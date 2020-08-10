@@ -1,0 +1,787 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--        Detention Email Reminder-->
+    <record model="ir.cron" id="detention_reminder">
+        <field name="name">Detention Email Reminder</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'sale.order'"/>
+        <field name="function" eval="'mail_reminder'"/>
+        <field name="args" eval="'()'"/>
+    </record>
+
+    <template id="assets_backend" name="custom assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/custom_logistic/static/src/css/styles.css"/>
+        </xpath>
+    </template>
+
+    <record id="move_form_view" model="ir.ui.view">
+        <field name="name">move_form_view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_done']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!--FIXME -> RESOLVE BUTTON NUMBER ISSUE -->
+            <xpath expr="//button[@name='274']" position="attributes">
+                <attribute name="attrs">{'invisible': 1}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="project_no"/>
+                <field name="crt_no" style="text-transform: uppercase;"/>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="options">{'no_quick_create': True, 'no_create_edit' : True}</attribute>
+                <attribute name="domain">[('customer','=',True),('parent_id','=',False)]</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="options">{'no_quick_create': True, 'no_create_edit' : True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="by_customer" attrs="{'invisible':[('no_by_customer','=', True)]}"
+                       options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                <field name="bill_type"/>
+                <field name="freight_link" readonly="1"/>
+                <field name="trans_link" readonly="1"/>
+                <field name="acc_link" readonly="1"/>
+                <field name="customer_site" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                <field name="service_type"/>
+                <field name="sale_status" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                <field name="container_num" invisible="1"/>
+                <field name="count_crt"/>
+                <field name="demurrage"/>
+                <field name="detention"/>
+                <field name="inv_chk" invisible="1"/>
+                <field name="pod_chk" invisible="1"/>
+                <field name="import_chk" invisible="1"/>
+                <field name="invoice_done" invisible="1"/>
+                <field name="extra_paid" invisible="1"/>
+                <field name="extra_charges" attrs="{'readonly': [('state', 'in', ['rec', 'done'])],
+                'invisible': [('state', 'in', ['draft', 'sent', 'sale'])]}"/>
+                <field name="extra_driver_id" attrs="{'required': [('extra_charges', '=', True)],
+                'readonly': [('state', 'in', ['rec', 'done'])],'invisible': [('extra_charges', '=', False)]}"
+                       domain="[('customer','=',False),('supplier','=',True)]"
+                       options="{'no_quick_create':True, 'no_create_edit' : True}"/>
+                <field name="extra_expenses" attrs="{'required': [('extra_charges', '=', True)],
+                'readonly': [('state', 'in', ['rec', 'done'])],
+                'invisible': [('extra_charges', '=', False)]}"/>
+                <field name="extra_reason" attrs="{'required': [('extra_charges', '=', True)],
+                'readonly': [('state', 'in', ['rec', 'done'])],
+                'invisible': [('extra_charges', '=', False)]}"/>
+                <field name="vessel_number"/>
+                <!--                            Code By Faizal-->
+                <field name="eir_date"/>
+                <!--                            -->
+            </xpath>
+
+            <xpath expr="//button[@name='print_quotation']" position="before">
+                <button name="sent_terminal"
+                        attrs="{'invisible': ['|',('state', '!=', 'draft'),('in_terminal', '=', True)]}"
+                        string="Send To Terminal" type="object" class="oe_highlight btn btn-sm btn-default"/>
+
+                <button name="airway" attrs="{'invisible': ['|',('state', '!=', 'sale'),
+                ('pullout_status', '=', 'InProcess')]}" string="Way Bill" type="object"
+                        class="oe_highlight btn btn-sm btn-default"/>
+
+                <button name="trip" attrs="{'invisible': [('state', '!=', 'air'),('rescheduling', '!=', True)]}"
+                        string="Pay TripMoney"
+                        type="object" class="oe_highlight btn btn-sm btn-default"/>
+                <button name="pay_extra_charges"
+                        attrs="{'invisible': ['|',('extra_charges', '=', False),('extra_paid', '=', True)]}"
+                        string="Pay Extra Charges" type="object" class="oe_highlight btn btn-sm btn-default"/>
+
+                <button name="receive" attrs="{'invisible': [('state', '!=', 'trip')]}" string="Received POD"
+                        type="object" class="oe_highlight btn btn-sm btn-default"/>
+
+                <button name="new_create_invoice" string="Create Invoice" type="object" class="oe_highlight btn btn-sm
+                        btn-default" attrs="{'invisible': ['|',('state', '!=', 'rec'),('no_invoice', '=', True)]}"/>
+
+                <button name="sent_lock" string="Lock Transport Order" type="object" class="oe_highlight btn btn-sm
+                        btn-default" attrs="{'invisible': ['|',('state', '!=', 'rec'),('no_invoice', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="weight"/>
+                <field name="form" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                <field name="to" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                <field name="fleet_type" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="replace">
+
+
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="domain">[('parent_id','=',False),('supplier','=',False),('customer','=',True)]
+                </attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="groups">custom_logistic.group_logistic_hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="groups">custom_logistic.group_logistic_hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="groups">custom_logistic.group_logistic_hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+                <attribute name="groups">custom_logistic.group_logistic_hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='message_ids']" position="attributes">
+                <attribute name="groups">custom_logistic.group_logistic_hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="replace">
+                <field name="product_id"/>
+            </xpath>
+
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,sale,air,trip,rec,done"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+
+                <field name="bill_no"/>
+                <field name="priority_type"/>
+                <field name="delivery"/>
+                <field name="customer_ref" invisible="0"/>
+                <field name="sales_id" readonly="1"/>
+                <field name="ship_link" readonly="1"/>
+                <field name="sales_imp_id" readonly="1"/>
+                <field name="no_invoice" invisible="1"/>
+                <field name="pull_out" attrs="{'readonly': ['|',('pullout_status', 'in', ['InProcess','Completed'])
+                ,('state', '=', 'done')]}"/>
+                <field name="re_pull_out" attrs="{'readonly': ['|',('state', '=', 'done'),('re_pull_out_ids', '!=', [])],
+                'invisible': [('pull_out', '!=', True)]}"/>
+                <field name="breakdown"
+                       attrs="{'readonly': ['|',('breakdown_complete', '=', True),('state', '=', 'done')]}"/>
+                <field name="shuttling" attrs="{'readonly': ['|',('shuttling_status', 'in', ['Completed','InProcess'])
+                ,('state', '=', 'done')],
+                'invisible': [('state', 'not in', ['rec','done'])]}"/>
+                <field name="emp_col" attrs="{'readonly': [('emp_status', 'in', ['Completed','InProcess'])]}"/>
+                <field name="ret_col" attrs="{'readonly': [('ret_status', 'in', ['Completed','InProcess'])]}"/>
+                <field name="in_terminal" invisible="1"/>
+                <field name="in_storage" invisible="1"/>
+                <field name="our_job" invisible="1"/>
+                <field name="sr_no" invisible="1"/>
+                <field name="custom_dec" invisible="1"/>
+                <field name="bayan_no" invisible="1"/>
+                <field name="final_date" invisible="1"/>
+                <field name="transportation_status" invisible="1"/>
+                <field name="no_by_customer" invisible="1"/>
+                <field name="trans_account" invisible="1"/>
+                <field name="to_mails" invisible="1"/>
+                <field name="warn_shuttling" invisible="1"/>
+                <field name="rescheduling_status" invisible="1"/>
+                <field name="start_rescheduling" attrs="{'invisible': [('state', '!=', 'rec')],
+                'readonly':[('rescheduling_status', 'in', ['InProcess','Completed'])]}"/>
+                <field name="rescheduling" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_tax']" position="replace">
+            </xpath>
+            <!--<xpath expr="//field[@name='invoice_status']" position="attributes">-->
+            <!--<attribute name="readonly">0</attribute>-->
+            <!--</xpath>-->
+
+            <xpath expr="//page[2]" position="before">
+
+                <page string="Transport Information" attrs="{'invisible': ['|',('in_terminal', '=', False),
+                ('pullout_status','in',['InProcess'])]}">
+                    <group name="group_top">
+
+                        <group colspan="4" col="4">
+                            <field name="trans_mode"
+                                   attrs="{'required': [('state', 'not in', ['draft']),('in_terminal', '=', True)]}"/>
+
+                            <field name="suppl_name" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'invisible':
+                            [('trans_mode','=','in')],'required':[('trans_mode','=','ex')],
+                                       'readonly':[('state','!=','draft'),('rescheduling','!=',True)]}" options="{'no_quick_create':
+                                       True, 'no_create_edit' : True}" context="{'default_supplier':True,
+                                       'default_customer':False,'default_types':'trnas'}"/>
+
+                            <field name="service_type" attrs="{'invisible':[('trans_mode','=','in')]}"/>
+                            <field name="driver" attrs="{'invisible':[('trans_mode','=','in')]}"/>
+                            <field name="driver_num" attrs="{'invisible':[('trans_mode','=','in')]}"/>
+                            <field name="suppl_freight" attrs="{'invisible':[('trans_mode','=','in')],
+                            'required':[('trans_mode','=','ex')], 'readonly':[('state','in',['trip','rec','done']),
+                            ('rescheduling','!=',True)]}"/>
+                        </group>
+
+                        <group colspan="4" col="4" attrs="{'invisible':[('trans_mode','=','ex')]}">
+
+                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                            ('is_reserved','=',False)]" attrs="{'readonly':[('state','!=','draft'),('rescheduling','!=',True)],
+                            'required': [('trans_mode','=','in'),('in_terminal', '=', True)]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'readonly':[('state','!=','draft'),('rescheduling','!=',True)], 'required':
+                                   [('trans_mode','=','in'),('in_terminal', '=', True)]}"/>
+
+                            <field name="inter_num"/>
+                        </group>
+                    </group>
+
+                    <group colspan="6" col="6" string="Transport Information">
+                        <field name="form_t" attrs="{ 'required':[('trans_mode', 'in', ['in','ex'])]}"
+                               options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                        <field name="to_t" attrs="{ 'required':[('trans_mode', 'in', ['in','ex'])]}"
+                               options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                        <field name="fleet_type" attrs="{ 'required':[('trans_mode', 'in', ['in','ex'])]}"
+                               options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                    </group>
+                    <button name="rescheduling_start" attrs="{'invisible': ['|',('start_rescheduling', '!=', True),
+                    ('rescheduling_status', 'in', ['InProcess','Completed'])]}" string="Start Rescheduling"
+                            type="object"
+                            class="oe_highlight btn btn-sm btn-default"/>
+
+
+                    <group name="group_top">
+                        <group string="Sale And Transport Dates">
+                            <field name="upload_date"/>
+                            <field name="delivery_date"/>
+                        </group>
+
+                        <group string=".">
+                            <field name="return_date"/>
+                            <field name="stuff_date"/>
+                        </group>
+                    </group>
+
+                    <group colspan="6" col="6" string="Lead Days Information">
+                        <field name="way_date"/>
+                        <field name="pod_date"/>
+                        <field name="lead_days" readonly="1"/>
+                    </group>
+
+                    <group name="group_top">
+                        <group string="Receiver Information">
+                            <field name="recive_name"/>
+                        </group>
+
+                        <group string=".">
+                            <field name="recive_mob"/>
+                        </group>
+                    </group>
+
+                </page>
+
+            </xpath>
+
+            <xpath expr="//page[3]" position="after">
+                <page string="Receive POD's" attrs="{'invisible':[('state','not in',['rec','done'])]}">
+                    <field name="attachments" nolabel="1" attrs="{'readonly':[('state','=','done')]}">
+                        <tree editable="bottom">
+                            <field name="attachment_name" invisible="1"/>
+                            <field name="attachment" filename="attachment_name"/>
+                        </tree>
+                    </field>
+                </page>
+
+            </xpath>
+            <xpath expr="//page[4]" position="after">
+                <page string="PullOut Information" attrs="{'invisible':[('pull_out','!=',True)]}">
+                    <group name="top">
+                        <group name="left">
+                            <field name="pullout_mode" attrs="{'required':[('pull_out','=',True)]}"/>
+
+                            <!--<field name="pullout_mode" attrs="{'required':[('pull_out','=',True)]-->
+                            <!--,'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>-->
+
+                            <field name="p_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('pullout_mode','=','ex')]
+                            ,'invisible':[('pullout_mode','!=','ex')],'readonly':[('pullout_status','in',['InProcess','Completed'])]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="p_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                                ('is_reserved','=',False)]" attrs="{'required':[('pullout_mode','=','in')],
+                                'invisible':[('pullout_mode','!=','in')] ,'readonly':[('pullout_status','in',
+                                ['InProcess','Completed'])]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="move_from" attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+
+                            <field name="driver_expenses" attrs="{'required':[('pullout_mode','in',['in','ex'])],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])],'invisible':[('pullout_mode','not in',['in','ex'])]}"/>
+
+                            <field name="pullout_type" attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+
+                            <field name="self_reason" attrs="{'required':[('pullout_type','=','Self'),('pull_out','=',True)],
+                            'invisible':['|',('pullout_mode','!=','in'), ('pullout_type','!=','Self')]}"/>
+
+                        </group>
+                        <group name="right">
+                            <field name="p_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+
+                            <field name="pullout_status" attrs="{'required':[('pull_out','=',True)]}" readonly="1"/>
+                            <field name="pullout_date" readonly="1"/>
+                            <field name="move_to" attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+                        </group>
+
+                    </group>
+                    <button name="pull_out_complete" attrs="{'invisible': [('pullout_status', '!=', 'InProcess')]}"
+                            string="PullOut Complete" type="object" class="oe_highlight "/>
+                    <br/>
+                    <button name="pull_out_trip" attrs="{'invisible': [('pullout_status', '!=', 'StartPullOut')]}"
+                            string="Pay PullOut TripMoney" type="object" class="oe_highlight"/>
+                    <br/>
+                    <button name="sent_storage" attrs="{'invisible': ['|','|',('in_storage', '=', True),
+                    ('state', '!=', 'draft'),('pullout_status', '!=', 'Completed')]}" string="Send To Storage"
+                            type="object" class="oe_highlight oe_left space"/>
+                    <br/>
+
+                </page>
+
+
+                <page string="Re PullOut Information" attrs="{'invisible':['|',('re_pull_out','!=',True),
+                ('pull_out','!=',True)]}">
+                    <field name="re_pull_out_ids">
+                        <tree>
+                            <field name="pullout_mode"/>
+                            <field name="driver_expenses" attrs="{'required':[('pullout_mode','in',['in','ex'])],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])],'invisible':[('pullout_mode','not in',['in','ex'])]}"/>
+                            <field name="pullout_status" readonly="1"/>
+                            <field name="pullout_date" readonly="1"/>
+                            <button name="pull_out_complete"
+                                    attrs="{'invisible': [('pullout_status', '!=', 'InProcess')]}"
+                                    string="PullOut Complete" type="object" class="oe_highlight "/>
+                            <button name="pull_out_trip"
+                                    attrs="{'invisible': [('pullout_status', '!=', 'StartPullOut')]}"
+                                    string="Pay PullOut TripMoney" type="object" class="oe_highlight"/>
+                        </tree>
+                    </field>
+                </page>
+
+                <page string="BreakDown Information" attrs="{'invisible':[('breakdown','!=',True)]}">
+                    <group colspan="4" col="4">
+                        <field name="breakdown_mode" attrs="{'required':[('breakdown','=',True)]
+                        ,'readonly': [('breakdown_complete', '=', True)]}"/>
+                        <field name="b_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('breakdown_mode','=','ex')]
+                            ,'invisible':[('breakdown_mode','!=','ex')],'readonly': [('breakdown_complete', '=', True)]}"
+                               options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                        <field name="b_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                               attrs="{'required':[('breakdown_mode','=','in'),('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)],
+                               'invisible':[('breakdown_mode','!=','in')]}"/>
+                        <field name="b_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                               options="{'no_quick_create': True, 'no_create_edit' : True}"
+                               attrs="{'required':[('breakdown_mode','=','in'),('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)],
+                               'invisible':[('breakdown_mode','!=','in')]}"/>
+                        <field name="b_location"
+                               attrs="{'required':[('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)]}"/>
+                        <field name="b_driver_expenses"
+                               attrs="{'required':[('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)]}"/>
+                        <field name="b_remarks"
+                               attrs="{'required':[('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)]}"/>
+                        <field name="breakdown_complete" invisible="1"/>
+                    </group>
+                    <group string="Attachments">
+                        <field name="b_attachments" nolabel="1"
+                               attrs="{'readonly': [('breakdown_complete', '=', True)]}">
+                            <tree editable="bottom">
+                                <field name="attachment_name" invisible="1"/>
+                                <field name="attachment" filename="attachment_name"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <br/>
+                    <button name="breakdown_button" string="Breakdown" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('breakdown_complete','=',True)]}"/>
+                    <br/>
+                </page>
+
+                <page string="Shuttling Information" attrs="{'invisible':[('shuttling','!=',True)]}">
+                    <group name="top">
+                        <group name="left">
+                            <field name="shuttling_mode" attrs="{'required':[('shuttling','=',True)],
+                        'readonly':[('shuttling_status','in',['Completed','InProcess'])]}"/>
+                            <field name="s_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('shuttling_mode','=','ex')]
+                            ,'invisible':[('shuttling_mode','!=','ex')],'readonly':[('shuttling_status','in',['Completed','InProcess'])],}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="s_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('shuttling_mode', '=','in'),('shuttling','=',True)],'readonly':[('shuttling_status','in',['Completed','InProcess'])],
+                               'invisible':[('shuttling_mode','!=','in')]}"/>
+                            <field name="s_driver_expenses" attrs="{'required':[('shuttling','=',True)],
+                            'readonly':[('shuttling_status','in',['Completed','InProcess'])]}"/>
+                        </group>
+                        <group name="right">
+                            <field name="s_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('shuttling_mode','=','in'),('shuttling','=',True)],'readonly':[('shuttling_status','in',['Completed','InProcess'])],
+                               'invisible':[('shuttling_mode','!=','in')]}"/>
+                            <field name="shuttling_status" readonly="1"/>
+                        </group>
+
+                    </group>
+                    <button name="shuttling_complete" attrs="{'invisible': [('shuttling_status', '!=', 'InProcess')]}"
+                            string="Shuttling Complete" type="object" class="oe_highlight "/>
+                    <br/>
+                    <button name="shuttling_trip"
+                            attrs="{'invisible': [('shuttling_status', 'in', ['Completed','InProcess'])]}"
+                            string="Pay Shuttling TripMoney" type="object" class="oe_highlight"/>
+                </page>
+
+                <page string="Empty Collection Information" attrs="{'invisible':[('emp_col','!=',True)]}">
+                    <group name="top">
+                        <group name="left">
+                            <field name="emp_mode" attrs="{'required':[('emp_col','=',True)],
+                        'readonly':[('emp_status','in',['Completed','InProcess'])]}"/>
+                            <field name="emp_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('emp_mode','=','ex')]
+                            ,'invisible':[('emp_mode','!=','ex')],'readonly':[('emp_status','in',['Completed','InProcess'])],}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="emp_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('emp_mode','=','in'),('emp_col','=',True)],
+                                   'readonly':[('emp_status','in',['Completed','InProcess'])],
+                               'invisible':[('emp_mode','!=','in')]}"/>
+                            <field name="emp_driver_expenses" attrs="{'required':[('emp_col','=',True)],
+                            'readonly':[('emp_status','in',['Completed','InProcess'])]}"/>
+                        </group>
+                        <group name="right">
+                            <field name="emp_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('emp_mode','=','in'),('emp_col','=',True)],
+                                   'readonly':[('emp_status','in',['Completed','InProcess'])],
+                               'invisible':[('emp_mode','!=','in')]}"/>
+                            <field name="emp_status" readonly="1"/>
+                        </group>
+
+                    </group>
+                    <button name="emp_complete" attrs="{'invisible': [('emp_status', '!=', 'InProcess')]}"
+                            string="Empty Collection Complete" type="object" class="oe_highlight "/>
+                    <br/>
+                    <button name="emp_trip"
+                            attrs="{'invisible': [('emp_status', 'in', ['Completed','InProcess'])]}"
+                            string="Pay Driver TripMoney" type="object" class="oe_highlight"/>
+                </page>
+
+                <page string="Empty Return Collection Information" attrs="{'invisible':[('ret_col','!=',True)]}">
+                    <group name="top">
+                        <group name="left">
+                            <field name="ret_mode" attrs="{'required':[('ret_col','=',True)],
+                        'readonly':[('ret_status','in',['Completed','InProcess'])]}"/>
+                            <field name="ret_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('ret_mode','=','ex')]
+                            ,'invisible':[('ret_mode','!=','ex')],'readonly':[('ret_status','in',['Completed','InProcess'])],}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="ret_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('ret_mode','=','in'),('ret_col','=',True)],
+                                   'readonly':[('ret_status','in',['Completed','InProcess'])],
+                               'invisible':[('ret_mode','!=','in')]}"/>
+                            <field name="ret_driver_expenses" attrs="{'required':[('ret_col','=',True)],
+                            'readonly':[('ret_status','in',['Completed','InProcess'])]}"/>
+                        </group>
+                        <group name="right">
+                            <field name="ret_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('ret_mode','=','in'),('ret_col','=',True)],
+                                   'readonly':[('ret_status','in',['Completed','InProcess'])],
+                               'invisible':[('ret_mode','!=','in')]}"/>
+                            <field name="ret_status" readonly="1"/>
+                        </group>
+
+                    </group>
+                    <button name="ret_complete" attrs="{'invisible': [('ret_status', '!=', 'InProcess')]}"
+                            string="Empty Return Collection Complete" type="object" class="oe_highlight "/>
+                    <br/>
+                    <button name="ret_trip"
+                            attrs="{'invisible': [('ret_status', 'in', ['Completed','InProcess'])]}"
+                            string="Pay Driver TripMoney" type="object" class="oe_highlight"/>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="vendor_bill_form_view" model="ir.ui.view">
+        <field name="name">vendor_bill_form_view</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='reference']" position="after">
+                <field name="invoice_from" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="customer_id" attrs="{'invisible': [('check', '!=', True)]}"
+                       domain="[('customer','=',True)]"/>
+                <field name="check" invisible="1"/>
+                <field name="import_link" readonly="1"/>
+                <field name="export_link" readonly="1"/>
+                <field name="frieght_link" readonly="1"/>
+                <field name="sale_link" readonly="1"/>
+                <field name="ship_link" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
+                <field name="crt_no"/>
+            </xpath>
+
+            <!--<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="replace">-->
+            <!--</xpath>-->
+
+            <!--<xpath expr="//field[@name='amount_tax']" position="attributes">-->
+            <!--<attribute name="groups">custom_logistic.group_logistic_hide</attribute>-->
+            <!--</xpath>-->
+
+            <!--<xpath expr="//field[@name='tax_line_ids']" position="attributes">-->
+            <!--<attribute name="groups">custom_logistic.group_logistic_hide</attribute>-->
+            <!--</xpath>-->
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="options">{'no_quick_create': True, 'no_create_edit' : True}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="custom_sale_tree">
+        <field name="model">sale.order</field>
+        <field name="name">Transport Order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+                <attribute name="groups">custom_logistic.group_logistic_hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="eir_date"/>
+                <field name="container_num"/>
+                <field name="demurrage"/>
+                <field name="detention"/>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_status']" position="after">
+                <field name="sale_status"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="rental_product_sales_new">
+        <field name="model">sale.order</field>
+        <field name="name">sale.order.rental.new</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_delivery']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_invoice']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="shipment_link" model="ir.actions.act_window">
+        <field name="domain">[('ship_link', '=', active_id)]</field>
+        <field name="name">Project Transportation</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_id" ref="sale.view_order_tree"/>
+    </record>
+
+    <record id="shipment_order_form" model="ir.ui.view">
+        <field name="name">Transportation Project</field>
+        <field name="model">shipment.order</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Shipment Project">
+                <header>
+                    <button name="create_shipment" type="object" string="Create Shipment Transportation"
+                            class="oe_highlight" attrs="{'invisible':[('state','!=','draft')]}"/>
+                    <button name="create_invoice" type="object" string="Create Shipment Invoice" class="oe_highlight"
+                            attrs="{'invisible':[('state','!=','in')]}"/>
+                    <!--<button name="sent_done" type="object" string="Lock Shipment" class="oe_highlight" attrs="{'invisible':[('state','!=','in')]}"/>-->
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <button name="%(shipment_link)d" type="action" class="oe_stat_button ship_btn" icon="fa-truck"
+                            help="Show All Shipment Sale Orders" attrs="{'invisible':[('state','=','draft')]}">
+                        <field name="count" widget="statinfo" string="Shipments"/>
+                    </button>
+
+                    <button name="add_shipment" type="object" string="Add Shipment" class="oe_stat_button ship_btn"
+                            icon="fa-plus" help="Add Shipment" attrs="{'invisible':[('state','in',['draft','done'])]}">
+                    </button>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Shipment Number" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="customer" attrs="{'readonly':[('state','!=','draft')]}"
+                                   domain="[('is_driver','=', False),('supplier','=', False),('customer','=', True)]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            <field name="container" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="invoice_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="branch" attrs="{'readonly':[('state','!=','draft')]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            <field name="vessel_number" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="bill_number" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="c_ref"/>
+                            <field name="warn_add_shipment" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="shipment_order_tree" model="ir.ui.view">
+        <field name="name">Transportation Project</field>
+        <field name="model">shipment.order</field>
+        <field name="arch" type="xml">
+            <tree string="Shipment Project">
+                <field name="name"/>
+                <field name="branch"/>
+                <field name="customer"/>
+                <field name="container"/>
+                <field name="vessel_number"/>
+                <field name="bill_number"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="shipment_order_action" model="ir.actions.act_window">
+        <field name="name">Transportation Project</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shipment.order</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="context">{"search_default_customer":1}</field>-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+                Create Your Transportation Projects here
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+                This will give you facility to create Transportation.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="shipment_order_parent" name="Transportation Project " parent="sales_team.menu_base_partner"
+              sequence="12"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="shipment_order_menu" name="Transportation Project" parent="shipment_order_parent"
+              action="shipment_order_action" sequence="12"/>
+
+    <record id="shipment_order_sequence" model="ir.sequence">
+        <field name="name">Transportation Project Sequence</field>
+        <field name="code">shipment.order</field>
+        <field name="prefix">TRANS PROJ</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="re_pullout" model="ir.ui.view">
+        <field name="name">Re Pull Out</field>
+        <field name="model">re.pullout</field>
+        <field name="arch" type="xml">
+            <form string="Re PullOut">
+                <sheet>
+                    <group name="top">
+                        <group name="left">
+                            <field name="pullout_mode" attrs="{'readonly':[('pullout_status','in',
+                                ['InProcess','Completed'])]}"/>
+                            <field name="transporter_id" domain="[('types','=','trnas'),('customer','=',False),
+                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('pullout_mode','=','ex')]
+                            ,'invisible':[('pullout_mode','!=','ex')],'readonly':[('pullout_status','in',['InProcess','Completed'])]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                                ('is_reserved','=',False)]" attrs="{'required':[('pullout_mode','=','in')],
+                                'invisible':[('pullout_mode','!=','in')] ,'readonly':[('pullout_status','in',
+                                ['InProcess','Completed'])]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+
+                            <field name="move_from" attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+
+                            <field name="driver_expenses" attrs="{'required':[('pullout_mode','in',['in','ex'])],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])],'invisible':[('pullout_mode','not in',['in','ex'])]}"/>
+
+                            <field name="pullout_type" attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+
+                            <field name="self_reason" attrs="{'required':[('pullout_type','=','Self')],
+                            'invisible':['|',('pullout_mode','!=','in'), ('pullout_type','!=','Self')],
+                            'readonly':[('pullout_status','in', ['InProcess','Completed'])]}"/>
+
+                        </group>
+                        <group name="right">
+                            <field name="vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+                            <field name="pullout_status" readonly="1"/>
+                            <field name="move_to" attrs="{'required':[('pullout_mode','=','in')],'invisible':[('pullout_mode','!=','in')],
+                            'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>
+                            <field name="pullout_date" readonly="1"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

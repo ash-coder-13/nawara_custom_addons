@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+    <template>
+        <t t-extend="UserMenu.about">
+            <t t-jquery="a.oe_activate_debug_mode" t-operation="replace"/>
+        </t>
+    </template>
+</odoo>

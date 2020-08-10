@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="operational_email_notification_form" model="ir.ui.view">
+        <field name="name">Operational Email Recipients</field>
+        <field name="model">multi.mails</field>
+        <field name="arch" type="xml">
+            <form string="Operational Email Recipients"  create="false" delete="false">
+                <sheet>
+                    <group string = "Sales Support">
+                        <field name="sale_support" widget="many2many_tags"/>
+                    </group>
+                    <group string = "NTF Terminal">
+                        <field name="ntf_terminal" widget="many2many_tags"/>
+                    </group>
+                    <group string = "Custom Clearance">
+                        <field name = "custom_clearance" widget="many2many_tags"/>
+                    </group>
+                    <group string = "Finance">
+                        <field name = "finance" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="operational_email_notification_tree" model="ir.ui.view">
+        <field name="name">operational_email_notification_tree</field>
+        <field name="model">multi.mails</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Operational Email Recipients" create="false" delete="false">
+                <field name="sale_support"/>
+                <field name="ntf_terminal"/>
+                <field name="custom_clearance"/>
+                <field name="finance"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="operational_email_notification_action" model="ir.actions.act_window">
+        <field name="name">Email Notification Recipients</field>
+        <field name="res_model">multi.mails</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+
+    <menuitem id="operational_email_notification_root" name="Operational Email Notification"
+              parent="base.menu_administration" sequence="6"/>
+
+    <menuitem id="operational_email_notification" name="Operational Email Notification"
+              parent="operational_email_notification_root"
+              action="operational_email_notification_action" sequence="93"/>
+
+    <record id="storage_email_template" model="mail.template">
+        <field name="name">Storage Charges Information</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Dear ${object.partner_id.name}  Storage Charges Information</field>
+        <field name="email_to">${object.partner_id.storage_mail|safe}</field>
+        <field name="lang">${object.lang}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <table cellspacing="0" cellpadding="0" style="width:600px;background:inherit;color:inherit">
+                    <tbody>
+                        <tr>
+                            <td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <p><b><i>Dear ${object.partner_id.name},</i></b></p><p><span style="color: rgb(0, 0, 0);">The Transport Order&nbsp; <b>"</b>
+            </span><span style="color: rgb(0, 0, 0); font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;">
+                <b>${object.name}</b></span><span style="color: rgb(0, 0, 0);"><b>"&nbsp;</b> has been moved to storage.&nbsp;</span>
+                <span style="color: rgb(0, 0, 0); font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">You have&nbsp;</span>
+                <span style="color: rgb(0, 0, 0); font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;">
+                    <b>"${object.partner_id.free_day}"</b></span>
+                <span style="color: rgb(0, 0, 0); font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">&nbsp;</span>
+                <span style="color: rgb(0, 0, 0); font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;"><i>free days.</i></span>
+                <br></p><p style="color: rgb(0, 0, 0);">Best regards,</p><div style="padding:0px;width:600px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777"> ${user.signature | safe}
+                <p style="font-size: 11px; margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <record id="credit_limit_email_template" model="mail.template">
+        <field name="name">Credit Limit Warning</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Credit Limit Warning For ${object.partner_id.name}</field>
+        <field name="email_to">${object.partner_id.to_mails|safe}</field>
+        <field name="lang">${object.lang}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);"><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Dear Sales Support Team,</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Credit Limit Warning For ${object.partner_id.name} Exseeds, ${object.partner_id.name} have ${object.partner_id.credit_limit} Credit Limit</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Best regards,</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">${user.signature | safe}</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Sent by ${user.company_id.name}</font></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <record id="payment_term_email_template" model="mail.template">
+        <field name="name">Payment Term Warning</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Payment Term Warning For ${object.partner_id.name}</field>
+        <field name="email_to">${object.partner_id.to_mails|safe}</field>
+        <field name="lang">${object.lang}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);"><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Dear Sales Support Team,</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Payment Term Warning For ${object.partner_id.name}</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Best regards,</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777"><br></font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">${user.signature | safe}</font></div><div style="padding: 0px; width: 600px; margin: auto; background-image: initial; background-position: center top; background-size: 100%; background-repeat: repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><font color="#777777">Sent by ${user.company_id.name}</font></div></div>
+            ]]>
+        </field>
+    </record>
+
+
+    <record id="cct_email_template" model="mail.template">
+        <field name="name">Transport Orders From Custom Clearance Import</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Transport Orders From Custom Clearance Import ${object.s_no}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="custom_logistic.model_import_logic"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <p><b><i>Dear Team,</i></b></p><p style="margin-bottom: 0.14in; line-height: 115%">
+                <a name="__DdeLink__44_2078392737"></a> <span lang="en-ID">Transportation Orders&nbsp;</span>
+                <span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial; color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>${object.get_order_name(object.tos)}</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>"</b></span><span lang="en-ID" style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">
+                &nbsp;are created from the Customs Clearance department&nbsp; for&nbsp;</span>
+                <span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial; color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>${object.customer.name}</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial; font-variant-ligatures: initial;
+                 font-variant-caps: initial; font-weight: initial;">.</span></p><p>
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="margin-bottom: 0.14in; line-height: 115%"><span lang="en-ID">Thanks&nbsp;</span>
+             </p><div style="padding:0px;width:600px;margin:auto; margin-top: 10px;
+             background: #fff repeat top /100%;color:#777777"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+
+            ]]>
+        </field>
+    </record>
+
+    <record id="cct_email_template_1" model="mail.template">
+        <field name="name">Transport Orders From Custom Clearance Export</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Transport Orders From Custom Clearance Export ${object.sr_no}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="custom_logistic.model_export_logic"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <p><b><i>Dear Team,</i></b></p><p style="margin-bottom: 0.14in; line-height: 115%">
+                <a name="__DdeLink__44_2078392737"></a> <span lang="en-ID">Transportation Orders&nbsp;</span>
+                <span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial; color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>${object.get_order_name(object.tos)}</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>"</b></span><span lang="en-ID" style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">
+                &nbsp;are created from the Customs Clearance department&nbsp; for&nbsp;</span>
+                <span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial; color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>${object.customer.name}</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial; font-variant-ligatures: initial;
+                 font-variant-caps: initial; font-weight: initial;">.</span></p><p>
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="margin-bottom: 0.14in; line-height: 115%"><span lang="en-ID">Thanks&nbsp;</span>
+             </p><div style="padding:0px;width:600px;margin:auto; margin-top: 10px;
+             background: #fff repeat top /100%;color:#777777"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+
+            ]]>
+        </field>
+    </record>
+
+    <record id="tot_email_template" model="mail.template">
+        <field name="name">Transport Order Moved To Terminal</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Transport Orders ${object.name} Moved To Terminal</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+
+
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <p><b><i>Dear Team,</i></b></p><p style="margin-bottom: 0.14in; line-height: 115%">
+                <a name="__DdeLink__44_2078392737"></a> <span lang="en-ID">Transportation Order&nbsp;</span>
+                <span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial; color: rgb(0, 0, 0);"><b>"</b>&nbsp;</span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>${object.name}</b></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>"</b></span><span lang="en-ID" style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">&nbsp;has been&nbsp;
+                </span><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial;">transferred to the&nbsp;</span><span style="font-variant-ligatures: initial;
+                font-variant-caps: initial;"><i><b>Terminal</b></i></span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">&nbsp;</span>
+                <span lang="en-ID" style="font-style: initial; font-variant-ligatures: initial;
+                font-variant-caps: initial; font-weight: initial;">for&nbsp;</span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">
+                </span><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial; color: rgb(0, 0, 0);"><b>"</b>&nbsp;</span><span style="font-style: initial;
+                font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                color: rgb(0, 0, 0);"><b>${object.partner_id.name}</b></span><span style="font-style: initial;
+                 font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;
+                 color: rgb(0, 0, 0);"><b>"</b></span><span style="font-style: initial; font-variant-ligatures: initial;
+                  font-variant-caps: initial; font-weight: initial;">.</span></p>
+
+
+	        <style type="text/css">
+		        @page { margin: 0.79in }
+		        p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	        </style>
+
+
+            <p>
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="margin-bottom: 0.14in; line-height: 115%"><span lang="en-ID">Thanks&nbsp;</span>
+             </p><div style="padding:0px;width:600px;margin:auto; margin-top: 10px;
+             background: #fff repeat top /100%;color:#777777"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+
+
+            ]]>
+        </field>
+    </record>
+
+    <record id="tcc_email_template" model="mail.template">
+        <field name="name">Transport Orders Finished Create Invoice</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Transport Orders Finished Create Invoice For Order ${object.get_sale_name()}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);">
+                <p style="color: rgb(119, 119, 119);"><b><i>Dear Team,</i></b></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+        <p style="margin-bottom: 0.14in; line-height: 115%;"><span lang="en-ID" style="color: rgb(119, 119, 119);">
+        <span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">The
+        transportation orders related to order number</span>&nbsp;</span>
+                <b><span style="color: rgb(0, 0, 0); font-style: initial; font-variant-ligatures: initial;
+                font-variant-caps: initial;">"</span>${object.get_sale_name()}
+                <span style="color: rgb(0, 0, 0); font-style: initial; font-variant-ligatures: initial;
+                font-variant-caps: initial;">"</span></b><span lang="en-ID" style="color: rgb(119, 119, 119);
+                font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;
+                font-weight: initial;">&nbsp;</span><font color="#777777">is finished please make the invoice.</font>
+                </p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+            <p style="color: rgb(119, 119, 119);">
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="color: rgb(119, 119, 119); margin-bottom: 0.14in; line-height: 115%;"><span lang="en-ID">
+            Thanks&nbsp;</span> </p><div style="color: rgb(119, 119, 119); padding: 0px; width: 600px; margin: 10px auto auto;
+             background: center top / 100% repeat rgb(255, 255, 255);"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <record id="ti_email_template" model="mail.template">
+        <field name="name">Invoice Created Transportation</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Invoice Created For Transportation ${object.name}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+
+                            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);">
+                <p style="color: rgb(119, 119, 119);"><b><i>Dear Team,</i></b></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+        <p style="margin-bottom: 0.14in; line-height: 115%;">
+        <font color="#777777" style="font-size: 14px;">The invoice has been created for Transportation Order</font>
+        <span lang="en-ID" style="color: rgb(119, 119, 119); font-family: &quot;Times New Roman&quot;; font-size: 14px;
+         font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;">&nbsp;
+         </span><span style="font-family: &quot;Times New Roman&quot;; font-size: 14px; font-style: initial;
+          font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;"><b>"</b>&nbsp;<b>
+          ${object.name}</b><b>"</b></span><b style="font-style: initial; font-variant-ligatures: initial;
+          font-variant-caps: initial;"><span style="font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial;"></span></b><span lang="en-ID" style="font-style: initial;
+          font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;">
+          <font color="#777777" style="font-size: 14px;">&nbsp;</font></span><span lang="en-ID"
+          style="font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial;
+          font-weight: initial;"><span lang="en-ID" style="color: rgb(119, 119, 119); font-family: &quot;
+          Times New Roman&quot;; font-size: 14px; font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial; font-weight: initial;">for&nbsp;</span><span style="font-family: &quot;
+          Times New Roman&quot;; font-size: 14px; font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial; font-weight: initial;"><b>"</b>&nbsp;<b>${object.partner_id.name}
+          </b><b>"</b></span><font color="#777777" style="font-size: 14px;">.</font></span></p><p
+          style="margin-bottom: 0.14in; line-height: 115%;"><span style="font-style: initial;
+          font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;"></span></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+            <p style="color: rgb(119, 119, 119);">
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="color: rgb(119, 119, 119); margin-bottom: 0.14in; line-height: 115%;"><span lang="en-ID">
+            Thanks&nbsp;</span> </p><div style="color: rgb(119, 119, 119); padding: 0px; width: 600px; margin: 10px
+            auto auto; background: center top / 100% repeat rgb(255, 255, 255);"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <record id="tii_email_template" model="mail.template">
+        <field name="name">Invoice Created Sales Order Import</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Invoice Created For Sales Order ${object.s_no}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="custom_logistic.model_import_logic"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+
+                            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);">
+                <p style="color: rgb(119, 119, 119);"><b><i>Dear Team,</i></b></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+        <p style="margin-bottom: 0.14in; line-height: 115%;">
+        <font color="#777777" style="font-size: 14px;">The invoice has been created for Sales Order</font>
+        <span lang="en-ID" style="color: rgb(119, 119, 119); font-family: &quot;Times New Roman&quot;; font-size: 14px;
+         font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;">&nbsp;
+         </span><span style="font-family: &quot;Times New Roman&quot;; font-size: 14px; font-style: initial;
+          font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;"><b>"</b><b>
+          ${object.s_no}</b><b>"</b></span><b style="font-style: initial; font-variant-ligatures: initial;
+          font-variant-caps: initial;"><span style="font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial;"></span></b><span lang="en-ID" style="font-style: initial;
+          font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;">
+          <font color="#777777" style="font-size: 14px;">&nbsp;</font></span><span lang="en-ID"
+          style="font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial;
+          font-weight: initial;"><span lang="en-ID" style="color: rgb(119, 119, 119); font-family: &quot;
+          Times New Roman&quot;; font-size: 14px; font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial; font-weight: initial;">for&nbsp;</span><span style="font-family: &quot;
+          Times New Roman&quot;; font-size: 14px; font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial; font-weight: initial;"><b>"</b>&nbsp;<b>${object.customer.name}
+          </b><b>"</b></span><font color="#777777" style="font-size: 14px;">.</font></span></p><p
+          style="margin-bottom: 0.14in; line-height: 115%;"><span style="font-style: initial;
+          font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;"></span></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+            <p style="color: rgb(119, 119, 119);">
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="color: rgb(119, 119, 119); margin-bottom: 0.14in; line-height: 115%;"><span lang="en-ID">
+            Thanks&nbsp;</span> </p><div style="color: rgb(119, 119, 119); padding: 0px; width: 600px; margin: 10px
+            auto auto; background: center top / 100% repeat rgb(255, 255, 255);"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <record id="tie_email_template" model="mail.template">
+        <field name="name">Invoice Created Sales Order Export</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Invoice Created For Sales Order ${object.sr_no}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="custom_logistic.model_export_logic"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+
+                            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);">
+                <p style="color: rgb(119, 119, 119);"><b><i>Dear Team,</i></b></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+        <p style="margin-bottom: 0.14in; line-height: 115%;">
+        <font color="#777777" style="font-size: 14px;">The invoice has been created for Sales Order</font>
+        <span lang="en-ID" style="color: rgb(119, 119, 119); font-family: &quot;Times New Roman&quot;; font-size: 14px;
+         font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;">&nbsp;
+         </span><span style="font-family: &quot;Times New Roman&quot;; font-size: 14px; font-style: initial;
+          font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;"><b>"</b><b>
+          ${object.sr_no}</b><b>"</b></span><b style="font-style: initial; font-variant-ligatures: initial;
+          font-variant-caps: initial;"><span style="font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial;"></span></b><span lang="en-ID" style="font-style: initial;
+          font-variant-caps: initial; font-variant-ligatures: initial; font-weight: initial;">
+          <font color="#777777" style="font-size: 14px;">&nbsp;</font></span><span lang="en-ID"
+          style="font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial;
+          font-weight: initial;"><span lang="en-ID" style="color: rgb(119, 119, 119); font-family: &quot;
+          Times New Roman&quot;; font-size: 14px; font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial; font-weight: initial;">for&nbsp;</span><span style="font-family: &quot;
+          Times New Roman&quot;; font-size: 14px; font-style: initial; font-variant-caps: initial;
+          font-variant-ligatures: initial; font-weight: initial;"><b>"</b>&nbsp;<b>${object.customer.name}
+          </b><b>"</b></span><font color="#777777" style="font-size: 14px;">.</font></span></p><p
+          style="margin-bottom: 0.14in; line-height: 115%;"><span style="font-style: initial;
+          font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;"></span></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+            <p style="color: rgb(119, 119, 119);">
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="color: rgb(119, 119, 119); margin-bottom: 0.14in; line-height: 115%;"><span lang="en-ID">
+            Thanks&nbsp;</span> </p><div style="color: rgb(119, 119, 119); padding: 0px; width: 600px; margin: 10px
+            auto auto; background: center top / 100% repeat rgb(255, 255, 255);"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <record id="transportation_overdue_template" model="mail.template">
+        <field name="name">Transportation Overdue</field>
+        <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+        <field name="subject">Transportation Overdue ${object.name}</field>
+        <field name="email_to">${object.to_mails|safe}</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html">
+            <![CDATA[
+            <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+
+            </div>
+            <div style="padding: 0px; width: 600px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);">
+                <p style="color: rgb(119, 119, 119);"><b><i>Dear Team,</i></b></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+        <p style="margin-bottom: 0.14in; line-height: 115%;"><font color="#777777"><span style="font-size: 14px;">Please note that Transportation order number</span></font><span lang="en-ID" style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial; color: rgb(119, 119, 119); font-family: &quot;Times New Roman&quot;; font-size: 14px;">&nbsp;
+         </span><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-family: &quot;Times New Roman&quot;; font-size: 14px;"><b style="">"${object.name}</b><b style="">"&nbsp;</b><b style="font-weight: initial;">&nbsp;</b></span><font color="#777777" style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;"><span style="font-size: 14px;"></span><span style="font-size: 14px;">is overdue, The scheduled date was</span></font><span lang="en-ID" style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial; color: rgb(119, 119, 119); font-family: &quot;Times New Roman&quot;; font-size: 14px;">&nbsp;</span><b><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-family: &quot;Times New Roman&quot;; font-size: 14px;">"${object.delivery}</span><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-family: &quot;Times New Roman&quot;; font-size: 14px;">"</span></b></p><p style="margin-bottom: 0.14in; line-height: 115%;"><span style="font-style: initial;
+          font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;"></span></p>
+
+
+	    <style type="text/css">
+		    @page { margin: 0.79in }
+		    p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+	    </style>
+
+
+            <p style="color: rgb(119, 119, 119);">
+                  	 	<style type="text/css"> 		@page { margin: 0.79in }
+                  	 	p { margin-bottom: 0.1in; direction: ltr; line-height: 120%; text-align: left; orphans: 2;
+                  	 	widows: 2 } 	</style>
+
+
+            </p><p style="color: rgb(119, 119, 119); margin-bottom: 0.14in; line-height: 115%;"><span lang="en-ID">
+            Thanks&nbsp;</span> </p><div style="color: rgb(119, 119, 119); padding: 0px; width: 600px; margin: 10px
+            auto auto; background: center top / 100% repeat rgb(255, 255, 255);"><p style="font-size: 11px;
+             margin-top: 10px;"><strong>Sent by ${user.company_id.name}</strong>
+                </p></div></div>
+            ]]>
+        </field>
+    </record>
+
+    <data noupdate="1">
+        <record id="transportation_overdue_email" model="ir.cron">
+            <field name="name">Transportation OverDue</field>
+            <field name="active" eval="True" />
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">1</field>
+            <field name="model" eval="'sale.order'" />
+            <field name="function" eval="'send_overdue_mail'" />
+            <field name="args" eval="()" />
+            <field name="priority" eval="2" />
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_invoice_supplier_form_inherit_payment" model="ir.ui.view">
+            <field name="name">view.account.invoice.supplier.form.inherit.payment</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="pdc_amount" invisible="1"/>
+                    <field name="reg_payment" invisible="1"/>
+                </field>
+                <xpath expr="//button[@name='%(account.action_account_invoice_payment)d']" position="replace">
+                    <button name="%(account.action_account_invoice_payment)d" type="action" string="Register Payment" 
+                            groups="account.group_account_invoice" class="oe_highlight" 
+                            attrs="{'invisible':['|',('reg_payment','=',True),('state','in',('draft','cancel','paid'))]}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_account_invoice_form_inherit_payment" model="ir.ui.view">
+            <field name="name">view.account.invoice.form.inherit.payment</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="pdc_amount" invisible="1"/>
+                    <field name="reg_payment" invisible="1"/>
+                </field>
+                <xpath expr="//button[@name='%(account.action_account_invoice_payment)d']" position="replace">
+                    <button name="%(account.action_account_invoice_payment)d" type="action" string="Register Payment" 
+                            groups="account.group_account_invoice" class="oe_highlight" 
+                            attrs="{'invisible':['|',('reg_payment','=',True),('state','in',('draft','cancel','paid'))]}"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_account_payment_invoice_form_inherit_payments" model="ir.ui.view">
+                <field name="name">view.account.payment.invoice.form.inherit.payments</field>
+                <field name="model">account.payment</field>
+                <field name="inherit_id" ref="payment.view_account_payment_invoice_form_inherit_payment"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='payment_token_id']" position="attributes">
+                        <attribute name="attrs">{}</attribute>
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </field>
+        </record>
+    </data>
+</odoo>

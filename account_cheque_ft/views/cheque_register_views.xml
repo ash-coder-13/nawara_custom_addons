@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="cheque_register_view_tree" model="ir.ui.view">
+        <field name="name">Cheque Register Tree</field>
+        <field name="model">cheque.register</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cheque_no"/>
+                <field name="payment_id"/>
+                <field name="payee_name"/>
+                <field name="bank_name_out"/>
+                <field name="cheque_type"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="amount"/>
+                <field name="issue_date"/>
+                <field name="cheque_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cheque_register_view_form" model="ir.ui.view">
+       <field name="name">Cheque Register Form</field>
+       <field name="model">cheque.register</field>
+       <field name="arch" type="xml">
+            <form string="Cheque">
+                <header>
+                    <button name="action_validate" type="object" states="blank"
+                            class="oe_highlight" string="Validate Issue/Receipt"/>
+                    <button name="processed" type="object" states="valid" string="Processed by Bank"
+                            confirm="Are you sure this cheque has been processed by Bank ?"
+                            class="oe_highlight"/>
+                    <button name="cancel_cheque" string="Cancel Cheque" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="blank,valid,processed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="button_cheque_reg_journal_entries"
+                                string="Journal Items" type="object"
+                                groups="account.group_account_manager"
+                                attrs="{'invisible':[('payment_id','=',False)]}" icon="fa-bars"/>
+                    </div>
+                    <div class="oe_title">
+                        <group string="Cheque"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="acc_num" attrs="{'invisible':[('cheque_type','=','partner')]}"
+                            context="{'form_view_ref': 'account.view_account_bank_journal_form'}"/>
+                            <field name="acc_num_out" class="oe_read_only"
+                                attrs="{'invisible':[('cheque_type','=','company')]}"/>
+                            <field name="cheque_no"/>
+                            <field name="cheque_type"/>
+                        </group>
+                        <group>
+                            <field name="bank_name" attrs="{'invisible':[('cheque_type','=','partner')]}"/>
+                            <field name="bank_name_out" class="oe_read_only"
+                                attrs="{'invisible':[('cheque_type','=','company')]}"/>
+                            <field name="cheque_book_id" attrs="{'invisible':[('cheque_book_id','=',False)]}"/>
+                            <field name="payment_id" attrs="{'invisible': [('payment_id','=',False)]}"/>
+                            <field name="category_id"
+                                   attrs="{'invisible':['|',('state','=','draft'),('category_id','=',False)]}"/>
+                        </group>
+                        <group attrs="{'invisible': [('state','in',['draft'])]}">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount"/>
+                            <field name="payee_name"/>
+                        </group>
+                        <group  attrs="{'invisible': [('state','in',['draft'])]}">
+                            <field name="issue_date"/>
+                            <field name="cheque_date"/>
+                        </group>
+                        <group/>
+                        <group>
+                            <field name="cheque_ref"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+   </record>
+   
+   <record id="cheque_book_view_tree" model="ir.ui.view">
+        <field name="name">Cheque Book Tree</field>
+        <field name="model">cheque.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cheque_book_ref"/>
+                <field name="acc_num"/>
+                <field name="bank_name"/>
+                <field name="cheque_no_from"/>
+                <field name="cheque_no_to"/>
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cheque_book_form" model="ir.ui.view">
+        <field name="name">Cheque Book Form</field>
+        <field name="model">cheque.book</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Book">
+                <header>
+                    <button name="validate" states="draft" string="Validate" type="object"
+                            class="oe_highlight"/>
+                    <button name="register_cheques" states="validated" string="Register Cheques"
+                            type="object" class="oe_highlight"/>
+                    <button name="cancel" string="Cancel" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,valid,registered"/>
+                </header>
+                <sheet>
+                    <group string="Cheque Book">
+                        <group>
+                            <field name="acc_num" context="{'form_view_ref': 'account.view_account_bank_journal_form'}"/>
+                            <field name="bank_name"/>
+                        </group>
+                        <group>
+                            <field name="cheque_book_ref"/>
+                        </group>
+                        <group colspan="3" col="4">
+                            <group colspan="1">
+                                <label for="cheque_no_from" string="Cheque Nos from" colspan="1"/>
+                            </group>
+                            <group colspan="3">
+                                <div colspan="4" col="4" class="oe_inline">
+                                    <field name="cheque_no_from" widget="char" placeholder="Start.."
+                                           class="oe_inline" nolabel="1" />
+                                    <strong> to </strong>
+                                    <field name="cheque_no_to" widget="char" class="oe_inline"
+                                           placeholder="End.." nolabel="1"/>
+                                </div>
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cheques" name="cheques">
+                           <field name="cheque_ids" colspan="4" col="4">
+                                <tree string="Cheques">
+                                    <field name="cheque_no"/>
+                                    <field name="payment_id"/>
+                                    <field name="payee_name"/>
+                                    <field name="bank_name_out"/>
+                                    <field name="cheque_type"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="amount"/>
+                                    <field name="issue_date"/>
+                                    <field name="cheque_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="cheque_register_button_create_form" model="ir.ui.view">
+        <field name="name">Cheque Register Wizard</field>
+        <field name="model">cheque.register</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,valid,registered"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="payee_name" readonly="True"/>
+                            <field name="acc_num_out" required="True"/>
+                            <field name="bank_name_out" required="True"/>
+                            <field name="cheque_no" required="True"/>
+                            <field name="cheque_ref"/>
+                            <field name="cheque_type" invisible="True"/>
+                        </group>
+                        <group>
+                            <field name="category_id" readonly="True"
+                                   attrs="{'invisible':[('category_id','=',False)]}"/>
+                            <field name="payment_id" invisible="1"/>
+                            <field name="issue_date" readonly="True"/>
+                            <field name="cheque_date" readonly="True"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount" readonly="True" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="create_and_link_cheque_id" type="object" string="Create"
+                    class="oe_highlight"/>
+                    <button string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+   </record>
+
+    <record id="action_create_cheque_wizard" model="ir.actions.act_window">
+        <field name="name">Create Cheque</field>
+        <field name="res_model">cheque.register</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account_cheque_ft.cheque_register_button_create_form"/>
+        <field name="context">{'default_state': 'blank',
+            'default_cheque_type': 'partner'}</field>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="action_create_cheque" model="ir.actions.act_window">
+        <field name="name">Cheque Register</field>
+        <field name="res_model">cheque.register</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="account_cheque_ft.cheque_register_view_tree"/>
+        <field name="context">{'default_state': 'blank',
+            'default_cheque_type': 'partner'}</field>
+        <field name="domain">[('state','in',('valid','on_pdc','processed'))]</field>
+    </record>
+
+    <act_window
+        id="cheque_register_action"
+        name="Cheque Register"
+        res_model="cheque.register"
+    />
+
+    <act_window
+        id="cheque_book_action"
+        name="Cheque Books"
+        res_model="cheque.book"
+    />
+
+    <menuitem
+        id="cheque_manager_menu"
+        name="Cheque Manager"
+        parent="account.menu_finance"
+        sequence="4" />
+
+    <menuitem
+        id="cheque_register_menu"
+        name="Cheque Register"
+        action="action_create_cheque"
+        parent="cheque_manager_menu"
+        sequence="4" />
+
+    <menuitem
+        id="cheque_book_menu"
+        name="Cheque Books"
+        action="cheque_book_action"
+        parent="cheque_manager_menu"
+        sequence="5" />
+
+    <menuitem
+        id="cheque_bank_accounts_menu"
+        name="Bank Accounts"
+        action="account.action_account_bank_journal_form"
+        parent="cheque_manager_menu"
+        sequence="6" />
+</odoo>

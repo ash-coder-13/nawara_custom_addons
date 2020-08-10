@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cheque_register,access_cheque_register,model_cheque_register,account.group_account_invoice,1,1,1,1
+access_cheque_book,access_cheque_book,model_cheque_book,account.group_account_invoice,1,1,1,1
+access_cheque_category_cheques,access_cheque_category_cheques,model_cheque_category_cheques,account.group_account_invoice,1,1,1,1
