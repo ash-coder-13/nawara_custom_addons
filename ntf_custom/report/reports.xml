@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Paper Format-->
+        <record id="paperformat_horizontal_ntf" model="report.paperformat">
+            <field name="name">Horizontal Paper Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">7</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!--Customer Focuzed Revenue Report-->
+        <report
+                id="report_cfr"
+                model="sale.order"
+                string="Customer Focused Revenue Report"
+                report_type="qweb-pdf"
+                name="ntf_custom.report_customer_focuzed_rev"
+                file="ntf_custom.report_customer_focuzed_rev"
+                paperformat="ntf_custom.paperformat_horizontal_ntf"/>
+
+        <!--Customer Focused Revenue Report Excel-->
+<!--        <report-->
+<!--                id="report_cfr"-->
+<!--                model="sale.order"-->
+<!--                string="Customer Focused Revenue Report"-->
+<!--                report_type="xlsx"-->
+<!--                name="ntf_custom.report_customer_focused_rev.xlsx"-->
+<!--                file="ntf_custom.report_customer_focused_rev.xlsx"-->
+<!--                attachment_use="False"-->
+<!--        />-->
+
+
+    </data>
+</odoo>

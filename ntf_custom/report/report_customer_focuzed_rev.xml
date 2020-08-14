@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_customer_focuzed_rev">
+        <t t-call="report.external_layout">
+            <div class="page" style="font-size:14px;width:100%">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <head>
+                    </head>
+                    <body>
+                        <h2 style="text-align:center">Customer Focused Revenue Report</h2>
+                        <br/>
+                        <table class="table-condensed" style="font-size: 14px; width:100%;border:1px solid black;">
+                            <tr>
+                                <th style="border:1px solid black;text-align:center;">Sl No</th>
+                                <th style="border:1px solid black;text-align:center;">Customer Name</th>
+                                <th style="border:1px solid black;text-align:center;">Site</th>
+                                <th style="border:1px solid black;text-align:center;">Trip Reference / Job Number</th>
+                                <th style="border:1px solid black;text-align:center;">Sales Status</th>
+                                <th style="border:1px solid black;text-align:center;">Driver TripMoney (Pullout)</th>
+                                <th style="border:1px solid black;text-align:center;">Driver TripMoney (Local or Rabigh)</th>
+                                <th style="border:1px solid black;text-align:center;">Driver TripMoney (Empty Return)</th>
+                                <th style="border:1px solid black;text-align:center;">Total Trip Money</th>
+                                <th style="border:1px solid black;text-align:center;">Truck Cost (Pullout)</th>
+                                <th style="border:1px solid black;text-align:center;">Truck Cost (Local or Rabigh)</th>
+                                <th style="border:1px solid black;text-align:center;">Truck Cost (Empty Return)</th>
+                                <th style="border:1px solid black;text-align:center;">Total Truck Cost</th>
+                                <th style="border:1px solid black;text-align:center;">Total Cost</th>
+                                <th style="border:1px solid black;text-align:center;">30% margin</th>
+                                <th style="border:1px solid black;text-align:center;">Total Selling Price</th>
+                            </tr>
+                            <t t-set="i" t-value="1"/>
+                            <tr t-foreach="docs.sorted(key=lambda x: x.customer_site)" t-as="doc">
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-esc="i"/>
+                                    <t t-set="i" t-value="i+1"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.partner_id.name" t-field="doc.partner_id.name"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.customer_site" t-field="doc.customer_site"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.name" t-field="doc.name"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.sale_status" t-field="doc.sale_status"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.driver_expenses" t-field="doc.driver_expenses"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.ret_driver_expenses"
+                                          t-field="doc.ret_driver_expenses"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+                                    <span t-if="doc.driver_expenses"
+                                          t-esc="doc.driver_expenses + doc.ret_driver_expenses"/>
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+
+                                <td style="border:1px solid black;text-align:center;">
+
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
+

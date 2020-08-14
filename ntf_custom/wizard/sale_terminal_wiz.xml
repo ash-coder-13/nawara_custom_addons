@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        Import Shipment Report Wizard Form View-->
+        <record id="view_sale_terminal_excel_report_form" model="ir.ui.view">
+            <field name="name">Terminal Excel Export</field>
+            <field name="model">sale.terminal.excel.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Export Terminal Report">
+                    <group>
+                        <group>
+                            <field name="period_string" string="Period"
+                                   attrs="{'invisible':[('is_custom_range','=',True)]}"/>
+                            <field name="start_date" attrs="{'invisible':[('is_custom_range','=',False)]}"/>
+                            <field name="start_date_m" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="end_date" attrs="{'invisible':[('is_custom_range','=',False)]}"/>
+                            <field name="end_date_m" invisible="1"/>
+                            <field name="is_custom_range"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="genarate_excel_report" string="Proceed" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--        Import Shipment Status Report Action View-->
+        <record id="action_sale_terminal_excel_report" model="ir.actions.act_window">
+            <field name="name">Import Shipment Status</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.terminal.excel.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!--        Import Shipment Status Report Menu Item-->
+        <menuitem
+                action="action_sale_terminal_excel_report"
+                id="menu_action_sale_terminal_excel_report_wizard"
+                parent="sales_team.menu_sale_report"/>
+
+        <!--        Import Shipment Status Excel Report File Store-->
+        <record id="wizard_excel_report" model="ir.ui.view">
+            <field name="name">wizard.excel.report</field>
+            <field name="model">wizard.excel.report</field>
+            <field name="arch" type="xml">
+                <form string="Import Shipment Status Excel Report">
+                    <group>
+                        <field name="name" invisible="1"/>
+                        <h1>
+                            <field name="report" filename="name"/>
+                        </h1>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="_Close" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ext_contract_allowances,ext.contract.allowances,model_ext_contract_allowances,,1,1,1,1
+access_ext_contract_deductions,ext.contract.deductions,model_ext_contract_deductions,,1,1,1,1

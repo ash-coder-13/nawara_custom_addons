@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--    Form view of the customer focused revenue report wizard-->
+    <record id="view_customer_focuzed_revenue_wizard" model="ir.ui.view">
+        <field name="name">customer.focuzed.revenue.wizard</field>
+        <field name="model">customer.focuzed.revenue</field>
+        <field name="arch" type="xml">
+            <form string="Customer Focused Revenue Report">
+                <group>
+                    <group string="Customer &amp; Status">
+                        <field name="partner_ids"
+                               domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"
+                               options="{'no_create_edit': True}" widget="many2many_tags" required="True"/>
+                        <field name="sale_status_ids" options="{'no_create_edit': True}" widget="many2many_tags" required="True"/>
+                    </group>
+                    <group string="Date Range">
+                        <field name="start_date" required="True"/>
+                        <field name="end_date" required="True"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_cfr_report" string="Download PDF" type="object" class="btn-primary"/>
+<!--                    or-->
+<!--                    <button name="print_xls_report" string="Download Excel" type="object" class="btn-primary"/>-->
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <!--    Action of the customer focuzed revenue report wizard-->
+    <record id="action_customer_focuzed_revenue_details" model="ir.actions.act_window">
+        <field name="name">Customer Focused Revenue Report</field>
+        <field name="res_model">customer.focuzed.revenue</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--    Menuitem of the Customer Focused Revenue Report Wizard-->
+    <menuitem
+            id="cfr_main"
+            name="Customer Focused Revenue Report"
+            parent="account.account_reports_business_intelligence_menu"
+            action="action_customer_focuzed_revenue_details"
+            sequence="4"/>
+
+</odoo>

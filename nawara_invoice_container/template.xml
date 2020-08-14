@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+                id="nawara_inv_contain"
+                model="account.invoice"
+                name="nawara_invoice_container.logistic_invoice"
+                file="nawara_invoice_container.logistic_invoice"
+                report_type="qweb-html"
+                string="Nawara Container Invoice"
+                menu="True"/>
+    </data>
+
+
+</openerp>
