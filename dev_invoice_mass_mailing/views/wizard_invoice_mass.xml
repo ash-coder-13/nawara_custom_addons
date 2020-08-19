@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>    
+        <record id="view_mass_mail_invoice" model="ir.ui.view">
+            <field name="name">view.mass.mail.invoice</field>
+            <field name="model">mass.mail.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Mass Mail">
+                  <group>
+					 <field name="template_id" label="Invoice Template " domain="[('name','=like','Invoice%')]"/> 
+                  </group>
+                    <footer>
+                        <button name="send_button" string="Send" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+        <record id="action_mass_mail_invoice" model="ir.actions.act_window">
+			<field name="name">Invoice Mass Mail</field>
+			<field name="res_model">mass.mail.invoice</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_mass_mail_invoice"/>
+			<field name="target">new</field>
+		</record>
+		<record model="ir.values" id="invoice_mass_mail">
+            <field name="name">Invoice Mass Mail</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_mass_mail_invoice'))" />
+            <field name="key">action</field>
+            <field name="model">account.move</field>
+        </record>
+    </data>
+</openerp>        

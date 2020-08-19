@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="module_report">
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+
+
+                    <div class="page">
+                        <style>
+                            .main-data {
+                            width: 100%;
+                            }
+                            .center-data {
+                            width: 100%;
+                            margin: 0px auto;
+                            }
+                            .main-container{
+                            border: 1px solid white;
+                            width: 100%;
+                            /*height: 1150px;*/
+                            margin: 0px auto;
+                            }
+
+                            .my_header{
+                            border: 1px solid white;
+                            width: 95%;
+                            height: 220px;
+                            margin: 20px auto;
+                            padding-top:0%;
+
+                            }
+
+                            .my_image{
+                            border: 1px solid white;
+                            width: 18%;
+                            /*height: 60px;*/
+                            margin: 5px auto;
+                            float: left;
+                            }
+
+                            .my_address{
+                            border: 1px solid white;
+                            width: 76%;
+                            height: 195px;
+                            margin: 5px auto;
+                            float: right;
+                            }
+
+                            .my_body{
+                            border: 1px solid white;
+                            width: 100%;
+                            /*height: 60px;*/
+                            margin: 15px auto;
+                            }
+                            .my_title{
+                            border: 1px solid white;
+                            width: 90%;
+                            /*height: 60px;*/
+                            margin: 20px auto;
+                            padding-top:5%;
+                            }
+
+                            .my_center{
+                            /*text-align: center;*/
+                            /*color: #191970;*/
+                            }
+
+                            table th {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+
+                            }
+                            table td {
+                            border: 1px solid black;
+                            text-align: center;
+                            margin-top: 10px;
+
+                            }
+
+                            .tableClass{
+                            width: 90%;
+                            margin-left: 5%;
+                            margin-right: 4%;
+                            border-collapse: collapse;
+                            border: 1px solid black;
+                            margin-bottom: 2%;
+                            }
+
+                        </style>
+                        <div class="main-data">
+                            <div class="center-data">
+                                <div class="main-container">
+                                    <div class="my_header">
+                                        <div class="my_image">
+                                            <img src="/tax_balance/static/src/img/image.jpeg" alt="logo"
+                                                 width="100%" height="100%"/>
+                                        </div>
+                                        <div class="my_address">
+                                            <h2>
+                                                <b>
+                                                    <span t-esc="docs[0].company_id.name"/>
+                                                </b>
+                                            </h2>
+                                            <h6>
+                                                <span t-esc="docs[0].company_id.street"/>
+                                                -
+                                                <span t-esc="docs[0].company_id.street2"/>
+                                                -
+                                                <span t-esc="docs[0].company_id.city"/>
+                                                -
+                                                <span t-esc="docs[0].company_id.state_id.name"/>
+                                                <br/>
+
+                                                <span t-esc="docs[0].company_id.zip"/>
+                                                -
+                                                <span t-esc="docs[0].company_id.country_id.name"/>
+                                                <!--شارع الكيال - حي الروضة<span/>- جدة<span/>- المملكة العربية السعودية-->
+                                            </h6>
+                                            <h6>
+                                                Phone :
+                                                <span style="color: #0000CD;" t-esc="docs[0].company_id.phone"/>
+                                                <br/>
+                                                Fax :
+                                                <span style="color: #0000CD;" t-esc="docs[0].company_id.fax"/>
+                                            </h6>
+
+                                            <h5>
+                                                Email :
+                                                <span style="color: #0000CD;" t-esc="docs[0].company_id.email"/>
+                                                <br/>
+                                                Website :
+                                                <span style="color: #0000CD;" t-esc="docs[0].company_id.website"/>
+                                                <!--<span t-esc="docs[0].base_balance_regular"/>-->
+                                            </h5>
+                                        </div>
+
+                                    </div>
+                                    <div class="my_title">
+                                        <h4 style="text-align: center;">
+                                            <br/>
+                                            <b style="text-align: left; float: left;">
+                                                Vat :
+                                                <span style="color: #0000CD;" t-esc="docs[0].company_id.vat"/>
+                                            </b>
+                                            <b>Tax Report</b>
+                                            <b style="text-align: right; float: right">
+                                                Date :
+                                                <span style="color: #0000CD;" t-esc="today_date"/>
+                                            </b>
+
+                                        </h4>
+                                    </div>
+
+                                    <div class="my_body">
+
+                                        <table width="90%" class="tableClass">
+
+                                            <col width="90px"/>
+                                            <col width="150px"/>
+                                            <col width="90px"/>
+                                            <col width="90px"/>
+                                            <col width="90px"/>
+                                            <col width="90px"/>
+
+
+                                            <t t-set="i" t-value="1"/>
+                                            <t t-foreach="docs" t-as="o">
+
+                                                <t t-if="gettype(o.name)==1">
+                                                    <tr style="color: #0000CD;">
+                                                        <th style="text-align: left;" height="30">
+                                                            Sale
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            VAT for period 5%
+
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            Sale Refund
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            VAT Refund
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            Total Sale
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            Total VAT
+                                                            <span/>
+                                                        </th>
+                                                    </tr>
+                                                </t>
+                                                <t t-if="gettype(o.name)==2">
+                                                    <tr style="color: #0000CD;">
+                                                        <th style="text-align: left;" height="30">
+                                                            Purchase
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            VAT for period 5%
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            Purchase Refund
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            VAT Refund
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            Total Purchase
+                                                            <span/>
+                                                        </th>
+                                                        <th style="text-align: left;">
+                                                            Total VAT
+                                                            <span/>
+                                                        </th>
+                                                    </tr>
+                                                </t>
+
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="o.base_balance_regular"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="from_date, to_date "/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.base_balance_refund"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.balance_refund"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.base_balance"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="o.balance"/>
+                                                    </td>
+                                                </tr>
+
+                                                <t t-set="i" t-value="i+1"/>
+                                            </t>
+
+                                            <tr style="color: #0000CD;">
+                                                <th style="text-align: left;" height="30">
+                                                    Net Balance
+                                                    <span/>
+                                                </th>
+                                                <th style="text-align: left;">
+                                                    Net Vat
+                                                    <span/>
+                                                </th>
+                                                <th style="text-align: left;">
+                                                    Net Balance Refund
+                                                    <span/>
+                                                </th>
+                                                <th style="text-align: left;">
+                                                    Net Vat Refund
+                                                    <span/>
+                                                </th>
+                                                <th style="text-align: left;">
+                                                    Net Amount
+                                                    <span/>
+                                                </th>
+                                                <th style="text-align: left;">
+                                                    Net VAT
+                                                    <span/>
+                                                </th>
+                                            </tr>
+
+                                            <t t-if="i==2">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="docs[0].base_balance_regular "/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].balance"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].base_balance_refund "/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].balance_refund "/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].base_balance "/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].balance "/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <t t-elif="i!=2">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="docs[0].base_balance_regular + docs[1].base_balance_regular"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].balance + docs[1].balance"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].base_balance_refund + docs[1].base_balance_refund"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].balance_refund + docs[1].balance_refund"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].base_balance + docs[1].base_balance"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="docs[0].balance + docs[1].balance"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <!--</t>-->
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end of page-->
+
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

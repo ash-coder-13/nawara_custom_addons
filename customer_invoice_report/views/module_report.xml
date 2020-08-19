@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <div class="page">
+
+                        <style>
+
+                            .body {
+                            width: 1080px;
+                            margin: 0px auto;
+                            margin-top: 100px;
+                            }
+
+                            .head {
+                            text-align: center;
+                            font-size: 20px;
+                            font-weight: bold;
+                            }
+
+                            .solid {
+                            font-weight: bold;
+                            }
+
+
+                            table,td,th {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                            text-align: center;
+                            }
+
+                            .stat {
+                            text-align: right;
+                            margin-bottom: 40px;
+                            margin-top: -70px;
+                            }
+
+                        </style>
+
+                        <p class="head">
+                            Detailed Statement of the Invoices
+                        </p>
+                        <div class="body">
+
+                            <div  class="statL">
+                                <p>
+                                    <span class="solid"> CUSTOMER NAME:</span>
+                                    <span class="liquid" t-esc="getPartnerName()"/>
+                                </p>
+                                <p style="margin-left: 1px;">
+                                    <span class="solid">Address: </span>
+                                    <span class="liquid" t-esc="customer.street"></span>
+                                    <span class="liquid" t-esc="customer.city"></span>
+                                    <span class="liquid" t-esc="customer.country_id.name"></span>
+                                </p>
+                                <p>
+                                    <span class="solid">VAT: </span>
+                                    <span class="liquid" t-esc="customer.vat"></span>
+                                </p>
+                            </div>
+                            <div class="stat">
+                                <p>
+                                    <span class="solid">STATEMENT DATE:</span>
+                                    <span class="liquid" t-esc="date"/>
+                                </p>
+
+                            </div>
+                            <table style="width:100%">
+
+                                <tr>
+                                    <th>Invoice no.</th>
+                                    <th>Invoice Date</th>
+                                    <th>Reference No</th>
+                                    <th>Quantity</th>
+                                    <th>Price per Unit</th>
+                                    <th>Total Amount</th>
+                                    <th>VAT 5% Amount</th>
+                                    <th>Amount with VAT</th>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="8" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;"><b><span class="solid">Opening Balance: </span><span class="liquid" t-esc="real_open_bal(get_entries_before(customer))"></span></b></td>
+                                </tr>
+                                <t t-set = "qty" t-value = "0" />
+                                <t t-set = "price_unit" t-value = "0" />
+                                <t t-set = "total_amount" t-value = "0" />
+                                <t t-set = "discount" t-value = "0" />
+                                <t t-set = "amount_with_vat" t-value = "0" />
+                                <t t-set = "amount_vat" t-value = "0" />
+
+                                <t t-foreach="rec.sorted(key=lambda r: r.date_invoice)" t-as="o">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="o.number"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.date_invoice"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="getOrderRef(o.origin)"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.invoice_line_ids[0].quantity"/>
+                                            <t t-set = "qty" t-value = "qty + o.invoice_line_ids[0].quantity" />
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.invoice_line_ids[0].price_unit"/>
+                                            <t t-set = "price_unit" t-value = "o.invoice_line_ids[0].price_unit" />
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:0,}'.format(float(o.amount_untaxed))"/>
+                                            <t t-set = "total_amount" t-value = "total_amount + o.amount_untaxed" />
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:0,}'.format(float(o.amount_tax))"/>
+
+                                        </td>
+                                        <td>
+                                            <span t-esc="'{:0,}'.format(float(o.amount_total))"/>
+                                            <t t-set = "amount_with_vat" t-value = "amount_with_vat + o.amount_total" />
+                                            <t t-set = "amount_vat" t-value = "amount_vat + o.amount_tax" />
+
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr style="font-weight:bold;height:30px">
+                                    <td colspan="3">Total</td>
+                                    <td>
+                                        <span t-esc="'{:0,}'.format(float(qty))"/>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <span t-esc="'{:0,}'.format(float(total_amount))"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="'{:0,}'.format(float(amount_vat))"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="'{:0,}'.format(float(amount_with_vat))"/>
+                                    </td>
+                                </tr>
+
+                                <tr style="font-weight:bold;height:30px">
+                                    <td colspan="11">
+                                        <span class="solid">Payments made during this period: </span>
+                                        <span class="solid" t-esc="get_partner_payment(get_entries(customer))"/>
+                                    </td>
+                                </tr>                                
+                                <tr style="font-weight:bold;height:30px">
+                                    <td colspan="11">
+                                        <span class="solid" t-esc="number_to_spell(amount_with_vat)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;"><b><span class="solid">Balance Outstanding: </span><span class="liquid" t-esc="opening_bal(get_entries(customer)) + real_open_bal(get_entries_before(customer))"></span></b></td>
+                                </tr>
+                                <tr style="font-weight:bold;height:100px">
+
+                                    <td>Prepared By: </td>
+                                    <td colspan="5">
+                                        <span class="solid" t-esc="getname()" />
+                                    </td>
+                                    <td>Approved By: </td>
+                                    <td colspan="6"/>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- </t> -->
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+	<report
+		id="action_reportioud_genral_ledger"
+		model="account.account"
+		name="ioud_genral_ledger.genral_ledger_report"
+		file="ioud_genral_ledger.genral_ledger_report"
+		report_type="qweb-html"
+		string="Statement OF Chart of Account"
+		menu="False"/>
+	
+	
+	<record id="form_genral_ledger_view" model="ir.ui.view">
+		<field name="name">genral.ledger</field>
+		<field name="model">genral.ledger</field>
+		<field name="arch" type="xml">
+			<form string="Statement OF Chart of Account">
+				<group col="4">
+					<field name="account" required="1"/>
+					<field name="entry_type"/>
+				</group>
+				<group string="Date of Period" col="4">
+					<field name="form"/>
+					<field name="to"/>
+				</group>
+				<footer>
+					<button name="%(action_reportioud_genral_ledger)d" type="action" string="Print" class="oe_highlight"/>
+				</footer>
+			</form>
+		 </field>
+	</record>
+
+	<record id="action_genral_ledger" model="ir.actions.act_window">
+		<field name="name">Statement Of Chart of A/C </field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">genral.ledger</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="form_genral_ledger_view"/>
+		<field name="target">new</field>
+	</record>
+	
+	<menuitem id="action_genral_ledger_menu" name="Statement OF Chart-Account" action="action_genral_ledger" parent="account_reports.account_reports_legal_statements_menu" />
+	
+</odoo>

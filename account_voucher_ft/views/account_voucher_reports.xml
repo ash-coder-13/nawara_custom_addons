@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report.external_layout_footer_voucher_x" name="Report Layout Footer for Voucher">
+            <div class="footer">
+                <div class="text-center mb32">
+                    <div class="row mb32 table table-bordered"><b>
+                        <div class="col-xs-3">Prepared By:<span t-esc="user.name"/></div>
+                        <div class="col-xs-3">Checked By:</div>
+                        <div class="col-xs-3">Passed By:</div></b>
+                        <div class="col-xs-3"><b>Receivers Name</b><br/>signature</div>
+                    </div>
+                    <div style="transform: rotate(-90deg);transform-origin: 0% 154%;text-align: left">
+                        MECD/FIN/FR-01,31/07/2017
+                    </div>
+                    <!--<div class="row mb32">-->
+                        <!--&lt;!&ndash;<div class="col-xs-3"></div>&ndash;&gt;-->
+                        <!--<div class="col-xs-4">MECD/FIN/FR-01,31/07/2017</div>-->
+                    <!--</div>-->
+                    <!--<ul class="list-inline">-->
+                        <!--<li>Page:</li>-->
+                        <!--<li><span class="page"/></li>-->
+                        <!--<li>/</li>-->
+                        <!--<li><span class="topage"/></li>-->
+                    <!--</ul>-->
+                </div>
+            </div>
+        </template>
+
+        <template id="report.external_layout_header_voucher_x" name="Report Layout Header for Voucher" >
+             <div class="header" style="height:200px">
+            <!-- company name -->
+            <div class="company_name" style="width:75%;height:auto;float:right;">
+                <span style="width:100%;float: right;font-weight: bold;font-size: 25px;
+                text-align:right;font-family: fantasy;padding-top:25px;">
+                   <span t-esc="res_company.name"/>
+                </span>
+                <span style="font-size: 15px;width:100%;float:right;text-align:right;margin-top: 10px;"><span t-esc="res_company.street"/><t t-if="res_company.street2">,<t t-esc="res_company.street2"/></t></span>
+                <span style="width:100%;float:right;font-size: 15px;text-align:right;"><t t-esc="res_company.city"/><t t-if="res_company.zip">,<t t-esc="res_company.zip"/></t>
+
+                </span>
+                <span style="width:100%;float:right;text-align:right;font-size: 15px;"><t t-esc="res_company.state_id.name"/><t t-if="res_company.country_id">,<t t-esc="res_company.country_id.name"/></t></span>
+                <span style="font-size: 15px;width:100%;float:right;text-align:right">Phone: <t t-esc="res_company.phone"/><t t-if="res_company.fax">,Fax:<t t-esc="res_company.fax"/></t></span>
+            </div>
+            <!-- image -->
+            <div class="header_img" style="width:24%;height:200px;float: left;">
+                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-width:100%;max-height: 100%;float:right;min-width:100%;"/>
+            </div>
+        </div>
+        </template>
+        <template id="report.external_layout_voucher" inherit_id="report.external_layout"
+                  primary="True" name="Report Layout for Voucher">
+            <t t-call="report.external_layout_header" position="replace">
+                <t t-call="report.external_layout_header_voucher_x" />
+            </t>
+            <t t-call="report.external_layout_footer" position="replace">
+                <t t-call="report.external_layout_footer_voucher_x" />
+            </t>
+        </template>
+
+        <template id="report_voucher_layout">
+            <t t-call="report.external_layout_voucher">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+                <div class="page">
+                    <br/>
+                    <div class="header" style="text-align:center;margin-top:-30px;">
+                        <h2><strong>
+                            <t t-if="o.voucher_type == 'sale'">RECEIPT VOUCHER</t>
+                            <t t-if="o.voucher_type == 'purchase'">PAYMENT VOUCHER</t>
+                        </strong></h2>
+                    </div>
+                    <!--<div class="row mt16 mb8"-->
+                         <!--style="border: 2px solid #000266;border-left: none;border-right: none;padding-bottom: 6px;padding-top: 6px;">-->
+                        <!--<div class="col-xs-4">Date: <strong><t t-esc="o.date"/></strong></div>-->
+                        <!--<div class="col-xs-4"><t t-esc="o.name"/></div>-->
+                        <!--<div class="col-xs-4 text-right">No: <strong><t t-esc="o.number"/></strong></div>-->
+                    <!--</div>-->
+                    <div class="row mt8 mb16">
+                        <div name="partner_address" class="col-xs-6">
+                            <table class="table mt8">
+                                <tr><td><strong>Date: </strong></td><td><span t-field="o.date"/></td></tr>
+                                <tr><td><strong>
+                                        <span>
+                                            <t t-if="o.voucher_type == 'sale'">Received from:</t>
+                                            <t t-if="o.voucher_type == 'purchase'">Paid To:</t>
+                                        </span>
+                                </strong></td><td><span t-field="o.partner_id"/></td></tr>
+                                <tr><td><strong>
+                                    <span>Amount:</span>
+                                </strong></td><td>
+                                    <span t-field="o.amount"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td></tr>
+                                <tr><td><strong>
+                                    <span>
+                                        <t t-if="o.voucher_type == 'sale'">Received For(Bill Reference):</t>
+                                        <t t-if="o.voucher_type == 'purchase'">Paid For(Bill Reference):</t>
+                                    </span>
+                                </strong></td><td>
+                                    <span t-if="o.reference" t-field="o.reference"/>
+                                </td></tr>
+                                <tr t-if="o.cheque_id"><td><strong>
+                                    Cheque No:
+                                </strong></td><td>
+                                    <span t-field="o.cheque_id.cheque_no"/>
+                                </td></tr>
+                            </table>
+                        </div>
+                        <div class="col-xs-6">
+                            <table class="table mt8">
+                                <tr><td><strong>No: </strong></td><td><span t-field="o.number"/></td></tr>
+                                <tr t-if="o.name"><td><strong>
+                                        Reference NO:
+                                </strong></td><td><span t-field="o.name"/></td></tr>
+                                <tr><td><strong>
+                                    Payment Method:
+                                </strong></td><td>
+                                    <span t-field="o.journal_id"/>
+                                </td></tr>
+                                <tr t-if="o.cheque_id"><td><strong>
+                                    Cheque Date:
+                                </strong></td><td>
+                                    <span t-field="o.cheque_id.cheque_date"/>
+                                </td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <table class="table table-condensed" style="margin-left:0px !important" t-if="o.line_ids">
+                        <thead>
+                            <tr style="background-color:#000266 !important; color:white;">
+                                <th>S No</th>
+                                <th>Project</th>
+                                <th>GL Code</th>
+                                <th>Description</th>
+                                <th class="text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody class="payment_tbody">
+                            <tr t-foreach="o.line_ids" t-as="l">
+                                <td class="text-center" ><span t-esc="l_index+1"/></td>
+                                <td><span t-field="l.project_id.name"/></td>
+                                <td><span t-field="l.voucher_id.move_id.name"/></td>
+                                <td><span t-field="l.name"/></td>
+                                <td class="text-right">
+                                    <span t-field="l.price_unit"
+                                          t-options='{"widget": "monetary", "display_currency": l.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr style="border-top:2px solid black !important;">
+                                <td class="text-right" colspan="4">
+                                    <b><span>Total Voucher Amount:</span></b>
+                                </td>
+                                <td class="text-right">
+                                    <b><span t-field="o.amount"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><b>Amount in Words : <span t-field="o.amt_in_words"/></b></p>
+                    <!--<p style="text-align:center;">Thank You For Doing Business With Us</p>-->
+                </div>
+
+            </t>
+        </template>
+
+        <template id="assets_common" name="account_payment_print_ft pdf assets" inherit_id="report.assets_common">
+            <xpath expr="." position="inside">
+                <link href="/account_voucher_ft/static/src/css/invoice.css" rel="stylesheet" type="text/css"/>
+            </xpath>
+        </template>
+
+        <template id="report_receipt_document">
+            <t t-call="report.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+                <div class="page">
+                    <div class="row row_top"><h3>RECEIPT VOUCHER</h3></div>
+                    <div class="row row_top_space">
+                        <div class="col-xs-2 col_num">
+                            <t t-if="o.number"><strong>Receipt No:</strong></t>
+                        </div>
+                        <div class="col-xs-3 col_numv"><p t-field="o.number"/></div>
+                        <div class="col-xs-2 col_date">
+                            <t t-if="o.date"><strong>Date:</strong></t>
+                        </div>
+                        <div class="col-xs-3 col_datev"><p t-field="o.date"/></div>
+                        <div class="col-xs-12 col_name"><strong>Received From:</strong>
+                            <span class="indent" t-field="o.partner_id"/>
+                        </div>
+                        <div class=" col-xs-12 col_name"><strong>Amount:</strong>
+                            <span class="indent" t-field="o.amt_in_words"></span>
+                        </div>
+                        <div class=" col-xs-8 col_name">&#160;</div>
+                        <div class=" col-xs-4 col_amt"><span t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"/></span>
+                            <strong><span>Amount:</span></strong>
+                             <span t-field="o.amount"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></div>
+
+                        <div class=" col-xs-8 col_name">
+                            <strong>Received By:</strong>
+                            <span class="indent" t-esc="user.name"/>
+                        </div>
+                        <div class=" col-xs-3 col_sign"><strong>Sign</strong></div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+
+        <template id="report_voucher">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-if="o.line_ids" t-call="account_voucher_ft.report_voucher_layout" t-lang="o.partner_id.lang"/>
+                    <t t-if="not o.line_ids" t-call="account_voucher_ft.report_receipt_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

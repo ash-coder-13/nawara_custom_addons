@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+
+                id="report_for_genral_ledger"
+                model="res.partner"
+                name="genral_ledger.genral_ledger_report"
+                file="genral_ledger.genral_ledger_report"
+                report_type="qweb-html"
+                string="General Ledger"
+                menu="False"/>
+
+        <record id="genral_ledger_wizard" model="ir.ui.view">
+            <field name="name">genral_ledger_wizard</field>
+            <field name="model">genral.ledger</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>
+                            <field name="entry_type"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="to"/>
+                            <field name="account" options="{'no_create': True, 'no_create_edit':True}"  domain= "[('user_type_id','!=','View Type')]"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="%(report_for_genral_ledger)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="genral_ledger_action" model="ir.actions.act_window">
+            <field name="name">Genral Ledger</field>
+            <field name="res_model">genral.ledger</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="genral_ledger_wizard"/>
+            <field name="target">new</field>
+            <field name="context">{'default_account': active_id}</field>
+        </record>
+
+        <record model="ir.values" id="genral_wise_filter">
+            <field name="model_id" ref="" />
+            <field name="name">Print From Wizard</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval ="'ir.actions.act_window,'+str(ref('genral_ledger_action'))"/>
+            <field name="key">action</field>
+            <field name="model">account.account</field>
+        </record>
+
+        <record id="bank_boolean_fields" model="ir.ui.view">
+            <field name="name">bank_boolean_fields</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='deprecated']" position="after">
+                    <field name="nature"/>
+                </xpath>
+
+            </field>
+
+        </record>
+
+        <record id="genral_ledger_action_seprate" model="ir.actions.act_window">
+            <field name="name">General Ledger</field>
+            <field name="res_model">genral.ledger</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="genral_ledger_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="chile_genral_ledger" name= "Accounts General Ledger"
+                  parent="account_reports.account_reports_legal_statements_menu" action="genral_ledger_action_seprate"/>
+
+    </data>
+</openerp>

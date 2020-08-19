@@ -41,17 +41,17 @@
         </record>
 
         <!--         Vendor Bill Inherited here-->
-        <record id="vendor_bill_inherited_here" model="ir.ui.view">
-            <field name="name">vendor.bill.inherited</field>
-            <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_supplier_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
-                    <field name="store_name" invisible="1"/>
-                    <field name="attachment" filename="store_name"/>
-                </xpath>
-            </field>
-        </record>
+<!--        <record id="vendor_bill_inherited_here" model="ir.ui.view">-->
+<!--            <field name="name">vendor.bill.inherited</field>-->
+<!--            <field name="model">account.invoice</field>-->
+<!--            <field name="inherit_id" ref="account.invoice_supplier_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">-->
+<!--                    <field name="store_name" invisible="1"/>-->
+<!--                    <field name="attachment" filename="store_name"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!--        Form View of Industry Section-->
         <record id="industry_section_form" model="ir.ui.view">

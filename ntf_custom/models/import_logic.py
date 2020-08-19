@@ -25,7 +25,7 @@ class ImportLogic(models.Model):
                     }
                     self.env['mail.mail'].create(main_content).send()
 
-    @api.multi
+
     def get_company_details(self):
         result = []
         partner = self.env['res.partner'].sudo().search([('name', '=', 'NAPCO TRADING COMPANY')], limit=1)

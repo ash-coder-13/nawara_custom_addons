@@ -20,12 +20,12 @@
 # /#############################################################################
 {
     'name': 'NTF Customizations',
-    'version': '10.1.2',
+    'version': '13.0.1.0',
     'description': """Nawara Transport and Freight Group Odoo Customizations""",
     'summary': """Nawara Transport and Freight Group Odoo Customizations""",
     'category': 'Sales',
     'license': 'LGPL-3',
-    'author': "Muhammad Faizal NS",
+    'author': "Ashish",
     'website': "http://ntf-group.com/",
     'depends': ['base', 'custom_logistic', 'account', 'report', 'sales_team', 'crm', 'fleet'],
     'data': [

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_nawara_employee">
+            <field name="name">Nawara Employee</field>
+            <field name="sequence">6</field>
+        </record>
+
+        <record id="group_nawara_employee_rules" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_nawara_employee"/>
+        </record>
+    </data>
+    <data noupdate="1">
+    </data>
+</odoo>

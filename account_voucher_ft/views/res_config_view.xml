@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_account_config_settings" model="ir.ui.view">
+        <field name="name">account voucher settings</field>
+        <field name="model">account.config.settings</field>
+        <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <field name="arch" type="xml">
+            <group name="bank_cash" groups="account.group_account_user" position="after">
+                <separator string="Vouchers" groups="account.group_account_user"/>
+                    <group name="vouchers" groups="account.group_account_user">
+                        <label for="id" string="Configuration"/>
+                        <div name="group_voucher_product_based">
+                            <field name="group_voucher_product_based" class="oe_inline"/>
+                            <label for="group_voucher_product_based"/>
+                        </div>
+                    </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

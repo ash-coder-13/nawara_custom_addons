@@ -47,7 +47,7 @@ class ExportLogic(models.Model):
     shutl_start_date = fields.Date(string="Shuttling Start Date")
     fin_bayan_date = fields.Date(string="Final Bayan Date")
     shutl_end_date = fields.Date(string="Shuttling End Date")
-    acc_link = fields.Many2one('account.invoice', string="Invoice", readonly=True)
+    acc_link = fields.Many2one('account.move', string="Invoice", readonly=True)
     status = fields.Many2one('import.status', string="Status")
     fri_id = fields.Many2one('freight.forward', string="Freight Link")
     site = fields.Many2one('import.site', string="Site", required=True)
@@ -82,33 +82,36 @@ class ExportLogic(models.Model):
             if file.vessel_date:
                 file.demurrage = (datetime.strptime(str(file.vessel_date), '%Y-%m-%d') + timedelta(days=5)).date()
 
-    @api.one
     @api.depends('vessel_date', 'free_time_days')
     def _compute_export_demurrage_detention_dates(self):
-        if self.vessel_date and self.free_time_days:
-            self.detention_date = (datetime.strptime(str(self.vessel_date), '%Y-%m-%d') +
-                                   timedelta(days=self.free_time_days)).date()
+        for rec in self:
+            if rec.vessel_date and rec.free_time_days:
+                rec.detention_date = (datetime.strptime(str(rec.vessel_date), '%Y-%m-%d') +
+                                       timedelta(days=rec.free_time_days)).date()
 
-    @api.one
+
     @api.depends('state')
     def _compute_sale_order(self):
-        if self.state == 'done':
-            self.tos = self.env['sale.order'].search([('partner_id', '=', self.customer.id),
-                                                      ('sales_id', '=', self.id),
-                                                      ('bill_no', '=', self.bill_no)]).ids
+        for rec in self:
+            if rec.state == 'done':
+                rec.tos = self.env['sale.order'].search([('partner_id', '=', rec.customer.id),
+                                                      ('sales_id', '=', rec.id),
+                                                      ('bill_no', '=', rec.bill_no)]).ids
 
-    @api.one
+
     @api.depends('export_id')
     def _compute_container_num(self):
+
         """
         @api.depends() should contain all fields that will be used in the calculations.
         """
-        crt_list = []
-        if self.export_id:
-            for x in self.export_id:
-                if x.crt_no:
-                    crt_list.append(x.crt_no.encode('ascii', 'ignore'))
-            self.container_num = crt_list
+        for rec in self:
+            crt_list = []
+            if rec.export_id:
+                for x in rec.export_id:
+                    if x.crt_no:
+                        crt_list.append(x.crt_no.encode('ascii', 'ignore'))
+                rec.container_num = crt_list
 
     state = fields.Selection([
         ('pre', 'Pre Bayan'),
@@ -189,278 +192,276 @@ class ExportLogic(models.Model):
     #         x.number = x.number + counter
     #         print(x.number)
 
-    @api.multi
     def initialbay(self):
-        self.state = "initial"
+        for rec in self:
+            rec.state = "initial"
 
-    @api.multi
     def finalbay(self):
-        self.state = "final"
+        for rec in self:
+            rec.state = "final"
 
-    @api.multi
     def over(self):
-        self.state = "done"
+        for rec in self:
+            rec.state = "done"
 
-    @api.multi
     def create_sale(self):
-        """Create Transport Order"""
+        for rec in self:
+            """Create Transport Order"""
 
-        if not self.tos and not self.acc_link:
-            # / Get Product having name is Container/
-            value = self.env['product.template'].search([('name', '=', 'Transportation Charge')])[0].id
-            # / Create Transport Order/
-            for data in self.export_id:
-                if data.crt_no:
-                    records = self.env['sale.order'].create({
-                        'partner_id': self.customer.id,
-                        'by_customer': self.by_customer.id,
-                        'date_order': date.today(),
-                        'bill_type': self.bill_types,
-                        'bill_no': self.bill_no,
-                        'suppl_name': data.transporter.id,
-                        'suppl_freight': data.trans_charge,
-                        'form': data.form.name,
-                        'to': data.to.name,
-                        'sales_id': self.id,
-                        'our_job': self.our_job_no,
-                        'sr_no': self.sr_no,
-                        'customer_ref': self.customer_ref,
-                        'custom_dec': '',
-                        'bayan_no': self.bayan_no,
-                        'customer_site': self.site.id,
-                        'final_date': self.fin_bayan_date,
-                        'no_invoice': True,
-                        'demurrage': self.demurrage,
-                    })
+            if not rec.tos and not rec.acc_link:
+                # / Get Product having name is Container/
+                value = self.env['product.template'].search([('name', '=', 'Transportation Charge')])[0].id
+                # / Create Transport Order/
+                for data in rec.export_id:
+                    if data.crt_no:
+                        records = self.env['sale.order'].create({
+                            'partner_id': rec.customer.id,
+                            'by_customer': rec.by_customer.id,
+                            'date_order': date.today(),
+                            'bill_type': rec.bill_types,
+                            'bill_no': rec.bill_no,
+                            'suppl_name': data.transporter.id,
+                            'suppl_freight': data.trans_charge,
+                            'form': data.form.name,
+                            'to': data.to.name,
+                            'sales_id': rec.id,
+                            'our_job': rec.our_job_no,
+                            'sr_no': rec.sr_no,
+                            'customer_ref': rec.customer_ref,
+                            'custom_dec': '',
+                            'bayan_no': rec.bayan_no,
+                            'customer_site': rec.site.id,
+                            'final_date': rec.fin_bayan_date,
+                            'no_invoice': True,
+                            'demurrage': rec.demurrage,
+                        })
 
-                    records.order_line.create({
-                        'product_id': value,
-                        'weight': data.weight,
-                        'name': 'Container',
-                        'product_uom_qty': 1.0,
-                        'price_unit': data.custm_charge,
-                        'crt_no': data.crt_no,
-                        'product_uom': 1,
-                        'order_id': records.id,
-                        'form': data.form.id,
-                        'to': data.to.id,
-                        'fleet_type': data.fleet_type.id,
-                    })
-            email_rec = self.env['multi.mails'].search([])
-            template = self.env.ref('custom_logistic.cct_email_template_1')
-            for email in email_rec.sale_support:
-                self.to_mails = email.name
-                self.env['mail.template'].browse(template.id).send_mail(self.id)
-        else:
-            raise UserError(_('Transportation or Invoice is Already Created'))
+                        records.order_line.create({
+                            'product_id': value,
+                            'weight': data.weight,
+                            'name': 'Container',
+                            'product_uom_qty': 1.0,
+                            'price_unit': data.custm_charge,
+                            'crt_no': data.crt_no,
+                            'product_uom': 1,
+                            'order_id': records.id,
+                            'form': data.form.id,
+                            'to': data.to.id,
+                            'fleet_type': data.fleet_type.id,
+                        })
+                email_rec = self.env['multi.mails'].search([])
+                template = self.env.ref('custom_logistic.cct_email_template_1')
+                for email in email_rec.sale_support:
+                    rec.to_mails = email.name
+                    self.env['mail.template'].browse(template.id).send_mail(rec.id)
+            else:
+                raise UserError(_('Transportation or Invoice is Already Created'))
 
-    @api.multi
     def get_order_name(self, sale_ids):
-        return str([sale.name.encode('ascii', 'ignore') for sale in sale_ids]).replace('[', '').replace(']',
-                                                                                                        '').replace("'",
-                                                                                                                    '')
+        for rec in self:
+            return str([sale.name.encode('ascii', 'ignore') for sale in sale_ids]).replace('[', '').replace(']','').replace("'",'')
 
-    @api.multi
     def create_custom_charges(self):
         """ Creating the invoice as per billing type B/L or Container wise"""
+        for rec in self:
 
-        if self.warn_invoice == 0:
-            self.warn_invoice += 1
-            view = self.env.ref('sh_message.sh_message_wizard').id
-            context = dict(self._context or self)
-            context['message'] = "Do you Really Want To Create Invoice, If yes then click Create Invoice Button Again."
-            return {'name': 'Warning',
-                    'type': 'ir.actions.act_window',
-                    'view_type': 'form',
-                    'view_mode': 'form',
-                    'res_model': 'sh.message.wizard',
-                    'views': [(view, 'form')],
-                    'view_id': view,
-                    'target': 'new',
-                    'context': context,
-                    }
+            if rec.warn_invoice == 0:
+                rec.warn_invoice += 1
+                view = self.env.ref('sh_message.sh_message_wizard').id
+                context = dict(rec._context or rec)
+                context['message'] = "Do you Really Want To Create Invoice, If yes then click Create Invoice Button Again."
+                return {'name': 'Warning',
+                        'type': 'ir.actions.act_window',
+                        'view_type': 'form',
+                        'view_mode': 'form',
+                        'res_model': 'sh.message.wizard',
+                        'views': [(view, 'form')],
+                        'view_id': view,
+                        'target': 'new',
+                        'context': context,
+                        }
 
-        sale = self.env['sale.order'].search([('sales_id', '=', self.id)])
-        check = 0
-        for x in sale:
-            if x.state == 'done':
-                check += 1
+            sale = self.env['sale.order'].search([('sales_id', '=', rec.id)])
+            check = 0
+            for x in sale:
+                if x.state == 'done':
+                    check += 1
 
-        if check == len(sale):
-            if not self.acc_link and not self.fri_id:
-                create_invoice = ''
-                account = self.env['account_journal.configuration'].search([])
-                invoice = self.env['account.invoice'].search([])
-                invoice_lines = self.env['account.invoice.line'].search([])
-                # / B/L Wise invoice/
+            if check == len(sale):
+                if not rec.acc_link and not rec.fri_id:
+                    create_invoice = ''
+                    account = self.env['account_journal.configuration'].search([])
+                    invoice = self.env['account.move'].search([])
+                    invoice_lines = self.env['account.move.line'].search([])
+                    # / B/L Wise invoice/
 
-                if self.bill_types == "B/L Number":
-                    create_invoice = invoice.create({
-                        'journal_id': account.e_invoice_journal.id,
-                        'partner_id': self.customer.id,
-                        'by_customer': self.by_customer.id,
-                        'date_invoice': date.today(),
-                        'billng_type': self.bill_types,
-                        'bill_num': self.bill_no,
-                        'our_job': self.our_job_no,
-                        'sr_no': self.sr_no,
-                        'customer_ref': self.customer_ref,
-                        'custom_dec': '',
-                        'bayan_no': self.bayan_no,
-                        'customer_site': self.site.id,
-                        'final_date': self.fin_bayan_date,
-                        'type': 'out_invoice',
-                        'invoice_from': 'exp',
-                        'export_link': self.id,
-                        'property_account_receivable_id': self.customer.property_account_receivable_id.id,
-                    })
-
-                    for x in self.export_serv:
-                        create_invoice_lines = invoice_lines.create({
-                            'quantity': 1,
-                            'price_unit': x.sevr_charge,
-                            'account_id': account.e_invoice_account.id,
-                            'name': x.sevr_type.name,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                    if rec.bill_types == "B/L Number":
+                        create_invoice = invoice.create({
+                            'journal_id': account.e_invoice_journal.id,
+                            'partner_id': rec.customer.id,
+                            'by_customer': rec.by_customer.id,
+                            'date_invoice': date.today(),
+                            'billng_type': rec.bill_types,
+                            'bill_num': rec.bill_no,
+                            'our_job': rec.our_job_no,
+                            'sr_no': rec.sr_no,
+                            'customer_ref': rec.customer_ref,
+                            'custom_dec': '',
+                            'bayan_no': rec.bayan_no,
+                            'customer_site': rec.site.id,
+                            'final_date': rec.fin_bayan_date,
+                            'type': 'out_invoice',
+                            'invoice_from': 'exp',
+                            'export_link': rec.id,
+                            'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
                         })
 
-                # / B/L Wise invoice/
-                if self.bill_types == "Container Wise":
-                    data = []
-                    for x in self.export_id:
-                        if x.types not in data:
-                            data.append(x.types)
-
-                    create_invoice = invoice.create({
-                        'journal_id': account.e_invoice_journal.id,
-                        'partner_id': self.customer.id,
-                        'by_customer': self.by_customer.id,
-                        'date_invoice': date.today(),
-                        'billng_type': self.bill_types,
-                        'bill_num': self.bill_no,
-                        'our_job': self.our_job_no,
-                        'sr_no': self.sr_no,
-                        'customer_ref': self.customer_ref,
-                        'custom_dec': '',
-                        'bayan_no': self.bayan_no,
-                        'customer_site': self.site.id,
-                        'final_date': self.fin_bayan_date,
-                        'type': 'out_invoice',
-                        'invoice_from': 'exp',
-                        'export_link': self.id,
-                        'property_account_receivable_id': self.customer.property_account_receivable_id.id,
-                    })
-
-                    for line in data:
-                        value = 0
-                        for x in self.export_id:
-                            if x.types == line:
-                                value = value + 1
-                        get_unit = 0
-                        get_type = ' '
-                        for y in self.cont_serv:
-                            if y.type_contt == line:
-                                get_unit = y.sevr_charge_cont
-                                get_type = y.sevr_type_cont.name
-
-                        create_invoice_lines = invoice_lines.create({
-                            'quantity': value,
-                            'price_unit': get_unit,
-                            'account_id': account.e_invoice_account.id,
-                            'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
-                            'service_type': get_type,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
-                        })
-
-                for x in self.export_other_charges:
-                    create_invoice_lines = invoice_lines.create({
-                        'quantity': 1,
-                        'price_unit': x.charges,
-                        'account_id': account.e_invoice_account.id,
-                        'name': x.name.name,
-                        'invoice_id': create_invoice.id,
-                    })
-
-                for x in self.export_gov_charges:
-                    create_invoice_lines = invoice_lines.create({
-                        'quantity': 1,
-                        'price_unit': x.charges,
-                        'account_id': account.g_invoice_account.id,
-                        'name': x.name.name,
-                        'invoice_id': create_invoice.id,
-                    })
-                self.acc_link = create_invoice.id
-
-                if self.tos:
-                    for x in self.tos:
-                        x.invoice_status = 'invoiced'
-                        create_invoice.invoice_line_ids.create({
-                            'quantity': 1,
-                            'price_unit': x.amount_total,
-                            'account_id': account.same_custom_invoice_account.id,
-                            'name': str(x.name) + " Transportation Charges" + ' اجور نقل '.decode('utf-8'),
-                            'crt_no': x.order_line.crt_no,
-                            'invoice_id': create_invoice.id
-                        })
-
-                        if x.pullout_type == 'Customer':
-                            create_invoice.invoice_line_ids.create({
+                        for x in rec.export_serv:
+                            create_invoice_lines = invoice_lines.create({
                                 'quantity': 1,
-                                'price_unit': x.partner_id.pullout_charges,
-                                'account_id': account.t_pullout_account.id,
-                                'name': str(x.name) + " PullOut Charges",
-                                'invoice_id': create_invoice.id
+                                'price_unit': x.sevr_charge,
+                                'account_id': account.e_invoice_account.id,
+                                'name': x.sevr_type.name,
+                                'invoice_id': create_invoice.id,
+                                'invoice_line_tax_ids': [1],
                             })
 
-                        if x.pull_out and x.pullout_status == 'Completed':
-                            if datetime.now().date() >= (
-                                    datetime.strptime(str(x.pullout_date), '%Y-%m-%d %H:%M:%S') + timedelta(
-                                days=x.partner_id.free_day)).date():
-                                day = datetime.now().date() - (
-                                        datetime.strptime(str(x.pullout_date), '%Y-%m-%d %H:%M:%S') + timedelta(
-                                    days=x.partner_id.free_day)).date()
+                    # / B/L Wise invoice/
+                    if rec.bill_types == "Container Wise":
+                        data = []
+                        for x in rec.export_id:
+                            if x.types not in data:
+                                data.append(x.types)
 
-                                if day.days > 0:
-                                    create_invoice.invoice_line_ids.create({
-                                        'quantity': day.days,
-                                        'price_unit': x.partner_id.storage_charges,
-                                        'account_id': account.t_storage_account.id,
-                                        'name': "Storage Charges for " + str(day.days) + " Days",
-                                        'invoice_id': create_invoice.id
-                                    })
+                        create_invoice = invoice.create({
+                            'journal_id': account.e_invoice_journal.id,
+                            'partner_id': rec.customer.id,
+                            'by_customer': rec.by_customer.id,
+                            'date_invoice': date.today(),
+                            'billng_type': rec.bill_types,
+                            'bill_num': rec.bill_no,
+                            'our_job': rec.our_job_no,
+                            'sr_no': rec.sr_no,
+                            'customer_ref': rec.customer_ref,
+                            'custom_dec': '',
+                            'bayan_no': rec.bayan_no,
+                            'customer_site': rec.site.id,
+                            'final_date': rec.fin_bayan_date,
+                            'type': 'out_invoice',
+                            'invoice_from': 'exp',
+                            'export_link': rec.id,
+                            'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
+                        })
 
-                # vendor bill creation
-                partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
+                        for line in data:
+                            value = 0
+                            for x in rec.export_id:
+                                if x.types == line:
+                                    value = value + 1
+                            get_unit = 0
+                            get_type = ' '
+                            for y in rec.cont_serv:
+                                if y.type_contt == line:
+                                    get_unit = y.sevr_charge_cont
+                                    get_type = y.sevr_type_cont.name
 
-                if self.export_gov_charges:
-                    create_invoice = self.env['account.invoice'].create({
-                        'journal_id': account.g_invoice_journal.id,
-                        'partner_id': partner.id,
-                        'date_invoice': date.today(),
-                        'type': 'in_invoice',
-                        'export_link': self.id,
-                        'invoice_from': 'exp',
-                        'account_id': partner.property_account_payable_id.id
-                    })
-                    for x in self.export_gov_charges:
-                        create_invoice_lines = create_invoice.invoice_line_ids.create({
+                            create_invoice_lines = invoice_lines.create({
+                                'quantity': value,
+                                'price_unit': get_unit,
+                                'account_id': account.e_invoice_account.id,
+                                'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
+                                'service_type': get_type,
+                                'invoice_id': create_invoice.id,
+                                'invoice_line_tax_ids': [1],
+                            })
+
+                    for x in rec.export_other_charges:
+                        create_invoice_lines = invoice_lines.create({
+                            'quantity': 1,
+                            'price_unit': x.charges,
+                            'account_id': account.e_invoice_account.id,
+                            'name': x.name.name,
+                            'invoice_id': create_invoice.id,
+                        })
+
+                    for x in rec.export_gov_charges:
+                        create_invoice_lines = invoice_lines.create({
                             'quantity': 1,
                             'price_unit': x.charges,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name.name,
                             'invoice_id': create_invoice.id,
                         })
-                email_rec = self.env['multi.mails'].search([])
-                template = self.env.ref('custom_logistic.tie_email_template')
-                for email in email_rec.finance:
-                    self.to_mails = email.name
-                    self.env['mail.template'].browse(template.id).send_mail(self.id)
+                    rec.acc_link = create_invoice.id
+
+                    if rec.tos:
+                        for x in rec.tos:
+                            x.invoice_status = 'invoiced'
+                            create_invoice.invoice_line_ids.create({
+                                'quantity': 1,
+                                'price_unit': x.amount_total,
+                                'account_id': account.same_custom_invoice_account.id,
+                                'name': str(x.name) + " Transportation Charges" + ' اجور نقل '.decode('utf-8'),
+                                'crt_no': x.order_line.crt_no,
+                                'invoice_id': create_invoice.id
+                            })
+
+                            if x.pullout_type == 'Customer':
+                                create_invoice.invoice_line_ids.create({
+                                    'quantity': 1,
+                                    'price_unit': x.partner_id.pullout_charges,
+                                    'account_id': account.t_pullout_account.id,
+                                    'name': str(x.name) + " PullOut Charges",
+                                    'invoice_id': create_invoice.id
+                                })
+
+                            if x.pull_out and x.pullout_status == 'Completed':
+                                if datetime.now().date() >= (
+                                        datetime.strptime(str(x.pullout_date), '%Y-%m-%d %H:%M:%S') + timedelta(
+                                    days=x.partner_id.free_day)).date():
+                                    day = datetime.now().date() - (
+                                            datetime.strptime(str(x.pullout_date), '%Y-%m-%d %H:%M:%S') + timedelta(
+                                        days=x.partner_id.free_day)).date()
+
+                                    if day.days > 0:
+                                        create_invoice.invoice_line_ids.create({
+                                            'quantity': day.days,
+                                            'price_unit': x.partner_id.storage_charges,
+                                            'account_id': account.t_storage_account.id,
+                                            'name': "Storage Charges for " + str(day.days) + " Days",
+                                            'invoice_id': create_invoice.id
+                                        })
+
+                    # vendor bill creation
+                    partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
+
+                    if rec.export_gov_charges:
+                        create_invoice = self.env['account.move'].create({
+                            'journal_id': account.g_invoice_journal.id,
+                            'partner_id': partner.id,
+                            'date_invoice': date.today(),
+                            'type': 'in_invoice',
+                            'export_link': rec.id,
+                            'invoice_from': 'exp',
+                            'account_id': partner.property_account_payable_id.id
+                        })
+                        for x in rec.export_gov_charges:
+                            create_invoice_lines = create_invoice.invoice_line_ids.create({
+                                'quantity': 1,
+                                'price_unit': x.charges,
+                                'account_id': account.g_invoice_account.id,
+                                'name': x.name.name,
+                                'invoice_id': create_invoice.id,
+                            })
+                    email_rec = self.env['multi.mails'].search([])
+                    template = self.env.ref('custom_logistic.tie_email_template')
+                    for email in email_rec.finance:
+                        rec.to_mails = email.name
+                        self.env['mail.template'].browse(template.id).send_mail(rec.id)
+                else:
+                    raise UserError(_('Invoice Is Already Created or Maybe This Export Is Linked With Project.'))
             else:
-                raise UserError(_('Invoice Is Already Created or Maybe This Export Is Linked With Project.'))
-        else:
-            raise UserError(_('Transportation in Process Wait until Transport order not complete'))
+                raise UserError(_('Transportation in Process Wait until Transport order not complete'))
 
 
 class logistics_export_tree(models.Model):
@@ -495,12 +496,13 @@ class FiledOfficer(models.Model):
 
     name = fields.Char(string="Filed Officer Name", required=True)
 
-    @api.one
-    @api.multi
+
+
     def unlink(self):
-        if self.env['export.logic'].search_count([('filed_officer', '=', self.id)]):
-            raise ValidationError('filed officer is in use you can not Delete')
-        return super(FiledOfficer, self).unlink()
+        for rec in self:
+            if self.env['export.logic'].search_count([('filed_officer', '=', rec.id)]):
+                raise ValidationError('filed officer is in use you can not Delete')
+            return super(FiledOfficer, self).unlink()
 
 
 class export_tree(models.Model):
@@ -574,18 +576,19 @@ class ImportLogic(models.Model):
     delivery = fields.Date(string="Delivery Date", compute='_compute_dates')
     eir_date = fields.Date(string="EIR Date", compute='_compute_dates')
 
-    @api.one
-    @api.multi
+
+
     def _compute_dates(self):
-        self.ensure_one()
-        sales_order = self.env['sale.order'].search([('sales_imp_id', '=', self.id)], limit=1,
-                                                    order='create_date desc')
-        for file in self:
+        for rec in self:
+            # rec.ensure_one()
+            sales_order = self.env['sale.order'].search([('sales_imp_id', '=', rec.id)], limit=1,
+                                                        order='create_date desc')
+
             for item in sales_order:
                 if sales_order:
-                    file.delivery_date = item.delivery_date
-                    file.delivery = item.delivery
-                    file.eir_date = item.eir_date
+                    rec.delivery_date = item.delivery_date
+                    rec.delivery = item.delivery
+                    rec.eir_date = item.eir_date
 
     customer = fields.Many2one('res.partner', string="Customer", required=True)
     by_customer = fields.Many2one('by.customer', string="By Customer")
@@ -613,7 +616,7 @@ class ImportLogic(models.Model):
     do_attach = fields.Binary(string=" ")
     do_no = fields.Date(string="DO Date")
     do_num = fields.Char(string="DO Number")
-    acc_link = fields.Many2one('account.invoice', string="Invoice", readonly=True)
+    acc_link = fields.Many2one('account.move', string="Invoice", readonly=True)
     bayan_attach = fields.Binary(string=" ")
     final_bayan = fields.Char(string="Final Bayan")
     final_attach = fields.Binary(string="Final Bayan")
@@ -641,7 +644,7 @@ class ImportLogic(models.Model):
     SDO_Date = fields.Date(string="SDO Collection Date", required=False, )
     ship_Type = fields.Selection(string="Shipment Type", selection=[('lcl', 'LCL'), ('fcl', 'FCL'), ], required=False, )
     sale_link = fields.Many2one(comodel_name="sale.order", string="sale link", required=False, )
-    bill_link = fields.Many2one(comodel_name="account.invoice", string="Vendor bill", required=False, )
+    bill_link = fields.Many2one(comodel_name="account.move", string="Vendor bill", required=False, )
     tick = fields.Boolean()
     tos = fields.Many2many(comodel_name="sale.order", string="Transportation Orders", compute='_compute_sale_order')
     warn_invoice = fields.Integer(string="Warn Invoice", )
@@ -661,12 +664,11 @@ class ImportLogic(models.Model):
     detention_date = fields.Date(string="Detention Date", store=True,
                                  compute='_compute_import_demurrage_detention_dates')
 
-    @api.one
     @api.depends('vessel_date', 'free_time_days')
     def _compute_import_demurrage_detention_dates(self):
-        if self.vessel_date and self.free_time_days:
-            self.detention_date = (datetime.strptime(str(self.vessel_date), '%Y-%m-%d') + timedelta(
-                days=self.free_time_days)).date()
+        for rec in self:
+            if rec.vessel_date and rec.free_time_days:
+                rec.detention_date = (datetime.strptime(str(rec.vessel_date), '%Y-%m-%d') + timedelta(days=rec.free_time_days)).date()
 
     @api.onchange('vessel_date')
     def _onchange_demurrage(self):
@@ -677,19 +679,20 @@ class ImportLogic(models.Model):
     count_crt = fields.Integer(string="Count Of Container", required=False, compute='_compute_container_num',
                                store=True)
 
-    @api.one
+
     @api.depends('import_id')
     def _compute_container_num(self):
         """
         @api.depends() should contain all fields that will be used in the calculations.
         """
-        crt_list = []
-        if self.import_id:
-            for x in self.import_id:
-                if x.crt_no:
-                    crt_list.append(x.crt_no.encode('ascii', 'ignore'))
-            self.container_num = crt_list
-            self.count_crt = len(crt_list)
+        for rec in self:
+            crt_list = []
+            if rec.import_id:
+                for x in rec.import_id:
+                    if x.crt_no:
+                        crt_list.append(x.crt_no.encode('ascii', 'ignore'))
+                rec.container_num = crt_list
+                rec.count_crt = len(crt_list)
 
     stages = fields.Selection([
         ('pre', 'Pre Bayan'),
@@ -751,27 +754,27 @@ class ImportLogic(models.Model):
                             })
                 self.imp_contt = contt
 
-    @api.multi
+
     def initialbay(self):
         self.stages = "initial"
 
-    @api.multi
+
     def finalbay(self):
         self.stages = "final"
 
-    @api.multi
+
     def over(self):
         self.stages = "done"
 
-    @api.one
     @api.depends('stages')
     def _compute_sale_order(self):
-        if self.stages == 'done':
-            self.tos = self.env['sale.order'].search([('partner_id', '=', self.customer.id),
-                                                      ('sales_imp_id', '=', self.id),
-                                                      ('bill_no', '=', self.bill_no)]).ids
+        for rec in self:
+            if rec.stages == 'done':
+                rec.tos = self.env['sale.order'].search([('partner_id', '=', rec.customer.id),
+                                                          ('sales_imp_id', '=', rec.id),
+                                                          ('bill_no', '=', rec.bill_no)]).ids
 
-    @api.multi
+
     def create_sale(self):
         """Create Transport Order"""
 
@@ -804,13 +807,13 @@ class ImportLogic(models.Model):
         else:
             raise UserError(_('Transportation or Invoice is Already Created'))
 
-    @api.multi
+
     def get_order_name(self, sale_ids):
         return str([sale.name.encode('ascii', 'ignore') for sale in sale_ids]).replace('[', '').replace(']',
                                                                                                         '').replace("'",
                                                                                                                     '')
 
-    @api.multi
+
     def create_custom_charges(self):
         if self.warn_invoice == 0:
             self.warn_invoice += 1
@@ -822,8 +825,8 @@ class ImportLogic(models.Model):
                     'context': context, }
 
         account = self.env['account_journal.configuration'].search([])
-        invoice = self.env['account.invoice'].search([])
-        invoice_lines = self.env['account.invoice.line'].search([])
+        invoice = self.env['account.move'].search([])
+        invoice_lines = self.env['account.move.line'].search([])
         sale = self.env['sale.order'].search([('sales_imp_id', '=', self.id)])
         check = 0
         for x in sale:
@@ -985,7 +988,7 @@ class ImportLogic(models.Model):
 
                 # vendor bill
                 if self.import_gov_charges:
-                    create_invoice = self.env['account.invoice'].create({
+                    create_invoice = self.env['account.move'].create({
                         'journal_id': account.g_invoice_journal.id,
                         'partner_id': partner.id,
                         'date_invoice': date.today(),
@@ -997,7 +1000,6 @@ class ImportLogic(models.Model):
                         'account_id': partner.property_account_payable_id.id
                     })
                     for x in self.import_gov_charges:
-                        print "================================================================================================="
                         create_invoice_lines = create_invoice.invoice_line_ids.create({
                             'quantity': 1,
                             'price_unit': x.charges,
@@ -1144,13 +1146,13 @@ class StatusLogic(models.Model):
     comment = fields.Char(string="status")
     name = fields.Char(string="Status Name")
 
-    @api.one
-    @api.multi
+
+
     def unlink(self):
-        if self.env['import.logic'].search_count([('status', '=', self.id)]) or self.env['export.logic'].search_count([(
-                'status', '=', self.id)]):
-            raise ValidationError('Status is in use you can not Delete')
-        return super(StatusLogic, self).unlink()
+        for rec in self:
+            if self.env['import.logic'].search_count([('status', '=', rec.id)]) or self.env['export.logic'].search_count([('status', '=', rec.id)]):
+                raise ValidationError('Status is in use you can not Delete')
+            return super(StatusLogic, self).unlink()
 
 
 # @api.model
@@ -1161,7 +1163,7 @@ class StatusLogic(models.Model):
 
 
 class AccInvLineExt(models.Model):
-    _inherit = 'account.invoice.line'
+    _inherit = 'account.move.line'
 
     attachment = fields.Binary(string="Attachment", attachment=True)
     afterTaxAmt = fields.Float(string='Tax Amount', required=False, digits=(6, 3))
@@ -1248,7 +1250,7 @@ class Change_Date_Status(models.TransientModel):
     status = fields.Many2one(comodel_name="import.status", string="Status", required=True, )
     m_name = fields.Char()
 
-    @api.multi
+
     def pre(self):
         active_class = self.env[self.m_name].browse(self._context.get('active_id'))
         if active_class:
@@ -1261,7 +1263,7 @@ class Change_Date_Status(models.TransientModel):
                     x.pre_bayan = self.date;
                     x.status = self.status.id
 
-    @api.multi
+
     def final(self):
         active_class = self.env[self.m_name].browse(self._context.get('active_id'))
         if active_class:
@@ -1343,14 +1345,14 @@ class AccountAnalyticalExt(models.Model):
     is_parent = fields.Boolean(string="Is Parent?")
 
 
-class AccountAssetExt(models.Model):
-    _inherit = 'account.asset.asset'
-
-    acc_dep = fields.Float(string="Accumulated Depreciation", compute="_compute_acc_dep_amount")
-
-    @api.one
-    @api.depends('depreciation_line_ids', 'depreciation_line_ids.move_check', 'depreciation_line_ids.move_id')
-    def _compute_acc_dep_amount(self):
-        for line in self.depreciation_line_ids:
-            if line.move_check and line.move_id.name != '/':
-                self.acc_dep += line.amount
+# class AccountAssetExt(models.Model):
+#     _inherit = 'account.asset.asset'
+#
+#     acc_dep = fields.Float(string="Accumulated Depreciation", compute="_compute_acc_dep_amount")
+#
+#     @api.depends('depreciation_line_ids', 'depreciation_line_ids.move_check', 'depreciation_line_ids.move_id')
+#     def _compute_acc_dep_amount(self):
+#         for rec in self:
+#             for line in rec.depreciation_line_ids:
+#                 if line.move_check and line.move_id.name != '/':
+#                     rec.acc_dep += line.amount

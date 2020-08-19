@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+
+        <record id="parent_account_balance_wizard" model="ir.ui.view">
+            <field name="name">parent_account_balance_wizard</field>
+            <field name="model">parentaccount.balance</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="date_from"/>
+                            <field name="account_id" domain="[('internal_type','=','view')]" context="{'show_parent_account':True}"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="date_to"/>
+                            <field name="filters"/>
+                            <field name="name" invisible="1"/>
+                            <field name="file" filename="name" readonly="1"/>
+                            
+
+                        </group>
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="get_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="parent_account_balance_wizard_action" model="ir.actions.act_window">
+            <field name="name">Parent Account Wise Balance</field>
+            <field name="res_model">parentaccount.balance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="parent_account_balance_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="parent_account_balance_wizard_action_menu_item" name="Parent Account Wise Balance Xlsx" action="parent_account_balance_wizard_action" parent="account_reports.account_reports_legal_statements_menu" sequence="25"/>   
+        
+    </data>
+</openerp>

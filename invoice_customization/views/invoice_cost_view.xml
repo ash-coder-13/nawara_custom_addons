@@ -1,0 +1,80 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it -->
+        <record id="ext_invoice_module_cost_form" model="ir.ui.view">
+            <field name="name">invoice_module_cost</field>
+            <field name="model">invoice.module.cost</field>
+            <field name="arch" type="xml">
+                <form string="invoice_module_cost">
+                    <header>
+                        <button name="importBalancesCustomer" string="Genrate Invoices" class="oe_highlight"
+                                type="object" />
+                    </header>
+                    <sheet>
+                        <group name="top">
+                            <group name="left">
+                                <field name="name" invisible="1"/>
+                                <field name="account_journal" />
+                            </group>
+                            <group name="right">
+                                <field name="account_id" />
+                            </group>
+                        </group>
+                        
+                        <field name="cost_tree_ids" nolabel="1">
+                            <tree editable="bottom" >
+                                <field name="partner_cost_ids" />
+                                <field name="date" />
+                                <field name="description" />
+                                <field name="amount" />
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ext_invoice_module_cost_tree" model="ir.ui.view">
+            <field name="name">invoice_module_cost_tree</field>
+            <field name="model">invoice.module.cost</field>
+            <field name="arch" type="xml">
+                <tree string="invoice_module_cost">
+                    <field name="name" />
+                    <field name="account_journal" />
+                    <field name="account_id" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="ext_invoice_module_cost_action" model="ir.actions.act_window">
+            <field name="name">Import Balance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">invoice.module.cost</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                    Import balances
+                </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+                Here you can import balance for customer and supplier
+            </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="ext_invoice_module_cost_menu_one" name="Import Balance" parent="account.menu_finance_entries"
+                  action="ext_invoice_module_cost_action" sequence="3"/>
+
+
+<!-- Sequence for Record  -->
+        <record id="ext_invoice_module_cost_seq" model="ir.sequence">
+          <field name="name">ext_invoice_module_cost_seq</field>
+          <field name="code">invoice.module.cost.seq</field>
+          <field name="prefix">Sr</field>
+          <field name="padding">4</field>
+        </record>
+
+  </data>
+</odoo>

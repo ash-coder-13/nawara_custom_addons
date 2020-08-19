@@ -6,9 +6,9 @@
 
     'description': "nawara_invoice",
 
-    'author': 'SolutionFounder',
+    'author': 'Ashish',
     'website': "http://www.solutionfounder.com",
-    'version': '10.0.1.12',
+    'version': '13.0.1.0',
     'category': 'account',
 
 

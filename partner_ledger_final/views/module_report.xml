@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>
+
+        <template id="partner_ledger_report">
+
+            <t t-call="report.html_container">
+
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+
+                        <div class="page">
+
+                            <style type="text/css">
+                                .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                                }
+                                .report-wrapper {
+                                width: 1000px;
+                                margin: 0px auto;
+                                }
+                                table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border: 2px solid #CCC;
+                                }
+                                table tr td, table tr th {
+                                text-align: center;
+                                padding: 10px 0px 10px 5px;
+                                min-width: 130px;
+                                border-right: 2px solid #CCC;
+                                border-bottom: 1px solid #eee;
+                                }
+                                table tr td:last-child,
+                                table tr th:last-child {
+                                border-right: none
+                                }
+                                table tr:last-child td {
+                                border-bottom: none
+                                }
+                                table tr th {
+                                text-align: center;
+                                }
+                                .report-header {
+                                width: 100%;
+                                margin: 0px 0px 10px;
+                                text-align: left;
+                                }
+                                .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                                }
+                                .report-header p .solid {
+                                font-weight: bold;
+                                }
+                                h2 {
+                                text-align: center;
+                                font-size: 35px;
+                                text-decoration: underline;
+                                }
+                                .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                                }
+
+                                .heading {
+                                    margin-left: 300px;
+                                }
+                            </style>
+
+                            <div class="report-wrapper">
+
+                                <div class="report-header">
+                                    <div class="heading">
+                                        <img src="/partner_ledger_final/static/src/img/logo.jpg" alt="NTF Group" />
+                                    </div>
+
+                                    <h3>
+                                        <span class="solid" style="text-align:  center; margin-left: 300px;">Statement of account  كشف حساب </span>
+                                    </h3>
+
+                                    <!--  <p>
+                                         <span class="solid">Partner: </span>
+                                         <span class="liquid" t-esc="getPartnerName(o)"></span>
+                                     </p>
+
+                                     <p style="margin-left: 1px;">
+                                         <span class="solid">Address: </span>
+                                         <span class="liquid" t-esc="o.street"></span>
+                                         <span class="liquid" t-esc="o.city"></span>
+                                         <span class="liquid" t-esc="o.country_id.name"></span>
+                                     </p>
+                                     <p>
+                                         <span class="solid">VAT: </span>
+                                         <span class="liquid" t-esc="o.vat"></span>
+                                     </p> -->
+
+                                    <div style="float:left; width: 100%;">
+
+                                        <div style="float:left; width: 50%;text-align: left;">
+
+                                            <p>
+                                                <span class="solid">Partner: </span>
+                                                <span class="liquid" t-esc="getPartnerName(o)"></span>
+                                            </p>
+
+                                            <p style="margin-left: 1px;">
+                                                <span class="solid">Address: </span>
+                                                <span class="liquid" t-esc="o.street"></span>
+                                                <span class="liquid" t-esc="o.city"></span>
+                                                <span class="liquid" t-esc="o.country_id.name"></span>
+                                            </p>
+                                            <p>
+                                                <span class="solid">VAT: </span>
+                                                <span class="liquid" t-esc="o.vat"></span>
+                                            </p>
+
+                                        </div>
+
+                                        <div style="float:right; width: 50%;text-align: right;">
+                                            <p style="float:none; width: 100%;">
+                                                <span class="solid">From: </span>
+                                                <span class="liquid" t-esc="form"></span>
+                                            </p>
+
+                                            <p style="float:none; width: 100%;">
+                                                <span class="solid">To: </span>
+                                                <span class="liquid" t-esc="to"></span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <br class="clearfloat" />
+
+                                </div>
+
+                                <table>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Transaction Type</th>
+                                        <th>Invoice No</th>
+                                        <th>Description</th>
+                                        <th>Reference No</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;"><b><span class="solid">Opening Balance: </span><span class="liquid" t-esc="real_open_bal(get_entries_before(o))"></span></b></td>
+                                    </tr>
+                                    <t t-set="i" t-value="0"/>
+                                    <t t-set="j" t-value="0"/>
+                                    <t t-set="open_bal" t-value="real_open_bal(get_entries_before(o))"/>
+                                    <t t-set="bal" t-value="0"/>
+                                    <t t-foreach="get_entries(o).sorted(key=lambda r: r.date)" t-as="data">
+                                        <t t-set="bal" t-value="bal +((open_bal+ data.debit) - data.credit)"/>
+                                        <tr>
+                                            <td><span t-esc="data.date"></span></td>
+                                            <td><span t-esc="data.journal_id.name"></span></td>
+                                            <td><span t-esc="data.move_id.name"></span></td>
+                                            <td><span t-esc="data.name"></span></td>
+                                            <td><span t-esc="data.ref"></span></td>
+                                            <td><span t-esc="data.debit"></span></td>
+                                            <td><span t-esc="data.credit"></span></td>
+                                            <td><span t-esc="bal"></span></td>
+                                        </tr>
+                                        <t t-set="open_bal" t-value="0"/>
+                                        <t t-set="i" t-value="i+data.credit"/>
+                                        <t t-set="j" t-value="j+data.debit"/>
+                                    </t>
+                                    <tr>
+                                        <b>
+                                            <td colspan="5"><b><span class="solid">Total </span></b></td>
+                                            <td><b><span t-esc="j"></span></b></td>
+                                            <td><b><span t-esc="i"></span></b></td>
+                                            <td><b><span t-esc="opening_bal(get_entries(o))"></span></b></td>
+                                        </b>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;"><b><span class="solid">Balance Outstanding: </span><span class="liquid" t-esc="bal"></span></b></td>
+                                    </tr>
+                                </table>
+
+                            </div><!--end of report wrapper-->
+
+                        </div><!--end of page -->
+
+                    </t>
+
+                </t>
+
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

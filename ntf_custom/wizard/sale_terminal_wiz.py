@@ -88,7 +88,7 @@ class SaleTerminalExcelReport(models.TransientModel):
             self.start_date = start
             self.end_date = end
 
-    @api.multi
+
     def genarate_excel_report(self):
         custom_value = {}
         custom_obj = self.env['import.logic']

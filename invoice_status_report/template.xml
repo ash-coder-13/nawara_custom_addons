@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+
+            id="report_for_invoice_status_report" 
+            model="product.product"
+            name="invoice_status_report.sales_summary_report"
+            file="invoice_status_report.sales_summary_report"
+            report_type="qweb-html"
+            string="Invoice Status Report"
+             menu="False"/>
+
+        <record id="invoice_status_report_wizard_cust" model="ir.ui.view">
+            <field name="name">invoice_status_report_wizard_cust</field>
+            <field name="model">invoice.statusreport</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="form"/>  
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="to"/>
+                        
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(report_for_invoice_status_report)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="invoice_status_report_action_cust" model="ir.actions.act_window">
+            <field name="name">Invoice Status Report</field>
+            <field name="res_model">invoice.statusreport</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="invoice_status_report_wizard_cust"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="invoice_status_report_menu_cust" name="Invoice Status Report" parent="account_reports.account_reports_legal_statements_menu" action="invoice_status_report_action_cust" />
+
+        <!-- <record id="invoice_status_message_action" model="ir.actions.act_window">
+            <field name="name">Mail Message</field>
+            <field name="res_model">mail.message</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="invoice_message_menu_cust" name="Mail Message" parent="account_reports.account_reports_legal_statements_menu" action="invoice_status_message_action" /> -->
+        
+    </data>
+</openerp>

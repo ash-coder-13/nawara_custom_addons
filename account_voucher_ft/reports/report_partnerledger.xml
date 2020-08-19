@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_partnerledger_inherit" inherit_id="account.report_partnerledger">
+        <xpath expr="//div//h2" position="after">
+            <div>
+                <center t-if="data['form']['partner_account_id']">
+                    <br/><strong>Account:</strong><span t-esc="data['form']['partner_account_name']"/>
+                </center>
+            </div>
+        </xpath>
+    </template>
+</odoo>

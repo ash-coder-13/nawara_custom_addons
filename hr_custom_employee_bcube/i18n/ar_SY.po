@@ -1,0 +1,2476 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_custom_employee_bcube
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-04 06:37+0000\n"
+"PO-Revision-Date: 2017-11-04 14:33+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: ar\n"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,n_period:0
+msgid "1 Months"
+msgstr "1 شهر"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,dependent:0
+msgid "1+1 "
+msgstr "1  1"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,dependent:0
+msgid "1+2 "
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,dependent:0
+msgid "1+3 "
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,c_vacation:0 selection:hr.contract,nod:0
+msgid "12 Months"
+msgstr "12 شهر"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,c_vacation:0 selection:hr.contract,nod:0
+msgid "18 Months"
+msgstr "18 شهرا"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,n_period:0
+msgid "2 Months"
+msgstr "أشهر"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,c_vacation:0 selection:hr.contract,nod:0
+msgid "24 Months"
+msgstr "24 شهر"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,n_period:0 selection:hr.contract,probation:0
+msgid "3 Months"
+msgstr "3 أشهر"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,probation:0
+msgid "6 Months"
+msgstr "6 اشهر"
+
+#. module: hr_custom_employee_bcube
+#: selection:employee.card,card_type:0
+msgid "Access Card"
+msgstr "بطاقة الدخول"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_access_type
+msgid "Access Type"
+msgstr "نوع الوصول"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.eos_form_view
+msgid "Accounting"
+msgstr "المحاسبة"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.employee,emp_status:0
+msgid "Active"
+msgstr "نشط"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "Address"
+msgstr "العنوان"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_address_ksa
+msgid "Address in KSA"
+msgstr "العنوان في المملكة العربية السعودية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_adults
+msgid "Adult(s)"
+msgstr "اشخاص بالغين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_advance_salary
+msgid "Advance AGT Salary"
+msgstr "أدفانس أغت المرتب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_air_allow
+msgid "Air Allowance"
+msgstr "بدل الهواء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_alert
+msgid "Alert Days"
+msgstr "متيقظ، منتبه"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_alert
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_alert
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_alert
+msgid "Alert To"
+msgstr "تنبيه إلى"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,dependent:0
+msgid "All "
+msgstr "الكل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_loan_allow
+msgid "Allow Loan Allowance"
+msgstr "السماح بدل القرض"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_allow_mbl
+msgid "Allow Mobile Allowance"
+msgstr "تسمح ببدل الجوال"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_contract_form_view
+msgid "Allowances"
+msgstr "1 - البدلات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_a_email
+msgid "Alternate Email ID"
+msgstr "معرف البريد الإلكتروني البديل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_ea_mobile
+msgid "Alternate No"
+msgstr "رقم البديل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_arabic_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_arabic_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_arabic_name
+msgid "Arabic name"
+msgstr "اسم عربي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_arrival_date
+msgid "Arrival Date in Suadi"
+msgstr "تاريخ الدخول"
+
+#. module: hr_custom_employee_bcube
+#: selection:document.list,category:0
+msgid "Asset"
+msgstr "أصل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.maintenance_equipment_view_ext
+msgid "Asset Details"
+msgstr "تفاصيل الأصول"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.maintenance_equipment_view_ext
+msgid "Asset Documents"
+msgstr "وثائق الأصول"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_attach
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_attach
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_attach
+msgid "Attach File"
+msgstr "أرفق ملف"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,status:0
+msgid "Bachelor"
+msgstr "حامل بكالوريا"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_bk_balance
+msgid "Bank Balance"
+msgstr "رصيد البنك:"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_bank_code
+msgid "Bank Code"
+msgstr "رمز المصرف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_bg
+msgid "Blood Group"
+msgstr "فصيلة الدم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.res_company_branch_act
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.branch_ext_menu
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.res_company_ext
+msgid "Branch"
+msgstr "الفرع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_bran_code
+msgid "Branch Code"
+msgstr "رمز الفرع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_branch_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_branch_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_branch_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_branch_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_bran_name
+msgid "Branch Name"
+msgstr "اسم الفرع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.res_company_ext
+msgid "Branch Tagline"
+msgstr "فرع تاجلين"
+
+#. module: hr_custom_employee_bcube
+#: selection:employee.card,card_type:0
+msgid "Business Card"
+msgstr "بطاقة العمل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_cr_no
+msgid "CR No"
+msgstr "رقم CR"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.cards_form_view
+msgid "Card Information"
+msgstr "معلومات البطاقة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_card_no
+msgid "Card No."
+msgstr "بطاقه رقم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_card_type
+msgid "Card Type"
+msgstr "نوع البطاقة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_card_code
+msgid "Card code"
+msgstr "رمز البطاقة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_cash_sales
+msgid "Cash Sales"
+msgstr "البيع نقدا"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_category
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_category
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_category
+msgid "Category"
+msgstr "التصنيف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.category_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.category_tree_view
+msgid "Category Details"
+msgstr "تفاصيل الفئة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.category_info_act
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_category
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_category
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.category_info_menu
+msgid "Category Info"
+msgstr "معلومات الفئة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_certification_id
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Certification"
+msgstr "شهادة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_car_name
+msgid "Certification Name"
+msgstr "اسم الشهادة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_certification_relation
+msgid "Certification Relation"
+msgstr "علاقة التصديق"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_chasi_no
+msgid "Chassis No"
+msgstr "رقم الهيكل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_children
+msgid "Children"
+msgstr "الأطفال"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_city
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_city
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "City"
+msgstr "مدينة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_clas_n
+msgid "Class"
+msgstr "الدرجة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_c_athu
+msgid "Clearing Authority"
+msgstr "سلطة المقاصة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.users_company1
+#: model:ir.model,name:hr_custom_employee_bcube.model_res_company
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.users_company_extension_menu_item1
+msgid "Companies"
+msgstr "شركات"
+
+#. module: hr_custom_employee_bcube
+#: selection:document.list,category:0
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.res_company_ext
+msgid "Company"
+msgstr "الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_c_accommodation
+msgid "Company Accommodation"
+msgstr "شركة الإقامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.document_com_act
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.document_com_menu
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.document_com_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.document_com_tree_view
+msgid "Company Document"
+msgstr "وثيقة الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_company_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_company_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_company_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_company_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_comp_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_rc_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_c_name
+msgid "Company Name"
+msgstr "اسم الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.res_company_ext
+msgid "Company Tagline"
+msgstr "سطر وصف الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_c_vehicle
+msgid "Company Vehicle"
+msgstr "سيارة من الشركة للاستخدام الشخصي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_company_tree
+msgid "Company tree"
+msgstr "شجرة الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_comp_date
+msgid "Completion Date"
+msgstr "تاريخ الإنجاز"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_contact_email
+msgid "Contact Email"
+msgstr "البريد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_contact_name
+msgid "Contact Name"
+msgstr "اسم جهة الاتصال"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_contact_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_contact_no
+msgid "Contact No"
+msgstr "رقم جهة الاتصال"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_partner_id
+msgid "Contact Person"
+msgstr "تواصل مع الشخص"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_contact_phn
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_contact_phn
+msgid "Contact Phone No"
+msgstr "الهاتف 2"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_contact_email
+msgid "Contact email"
+msgstr "إيميل التواصل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_contact_name
+msgid "Contact name"
+msgstr "جهة الاتصال"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_contact_phone
+msgid "Contact phone"
+msgstr "رقم الهاتف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_contract
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_contract
+msgid "Contract"
+msgstr "عقد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.amedment_form_view
+msgid "Contract Information"
+msgstr "معلومات العقد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_c_vacation
+msgid "Contractual Vacation"
+msgstr "عطلة تعاقدية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_country_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_country_id
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "Country"
+msgstr "البلد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_create_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_create_uid
+msgid "Created by"
+msgstr "تم إنشاء من قبل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_create_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_currency
+msgid "Currency"
+msgstr "العملة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_c_location
+msgid "Current Location"
+msgstr "الموقع الحالي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_dob
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_dob
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_dob
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_dob
+msgid "Date of Birth"
+msgstr "تاريخ الميلاد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_dob_hijri
+msgid "Date of Birth(Hijri)"
+msgstr "تاريخ الميلاد (هجري)"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_exp_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_date_expiry
+msgid "Date of Expiry"
+msgstr "تاريخ الانتهاء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_date_hijri
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_date_hijri
+msgid "Date of Expiry(Hijri)"
+msgstr "تاريخ انتهاء الصلاحية (هجري)"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_issue_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_date_issue
+msgid "Date of Issue"
+msgstr "تاريخ الإصدار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_contract_form_view
+msgid "Deductions"
+msgstr "الخصومات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_department
+msgid "Department"
+msgstr "قسم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.department_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.department_tree_view
+msgid "Department Details"
+msgstr "تفاصيل القسم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.department_info_act
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.department_info_menu
+msgid "Department Info"
+msgstr "معلومات القسم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_department_relation
+msgid "Department relation"
+msgstr "قسم العلاقة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_departure
+msgid "Departure Air Port"
+msgstr "مطار المغادرة"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.documents,holder:0
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.dependent_list_action
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_dependent
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_dependent_id
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.ddependent_menu
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Dependent"
+msgstr "توابع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_dependent_relation
+msgid "Dependent relation"
+msgstr "علاقة تابعة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Deployment"
+msgstr "نشر"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_description
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.leaving_form_view
+msgid "Description"
+msgstr "وصف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_job
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_Designation
+msgid "Designation"
+msgstr "المسمى الوظيفي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.designation_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.designation_tree_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.document_list_tree_view
+
+msgid "Designation Details"
+msgstr "تفاصيل التعيين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.designation_info_act
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_designation
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.designation_info_menu
+
+msgid "Designation Info"
+msgstr "معلومات التعيين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_destination
+
+msgid "Destination Air Port"
+msgstr "الوجهة الجوية الميناء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_dn
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_display_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_display_name
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Display Name"
+msgstr "الاسم الذي يعرض"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_division
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_division
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_department
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_division
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_division
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_division
+msgid "Division"
+msgstr "القطاع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.division_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.division_tree_view
+
+msgid "Division Details"
+msgstr "تفاصيل الشعبة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.division_info_act
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.division_info_menu
+
+msgid "Division Info"
+msgstr "معلومات الشعبة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_name
+
+msgid "Doc Name"
+msgstr "اسم المستند"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_doc_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_doc_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_number
+msgid "Doc No"
+msgstr "الوثيقة، رقم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_doc_type
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_doc_type
+
+msgid "Doc Type"
+msgstr "نوع المستند"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.document_list_form_view
+
+msgid "Document  List"
+msgstr "لائحة المستندات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.document_list_act
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.document_list_menu
+
+msgid "Document List"
+msgstr "لائحة المستندات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_name
+msgid "Document Name"
+msgstr "اسم المستند"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_documents_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_documents_id
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Documents"
+msgstr "الوثائق"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_documents_relation
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_documents_relation
+
+msgid "Documents relation"
+msgstr "علاقة الوثائق"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_door_no
+
+msgid "Door No"
+msgstr "الباب رقم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_dfr
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_dfr
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_dfr
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_renewal
+
+msgid "Due for Renewal"
+msgstr "بسبب التجديد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.eos_list_action
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.employee_eos_menu
+msgid "EOS"
+msgstr "الهيئة المصرية العامة للمواصفات والجودة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.eos_form_view
+
+msgid "EOS Details"
+msgstr "تفاصيل يوس"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+
+msgid "Education and Experience"
+msgstr "المؤهلات العلمية والخبرات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_e_date
+msgid "Effective Date"
+msgstr "إعتبارا من"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_effective_date
+msgid "Effective date"
+msgstr "تاريخ النفاذ"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_email
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_e_mail
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_mail
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_email
+msgid "Email"
+msgstr "البريد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Emergency Contact"
+msgstr "جهة الاتصال في حالة  الطوارئ"
+
+#. module: hr_custom_employee_bcube
+#: selection:document.list,category:0
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_employee
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_employee
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.amedment_list_action
+
+msgid "Employee Amedment"
+msgstr "موظف الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.contract_amedment_menu
+
+msgid "Employee Amendment"
+msgstr "تعديل الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.card_list_action
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.cards_menu
+
+msgid "Employee Cards"
+msgstr "بطاقات الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.it_department_list_action
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.employee_clearance_menu
+
+msgid "Employee Clearance"
+msgstr "تخليص الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_employee_clearence_ref
+
+msgid "Employee Clearence Ref"
+msgstr "الموظف كلارنس الرقم المرجعي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_e_code
+
+msgid "Employee Code"
+msgstr "رمز الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_contract
+
+msgid "Employee Contract"
+msgstr "عقد الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.clearance_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.eos_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.grops_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.iqama_form_view
+
+msgid "Employee Details"
+msgstr "تفاصيل الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.grops_list_action
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.employee_grops_menu
+
+msgid "Employee GOSI"
+msgstr "موظف غوسي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.amedment_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.cards_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.leaving_form_view
+msgid "Employee Information"
+msgstr "معلومات الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.iqama_list_action
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.contract_iqama_menu
+
+msgid "Employee Iqama"
+msgstr "موظف الإقامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.leaving_list_action
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.employee_leaving_menu
+
+msgid "Employee Leaving"
+msgstr "مغادرة الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_e_name
+msgid "Employee Name"
+msgstr "اسم الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_emp_status
+msgid "Employee Status"
+msgstr "حالة الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_employee_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_employee_code
+
+msgid "Employee code"
+msgstr "رمز الموظف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Employment"
+msgstr "التوظيف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_expiry_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_end_date
+msgid "End Date"
+msgstr "تاريخ الإنتهاء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_maintenance_equipment
+msgid "Equipment"
+msgstr "المعدات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_interview_date
+
+msgid "Exit Interview Date"
+msgstr "مقابلة المغادرة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_expense_claim
+
+msgid "Expense Claim"
+msgstr "المطالبة النفقات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_doe
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_doe
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_expiry_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_expiry_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_expiry_date
+msgid "Expiry Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_expiry_date
+msgid "Expiry date"
+msgstr "تاريخ الانتهاء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.eos_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.leaving_form_view
+msgid "Extra Information"
+msgstr "معلومات اضافية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_fax
+msgid "Fax"
+msgstr "فاكس"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_state_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_state_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_state_id
+msgid "Fed. State"
+msgstr "الولاية"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.dependent,d_gender:0 selection:hr.insurance,gender:0
+msgid "Female"
+msgstr "أنثى"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_fc_athu
+
+msgid "Final Clearing Authority"
+msgstr "سلطة المقاصة النهائية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_fn
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_fn
+msgid "First Name"
+msgstr "الاسم الأول"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_f_ot
+
+msgid "Fixed OT"
+msgstr "ثابت أوت"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_f_allow
+
+msgid "Food Allowance"
+msgstr "بدل الغذاء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.amedment_form_view
+msgid "From"
+msgstr "من"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_gosi
+msgid "GOSI"
+msgstr "المؤسسة العامة للتأمينات الاجتماعية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_gosi_ammount
+
+msgid "GOSI Amount"
+msgstr "مبلغ الـتأمينات الاجتماعية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_gosi_no
+
+msgid "GOSI NO"
+msgstr "رقم  الـتأمينات الاجتماعية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_gosi_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_contact_person
+msgid "GOSI No"
+msgstr "رقم  الـتأمينات الاجتماعية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_d_gender
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_gender
+msgid "Gender"
+msgstr "جنس"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.documents,category:0
+msgid "Gernal"
+msgstr "الفئة العامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.grops_form_view
+
+msgid "Gosi Details"
+msgstr "تفاصيل غوسي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_grade
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_grade
+msgid "Grade"
+msgstr "درجة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_grops_id
+msgid "Grops id"
+msgstr "مجموعة ID"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_grops_relation
+msgid "Grops relation"
+msgstr "مجموعة ريلاتيون"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_hr_visa_ticket
+msgid "HR Visa/Ticket"
+msgstr "HR VISA/Ticket"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_hra
+msgid "HRA"
+msgstr "HRA"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_handled_by
+
+msgid "Handled by"
+msgstr "أنجز من قبل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_head
+
+msgid "Head of Function"
+msgstr "رئيس وظيفة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_holder
+msgid "Holder"
+msgstr "الحامل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_hr_expense
+
+msgid "Hr Expense"
+msgstr "مصروف الموارد البشرية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_iban
+msgid "IBAN"
+msgstr "IBAN"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_id
+msgid "ID"
+msgstr "التعرف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_profession
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_id_prof
+
+msgid "ID Profession"
+msgstr "إد مهنة"
+
+#. module: hr_custom_employee_bcube
+#: selection:employee.card,card_type:0
+
+msgid "Id Card"
+msgstr "بطاقة شخصية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_in_saudi
+
+msgid "In Saudi?"
+msgstr "في السعودية؟"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.employee,emp_status:0
+msgid "Inactive"
+msgstr "غير نشط"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_incentive
+msgid "Incentive"
+msgstr "الحافز"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_infants
+msgid "Infants"
+msgstr "رضع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.hr_insurance_act
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_insurance_id
+#: model:ir.ui.menu,name:hr_custom_employee_bcube.hr_insurance_menu
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Insurance"
+msgstr "الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_insurance_relation
+
+msgid "Insurance relation"
+msgstr "علاقة التأمين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_cr_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_i_value
+
+msgid "Insured Value"
+msgstr "القيمة المؤمن عليها"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.dependent_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.iqama_form_view
+
+msgid "Iqama Details"
+msgstr "تفاصيل الإقامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_iqama_num
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_iqama_num
+msgid "Iqama Number"
+msgstr "رقم الإقامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_iqama_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_iqama_no
+
+msgid "Iqama no"
+msgstr "رقم الإقامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_iqama_position
+
+msgid "Iqama position"
+msgstr "المعرف الوظيفي في الإقامة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_is_head
+
+msgid "Is Head  of Function"
+msgstr "هو رئيس وظيفة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_is_line_man
+
+msgid "Is Line Manager"
+msgstr "إدارة تنفيذية مباشرة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_doi
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_issue_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_issue_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_issue_date
+msgid "Issue Date"
+msgstr "تاريخ الإستعارة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_issue_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_issue_date
+msgid "Issue date"
+msgstr "تاريخ الإصدار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_issue_place
+
+msgid "Issue place"
+msgstr "مكان القضية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_issue_org
+
+msgid "Issuing Organization"
+msgstr "منظمة الإصدار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_it_department
+
+msgid "It department"
+msgstr "قسم تكنولوجيا المعلومات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_item
+msgid "Item"
+msgstr "عنصر"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_job
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_job
+msgid "Job"
+msgstr "عمل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_job
+msgid "Job Position"
+msgstr "منصب العمل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_job
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_job_title
+msgid "Job Title"
+msgstr "المسمى الوظيفي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_joining_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_joining_date
+msgid "Joining Date"
+msgstr "تاريخ الالتحاق"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_laptop_des
+
+msgid "Laptop/Desktop"
+msgstr "حاسوب مكتبي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_last_day_work
+
+msgid "Last Day of Work"
+msgstr "آخر يوم عمل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des___last_update
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles___last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_ln
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_ln
+msgid "Last Name"
+msgstr "الاسم الاخير"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_write_uid
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_category_info_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_department_info_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_designation_info_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_division_info_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_list_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_write_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_last_country_day
+
+msgid "Last country day"
+msgstr "آخر يوم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_tree_latest_renewal_date
+
+msgid "Latest Renewal Date"
+msgstr "آخر تجديد التاريخ"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_lease_expiry
+
+msgid "Lease Expiry"
+msgstr "انتهاء مدة الإيجار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.maintenance_equipment_view_ext
+#: selection:maintenance.equipment,ownership:0
+msgid "Leased"
+msgstr "مؤجر"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_leave_balance
+
+msgid "Leave balance"
+msgstr "رصيد الاجازات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.leaving_form_view
+
+msgid "Leaving Information"
+msgstr "ترك المعلومات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_leaving_date
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_leaving_date
+
+msgid "Leaving date"
+msgstr "تاريخ المغادرة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_letter_to_client
+
+msgid "Letter to client"
+msgstr "رسالة إلى العميل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.res_company_ext
+msgid "License"
+msgstr "ترخيص"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_company_link
+
+msgid "License Documents"
+msgstr "وثائق الترخيص"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_line_man
+
+msgid "Line Manager"
+msgstr "إدارة تنفيذية مباشرة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_line_manager_attendance
+
+msgid "Line Manager Attendance"
+msgstr "مدير خط الحضور"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_location
+
+msgid "Location Code"
+msgstr "كود الموقع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_mol_location
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_nmol_location
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_mol_location
+
+msgid "MOL Location"
+msgstr "مول الموقع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_mol_no
+
+msgid "MOL No"
+msgstr "مول رقم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_make
+msgid "Make"
+msgstr "صانع السيارة"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.dependent,d_gender:0 selection:hr.insurance,gender:0
+msgid "Male"
+msgstr "الذكر"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_medical
+msgid "Medical"
+msgstr "الطبي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_member_name
+
+msgid "Member name"
+msgstr "اسم العضو"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_mn
+msgid "Middle Name"
+msgstr "الاسم الأوسط"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_e_mobile
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_mobile
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_mobile
+msgid "Mobile No"
+msgstr "الجوال"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_e_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_issued_place_issued_place_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_office_office_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_projects_projects_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_relation_relation_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_religion_religion_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_uni_name_uni_name_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vac_des_vac_des_name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_name
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_name_as_pass
+
+msgid "Name(As in Passport)"
+msgstr "الاسم (كما هو الحال في جواز السفر)"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_nationality
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_nationality
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_nationality
+msgid "Nationality"
+msgstr "جنسية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_airport
+
+msgid "Nearest Airport"
+msgstr "إلى أقرب مطار ؟"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.documents,category:0
+msgid "Negative"
+msgstr "سلبي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_n_location
+msgid "New Location"
+msgstr "إضافة مكان جديد"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,c_accommodation:0 selection:hr.contract,c_vehicle:0
+#: selection:hr.contract,incentive:0 selection:hr.contract,medical:0
+#: selection:hr.employee,c_athu:0 selection:hr.employee,fc_athu:0
+msgid "No"
+msgstr "لا"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_nod
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_nod
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_nod
+
+msgid "No Of Days"
+msgstr "عدد الأيام"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_no_days
+
+msgid "No of Days"
+msgstr "عدد أيام التحضير"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_no_month
+
+msgid "No of Months"
+msgstr "عدد الشهور"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_no_year
+
+msgid "No of Years"
+msgstr "عدد السنوات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_notes
+msgid "Notes"
+msgstr "الملاحظات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_end_date
+msgid "Notice End Date"
+msgstr "تاريخ انتهاء الإشعار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_n_period
+msgid "Notice Period"
+msgstr "فترة الإشعار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_notice_date
+msgid "Notice Start Date"
+msgstr "تاريخ بدء الإشعار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_nod
+msgid "Number of days"
+msgstr "عدد الايام"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_office
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_office
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_office
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_office
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_office
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_office
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_office
+msgid "Office"
+msgstr "المكتب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_other_allowances
+
+msgid "Other Allowances"
+msgstr "الإعانات الأخرى"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_other_deductions
+
+msgid "Other Deductions"
+msgstr "أي استقطاعات أخرى."
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_others
+msgid "Others"
+msgstr "الآخرين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.maintenance_equipment_view_ext
+#: selection:maintenance.equipment,ownership:0
+msgid "Owned"
+msgstr "مِلِك"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_ownership
+msgid "Ownership"
+msgstr "الملكية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_po_no
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_pob
+
+msgid "P.O Box No"
+msgstr "ص.ب. 1234"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_package
+msgid "Package"
+msgstr "الباقة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_d_passport
+msgid "Passport No"
+msgstr "رقم جواز السفر"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_passport_no
+msgid "Passport no"
+msgstr "رقم الجواز:"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_payslip
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_payslip_payslip
+msgid "Payslip"
+msgstr "مسير الراتب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_performence_manager
+
+msgid "Performance Manager"
+msgstr "مدير الأداء"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_period_stay
+
+msgid "Period of Stay"
+msgstr "الفترة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Permanent Address"
+msgstr "العنوان الدائم:"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.dependent_form_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.dependent_tree_view
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.insurance_tree_view
+msgid "Personal Information"
+msgstr "البيانات الشخصية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_phone
+msgid "Phone"
+msgstr "هاتف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_e_phone
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_phone
+msgid "Phone No"
+msgstr "رقم الهاتف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_poi
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_place_issue
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_place_issue
+msgid "Place of Issue"
+msgstr "مكان لإصدار"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_plate_no
+
+msgid "Plate No"
+msgstr "رقم اللوحة"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.documents,category:0
+msgid "Positive"
+msgstr "إيجابية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+
+msgid "Postal /Zip Code"
+msgstr "الرمز البريدي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_premium
+msgid "Premium"
+msgstr "علاوة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Present Address"
+msgstr ":: العنوان الحالي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_probation
+msgid "Probation"
+msgstr "1-  إثبات / دليل مثبت فترة اختبار للموظف في العمل الحكم مع وقف التنفيذ ووضع المحكوم عليه تحت المراقبة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_profession
+msgid "Profession"
+msgstr "المهنة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_prg_status
+
+msgid "Program Status"
+msgstr "حالة البرنامج"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_project
+msgid "Project"
+msgstr "المشروع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_p_price
+msgid "Purchase Price"
+msgstr "قیمت خرید"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_qualification_relation_name
+
+msgid "Qualification Relation Name"
+msgstr "اسم العلاقة المؤهل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_qualifiction_id
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Qualifications"
+msgstr "المؤهلات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_reason
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_reason
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "References"
+msgstr "مراجع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_reg_no
+msgid "Registration No"
+msgstr "رقم التسجيل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_certification_regis_no
+msgid "Registration No."
+msgstr "رقم التسجيل."
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_relation
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_relation
+msgid "Relation"
+msgstr "العلاقة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_e_relationship
+msgid "Relationship"
+msgstr "صلة القرابة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_relegion
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_religion
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_religion
+msgid "Religion"
+msgstr "الدين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_remaining_leave
+
+msgid "Remaining leave"
+msgstr "الإجازة المتبقية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_remark
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_remark
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_remark
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_remark
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_e_remark
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_remark
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_remarks
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_remark
+msgid "Remarks"
+msgstr "ملاحظات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_asset_dor
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_document_com_dor
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_dor
+msgid "Renewed Date"
+msgstr "تاريخ التجديد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_nr_manager
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_r_manager
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_r_manager
+
+msgid "Reporting Manager"
+msgstr "مدير التقارير"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_requested_date
+
+msgid "Requesed Date"
+msgstr "التاريخ المطلوب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_eos_leaving_requested_date
+msgid "Requested date"
+msgstr "تاريخ الطلب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_res_date
+
+msgid "Resignation/Term Date"
+msgstr "استقالة / تاريخ الأجل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_salary
+
+msgid "Salary of Current Month"
+msgstr "راتب الشهر الحالي"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.documents,holder:0
+msgid "Self"
+msgstr "ذاتي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_clearance_seniority_date
+
+msgid "Seniority date"
+msgstr "تاريخ الأقدمية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_serial_num
+msgid "Serial No."
+msgstr "الرقم المتسلسل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_dependent_serial_num
+msgid "Serial Number"
+msgstr "الرقم التسلسلي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_iqama_serial_no
+
+msgid "Serial no"
+msgstr "الرقم المتسلسل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_sign_bonous
+
+msgid "Sign on Bounus"
+msgstr "وقع على بونوس"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.actions.act_window,name:hr_custom_employee_bcube.res_sponsor_act
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_sponsor
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_s_name
+msgid "Sponsor"
+msgstr "الراعى"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+
+msgid "Sponsor Details"
+msgstr "تفاصيل الراعي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_sponsor_id
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_sponsor_id
+msgid "Sponsor ID"
+msgstr "معرف الكفيل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_maintenance_equipment_sponsor
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_name
+msgid "Sponsor Name"
+msgstr "اسم الجهة الراعية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_sponsor_id
+
+msgid "Sponsor id"
+msgstr "معرف الكفيل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_sponsor_tree
+
+msgid "Sponsor tree"
+msgstr "الراعي شجرة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_sponsor_id
+
+msgid "SponsorID"
+msgstr "هوية الكفيل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_company_sponsor_link
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.res_company_ext
+msgid "Sponsors"
+msgstr "الرعاة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_spouse_no
+
+msgid "Spouse Phone No."
+msgstr "رقم هاتف الزوج"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_start_date
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_insurance_start_date
+msgid "Start date"
+msgstr "تاريخ البداية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "State"
+msgstr "الحالة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_card_status
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_status
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_status
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_status
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_it_department_status
+msgid "Status"
+msgstr "الحالات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_street
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_street
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_street
+msgid "Street"
+msgstr "عنوان الشارع "
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "Street 2..."
+msgstr "الشارع 2"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "Street..."
+msgstr "الشارع ..."
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_street2
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_street2
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_street2
+msgid "Street2"
+msgstr "الشارع 2"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_system_attendance
+
+msgid "System Attendance"
+msgstr "نظام الحضور"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.amedment_form_view
+msgid "To"
+msgstr "الى"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_to_department
+
+msgid "To Department"
+msgstr "إلى الإدارة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_to_job
+
+msgid "To Designation"
+msgstr "إلى التعيين"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_to_grade
+
+msgid "To Grade"
+msgstr "إلى الصف"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_contract_amedment_to_office
+
+msgid "To Office"
+msgstr "إلى أوفيس"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_serv_year
+
+msgid "Total Service Year"
+msgstr "إجمالي سنة الخدمة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_total_amount
+msgid "Total amount"
+msgstr "المبلغ الكلي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_total_award
+
+msgid "Total award"
+msgstr "مجموع الجائزة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_traffic_fine
+
+msgid "Traffic Fine"
+msgstr "حركة المرور الجميلة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_extension_form_view
+msgid "Training"
+msgstr "الدورات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_training_company
+
+msgid "Training Company"
+msgstr "شركة التدريب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_training_place
+
+msgid "Training Place"
+msgstr "مكان التدريب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_trainings_relation
+
+msgid "Training Relation"
+msgstr "علاقة التدريب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_training_sum
+msgid "Training Summary"
+msgstr "ملخص التدريب"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_trainings_id
+msgid "Trainings"
+msgstr "التدريبات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_t_allow
+msgid "Transport Allowance"
+msgstr "بدل النقل"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.hr_contract_form_view
+msgid "Travel Details"
+msgstr "تفاصيل السفر"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_documents_typed_type_c
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_type_d
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_grops_type_d
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_documents_type_d
+msgid "Type"
+msgstr "النوع"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_trainings_type_training
+msgid "Type of Training"
+msgstr "نوع التدريب"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.dependent,nationality:0
+msgid "United States"
+msgstr "الولايات المتحدة الأمريكية"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_qualification_uni_name
+msgid "University Name"
+msgstr "اسم الجامعة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.amedment_form_view
+msgid "Update"
+msgstr "تحديث"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_vac_des
+msgid "Vacation Destination"
+msgstr "المقصد"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_vehiclee
+msgid "Vehicle"
+msgstr "السيارات"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_contract_vehicle_attendance
+msgid "Vehicle Attendance"
+msgstr "سيارة الحضور"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_vehicle_model
+msgid "Vehicle Model"
+msgstr "طراز السيارة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_vehicles_vehicles_vehicle_no
+msgid "Vehicle No"
+msgstr "السيارة رقم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_vendor_no
+msgid "Vendor No"
+msgstr "المورد رقم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_website
+msgid "Website"
+msgstr "موقع الكتروني"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,help:hr_custom_employee_bcube.field_res_sponsor_website
+msgid "Website of Partner or Company"
+msgstr "موقع الشريك أو الشركة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_work_fax
+msgid "Work Fax"
+msgstr "فاكس"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_employee_eos_year
+msgid "Year"
+msgstr "سنة"
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,c_accommodation:0 selection:hr.contract,c_vehicle:0
+#: selection:hr.contract,incentive:0 selection:hr.contract,medical:0
+#: selection:hr.employee,c_athu:0 selection:hr.employee,fc_athu:0
+msgid "Yes"
+msgstr "نعم"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_p_zip_code
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_hr_employee_zip_code
+msgid "Zip Code"
+msgstr "الرمز البريدي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model.fields,field_description:hr_custom_employee_bcube.field_res_sponsor_zip_code
+msgid "Zip code"
+msgstr "الرمز البريدي"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_category_info
+msgid "category.info"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_contract_amedment
+msgid "contract.amedment"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_department_info
+msgid "department.info"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_designation_info
+msgid "designation.info"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_division_info
+msgid "division.info"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_document_asset
+msgid "document.asset"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_document_com
+msgid "document.com"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_document_list
+msgid "document.list"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_documents_typed
+msgid "documents.typed"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.ui.view,arch_db:hr_custom_employee_bcube.sponsor_form_view
+msgid "e.g. www.odoo.com"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_employee_card
+msgid "employee.card"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_employee_clearance
+msgid "employee.clearance"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_employee_eos
+msgid "employee.eos"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_employee_grops
+msgid "employee.grops"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_employee_iqama
+msgid "employee.iqama"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_employee_payslip
+msgid "employee.payslip"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_eos_leaving
+msgid "eos.leaving"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: selection:hr.contract,status:0
+msgid "family"
+msgstr "عائلة"
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_certification
+msgid "hr.certification"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_dependent
+msgid "hr.dependent"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_documents
+msgid "hr.documents"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_insurance
+msgid "hr.insurance"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_qualification
+msgid "hr.qualification"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_hr_trainings
+msgid "hr.trainings"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_issued_place_issued_place
+msgid "issued_place.issued_place"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_it_department
+msgid "it.department"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_office_office
+msgid "office.office"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_projects_projects
+msgid "projects.projects"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_relation_relation
+msgid "relation.relation"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_religion_religion
+msgid "religion.religion"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_res_company_tree
+msgid "res.company.tree"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_res_sponsor
+msgid "res.sponsor"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_uni_name_uni_name
+msgid "uni_name.uni_name"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_vac_des_vac_des
+msgid "vac_des.vac_des"
+msgstr ""
+
+#. module: hr_custom_employee_bcube
+#: model:ir.model,name:hr_custom_employee_bcube.model_vehicles_vehicles
+msgid "vehicles.vehicles"
+msgstr ""

@@ -35,49 +35,48 @@ class XlsxReport(models.Model):
         if not self.customer.by_customer:
             self.b_name = ''
 
-    @api.multi
     def print_report(self):
-        if self.total:
-            if self.ttype == 'export':
-                data = self.env['export.logic'].search(
-                    [('customer', '=', self.customer.id), ('by_customer', '=', self.b_name.id),
-                     ('site', '=', self.site.id)])
-                if data:
-                    return self.xlsx_report(data, ttype='export')
-                else:
-                    raise ValidationError('Report Does Not Exist According To Given Data')
-            elif self.ttype == 'import':
-                data = self.env['import.logic'].search(
-                    [('customer', '=', self.customer.id), ('by_customer', '=', self.b_name.id),
-                     ('site', '=', self.site.id)])
-                if data:
-                    return self.xlsx_report(data, ttype='import')
-                else:
-                    raise ValidationError('Report Does Not Exist According To Given Data')
-            else:
-                raise ValidationError('Report Does Not Exist According To Given Data')
-        else:
-            if self.ttype == 'export' and self.e_date and self.s_date:
-                data = self.env['export.logic'].search(
-                    [('customer', '=', self.customer.id), ('by_customer', '=', self.b_name.id),
-                     ('date', '>=', self.s_date), ('date', '<=', self.e_date), ('site', '=', self.site.id)])
-                if data:
-                    return self.xlsx_report(data, ttype='export')
-                else:
-                    raise ValidationError('Report Does Not Exist According To Given Data')
-
-            elif self.ttype == 'import' and self.e_date and self.s_date:
-                data = self.env['import.logic'].search(
-                    [('customer', '=', self.customer.id), ('by_customer', '=', self.b_name.id),
-                     ('date', '>=', self.s_date), ('date', '<=', self.e_date), ('site', '=', self.site.id)])
-                if data:
-                    return self.xlsx_report(data, ttype='import')
+        for rec in self:
+            if rec.total:
+                if rec.ttype == 'export':
+                    data = self.env['export.logic'].search(
+                        [('customer', '=', rec.customer.id), ('by_customer', '=', rec.b_name.id),
+                         ('site', '=', rec.site.id)])
+                    if data:
+                        return rec.xlsx_report(data, ttype='export')
+                    else:
+                        raise ValidationError('Report Does Not Exist According To Given Data')
+                elif rec.ttype == 'import':
+                    data = self.env['import.logic'].search(
+                        [('customer', '=', rec.customer.id), ('by_customer', '=', rec.b_name.id),
+                         ('site', '=', rec.site.id)])
+                    if data:
+                        return rec.xlsx_report(data, ttype='import')
+                    else:
+                        raise ValidationError('Report Does Not Exist According To Given Data')
                 else:
                     raise ValidationError('Report Does Not Exist According To Given Data')
             else:
-                raise ValidationError('Report Does Not Exist According To Given Data')
+                if rec.ttype == 'export' and rec.e_date and rec.s_date:
+                    data = self.env['export.logic'].search(
+                        [('customer', '=', rec.customer.id), ('by_customer', '=', rec.b_name.id),
+                         ('date', '>=', rec.s_date), ('date', '<=', rec.e_date), ('site', '=', rec.site.id)])
+                    if data:
+                        return rec.xlsx_report(data, ttype='export')
+                    else:
+                        raise ValidationError('Report Does Not Exist According To Given Data')
 
-    @api.multi
+                elif rec.ttype == 'import' and rec.e_date and rec.s_date:
+                    data = self.env['import.logic'].search(
+                        [('customer', '=', rec.customer.id), ('by_customer', '=', rec.b_name.id),
+                         ('date', '>=', rec.s_date), ('date', '<=', rec.e_date), ('site', '=', rec.site.id)])
+                    if data:
+                        return rec.xlsx_report(data, ttype='import')
+                    else:
+                        raise ValidationError('Report Does Not Exist According To Given Data')
+                else:
+                    raise ValidationError('Report Does Not Exist According To Given Data')
+
     def xlsx_report(self, input_records, ttype):
         with xlsxwriter.Workbook(config['data_dir'] + "/SHIPMENT_STATUS_REPORT.xlsx") \
                 as workbook:

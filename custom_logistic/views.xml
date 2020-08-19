@@ -1429,16 +1429,16 @@
         </field>
     </record>
 
-    <record id="account_asset_ext" model="ir.ui.view">
-        <field name="name">Account Asset Ext</field>
-        <field name="model">account.asset.asset</field>
-        <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='value_residual']" position="after">
-                <field name="acc_dep" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-            </xpath>
+<!--    <record id="account_asset_ext" model="ir.ui.view">-->
+<!--        <field name="name">Account Asset Ext</field>-->
+<!--        <field name="model">account.asset.asset</field>-->
+<!--        <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='value_residual']" position="after">-->
+<!--                <field name="acc_dep" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--            </xpath>-->
 
-        </field>
-    </record>
+<!--        </field>-->
+<!--    </record>-->
 
 </odoo>

@@ -68,7 +68,7 @@ class IndustryDivision(models.Model):
             if file.code and file.section_id:
                 file.c_code = file.section_id.code + file.code
 
-    @api.multi
+
     def _compute_class_code(self):
         for file in self:
             if file.c_code:
@@ -95,7 +95,7 @@ class ResPartner(models.Model):
     cons_type = fields.Selection(string="Consolidated Data Sub Type",
                                  selection=[('non_decs_maker', 'Non-Decision Maker'), ('deci_maker', 'Decision Maker')])
 
-    @api.multi
+
     def _compute_class_code(self):
         for file in self:
             if file.division_id:
@@ -155,9 +155,9 @@ class AccountMoveLine(models.Model):
     store_name = fields.Char(string="File Name")
     attachment = fields.Binary(string="Attachment", attachment=True, help="Upload your supporting document here")
 
-
-class AccountInvoiceLine(models.Model):
-    _inherit = 'account.invoice.line'
-
-    store_name = fields.Char(string="File Name")
-    attachment = fields.Binary(string="Attachment", attachment=True, help="Upload your supporting document here")
+#
+# class AccountInvoiceLine(models.Model):
+#     _inherit = 'account.invoice.line'
+#
+#     store_name = fields.Char(string="File Name")
+#     attachment = fields.Binary(string="Attachment", attachment=True, help="Upload your supporting document here")

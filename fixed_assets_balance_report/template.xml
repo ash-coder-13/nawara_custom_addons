@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+
+        <record id="stockchecking_of_assets_bal" model="ir.ui.view">
+            <field name="name">stockchecking_of_assets_bal</field>
+            <field name="model">assets.bal</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="filters"/>
+
+                            <field name="cat_type" attrs="{'invisible':[('filters','!=','cat')],'required':[('filters','=','cat')]}"/>
+
+                            <field name="assest_type" attrs="{'invisible':[('filters','!=','asset')],'required':[('filters','=','asset')]}"/>
+
+                            <field name="file" filename="name" readonly="1"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="date"/>
+
+                            <field name="assets" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible':[('assest_type','!=','specfic')],'required':[('assest_type','=','specfic')]}" widget="many2many_tags"/>
+
+                            <field name="category" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible':[('cat_type','!=','specfic')],'required':[('cat_type','=','specfic')]}" widget="many2many_tags"/>
+
+                            <field name="name" invisible="1"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="get_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="assets_bal_xlsx_action_cat" model="ir.actions.act_window">
+            <field name="name">Fixed Assets Balance Report</field>
+            <field name="res_model">assets.bal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="stockchecking_of_assets_bal"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="assets_bal_xlsx_action_id_cat" name="Fixed Assets Balance Report Xlsx" action="assets_bal_xlsx_action_cat" parent="account_reports.account_reports_legal_statements_menu" />
+      
+        
+    </data>
+</openerp>

@@ -6,10 +6,10 @@
     'description': """
     Provides The Import, Export, Transportation, Projects and Transportation Project Logistics Facility
     """,
-    'author': 'SolutionFounder',
-    'website': "http://www.solutionfounder.com",
+    'author': 'Ashish Thomas',
+    'website': "",
     'category': 'Specific Industry Applications',
-    'version': '10.0.2.33',
+    'version': '13.0.1.0',
     'depends': ['base', 'sale', 'account', 'sale_stock', 'fleet', 'stock'],
     'data': [
         'security/security.xml',

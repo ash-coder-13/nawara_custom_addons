@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="sales_summary_report">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+                
+                    <div class="page">
+
+                        <style>
+                            .container{
+                                width: 100%;
+                                margin: 0px auto;
+                            }
+                            .center-container{
+                                width: 1000px;
+                                margin: 0px auto;
+                            }
+                            .heading{
+                                width: 1000px;
+                                margin: 0px auto
+                            }
+                            .heading h1{
+                                text-align: center;
+                                margin: 0px;
+                                font-size: 35px;
+                            }
+                            .head-info {
+                                width: 100%;
+                                float: left;
+                                margin: 10px 0px;
+                            }
+                            .info-col-01,
+                            .info-col-02,
+                            .info-col-03 {
+                                width: 50%;
+                                margin: 0px auto;
+                            }
+                            .info-col-02 {
+                                text-align: right;
+                            }
+                            .info-col-03 {
+                                text-align: center;
+                            }
+                            .head-info p {
+                                width: 50%;
+                                float: left;
+                                margin: 5px 0px;
+                                font-size: 14px;
+                            }
+                            .head-info p span.solid {
+                                font-weight: 700;
+                            }
+                            .info-col-02 p {
+                                width: 100%;
+                                float: none;
+                            }
+                            .info-col-01 p {
+                                width: 100%;
+                                float: left;
+                            }
+                            .info-col-03 p {
+                                width: 50%;
+                                float: left;
+                                margin-bottom: 30px;
+                            }
+                            table {
+                                width: 100%;
+                                border-spacing: 0px;
+                            }
+                            table tr th {
+                                text-align: left;
+                                border-bottom: 2px solid #666;
+                                padding: 5px 0px;
+                                font-size: 15px;
+                                text-transform: capitalize;
+                            }
+                            table tr td {
+                                border-top: 1px solid #ddd;
+                                text-align: left;
+                                padding: 5px 0px;
+                                font-size: 15px;
+                                text-transform: capitalize;
+                            }
+                            .stock {
+                                width: 100%;
+                                float: left;
+                                text-align: right;
+                                margin-top: 15px;
+                            }
+                            .stock p {
+                                font-size: 15px;
+                                margin: 10px 0px;
+                            }
+                            .stock p span.solid {
+                                font-weight: bold;
+                                display: inline-block;
+                                width: 160px;
+                            }
+                            .stock p span.liquid {
+                                display: inline-block;
+                                width: 75px;
+                            }
+                            .product_info {
+                                width: 100%;
+                                float: left;
+                                border-top: 1px solid #000;
+                                padding: 5px 0px;
+                                margin: 0px 0px 10px;
+                            }
+                            .product_info p {
+                                width: 50%;
+                                float: left;
+                                margin: 3px 0px;
+                            }
+                            .product_info p.lefter {
+                                text-align: left;
+                            }
+                            .product_info p.righter {
+                                text-align: right;
+                            }
+                            .product_info p.fuller {
+                                text-align: right;
+                                width: 100%;
+                            }
+
+                            tr { 
+                                page-break-inside: avoid !important;
+                            }
+
+                            td { 
+                                page-break-inside: avoid !important;
+                            }
+
+                            .space {
+                                min-width : 150px;
+                                max-width : 150px;
+                                width : 150px;
+                            }
+                            
+                        </style>
+
+                        <div class="container">
+
+                            <div class="center-container">
+
+                                <div class="heading">
+                                    <b><h1>INVOICE STATUS REPORT</h1></b>
+                                </div>
+                                
+                                <div class="head-info">
+
+                                    <div class="info-col-03">
+
+                                        <p>
+                                            <span class="solid">From:</span>
+                                            <span class="liquid" t-esc="form"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">To:</span> 
+                                            <span class="liquid" t-esc="to"></span>
+                                        </p>
+                                    </div>
+
+                                    <!-- <div class="info-col-03">
+
+                                        <p>
+                                            <span class="solid">Type :</span>
+                                            <span class="liquid" t-esc="get_type()"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">Type of Sale:</span> 
+                                            <span class="liquid" t-esc="type_of_sale"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="info-col-02">
+
+                                        <p>
+                                            <span class="solid">Date:</span> 
+                                            <span class="liquid" t-esc="date"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">Time:</span> 
+                                            <span class="liquid" t-esc="get_time()"></span>
+                                        </p>
+                                    </div> -->
+
+                                </div>
+                                <br class="clearfloat" />
+
+                                <table>
+
+                                    <tr>
+
+                                        <th class="space">
+                                            <span></span>
+                                        </th>
+                                        <th>Source</th>
+                                        <th>Invoice Completion Date</th>
+                                        <th>Invoice Creation Date</th>
+                                        <th>Difference</th>
+
+                                    </tr>
+
+                                    <t t-foreach="cust" t-as="o">
+
+
+                                        <tr>
+
+                                            <th colspan="5">
+                                                <span t-esc="o.name"></span>
+                                            </th>
+        
+                                        </tr>
+
+                                        <span t-esc="get_inv(o.id)"></span>
+                                        <t t-foreach="inv" t-as="line">
+
+
+                                            <tr>
+
+                                                <td>
+                                                    <span></span>
+                                                    
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="get_date(line.id)[3]"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_date(line.id)[0]"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_date(line.id)[1]"></span>
+                                                    <b><span t-esc="get_date(line.id)[2]"></span></b>
+                                                </td>
+                                                <td>
+                                                    <b><span t-esc="get_date(line.id)[4]"></span></b> Days
+                                                </td>
+
+                                            </tr>
+
+                                        </t>
+
+                                    </t>
+
+                                </table>  
+
+                            </div>
+                            
+                        </div>
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

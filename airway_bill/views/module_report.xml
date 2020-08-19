@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .report-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    }
+                            
+                                .report-body {
+                                    width: 100%;
+                                    border: 1px solid;
+                                    padding: 5px 5px 30px;
+                                    margin: 0px auto;
+                                    float: left;
+                                    }
+
+                                .report-img {
+                                    width: 100%;
+                                    float: left;
+                                    margin-top: 10px;
+                                    }
+
+                                img {
+                                    width: 40%;
+                                    height: 90px;
+                                    float: left;
+                                }
+
+
+                                .report-img .img{
+
+                                    width: 100%;
+                                    height: 90px;
+                                    float: left;
+                                }
+                                    
+                                .clear-float {
+                                    float: none;
+                                    clear: both;
+                                    }
+
+                                table, td, th {
+                                    border: 1px solid;
+                                    border-collapse: collapse;
+                                    padding: 10px;
+                                    text-align: center;
+                                    font-size: 16px;
+                                    }
+
+                                .header {
+                                    display: none !important;
+                                }
+
+                                .footer {
+                                    display: none !important;
+                                }
+
+                            </style>
+      
+                            <div class="report-container">
+
+                                <br class="clear-float" />
+
+                            
+                                <!-- <div class="report-body">
+
+                                    <img src="/airway_bill/static/src/img/image001.jpg"/>
+
+                                    <h2 style="margin-left: 410px;margin-top: 50px;font-size: 40px;">Way Bill</h2>
+                                
+                                </div> -->
+
+                                <table style="width:99%;margin-top:30px">
+                                    
+                                    <tr>
+                                        <td style="font-weight: bold;">Job No</td>
+                                        <td>
+                                            <span t-esc="o.name"></span>
+                                        </td>
+                                        <td style="font-weight: bold;">Customer Reference No.</td>
+                                        <td>
+                                            <!-- <span t-esc="o.crt_tree.customer_ref"></span> -->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Bayan No:</td>
+                                        
+                                        <td style="font-weight: bold;">Bill of loading (B/L) No.</td>
+
+                                        <td style="font-weight: bold;">Port  of  Destination:</td>
+
+                                        <td style="font-weight: bold;">Vessel Name:</td>
+
+                                    </tr>
+
+                                    <tr style="height:40px">
+                                        
+                                        <td></td>
+
+                                        <td>
+                                            <span t-esc="o.bill_no"></span>
+                                        </td>
+
+                                        <td></td>
+                                        <td>
+                                            <span t-esc="o.vessel_number"></span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2" style="font-weight: bold;">Sender Name &amp; Address:</td>
+                                        <td colspan="2" style="font-weight: bold;">Receiver Name:</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2">Nawara Transport &amp; Freight Co.(NTF)</td>
+                                        <td colspan="2">
+                                        </td>
+                                    </tr>
+
+                                    <tr style="height:40px">
+                                        <td>
+                                            <span style="font-weight:bold">Print Date</span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>
+                                        </td>
+                                        <td colspan="2"></td>
+                                        
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Customer Name &amp; Address:</td>
+                                        <td>
+                                            <span t-esc="o.partner_id.name"></span>
+                                        </td>
+                                        <td style="font-weight: bold;">Mobile#</td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Delivery Date</td>
+                                        <td style="font-weight: bold;">Pickup From</td>
+                                        <td style="font-weight: bold;">Loading Place</td>
+                                        <td style="font-weight: bold;">Delivery address</td>
+                                    </tr>
+
+                                    <tr style="height:40px">
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <span t-esc="o.order_line.form.name"></span>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <span t-esc="o.order_line.to.name"></span>
+                                        </td>
+                                    </tr>
+
+                                   <!--  <tr style="height:40px">
+
+                                        <td colspan="4"></td>
+                                        
+                                    </tr> -->
+
+                                    <tr>
+
+                                        <td style="font-weight: bold;"> Container Number: </td>
+                                        <td colspan="3">
+                                            <span t-esc="o.order_line.crt_no"></span>
+                                        </td>
+                                        
+                                    </tr>
+
+                                    <tr>
+
+                                        <td style="font-weight: bold;">Seal Number: </td>
+                                        <td colspan="3">
+                                            <span t-esc="o.order_line.project_no"></span>
+                                        </td>
+                                        
+                                    </tr>
+
+                                    <tr>
+
+                                        <td style="font-weight: bold;"> Container Type: </td>
+                                        <td colspan="3">
+                                            <span t-esc="o.order_line.fleet_type.name"></span>
+                                        </td>
+                                        
+                                    </tr>
+
+                                    <!-- <tr style="height:40px">
+                                        <td colspan="4"></td>
+                                        
+                                    </tr>
+
+                                    <tr style="height:40px">
+                                        <td colspan="4"></td>
+                                        
+                                    </tr>
+ -->
+                                   <!--  <tr>
+                                        <td style="font-weight: bold;">Serial No.</td>
+                                        <td style="font-weight: bold;">No. of Items</td>
+                                        <td style="font-weight: bold;">Shipment Type (FCL/LCL)</td>
+                                        <td style="font-weight: bold;">Description of Goods</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr> -->
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Remarks</td>
+                                        <td colspan="3"></td>   
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Commodity</td>
+                                        <td colspan="3"></td>   
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Truck No.</td>
+                                        <td>
+                                            <span t-esc="o.vehicle_id.model_id.brand_id.name"></span>&#032;
+                                            <span t-esc="o.vehicle_id.model_id.name"></span>
+                                            &#032;<span t-esc="o.vehicle_id.license_plate"></span>
+                                        </td>
+                                        <td style="font-weight: bold;">Driver Name</td>
+                                        <td>
+                                            <span t-esc="o.driver_id.name"></span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="font-weight: bold;">Driver mobile No.</td>
+                                        <td></td>
+                                        <td style="font-weight: bold;">Signature</td>
+                                        <td></td>
+                                    </tr>
+<!-- 
+                                    <tr style="height:40px">
+
+                                        <td colspan="4"></td>
+                                        
+                                    </tr> -->
+<!-- 
+                                    <tr>
+                                        <td style="font-weight: bold;">Received By:</td>
+                                        <td style="font-weight: bold;">Prepared By:</td>
+                                        <td colspan="2" style="font-weight: bold;">Signature:</td>
+                                    </tr>
+
+                                    <tr style="height:40px">
+                                        <td></td>
+                                        <td></td>
+                                        <td colspan="2"></td>
+                                    </tr> -->
+
+
+
+                                </table>
+
+
+                                <!-- <table style="border:hidden;margin-top:20px">
+
+                                    <tr style="border-bottom:hidden;margin-top:10px;text-align:left;font-weight:bold;padding-left:8px">
+                                        <td style="text-align:left">Prepared By-</td>
+                                    </tr>
+
+                                    <tr style="border-bottom:hidden;margin-top:10px;text-align:left;font-weight:bold;padding-left:8px">
+                                        <td style="text-align:left">Mansoor/ Abu Hanif</td>
+                                    </tr>
+
+                                    <tr style="border-bottom:hidden;margin-top:10px;text-align:left;font-weight:bold;padding-left:8px">
+                                        <td style="text-align:left">Date/Time</td>
+                                    </tr>
+
+                                </table> -->
+
+                            </div>
+
+                        </div>
+
+                    </t>
+
+                </t>
+
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_voucher_layout" inherit_id="account_voucher_ft.report_voucher_layout">
+            <xpath expr="//div[@class='header']//strong" position="inside">
+                <t t-if="o.voucher_type == 'pettycash'"><h3><b>PETTY CASH VOUCHER</b></h3></t>
+            </xpath>
+            <xpath expr="//div[@name='partner_address']//tr[2]//span" position="inside">
+                <t t-if="o.voucher_type == 'pettycash'">Paid To:</t>
+            </xpath>
+            <xpath expr="//div[@name='partner_address']//tr[4]//span" position="inside">
+                <t t-if="o.voucher_type == 'pettycash'">Paid For(Bill Reference):</t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

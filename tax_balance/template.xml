@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_module_account_tax"
+            model="account.tax"
+            name="tax_balance.module_report"
+            file="tax_balance.module_report"
+            report_type="qweb-html"
+            string="Account Tax Balance"
+        />
+    </data>
+</openerp>

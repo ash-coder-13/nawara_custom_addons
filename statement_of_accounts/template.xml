@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+    <record id="statement_of_accounts_wizard" model="ir.ui.view">
+        <field name="name">statement_of_accounts_wizard</field>
+        <field name="model">statement.accounts</field>
+        <field name="arch" type="xml">
+            <form string="Statement of Accounts">
+                
+                <group name="group_top">
+                    <group name="group_left">
+                        <field name="form"/>
+                        <field name="partner" options="{'no_create':True,'no_edit':True}"/>
+                    </group>
+                    <group name="group_right">
+                        <field name="to"/>
+                        <field name="name" invisible="1"/>
+                        <field name="file" filename="name" readonly="1"/>
+                    </group>
+                </group>
+
+                <footer style="height: 30px !important; border: none !important;">
+                    <button name="get_report" type="object" string="Print" class="oe_highlight"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="partner_statement_of_accounts_xlsx" model="ir.actions.act_window">
+        <field name="name">Statement of Accounts</field>
+        <field name="res_model">statement.accounts</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="statement_of_accounts_wizard"/>
+        <field name="target">new</field>
+        <field name="context">{'default_partner': active_id,'default_partner_id':active_ids}</field> 
+    </record>
+
+
+    <record model="ir.values" id="partner_wise_filter_id">
+        <field name="model_id" ref="" />
+        <field name="name">Print From Wizard</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval ="'ir.actions.act_window,'+str(ref('partner_statement_of_accounts_xlsx'))"/>
+        <field name="key">action</field>
+        <field name="model">res.partner</field>
+    </record>
+
+
+    <record id="statement_of_accounts_action" model="ir.actions.act_window">
+        <field name="name">Statement of Accounts</field>
+        <field name="res_model">statement.accounts</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="statement_of_accounts_wizard"/>
+        <field name="target">new</field>
+    </record>
+    
+
+    <menuitem id="statement_of_accounts_action_menu_item" name="Statement of Accounts Xlsx"
+              action="statement_of_accounts_action" parent="account.account_reports_business_intelligence_menu"
+              sequence="22"/>
+</odoo>

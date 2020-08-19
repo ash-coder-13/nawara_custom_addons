@@ -91,7 +91,7 @@ class TransportInfo(models.Model):
     pod_chk = fields.Boolean(string="pod")
     freight_link = fields.Many2one('freight.forward', string='Freight Forwarding', readonly=True)
     trans_link = fields.Many2one('freight.forward', string='Freight Link', readonly=True)
-    acc_link = fields.Many2one('account.invoice', string='Invoice', readonly=True)
+    acc_link = fields.Many2one('account.move', string='Invoice', readonly=True)
     inter_num = fields.Integer(string="Internal Number")
     driver = fields.Char(string="Driver")
     driver_num = fields.Char(string="Driver Number")
@@ -223,15 +223,16 @@ class TransportInfo(models.Model):
                                          required=False, )
     re_pull_out_ids = fields.One2many(comodel_name="re.pullout", inverse_name="order_id", string="Re PullOut")
 
-    @api.one
+
     @api.depends('sales_id.vessel_date', 'sales_imp_id.vessel_date')
     def _compute_demurrage_detention_dates(self):
-        if self.sales_imp_id.vessel_date:
-            self.detention = self.sales_imp_id.detention_date
-        if self.sales_id.vessel_date:
-            self.detention = self.sales_id.detention_date
+        for rec in self:
+            if rec.sales_imp_id.vessel_date:
+                rec.detention = rec.sales_imp_id.detention_date
+            if rec.sales_id.vessel_date:
+                rec.detention = rec.sales_id.detention_date
 
-    @api.multi
+
     def rescheduling_start(self):
         if self.trans_mode == 'in':
             self.driver_id.is_reserved = False
@@ -242,7 +243,7 @@ class TransportInfo(models.Model):
         self.rescheduling = True
         self.rescheduling_status = 'InProcess'
 
-    @api.multi
+
     def send_overdue_mail(self):
         records = self.env['sale.order'].search([('delivery', '!=', False)])
         email_rec = self.env['multi.mails'].search([])
@@ -262,11 +263,11 @@ class TransportInfo(models.Model):
         else:
             self.trans_account = account.same_custom_invoice_account.id
 
-    @api.multi
+
     def emp_trip(self):
         if self.emp_driver_expenses > 0:
             account = self.env['account_journal.configuration'].search([])
-            invoice = self.env['account.invoice'].search([])
+            invoice = self.env['account.move'].search([])
             if self.emp_mode == 'in':
                 partner = self.emp_driver_id.id
                 journal = account.t_vendor_journal.id
@@ -298,17 +299,18 @@ class TransportInfo(models.Model):
                 self.emp_vehicle_id.is_reserved = True
         self.empty_collection_date = datetime.today()
 
-    @api.one
-    def emp_complete(self):
-        self.emp_status = "Completed"
-        if self.emp_mode == 'in':
-            self.emp_driver_id.is_reserved = False
-            self.emp_vehicle_id.is_reserved = False
 
-    @api.multi
+    def emp_complete(self):
+        for rec in self:
+            rec.emp_status = "Completed"
+            if rec.emp_mode == 'in':
+                rec.emp_driver_id.is_reserved = False
+                rec.emp_vehicle_id.is_reserved = False
+
+
     def ret_trip(self):
         account = self.env['account_journal.configuration'].search([])
-        invoice = self.env['account.invoice'].search([])
+        invoice = self.env['account.move'].search([])
         if self.ret_mode == 'in':
             partner = self.ret_driver_id.id
             journal = account.t_vendor_journal.id
@@ -349,14 +351,15 @@ class TransportInfo(models.Model):
         else:
             raise UserError(_('No Charges for this route for this driver or transporter'))
 
-    @api.one
-    def ret_complete(self):
-        self.ret_status = "Completed"
-        if self.ret_mode == 'in':
-            self.ret_driver_id.is_reserved = False
-            self.ret_vehicle_id.is_reserved = False
 
-    @api.multi
+    def ret_complete(self):
+        for rec in self:
+            rec.ret_status = "Completed"
+            if rec.ret_mode == 'in':
+                rec.ret_driver_id.is_reserved = False
+                rec.ret_vehicle_id.is_reserved = False
+
+
     def action_confirm(self):
         res = super(TransportInfo, self).action_confirm()
         if not self.driver_id and not self.vehicle_id and not self.to_t and not self.form_t and not self.fleet_type:
@@ -376,7 +379,7 @@ class TransportInfo(models.Model):
                     self.to_mails = email.name
                     self.env['mail.template'].browse(template.id).send_mail(self.id)
 
-        filtered_payment = self.env['account.invoice'].search([('partner_id', '=', self.partner_id.id),
+        filtered_payment = self.env['account.move'].search([('partner_id', '=', self.partner_id.id),
                                                                ('state', '!=', 'paid'),
                                                                ('amount_total', '!=', 0),
                                                                ])
@@ -396,12 +399,12 @@ class TransportInfo(models.Model):
             else:
                 self.no_by_customer = False
 
-    @api.multi
+
     def shuttling_trip(self):
 
         if self.s_driver_expenses > 0 and self.order_line:
             account = self.env['account_journal.configuration'].search([])
-            invoice = self.env['account.invoice'].search([])
+            invoice = self.env['account.move'].search([])
             if self.shuttling_mode == 'in':
                 partner = self.s_driver_id.id
                 journal = account.t_vendor_journal.id
@@ -433,20 +436,20 @@ class TransportInfo(models.Model):
                 self.s_driver_id.is_reserved = True
                 self.s_vehicle_id.is_reserved = True
 
-    @api.one
     def shuttling_complete(self):
-        self.shuttling_status = "Completed"
-        if self.shuttling_mode == 'in':
-            self.s_driver_id.is_reserved = False
-            self.s_vehicle_id.is_reserved = False
-        self.sale_status = 24
+        for rec in self:
+            rec.shuttling_status = "Completed"
+            if rec.shuttling_mode == 'in':
+                rec.s_driver_id.is_reserved = False
+                rec.s_vehicle_id.is_reserved = False
+            rec.sale_status = 24
 
-    @api.multi
-    @api.one
+
     def unlink(self):
-        if self.ship_link:
-            self.ship_link.container = self.env['sale.order'].search_count([('ship_link', '=', self.ship_link.id)]) - 1
-        return super(TransportInfo, self).unlink()
+        for rec in self:
+            if rec.ship_link:
+                rec.ship_link.container = self.env['sale.order'].search_count([('ship_link', '=', rec.ship_link.id)]) - 1
+            return super(TransportInfo, self).unlink()
 
     def breakdown_button(self):
         if self.breakdown:
@@ -462,7 +465,7 @@ class TransportInfo(models.Model):
                     journal = account.t_vendor_journal_ex.id
                     account = account.t_vendor_account_ex.id
 
-                create_invoice = self.env['account.invoice'].create({
+                create_invoice = self.env['account.move'].create({
                     'journal_id': journal,
                     'partner_id': partner,
                     'date_invoice': date.today(),
@@ -497,31 +500,31 @@ class TransportInfo(models.Model):
             self.breakdown_complete = True
             self.state = 'rec'
 
-    @api.one
     @api.depends('order_line')
     def _compute_container(self):
         """
         @api.depends() should contain all fields that will be used in the calculations.
         """
-        crt_list = []
-        if self.order_line:
-            for x in self.order_line:
-                if x.crt_no:
-                    crt_list.append(x.crt_no.encode('ascii', 'ignore'))
-            self.container_num_m = crt_list
-            self.count_crt = len(crt_list)
+        for rec in self:
+            crt_list = []
+            if rec.order_line:
+                for x in rec.order_line:
+                    if x.crt_no:
+                        crt_list.append(x.crt_no.encode('ascii', 'ignore'))
+                rec.container_num_m = crt_list
+                rec.count_crt = len(crt_list)
 
     container_num_m = fields.Char(string="Container Number", required=False, compute='_compute_container', store=True)
     count_crt = fields.Integer(string="Count Of Container", required=False, compute='_compute_container', store=True)
 
-    @api.one
     @api.depends('order_line')
     def _compute_container_num(self):
         """
         @api.depends() should contain all fields that will be used in the calculations.
         """
-        if self.order_line:
-            self.container_num = self.order_line[0].crt_no
+        for rec in self:
+            if rec.order_line:
+                rec.container_num = rec.order_line[0].crt_no
 
     state = fields.Selection([
         ('draft', 'Quotation'),
@@ -534,7 +537,7 @@ class TransportInfo(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
 
-    @api.multi
+
     def sent_terminal(self):
         amount = 0.0
         if self.partner_id.id and self.order_line.form and self.order_line.to and self.order_line.fleet_type:
@@ -553,7 +556,7 @@ class TransportInfo(models.Model):
             self.env['mail.template'].browse(template.id).send_mail(self.id)
         self.sale_status = 3
 
-    @api.multi
+
     def sent_lock(self):
         self.priority_type = False
         if self.warn_shuttling == 0:
@@ -595,7 +598,7 @@ class TransportInfo(models.Model):
                 self.to_mails = email.name
                 self.env['mail.template'].browse(template.id).send_mail(self.id)
 
-    @api.multi
+
     def get_sale_name(self):
         name = ' '
         if self.sales_imp_id:
@@ -609,11 +612,11 @@ class TransportInfo(models.Model):
 
         return name
 
-    @api.multi
+
     def sent_storage(self):
         self.in_storage = True
 
-    @api.multi
+
     def airway(self):
         if self.order_line[0].crt_no:
             self.state = 'air'
@@ -625,11 +628,11 @@ class TransportInfo(models.Model):
         else:
             raise UserError(_("Please Add Container Number To Print WayBill"))
 
-    @api.multi
+
     def pay_extra_charges(self):
         if self.extra_charges and self.extra_expenses > 0.0:
             account = self.env['account_journal.configuration'].search([])
-            invoice = self.env['account.invoice'].search([])
+            invoice = self.env['account.move'].search([])
             acc = account.t_vendor_account.id
             jrl = account.t_vendor_journal.id
             if not self.extra_paid:
@@ -654,12 +657,12 @@ class TransportInfo(models.Model):
             else:
                 raise ValidationError('Extra Charges Already Paid')
 
-    @api.multi
+
     def trip(self):
         if not self.pod_chk:
             self.pod_chk = True
             account = self.env['account_journal.configuration'].search([])
-            invoice = self.env['account.invoice'].search([])
+            invoice = self.env['account.move'].search([])
             partner_name = 0
             amount = 0
 
@@ -712,10 +715,10 @@ class TransportInfo(models.Model):
             self.driver_id.is_reserved = True
             self.vehicle_id.is_reserved = True
 
-    @api.multi
+
     def pull_out_trip(self):
         account = self.env['account_journal.configuration'].search([])
-        invoice = self.env['account.invoice'].search([])
+        invoice = self.env['account.move'].search([])
 
         if self.pullout_mode == 'in':
             partner = self.p_driver_id.id
@@ -751,16 +754,17 @@ class TransportInfo(models.Model):
                 self.p_vehicle_id.is_reserved = True
         self.pullout_date = datetime.today()
 
-    @api.one
-    def pull_out_complete(self):
-        if self.pullout_mode == 'in':
-            self.p_driver_id.is_reserved = False
-            self.p_vehicle_id.is_reserved = False
-        self.pullout_status = "Completed"
-        template = self.env.ref('custom_logistic.storage_email_template')
-        self.env['mail.template'].browse(template.id).send_mail(self.id)
 
-    @api.multi
+    def pull_out_complete(self):
+        for rec in self:
+            if rec.pullout_mode == 'in':
+                rec.p_driver_id.is_reserved = False
+                rec.p_vehicle_id.is_reserved = False
+            rec.pullout_status = "Completed"
+            template = self.env.ref('custom_logistic.storage_email_template')
+            self.env['mail.template'].browse(template.id).send_mail(rec.id)
+
+
     def receive(self):
         self.state = "rec"
         self.transportation_status = "Completed"
@@ -772,24 +776,24 @@ class TransportInfo(models.Model):
             self.pod_date = date.today()
         self.sale_status = 16
 
-    @api.one
     @api.depends('way_date', 'pod_date')
     def _compute_lead_days(self):
         """
         @api.depends() should contain all fields that will be used in the calculations.
         """
-        if self.way_date and self.pod_date:
-            way = datetime.strptime(self.way_date, '%Y-%m-%d').date()
-            pod = datetime.strptime(self.pod_date, '%Y-%m-%d').date()
-            self.lead_days = (pod - way).days
+        for rec in self:
+            if rec.way_date and rec.pod_date:
+                way = datetime.strptime(rec.way_date, '%Y-%m-%d').date()
+                pod = datetime.strptime(rec.pod_date, '%Y-%m-%d').date()
+                rec.lead_days = (pod - way).days
 
-    @api.multi
+
     def action_invoice_create(self):
         """Adding By_customer To Invoice"""
         account = self.env['account_journal.configuration'].search([])
         if self.shuttling is True and self.shuttling_status == 'Completed':
             new_record = super(TransportInfo, self).action_invoice_create()
-            records = self.env['account.invoice'].search([('origin', '=', self.name)])
+            records = self.env['account.move'].search([('origin', '=', self.name)])
             if records:
                 records.by_customer = self.by_customer.id
                 records.our_job = self.our_job
@@ -851,7 +855,7 @@ class TransportInfo(models.Model):
 
         elif not self.shuttling:
             new_record = super(TransportInfo, self).action_invoice_create()
-            records = self.env['account.invoice'].search([('origin', '=', self.name)])
+            records = self.env['account.move'].search([('origin', '=', self.name)])
             if records:
                 records.by_customer = self.by_customer.id
                 records.our_job = self.our_job
@@ -915,7 +919,7 @@ class TransportInfo(models.Model):
         else:
             raise exceptions.except_orm(_('Shuttling in Process'), 'Wait until Shuttling not complete')
 
-    @api.multi
+
     def test_button(self):
         if self.pull_out and self.pullout_status == 'Completed':
             if datetime.now().date() >= (datetime.strptime(str(self.pullout_date), '%Y-%m-%d %H:%M:%S') + timedelta(
@@ -924,7 +928,7 @@ class TransportInfo(models.Model):
                         datetime.strptime(str(self.pullout_date), '%Y-%m-%d %H:%M:%S') + timedelta(
                     days=self.partner_id.free_day)).date()
 
-    @api.multi
+
     def new_create_invoice(self):
         """Creates invoices"""
         self.action_confirm()
@@ -975,7 +979,7 @@ class ShipmentOrder(models.Model):
                              selection=[('draft', 'Draft'), ('in', 'In Process'), ('done', 'Done'), ], default='draft',
                              required=False, track_visibility='onchange')
     count = fields.Integer(string="Shipment Count", required=False, compute='shipment_count')
-    invoice_id = fields.Many2one(comodel_name="account.invoice", string="Shipment Invoice", required=False, )
+    invoice_id = fields.Many2one(comodel_name="account.move", string="Shipment Invoice", required=False, )
     c_ref = fields.Char(string="Customer Reference", required=False, )
     warn_add_shipment = fields.Integer(string="warn_add_shipment", required=False, )
 
@@ -985,11 +989,11 @@ class ShipmentOrder(models.Model):
                 'name': "Accounts and Journals Configuration"
             })
 
-    @api.multi
+
     def create_shipment(self):
         self.shipment(self.container)
 
-    @api.multi
+
     def add_shipment(self):
         if self.warn_add_shipment == 0:
             self.warn_add_shipment += 1
@@ -1048,7 +1052,7 @@ class ShipmentOrder(models.Model):
                 check += 1
         if check > 0 and check == len(sale):
             origin = sale[0].name
-            records = self.env['account.invoice'].create({
+            records = self.env['account.move'].create({
                 'partner_id': self.customer.id,
                 'date_invoice': date.today(),
                 'type': "out_invoice",
@@ -1108,7 +1112,7 @@ class ShipmentOrder(models.Model):
         else:
             raise exceptions.except_orm(_('Shipment in Process'), 'Wait until Shipment Transportation not complete')
 
-    @api.multi
+
     def unlink(self):
         for order in self:
             if order.state not in 'draft':
@@ -1117,9 +1121,10 @@ class ShipmentOrder(models.Model):
                                             ' before.')
         return super(ShipmentOrder, self).unlink()
 
-    @api.one
+
     def shipment_count(self):
-        self.count = self.env['sale.order'].search_count([('ship_link', '=', self.id)])
+        for rec in self:
+            rec.count = self.env['sale.order'].search_count([('ship_link', '=', rec.id)])
 
     @api.model
     def create(self, vals):
@@ -1155,10 +1160,10 @@ class RePullout(models.Model):
     move_to = fields.Many2one(comodel_name="stock.warehouse", string="To Warehouse", required=False, )
     self_reason = fields.Char(string="Self PullOut Reason", required=False, )
 
-    @api.multi
+
     def pull_out_trip(self):
         account = self.env['account_journal.configuration'].search([])
-        invoice = self.env['account.invoice'].search([])
+        invoice = self.env['account.move'].search([])
 
         if self.pullout_mode == 'in':
             partner = self.driver_id.id
@@ -1193,12 +1198,12 @@ class RePullout(models.Model):
                 self.driver_id.is_reserved = True
                 self.vehicle_id.is_reserved = True
 
-    @api.one
     def pull_out_complete(self):
-        if self.pullout_mode == 'in':
-            self.driver_id.is_reserved = False
-            self.vehicle_id.is_reserved = False
-        self.pullout_status = "Completed"
-        self.pullout_date = datetime.today()
-        template = self.env.ref('custom_logistic.storage_email_template')
-        self.env['mail.template'].browse(template.id).send_mail(self.order_id.id)
+        for rec in self:
+            if rec.pullout_mode == 'in':
+                rec.driver_id.is_reserved = False
+                rec.vehicle_id.is_reserved = False
+            rec.pullout_status = "Completed"
+            rec.pullout_date = datetime.today()
+            template = self.env.ref('custom_logistic.storage_email_template')
+            self.env['mail.template'].browse(template.id).send_mail(rec.order_id.id)

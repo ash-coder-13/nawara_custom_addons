@@ -58,8 +58,8 @@ route_transport_TO,route.transport,model_route_transport,group_logistic_TO,1,1,1
 serv_types_TO,serv.types,model_serv_types,group_logistic_TO,1,1,1,1
 res_port_TO,res.port,model_res_port,group_logistic_TO,1,1,1,1
 import_status_TO,import.status,model_import_status,group_logistic_TO,1,1,1,1
-account_invoice_TO,account.invoice,model_account_invoice,group_logistic_TO,1,0,1,0
-account_invoice_line_TO,account.invoice.line,model_account_invoice_line,group_logistic_TO,1,0,1,0
+account_move_TO,account.move,model_account_move,group_logistic_TO,1,0,1,0
+account_move_line_TO,account.move.line,model_account_move_line,group_logistic_TO,1,0,1,0
 account_journal_configuration_TO,account_journal.configuration,model_account_journal_configuration,group_logistic_TO,1,0,1,0
 to_mails_TO,to.mails,model_to_mails,group_logistic_TO,1,0,1,0
 multi_mails_TO,multi.mails,model_multi_mails,group_logistic_TO,1,1,1,1
@@ -97,8 +97,8 @@ res_port_CCO,res.port,model_res_port,group_logistic_CCO,1,1,1,1
 res_partner_CCO,res.partner,model_res_partner,group_logistic_CCO,1,1,1,1
 freight_tree_CCO,freight.tree,model_freight_tree,group_logistic_CCO,1,1,1,1
 freight_forward_CCO,freight.forward,model_freight_forward,group_logistic_CCO,1,1,1,1
-account_invoice_CCO,account.invoice,model_account_invoice,group_logistic_CCO,1,0,1,0
-account_invoice_line_CCO,account.invoice.line,model_account_invoice_line,group_logistic_CCO,1,0,1,0
+account_move_CCO,account.move,model_account_move,group_logistic_CCO,1,0,1,0
+account_move_line_CCO,account.move.line,model_account_move_line,group_logistic_CCO,1,0,1,0
 account_journal_configuration_CCO,account_journal.configuration,model_account_journal_configuration,group_logistic_CCO,1,0,1,0
 to_mails_CCO,to.mails,model_to_mails,group_logistic_CCO,1,0,1,0
 multi_mails_CCO,multi.mails,model_multi_mails,group_logistic_CCO,1,1,1,1
@@ -114,11 +114,10 @@ by_customer_PO,by.customer,model_by_customer,group_logistic_PO,1,1,1,1
 import_site_PO,import.site,model_import_site,group_logistic_PO,1,1,1,1
 import_status_PO,import.status,model_import_status,group_logistic_PO,1,1,1,1
 account_journal_PO,account.account.journal,account.model_account_journal,group_logistic_PO,1,1,1,1
-account_invoice_tax_PO,account.invoice.tax,account.model_account_invoice_tax,group_logistic_PO,1,1,1,1
 sale_order_PO,sale.order,model_sale_order,group_logistic_PO,1,0,1,0
 sale_order_line_PO,sale.order.line,model_sale_order_line,group_logistic_PO,1,0,1,0
-account_invoice_PO,account.invoice,model_account_invoice,group_logistic_PO,1,0,1,0
-account_invoice_line_PO,account.invoice.line,model_account_invoice_line,group_logistic_PO,1,0,1,0
+account_move_PO,account.move,model_account_move,group_logistic_PO,1,0,1,0
+account_move_line_PO,account.move.line,model_account_move_line,group_logistic_PO,1,0,1,0
 account_journal_configuration_PO,account_journal.configuration,model_account_journal_configuration,group_logistic_PO,1,0,1,0
 bl_tree_PO,bl.tree,model_bl_tree,group_logistic_PO,1,0,0,0
 charg_vender_PO,charg.vender,model_charg_vender,group_logistic_PO,1,0,0,0

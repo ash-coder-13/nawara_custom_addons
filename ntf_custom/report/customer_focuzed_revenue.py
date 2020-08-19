@@ -30,12 +30,12 @@ class CustomerFocuzedRevenue(models.TransientModel):
     start_date = fields.Datetime(string="Start Date")
     end_date = fields.Datetime(string="End Date")
 
-    @api.multi
+
     def generate_cfr_report(self):
         sale_order = self.env['sale.order'].search([
             ('partner_id', '=', self.partner_ids.ids), ('date_order', '>=', self.start_date),
             ('date_order', '<=', self.end_date), ('sale_status', '=', self.sale_status_ids.ids)])
-        print sale_order
+        # print sale_order
         return self.env["report"].get_action(sale_order, 'ntf_custom.report_customer_focuzed_rev')
 
     # def print_xls_report(self):

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_module_cost,invoice.module.cost,model_invoice_module_cost,,1,0,0,0
+access_invoice_module_cost_tree,invoice.module.cost.tree,model_invoice_module_cost_tree,,1,0,0,0
+access_ext_depreciation_job,ext.depreciation.job,model_ext_depreciation_job,,1,0,0,0

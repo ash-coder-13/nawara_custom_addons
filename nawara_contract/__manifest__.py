@@ -9,9 +9,9 @@
         Contract Customization
     """,
 
-    'author': 'Solution Founder',
+    'author': 'Ashish',
     'website': 'http://solutionfounder.com/',
-    'version': '10.0.2.3',
+    'version': '13.0.1.3',
     'category': 'hr',
 
     # any module necessary for this one to work correctly

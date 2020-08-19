@@ -3,7 +3,7 @@
     <data>
         <report
                 id="nawara_inv"
-                model="account.invoice"
+                model="account.move"
                 name="nawara_invoice.logistic_invoice"
                 file="nawara_invoice.logistic_invoice"
                 report_type="qweb-html"

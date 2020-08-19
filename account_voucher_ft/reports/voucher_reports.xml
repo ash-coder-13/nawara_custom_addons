@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+        <report
+            id="account_voucher_report"
+            model="account.voucher"
+            string="Voucher"
+            report_type="qweb-pdf"
+            name="account_voucher_ft.report_voucher"
+            file="account_voucher_ft.report_voucher"
+        />
+        <report
+            id="account_journal_voucher_report"
+            model="account.move"
+            string="Journal Voucher"
+            report_type="qweb-pdf"
+            name="account_voucher_ft.report_journal_voucher"
+            file="account_voucher_ft.report_journal_voucher"
+            paperformat="account_voucher_ft.paperformat_journal_voucher"
+        />
+        
+        <report
+            id="account_journal_cash_credit_report"
+            model="account.move"
+            string="Cash Credit Voucher"
+            report_type="qweb-pdf"
+            name="account_voucher_ft.report_journal_cash_credit"
+            file="account_voucher_ft.report_journal_cash_credit"
+            paperformat="account_voucher_ft.paperformat_cash_debit_credit"
+        />
+        
+        <report
+            id="account_journal_cash_debit_report"
+            model="account.move"
+            string="Cash Debit Voucher"
+            report_type="qweb-pdf"
+            name="account_voucher_ft.report_journal_cash_debit"
+            file="account_voucher_ft.report_journal_cash_debit"
+            paperformat="account_voucher_ft.paperformat_cash_debit_credit"
+        />
+    </data>
+
+</odoo>

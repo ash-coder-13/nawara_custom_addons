@@ -34,13 +34,13 @@ class AccountMoveLineInher(models.Model):
     fleet_ids = fields.Many2many('fleet.vehicle', 'fleet_vehicle_transport_relation', string='Associated Vehicle')
     credit_limit = fields.Float(string="Max Credit Limit",  required=False, )
 
-    @api.multi
     def send_ban_mail(self):
-        mails = self.env['res.partner'].search([('BAN_expiry_date', '!=', False)])
-        for x in mails:
-            if datetime.now() + timedelta(days=15) >= datetime.strptime(str(x.BAN_expiry_date), '%Y-%m-%d'):
-                template = x.env.ref('custom_logistic.BAN_email_template')
-                self.env['mail.template'].browse(template.id).send_mail(x.id)
+        for rec in self:
+            mails = self.env['res.partner'].search([('BAN_expiry_date', '!=', False)])
+            for x in mails:
+                if datetime.now() + timedelta(days=15) >= datetime.strptime(str(x.BAN_expiry_date), '%Y-%m-%d'):
+                    template = x.env.ref('custom_logistic.BAN_email_template')
+                    self.env['mail.template'].browse(template.id).send_mail(x.id)
 
     @api.onchange('types')
     def get_trans(self):
@@ -135,7 +135,7 @@ class Fleet(models.Model):
 
 
 class AccountExtend(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     # billng_type = fields.Char(string="Billing Type")
     billng_type = fields.Selection([('B/L Number', 'B/L Number'), ('Container Wise', 'Container Wise')],
@@ -171,37 +171,39 @@ class AccountExtend(models.Model):
             else:
                 self.check = False
 
-    @api.one
+
     @api.depends('invoice_line_ids')
     def _compute_container_num(self):
         """
         @api.depends() should contain all fields that will be used in the calculations.
         """
-        crt_list = []
-        if self.invoice_line_ids:
-            for x in self.invoice_line_ids:
-                if x.crt_no:
-                    crt_list.append(x.crt_no.encode('ascii', 'ignore'))
-            self.container_num = crt_list
-            self.count_crt = len(crt_list)
+        for rec in self:
+            crt_list = []
+            if rec.invoice_line_ids:
+                for x in rec.invoice_line_ids:
+                    if x.crt_no:
+                        crt_list.append(x.crt_no.encode('ascii', 'ignore'))
+                rec.container_num = crt_list
+                rec.count_crt = len(crt_list)
 
-    @api.multi
+
     def reg_pay(self):
-        return {'name': 'Receipt',
-                'domain': [],
-                'res_model': 'customer.payment.bcube',
-                'type': 'ir.actions.act_window',
-                'view_mode': 'form', 'view_type': 'form',
-                'context': {
-                    'default_partner_id': self.partner_id.id,
-                    'default_receipts': True,
-                    'default_invoice_link': self.id,
-                    'default_amount': self.residual},
-                'target': 'new', }
+        for rec in self:
+            return {'name': 'Receipt',
+                    'domain': [],
+                    'res_model': 'customer.payment.bcube',
+                    'type': 'ir.actions.act_window',
+                    'view_mode': 'form', 'view_type': 'form',
+                    'context': {
+                        'default_partner_id': rec.partner_id.id,
+                        'default_receipts': True,
+                        'default_invoice_link': rec.id,
+                        'default_amount': rec.residual},
+                    'target': 'new', }
 
 
 class AccountTreeExtend(models.Model):
-    _inherit = 'account.invoice.line'
+    _inherit = 'account.move.line'
 
     crt_no = fields.Char(string="Container No.")
     service_type = fields.Char(string="Service Name")
@@ -228,7 +230,7 @@ class FreightForwarding(models.Model):
     no_of_con = fields.Integer(string="No of Containers")
     form = fields.Many2one('res.country', string="Country of Origin")
     to = fields.Many2one('res.country', string="Destination")
-    acct_link = fields.Many2one('account.invoice', string="Invoice", readonly=True)
+    acct_link = fields.Many2one('account.move', string="Invoice", readonly=True)
     implink = fields.Many2one('import.logic', string="Import Link", readonly=True)
     explink = fields.Many2one('export.logic', string="Export Link", readonly=True)
     freight = fields.Boolean(string="Freight Forwarding")
@@ -264,9 +266,10 @@ class FreightForwarding(models.Model):
 
     pname = fields.Char(compute='act_show_log_recharge_trip')
 
-    @api.one
+
     def act_show_log_recharge_trip(self):
-        self.recharge_count = self.env['sale.order'].search_count([('trans_link', '=', self.id)])
+        for rec in self:
+            rec.recharge_count = self.env['sale.order'].search_count([('trans_link', '=', rec.id)])
 
     @api.model
     def create(self, vals):
@@ -275,50 +278,50 @@ class FreightForwarding(models.Model):
 
         return new_record
 
-    @api.multi
     def done(self):
-        self.state = 'done'
+        for rec in self:
+            rec.state = 'done'
 
-    @api.multi
     def create_order(self):
-        if not self.smart:
-            self.btn_stage = 'custom'
-            self.smart = True
-            value = 0
-            get_id = self.env['product.template'].search([])
-            for x in get_id:
-                if x.name == "Container":
-                    value = x.id
+        for rec in self:
+            if not rec.smart:
+                rec.btn_stage = 'custom'
+                rec.smart = True
+                value = 0
+                get_id = self.env['product.template'].search([])
+                for x in get_id:
+                    if x.name == "Container":
+                        value = x.id
 
-            for data in self.frieght_id:
-                if data.cont_no:
-                    records = self.env['sale.order'].create({
-                        'partner_id': self.customer.id,
-                        'suppl_name': self.s_supplier.id,
-                        'trans_link': self.id,
-                        'no_invoice': True,
-                        'state': 'draft',
-                        'customer_ref': self.customer_ref
-                    })
+                for data in rec.frieght_id:
+                    if data.cont_no:
+                        records = self.env['sale.order'].create({
+                            'partner_id': rec.customer.id,
+                            'suppl_name': rec.s_supplier.id,
+                            'trans_link': rec.id,
+                            'no_invoice': True,
+                            'state': 'draft',
+                            'customer_ref': rec.customer_ref
+                        })
 
-                    records.order_line.create({
-                        'product_id': value,
-                        'name': 'Transport Order from Project ' + str(self.sr_no),
-                        'product_uom_qty': 1.0,
-                        'price_unit': 1,
-                        'crt_no': data.cont_no,
-                        'product_uom': 1,
-                        'order_id': records.id,
-                    })
-            self.trans = True
-        else:
-            raise UserError(_('Transportation is Already Created'))
+                        records.order_line.create({
+                            'product_id': value,
+                            'name': 'Transport Order from Project ' + str(rec.sr_no),
+                            'product_uom_qty': 1.0,
+                            'price_unit': 1,
+                            'crt_no': data.cont_no,
+                            'product_uom': 1,
+                            'order_id': records.id,
+                        })
+                rec.trans = True
+            else:
+                raise UserError(_('Transportation is Already Created'))
 
-    @api.multi
+
     def create_invoice(self):
         account = self.env['account_journal.configuration'].search([])
-        invoice = self.env['account.invoice'].search([])
-        invoice_lines = self.env['account.invoice.line'].search([])
+        invoice = self.env['account.move'].search([])
+        invoice_lines = self.env['account.move.line'].search([])
         sale = self.env['sale.order'].search([('trans_link', '=', self.id)])
         check = 0
 
@@ -453,7 +456,7 @@ class FreightForwarding(models.Model):
                 # vendor bill
                 if self.implink.import_gov_charges:
                     partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
-                    create_invoice = self.env['account.invoice'].create({
+                    create_invoice = self.env['account.move'].create({
                         'journal_id': account.g_invoice_journal.id,
                         'partner_id': partner.id,
                         'date_invoice': date.today(),
@@ -534,7 +537,7 @@ class FreightForwarding(models.Model):
 
                 if self.explink.export_gov_charges:
                     partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
-                    create_invoice = self.env['account.invoice'].create({
+                    create_invoice = self.env['account.move'].create({
                         'journal_id': account.g_invoice_journal.id,
                         'partner_id': partner.id,
                         'date_invoice': date.today(),
@@ -560,7 +563,6 @@ class FreightForwarding(models.Model):
         self.btn_stage = 'done'
         self.inv_chk = True
 
-    @api.multi
     def create_custm(self):
 
         if self.custm:

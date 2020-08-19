@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <template id="voucher_style_layout">
+            <style type="text/css">
+                .table_lines td{
+                border-top:none;
+                border-bottom:none;
+                font-size:15px
+                border-left:2px solid black;
+                border-right:2px solid black;
+                }
+                tr,td{
+                border-top:none;
+                border-bottom:none;
+                padding-left: 5px;
+                }
+                th,tr,td{
+                border-top:none;
+                border-bottom:none;
+                padding-left: 5px;
+                border-left:2px solid black;
+                border-right:2px solid black;
+
+                }
+                .payment_table td,th{
+                border:1px solid black;
+                padding-left: 5px;
+                border-left:1px solid black;
+                border-right:1px solid black;
+                }
+                .payment_table tr{
+                border:none;
+                }
+                .div_border{
+                content: "";
+                border-bottom: 2px dotted #000;
+                bottom: -1px;
+                left: -1px;
+                right: -1px;
+                }  
+            </style>
+        </template>
+        <template id="voucher_extrnal_layout_kt">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <t t-call="account_voucher_ft.layout_header_voucher" />
+            <t t-raw="0" />
+            <t t-call="account_voucher_ft.layout_footer_voucher" />
+            
+        </template>
+		
+        <template id="cash_credit_debit_extrnal_layout_kt">
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <t t-call="account_voucher_ft.external_layout_header_cash_credit_debit" />
+            <t t-raw="0" />
+            <t t-call="account_voucher_ft.layout_footer_voucher" />
+        </template>
+        
+        <template id="external_layout_header_cash_credit_debit">
+            <div class="header" style="height:200px">
+                <!-- company name -->
+                <!-- image -->
+                <div class="header_img" style="width:24%;height:200px;float: left;">
+                    <img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo" style="max-width:100%;max-height: 100%;float:right;min-width:100%;"/>
+                </div>
+                <div style="width:75%;height:200px;float: left;text-align:left;">
+                    <table style="float:center;margin-left:65%">
+                        <tr>
+                            <td>
+                                <b style="color:#578ed9;font-size:18px;">Date </b>
+                            </td>
+                            <td>&#160;: <t t-esc="o.date"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b style="color:#578ed9;font-size:18px;">Job </b>
+                            </td>
+                            <td>&#160;: </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b style="color:#578ed9;font-size:18px;">Voucher </b>
+                            </td>
+                            <td>&#160;: <t t-esc="o.name"/></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </template>
+        <template id="layout_header_voucher">
+            <div class="header">
+                <div class="row">
+                    <div class="col-xs-3" style="position:absolute;top:0;">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="height:70px;width:100%;" />
+                    </div>
+                    <div class="col-xs-12 text-center" style="font-size:30px;position:relative;">
+                        <div class="col-xs-8  text-center" style="float:none;margin:0 auto;">
+                            <t t-esc="company.partner_id.name"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="layout_footer_voucher" >
+            <div class="footer">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <t t-if="company.name">
+                        <span  t-field="company.name"/>,
+                    </t>
+                    <t t-if="company.street">
+                        <span t-field="company.street"/>,
+                    </t>
+                    <t t-if="company.street2">
+                        <span t-field="company.street2"/>,
+                    </t>
+                    <t t-if="company.city">
+                        <span t-field="company.city"/>,
+                    </t>
+                    <t t-if="company.state_id">
+                        <span  t-field="company.state_id.name"/>,
+                    </t>
+                    <t t-if="company.country_id">
+                        <span t-field="company.country_id.name"/>,
+                    </t>
+                    <t t-if="company.zip">
+                        <span t-field="company.zip"/>
+                    </t>
+                    <br/>
+                    <t t-if="company.phone">Tel: <span t-field="company.phone"/>,</t>
+                    <t t-if="company.fax">Fax: <span t-field="company.fax"/>,</t>
+                    <t t-if="company.email">Email: <span t-field="company.email"/>,</t>
+                </div>
+            </div>
+        </template>
+	
+        
+    </data>
+</odoo>

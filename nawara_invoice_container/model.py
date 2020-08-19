@@ -28,7 +28,7 @@ class PacificCommercialInvoice(models.AbstractModel):
     def render_html(self,docids, data=None):
         report_obj = self.env['report']
         report = report_obj._get_report_from_name('nawara_invoice_container.logistic_invoice')
-        records = self.env['account.invoice'].browse(docids)
+        records = self.env['account.move'].browse(docids)
 
         users = self.env['res.users'].search([])
         def getname():
@@ -57,7 +57,7 @@ class PacificCommercialInvoice(models.AbstractModel):
 
         docargs = {
             'doc_ids': docids,
-            'doc_model': 'account.invoice',
+            'doc_model': 'account.move',
             'docs': records,
             'getname': getname,
             'number': number,

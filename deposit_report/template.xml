@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="deposit_report_wizard" model="ir.ui.view">
+        <field name="name">deposit_report_wizard</field>
+        <field name="model">deposit.report</field>
+        <field name="arch" type="xml">
+            <form string="Deposit Report">
+                <group name="group_top">
+                    <group name="group_left">
+                        <field name="total"/>
+                        <field name="file" filename="name" readonly="1"/>
+                        <field name="name" invisible="1"/>
+                    </group>
+                    <group name="group_right">
+                        <field name="m_name" invisible="1"/>
+                        <field name="form" attrs="{'invisible':[('total','=',True)]}"/>
+                        <field name="to" attrs="{'invisible':[('total','=',True)]}"/>
+                    </group>
+                </group>
+                <footer style="height: 30px !important; border: none !important;">
+                    <button name="get_report" type="object" string="Print" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="deposit_report_wizard_import_xlsx" model="ir.actions.act_window">
+        <field name="name">Import Deposit Report</field>
+        <field name="res_model">deposit.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="deposit_report_wizard"/>
+        <field name="target">new</field>
+        <field name="context">{'default_m_name': 'import.logic'}</field>
+    </record>
+
+    <record id="deposit_report_wizard_export_xlsx" model="ir.actions.act_window">
+        <field name="name">Export Deposit Report</field>
+        <field name="res_model">deposit.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="deposit_report_wizard"/>
+        <field name="target">new</field>
+        <field name="context">{'default_m_name': 'export.logic'}</field>
+    </record>
+
+
+    <record model="ir.values" id="deposit_import_filter_id">
+        <field name="model_id" ref="" />
+        <field name="name">Import Deposit Report</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval ="'ir.actions.act_window,'+str(ref('deposit_report_wizard_import_xlsx'))"/>
+        <field name="key">action</field>
+        <field name="model">import.logic</field>
+    </record>
+
+    <record model="ir.values" id="deposit_export_filter_id">
+        <field name="model_id" ref="" />
+        <field name="name">Export Deposit Report</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval ="'ir.actions.act_window,'+str(ref('deposit_report_wizard_export_xlsx'))"/>
+        <field name="key">action</field>
+        <field name="model">export.logic</field>
+    </record>
+
+
+    <!--<record id="statement_of_accounts_action" model="ir.actions.act_window">-->
+    <!--<field name="name">Statement of Accounts</field>-->
+    <!--<field name="res_model">statement.accounts</field>-->
+    <!--<field name="view_type">form</field>-->
+    <!--<field name="view_mode">tree,form</field>-->
+    <!--<field name="view_id" ref="statement_of_accounts_wizard"/>-->
+    <!--<field name="target">new</field>-->
+    <!--</record>-->
+
+
+    <!--<menuitem id="deposit_report_menu_item" name="Deposit Report"-->
+    <!--action="statement_of_accounts_action" parent="account_reports.account_reports_legal_statements_menu"-->
+    <!--sequence="22"/>-->
+</odoo>

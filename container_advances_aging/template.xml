@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+
+        <record id="container_advances_aging_wizard" model="ir.ui.view">
+            <field name="name">container_advances_aging_wizard</field>
+            <field name="model">container.aging</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="date"/>
+                            <field name="account_id" domain="[('internal_type','=','view')]" context="{'show_parent_account':True}" invisible="1"/>
+                            <field name="filters"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="name" invisible="1"/>
+                            <field name="file" filename="name" readonly="1"/>
+                            
+
+                        </group>
+
+                    </group>
+
+                    <footer style="height: 30px !important; border: none !important;">
+                        <button name="get_report" type="object" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="container_advances_aging_wizard_action" model="ir.actions.act_window">
+            <field name="name">Container Deposit Aging Report</field>
+            <field name="res_model">container.aging</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="container_advances_aging_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="container_advances_aging_wizard_action_menu_item" name="Container Deposit Aging Report Xlsx" action="container_advances_aging_wizard_action" parent="account_reports.account_reports_legal_statements_menu" sequence="26"/>   
+        
+    </data>
+</openerp>
