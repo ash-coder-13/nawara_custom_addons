@@ -38,7 +38,7 @@
             <field name="name">Statment of invoices</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cust.invoice</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">form</field>
             <field name="view_id" ref="customer_invoice_report_report_cash_report"/>
             <field name="context">{'default_customer':active_id}</field>

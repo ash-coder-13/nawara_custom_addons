@@ -12,7 +12,6 @@ READONLY_STATES = {
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    @api.multi
     def post(self):
         invoice = self._context.get('invoice', False)
         self._post_validate()

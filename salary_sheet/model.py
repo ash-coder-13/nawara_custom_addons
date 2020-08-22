@@ -22,7 +22,6 @@ class XlsxReportstatement(models.TransientModel):
     file = fields.Binary('Download Report',)
    
 
-    @api.multi
     def print_report(self):
 
         data=self.batch.slip_ids
@@ -33,7 +32,6 @@ class XlsxReportstatement(models.TransientModel):
             
 
 
-    @api.multi
     def xlsx_report(self,input_records):
         with xlsxwriter.Workbook(config['data_dir']+"/salary_sheet.xlsx") as workbook:
         

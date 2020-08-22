@@ -17,7 +17,6 @@ class XlsxReportoverdue(models.TransientModel):
     name = fields.Char()
     file = fields.Binary('Download Report', )
 
-    @api.multi
     def print_report(self):
         data = []
         rec = self.env['account.move'].search(
@@ -28,7 +27,6 @@ class XlsxReportoverdue(models.TransientModel):
 
         self.xlsx_report(data)
 
-    @api.multi
     def xlsx_report(self, input_records):
         with xlsxwriter.Workbook(config['data_dir'] + "/overdue_report.xlsx") as workbook:
             main_heading = workbook.add_format({

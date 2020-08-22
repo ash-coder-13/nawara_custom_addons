@@ -31,7 +31,6 @@ class ChangeFundWizard(models.TransientModel):
                 res = True
             wiz.do_receivable = res
 
-    @api.multi
     def change_fund(self):
 
         # Create the petty cash fund

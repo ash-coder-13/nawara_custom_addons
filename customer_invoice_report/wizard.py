@@ -35,7 +35,6 @@ class InvoiceWiseDetail(models.Model):
 class ResPartnerExt(models.Model):
     _inherit = 'res.partner'
 
-    @api.multi
     def customer_invoice_account(self):
         return {'name': 'Statment of invoices',
                 'domain': [],

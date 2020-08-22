@@ -39,7 +39,6 @@ class hr_contract(models.Model):
 class hr_payslip(models.Model):
 	_inherit = 'hr.payslip'
 
-	@api.multi
 	def compute_sheet(self):
 		res = super(hr_payslip, self).compute_sheet()
 		for record in self:

@@ -41,7 +41,7 @@
         <record id="dsr_wizard_action" model="ir.actions.act_window">
             <field name="name">DSR Report</field>
             <field name="res_model">dsr.report</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="dsr_aging_wizard"/>
             <field name="target">new</field>

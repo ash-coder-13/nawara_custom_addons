@@ -33,7 +33,7 @@
         <record id="change_petty_cash_fund" model="ir.actions.act_window">
             <field name="name">Change Petty Cash Fund</field>
             <field name="res_model">pettycash.fund.change</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

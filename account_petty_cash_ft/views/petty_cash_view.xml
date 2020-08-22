@@ -153,7 +153,7 @@
         <record id="open_petty_cash_fund" model="ir.actions.act_window">
             <field name="name">Petty Cash Funds</field>
             <field name="res_model">pettycash.fund</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="petty_cash_fund_search"/>
             <field name="help" type="html">

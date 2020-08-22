@@ -20,7 +20,6 @@ class ContainerDepositReport(models.TransientModel):
         if self.total:
             self.form = self.to = ''
 
-    @api.multi
     def print_report(self):
         if not self.total:
             data = self.env[self.m_name].search([('date', '>=', self.form), ('date', '<=', self.to)])
@@ -40,7 +39,6 @@ class ContainerDepositReport(models.TransientModel):
             if not self.total:
                 return 'Export Deposit Report From {0} To {1}.xlsx'.format(str(self.form), str(self.to))
 
-    @api.multi
     def xlsx_report(self, data):
         with xlsxwriter.Workbook(config['data_dir'] + '/' + self.report_name()) as workbook:
             main_heading = workbook.add_format({

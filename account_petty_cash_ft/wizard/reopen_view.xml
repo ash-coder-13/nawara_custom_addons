@@ -27,7 +27,7 @@
         <record id="reopen_petty_cash_fund" model="ir.actions.act_window">
             <field name="name">Re-open Petty Cash Fund</field>
             <field name="res_model">pettycash.fund.reopen</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

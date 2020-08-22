@@ -13,8 +13,8 @@
     'depends': ['base', 'sale', 'account', 'sale_stock', 'fleet', 'stock'],
     'data': [
         'security/security.xml',
-        'security/ir.model.access.csv',
-        'views.xml',
+         'security/ir.model.access.csv',
+         # 'views.xml',
         'quote.xml',
         'supplier.xml',
         'mails.xml',

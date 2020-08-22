@@ -85,7 +85,7 @@
      <record id="action_move_lines_open" model="ir.actions.act_window">
             <field name="name">Journal Entry Items</field>
             <field name="res_model">account.move.line</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="domain">[('account_id','child_of',[active_id])]</field>
         </record>

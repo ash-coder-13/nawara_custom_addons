@@ -18,7 +18,6 @@ class invoiceModuleCost(models.Model):
         vals['name'] = self.env['ir.sequence'].next_by_code('invoice.module.cost.seq')
         return super(invoiceModuleCost, self).create(vals)
 
-    @api.multi
     def importBalancesCustomer(self):
         account_id = None
         invoice_type = None
@@ -82,7 +81,6 @@ class extAccountAssetAsset(models.Model):
     _inherit = 'account.asset.asset'
 
     # Inherit the method and use super to override
-    @api.multi
     def validate(self):
         res = super(extAccountAssetAsset, self).validate()
         OpeningAccount = self.env['account.account'].search([('code', '=', '3001121')])
@@ -94,7 +92,6 @@ class extAccountAssetAsset(models.Model):
                                            self.salvage_value, True)
         return res
 
-    @api.multi
     def genrateJournalEntries(self, journal_id, date):
         JornalEntries = self.env['account.move']
         create_journal_entry = JornalEntries.create({
@@ -104,7 +101,6 @@ class extAccountAssetAsset(models.Model):
         })
         return create_journal_entry
 
-    @api.multi
     def genrateJournalEntriyLines(self, move_id, account_id, partner_id, name, amount, deb_amount):
         JornalEntries_lines = self.env['account.move.line']
         if deb_amount:

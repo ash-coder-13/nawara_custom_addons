@@ -7,9 +7,9 @@
         <field name="interval_type">days</field>
         <field name="numbercall">-1</field>
         <field name="doall" eval="False"/>
-        <field name="model" eval="'sale.order'"/>
-        <field name="function" eval="'mail_reminder'"/>
-        <field name="args" eval="'()'"/>
+        <field name="model_id" ref="sale.model_sale_order"/>
+                    <field name="code">model.mail_reminder()</field>
+
     </record>
 
     <template id="assets_backend" name="custom assets" inherit_id="web.assets_backend">
@@ -27,22 +27,22 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
-            <xpath expr="//button[@name='print_quotation']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+<!--            <xpath expr="//button[@name='print_quotation']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
 
-            <xpath expr="//button[@name='action_cancel']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+<!--            <xpath expr="//button[@name='action_cancel']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
 
-            <xpath expr="//button[@name='action_done']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
+<!--            <xpath expr="//button[@name='action_done']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
 
             <!--FIXME -> RESOLVE BUTTON NUMBER ISSUE -->
-            <xpath expr="//button[@name='274']" position="attributes">
-                <attribute name="attrs">{'invisible': 1}</attribute>
-            </xpath>
+<!--            <xpath expr="//button[@name='274']" position="attributes">-->
+<!--                <attribute name="attrs">{'invisible': 1}</attribute>-->
+<!--            </xpath>-->
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                 <field name="project_no"/>
@@ -94,7 +94,7 @@
                 <!--                            -->
             </xpath>
 
-            <xpath expr="//button[@name='print_quotation']" position="before">
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
                 <button name="sent_terminal"
                         attrs="{'invisible': ['|',('state', '!=', 'draft'),('in_terminal', '=', True)]}"
                         string="Send To Terminal" type="object" class="oe_highlight btn btn-sm btn-default"/>
@@ -161,7 +161,7 @@
                 <field name="state" widget="statusbar" statusbar_visible="draft,sale,air,trip,rec,done"/>
             </xpath>
 
-            <xpath expr="//field[@name='payment_term_id']" position="after">
+            <xpath expr="//field[@name='partner_id']" position="after">
 
                 <field name="bill_no"/>
                 <field name="priority_type"/>
@@ -233,9 +233,7 @@
 
                         <group colspan="4" col="4" attrs="{'invisible':[('trans_mode','=','ex')]}">
 
-                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True),
-                            ('is_reserved','=',False)]" attrs="{'readonly':[('state','!=','draft'),('rescheduling','!=',True)],
-                            'required': [('trans_mode','=','in'),('in_terminal', '=', True)]}"
+                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True),('is_reserved','=',False)]" attrs="{'readonly':[('state','!=','draft'),('rescheduling','!=',True)],'required': [('trans_mode','=','in'),('in_terminal', '=', True)]}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
                             <field name="vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
@@ -394,10 +392,10 @@
                             ,'invisible':[('breakdown_mode','!=','ex')],'readonly': [('breakdown_complete', '=', True)]}"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="b_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
-                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                        ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                attrs="{'required':[('breakdown_mode','=','in'),('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)],
                                'invisible':[('breakdown_mode','!=','in')]}"/>
-                        <field name="b_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                        <field name="b_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"
                                attrs="{'required':[('breakdown_mode','=','in'),('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)],
                                'invisible':[('breakdown_mode','!=','in')]}"/>
@@ -435,14 +433,14 @@
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
                             <field name="s_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
-                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                        ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('shuttling_mode', '=','in'),('shuttling','=',True)],'readonly':[('shuttling_status','in',['Completed','InProcess'])],
                                'invisible':[('shuttling_mode','!=','in')]}"/>
                             <field name="s_driver_expenses" attrs="{'required':[('shuttling','=',True)],
                             'readonly':[('shuttling_status','in',['Completed','InProcess'])]}"/>
                         </group>
                         <group name="right">
-                            <field name="s_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                            <field name="s_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('shuttling_mode','=','in'),('shuttling','=',True)],'readonly':[('shuttling_status','in',['Completed','InProcess'])],
                                'invisible':[('shuttling_mode','!=','in')]}"/>
@@ -469,7 +467,7 @@
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
                             <field name="emp_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
-                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                        ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('emp_mode','=','in'),('emp_col','=',True)],
                                    'readonly':[('emp_status','in',['Completed','InProcess'])],
                                'invisible':[('emp_mode','!=','in')]}"/>
@@ -477,7 +475,7 @@
                             'readonly':[('emp_status','in',['Completed','InProcess'])]}"/>
                         </group>
                         <group name="right">
-                            <field name="emp_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                            <field name="emp_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('emp_mode','=','in'),('emp_col','=',True)],
                                    'readonly':[('emp_status','in',['Completed','InProcess'])],
@@ -505,7 +503,7 @@
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
                             <field name="ret_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
-                        ('is_reserved','=',False)]]" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                        ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('ret_mode','=','in'),('ret_col','=',True)],
                                    'readonly':[('ret_status','in',['Completed','InProcess'])],
                                'invisible':[('ret_mode','!=','in')]}"/>
@@ -513,7 +511,7 @@
                             'readonly':[('ret_status','in',['Completed','InProcess'])]}"/>
                         </group>
                         <group name="right">
-                            <field name="ret_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]]"
+                            <field name="ret_vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('ret_mode','=','in'),('ret_col','=',True)],
                                    'readonly':[('ret_status','in',['Completed','InProcess'])],
@@ -534,51 +532,51 @@
         </field>
     </record>
 
-    <record id="vendor_bill_form_view" model="ir.ui.view">
-        <field name="name">vendor_bill_form_view</field>
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_supplier_form"/>
-        <field name="arch" type="xml">
+<!--    <record id="vendor_bill_form_view" model="ir.ui.view">-->
+<!--        <field name="name">vendor_bill_form_view</field>-->
+<!--        <field name="model">account.invoice</field>-->
+<!--        <field name="inherit_id" ref="account.invoice_supplier_form"/>-->
+<!--        <field name="arch" type="xml">-->
 
-            <xpath expr="//field[@name='reference']" position="after">
-                <field name="invoice_from" readonly="1"/>
-            </xpath>
+<!--            <xpath expr="//field[@name='reference']" position="after">-->
+<!--                <field name="invoice_from" readonly="1"/>-->
+<!--            </xpath>-->
 
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="customer_id" attrs="{'invisible': [('check', '!=', True)]}"
-                       domain="[('customer','=',True)]"/>
-                <field name="check" invisible="1"/>
-                <field name="import_link" readonly="1"/>
-                <field name="export_link" readonly="1"/>
-                <field name="frieght_link" readonly="1"/>
-                <field name="sale_link" readonly="1"/>
-                <field name="ship_link" readonly="1"/>
-            </xpath>
-            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
-                <attribute name="required">0</attribute>
-            </xpath>
+<!--            <xpath expr="//field[@name='partner_id']" position="after">-->
+<!--                <field name="customer_id" attrs="{'invisible': [('check', '!=', True)]}"-->
+<!--                       domain="[('customer','=',True)]"/>-->
+<!--                <field name="check" invisible="1"/>-->
+<!--                <field name="import_link" readonly="1"/>-->
+<!--                <field name="export_link" readonly="1"/>-->
+<!--                <field name="frieght_link" readonly="1"/>-->
+<!--                <field name="sale_link" readonly="1"/>-->
+<!--                <field name="ship_link" readonly="1"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">-->
+<!--                <attribute name="required">0</attribute>-->
+<!--            </xpath>-->
 
-            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
-                <field name="crt_no"/>
-            </xpath>
+<!--            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">-->
+<!--                <field name="crt_no"/>-->
+<!--            </xpath>-->
 
-            <!--<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="replace">-->
-            <!--</xpath>-->
+<!--            &lt;!&ndash;<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="replace">&ndash;&gt;-->
+<!--            &lt;!&ndash;</xpath>&ndash;&gt;-->
 
-            <!--<xpath expr="//field[@name='amount_tax']" position="attributes">-->
-            <!--<attribute name="groups">custom_logistic.group_logistic_hide</attribute>-->
-            <!--</xpath>-->
+<!--            &lt;!&ndash;<xpath expr="//field[@name='amount_tax']" position="attributes">&ndash;&gt;-->
+<!--            &lt;!&ndash;<attribute name="groups">custom_logistic.group_logistic_hide</attribute>&ndash;&gt;-->
+<!--            &lt;!&ndash;</xpath>&ndash;&gt;-->
 
-            <!--<xpath expr="//field[@name='tax_line_ids']" position="attributes">-->
-            <!--<attribute name="groups">custom_logistic.group_logistic_hide</attribute>-->
-            <!--</xpath>-->
+<!--            &lt;!&ndash;<xpath expr="//field[@name='tax_line_ids']" position="attributes">&ndash;&gt;-->
+<!--            &lt;!&ndash;<attribute name="groups">custom_logistic.group_logistic_hide</attribute>&ndash;&gt;-->
+<!--            &lt;!&ndash;</xpath>&ndash;&gt;-->
 
-            <xpath expr="//field[@name='partner_id']" position="attributes">
-                <attribute name="options">{'no_quick_create': True, 'no_create_edit' : True}</attribute>
-            </xpath>
+<!--            <xpath expr="//field[@name='partner_id']" position="attributes">-->
+<!--                <attribute name="options">{'no_quick_create': True, 'no_create_edit' : True}</attribute>-->
+<!--            </xpath>-->
 
-        </field>
-    </record>
+<!--        </field>-->
+<!--    </record>-->
 
     <record model="ir.ui.view" id="custom_sale_tree">
         <field name="model">sale.order</field>
@@ -717,7 +715,7 @@
         </field>
     </record>
 
-    <menuitem id="shipment_order_parent" name="Transportation Project " parent="sales_team.menu_base_partner"
+    <menuitem id="shipment_order_parent" name="Transportation Project " parent="sale.sale_order_menu"
               sequence="12"/>
 
     <!-- This Menu Item must have a parent and an action -->

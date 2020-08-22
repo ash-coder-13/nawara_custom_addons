@@ -39,7 +39,7 @@
         <record id="salary_sheet_action" model="ir.actions.act_window">
             <field name="name">Salary Sheet</field>
             <field name="res_model">salary.sheet</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="salary_sheet_wizard"/>
             <field name="target">new</field>
@@ -58,7 +58,7 @@
         <record id="salary_sheet_action_menu_action" model="ir.actions.act_window">
             <field name="name">Salary Sheet</field>
             <field name="res_model">salary.sheet</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="salary_sheet_wizard"/>
             <field name="target">new</field>

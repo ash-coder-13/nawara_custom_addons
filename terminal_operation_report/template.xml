@@ -45,7 +45,7 @@
         <record id="terminal_operation_report_action" model="ir.actions.act_window">
             <field name="name">Terminal Operations Report</field>
             <field name="res_model">terminal.ledger</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="terminal_operation_report_wizard"/>
             <field name="target">new</field>

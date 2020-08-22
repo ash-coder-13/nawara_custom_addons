@@ -10,7 +10,6 @@ class FilterWizard(models.Model):
 	c_n = fields.Char(string="Container Number")
 	m_name = fields.Char(string="Model")
 	
-	@api.multi
 	def get_result(self):
 		if not self.bl:
 			self.bl = "^"

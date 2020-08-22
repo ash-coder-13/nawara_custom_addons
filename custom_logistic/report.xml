@@ -56,6 +56,6 @@
 				res_model="xl.report"
 				view_mode="tree,form" />
 
-	<menuitem id="report_menu_id" name="Shipment Status Report" parent="sales_team.menu_sale_report" action="report_act_id" sequence=""/>
+	<menuitem id="report_menu_id" name="Shipment Status Report" parent="sale.menu_sale_report" action="report_act_id" sequence=""/>
 
 </odoo>

@@ -49,7 +49,7 @@
         <record id="partner_ledger_action" model="ir.actions.act_window">
             <field name="name">Statement of account</field>
             <field name="res_model">partner.ledger</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="partner_ledger_wizard"/>
             <field name="target">new</field>
@@ -59,7 +59,7 @@
         <record id="partner_ledger_menu_action" model="ir.actions.act_window">
             <field name="name">Statement of Account</field>
             <field name="res_model">partner.ledger</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="partner_ledger_wizard"/>
             <field name="target">new</field>

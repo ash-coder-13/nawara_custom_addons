@@ -34,7 +34,6 @@ class OpenAccountChart(models.TransientModel):
         result['show_parent_account'] = True
         return result
 
-    @api.multi
     def account_chart_open_window(self):
         """
         Opens chart of Accounts
@@ -56,7 +55,6 @@ class OpenAccountChart(models.TransientModel):
 class WizardMultiChartsAccounts(models.TransientModel):
     _inherit = 'wizard.multi.charts.accounts'
 
-    @api.multi
     def execute(self):
         res = super(WizardMultiChartsAccounts, self).execute()
         self.chart_template_id.update_generated_account({},self.code_digits,self.company_id)

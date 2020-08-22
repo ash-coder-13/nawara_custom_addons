@@ -25,7 +25,6 @@ class XlsxReportoverdueAging(models.TransientModel):
         ('posted','Posted')], string='Filter',required=True)
    
 
-    @api.multi
     def print_report(self):
 
         acc = []
@@ -37,7 +36,6 @@ class XlsxReportoverdueAging(models.TransientModel):
         self.xlsx_report(acc)
 
 
-    @api.multi
     def xlsx_report(self,input_records):
         with xlsxwriter.Workbook(config['data_dir']+"/container_advances_aging.xlsx") as workbook:
             main_heading = workbook.add_format({

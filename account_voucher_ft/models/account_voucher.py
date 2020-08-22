@@ -116,7 +116,6 @@ class AccountVoucher(models.Model):
         amount_in_words += '\tOnly'
         self.amt_in_words = amount_in_words.capitalize()
 
-    @api.multi
     def write(self, vals):
         if 'payment_method_id' in vals and self.payment_method_code in PAY_METH_CODES and self.cheque_id:
             raise UserError('Sorry You Cannot change Payment Method of this Payment,'
@@ -124,7 +123,6 @@ class AccountVoucher(models.Model):
         else:
             return super(AccountVoucher, self).write(vals)
 
-    @api.multi
     def cancel_cheque(self, unlink=False):
         self.state = 'cancel'
         if unlink:
@@ -159,12 +157,12 @@ class AccountVoucher(models.Model):
             res['fields']['line_ids']['views']['tree']['arch'] = etree.tostring(arch_el)
         return res
 
-    @api.one
     @api.depends('move_id.line_ids.reconciled', 'move_id.line_ids.account_id.internal_type')
     def _check_paid(self):
-        self.paid = any(
-            [((line.account_id.internal_type, 'in', ('receivable', 'payable')) and line.reconciled) for line in
-             self.move_id.line_ids])
+        for rec in self:
+            rec.paid = any(
+                [((line.account_id.internal_type, 'in', ('receivable', 'payable')) and line.reconciled) for line in
+                 rec.move_id.line_ids])
 
     @api.model
     def _get_currency(self):
@@ -177,17 +175,15 @@ class AccountVoucher(models.Model):
     def _get_company(self):
         return self._context.get('company_id', self.env.user.company_id.id)
 
-    @api.multi
     @api.depends('name', 'number')
     def name_get(self):
         return [(r.id, (r.number or _('Voucher'))) for r in self]
 
-    @api.one
     @api.depends('journal_id', 'company_id')
     def _get_journal_currency(self):
-        self.currency_id = self.journal_id.currency_id.id or self.company_id.currency_id.id
+        for rec in self:
+            rec.currency_id = rec.journal_id.currency_id.id or rec.company_id.currency_id.id
 
-    @api.multi
     @api.depends('tax_correction', 'line_ids.price_subtotal')
     def _compute_total(self):
         for voucher in self:
@@ -216,22 +212,18 @@ class AccountVoucher(models.Model):
         self.partner_account_id = self.partner_id.property_account_receivable_id \
             if self.voucher_type == 'sale' else self.partner_id.property_account_receivable_id
 
-    @api.multi
     def proforma_voucher(self):
         self.action_move_line_create()
 
-    @api.multi
     def action_cancel_draft(self):
         self.write({'state': 'draft'})
 
-    @api.multi
     def cancel_voucher(self):
         for voucher in self:
             voucher.move_id.button_cancel()
             voucher.move_id.unlink()
         self.write({'state': 'cancel', 'move_id': False})
 
-    @api.multi
     def unlink(self):
         for voucher in self:
             cheque_id = voucher.cheque_id
@@ -242,7 +234,6 @@ class AccountVoucher(models.Model):
                 cheque_id.cancel_cheque(unlink=True)
         return res
 
-    @api.multi
     def first_move_line_get(self, move_id, company_currency, current_currency):
         debit = credit = 0.0
         if self.voucher_type == 'purchase':
@@ -271,7 +262,6 @@ class AccountVoucher(models.Model):
         }
         return move_line
 
-    @api.multi
     def account_move_get(self):
         if self.number:
             name = self.number
@@ -289,7 +279,6 @@ class AccountVoucher(models.Model):
         }
         return move
 
-    @api.multi
     def _convert_amount(self, amount):
         '''
         This function convert the amount given in company currency. It takes either the rate in the voucher (if the
@@ -304,7 +293,6 @@ class AccountVoucher(models.Model):
         for voucher in self:
             return voucher.currency_id.compute(amount, voucher.company_id.currency_id)
 
-    @api.multi
     def voucher_move_line_create(self, line_total, move_id, company_currency, current_currency):
         for line in self.line_ids:
             # create one move line per voucher line where amount is not 0.0
@@ -333,7 +321,6 @@ class AccountVoucher(models.Model):
             self.env['account.move.line'].with_context(apply_taxes=True).create(move_line)
         return line_total
 
-    @api.multi
     def action_move_line_create(self):
         '''
         Confirm the vouchers given in ids and create the journal entries for each of them

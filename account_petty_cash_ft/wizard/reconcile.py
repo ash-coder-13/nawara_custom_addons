@@ -9,6 +9,5 @@ class IssueVoucherWizard(models.TransientModel):
     fund = fields.Many2one('pettycash.fund', required=True)
     date = fields.Date(required=True, default=fields.Date.today())
 
-    @api.multi
     def reconcile_vouchers(self):
         return

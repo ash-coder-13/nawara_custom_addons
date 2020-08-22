@@ -129,7 +129,7 @@
     <record id="action_pettycash_voucher" model="ir.actions.act_window">
         <field name="name">PettyCash Voucher</field>
         <field name="res_model">account.voucher</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,kanban</field>
         <field name="domain">[('voucher_type','=','pettycash')]</field>
         <field name="context">{'default_voucher_type': 'pettycash', 'voucher_type': 'pettycash'}</field>

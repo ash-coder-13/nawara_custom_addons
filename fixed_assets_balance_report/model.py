@@ -40,7 +40,6 @@ class XlsxReportHeadOfficeAssesBAl(models.TransientModel):
 			self.cat_type = False
 			self.category = False
 
-	@api.multi
 	def print_report(self):
 		lisst = []
 		if self.filters == 'cat' and self.cat_type == 'all':
@@ -60,7 +59,6 @@ class XlsxReportHeadOfficeAssesBAl(models.TransientModel):
 			
 		self.xlsx_report(lisst)
 
-	@api.multi
 	def xlsx_report(self, input_records):
 		with xlsxwriter.Workbook(config['data_dir'] + "/fixed_assets_balance_report.xlsx") as workbook:
 			main_heading = workbook.add_format({

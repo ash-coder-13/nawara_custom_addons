@@ -27,7 +27,7 @@ class AccountVoucher(models.Model):
 
     @api.model
     def create(self, vals):
-        print"context",self._context
+
         if vals['voucher_type'] == 'pettycash':
             if not vals.get('account_id'):
                 pf = self.petty_cash_fund.browse(vals.get('petty_cash_fund'))
@@ -42,7 +42,6 @@ class AccountVoucher(models.Model):
         if not self.voucher_type == 'pettycash':
             super(AccountVoucher, self).onchange_partner_id()
 
-    @api.multi
     def first_move_line_get(self, move_id, company_currency, current_currency):
         res = super(AccountVoucher, self).first_move_line_get(move_id, company_currency, current_currency)
 #        credit = 0.0
@@ -57,7 +56,6 @@ class AccountVoucher(models.Model):
             })
         return res
 
-    @api.multi
     def voucher_move_line_create(self, line_total, move_id, company_currency, current_currency):
         if self.voucher_type == 'pettycash':
             line_total = line_total - self._convert_amount(self.tax_amount)
@@ -89,7 +87,6 @@ class AccountVoucher(models.Model):
             self.env['account.move.line'].with_context(apply_taxes=True).create(move_line)
         return line_total
 
-    @api.multi
     def print_voucher_ft(self):
         return self.env['report'].get_action(self, 'account_voucher_ft.report_voucher')
 

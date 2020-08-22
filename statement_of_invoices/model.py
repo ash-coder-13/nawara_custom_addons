@@ -20,7 +20,6 @@ class XlsxReportstatement(models.TransientModel):
     name = fields.Char()
     file = fields.Binary('Download Report', )
 
-    @api.multi
     def print_report(self):
         data = self.env['account.move'].search(
             [('partner_id', '=', self.partner.id), ('type', '=', 'out_invoice'), ('state', 'in', ['draft','posted']),
@@ -28,7 +27,6 @@ class XlsxReportstatement(models.TransientModel):
         data = sorted(data, key=lambda k: (k['date_invoice']))
         self.xlsx_report(data)
 
-    @api.multi
     def xlsx_report(self, input_records):
         with xlsxwriter.Workbook(config['data_dir'] + "/statement_of_invoices.xlsx") as workbook:
             main_heading = workbook.add_format({

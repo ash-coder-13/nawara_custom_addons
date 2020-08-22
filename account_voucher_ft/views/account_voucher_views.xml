@@ -395,7 +395,7 @@
     <record id="action_receipt_voucher" model="ir.actions.act_window">
         <field name="name">Receipt Vouchers</field>
         <field name="res_model">account.voucher</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,form,kanban</field>
         <field name="domain">[('voucher_type','=','sale')]</field>
         <field name="context">{'default_voucher_type': 'sale', 'voucher_type': 'sale','readonly_by_pass': ['amount']}</field>
@@ -417,7 +417,7 @@
     <record id="action_payment_voucher" model="ir.actions.act_window">
         <field name="name">Payment Voucher</field>
         <field name="res_model">account.voucher</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,form,kanban</field>
         <field name="domain">[('voucher_type','=','purchase')]</field>
         <field name="context">{'default_voucher_type': 'purchase', 'voucher_type': 'purchase','readonly_by_pass': ['amount']}</field>

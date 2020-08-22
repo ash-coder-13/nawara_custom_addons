@@ -32,7 +32,7 @@
     <record id="partner_statement_of_accounts_xlsx" model="ir.actions.act_window">
         <field name="name">Statement of Accounts</field>
         <field name="res_model">statement.accounts</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="statement_of_accounts_wizard"/>
         <field name="target">new</field>
@@ -53,7 +53,7 @@
     <record id="statement_of_accounts_action" model="ir.actions.act_window">
         <field name="name">Statement of Accounts</field>
         <field name="res_model">statement.accounts</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="statement_of_accounts_wizard"/>
         <field name="target">new</field>

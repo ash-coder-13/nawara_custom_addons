@@ -67,7 +67,6 @@ class ReopenFundWizard(models.TransientModel):
     effective_date = fields.Date(required=True)
     payable_move = fields.Many2one('account.move', string="Journal Entry")
 
-    @api.multi
     def reopen_fund(self):
 
         # Create the petty cash fund

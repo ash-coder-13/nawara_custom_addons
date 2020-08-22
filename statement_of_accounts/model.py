@@ -17,7 +17,6 @@ class XlsxReportstatementAccounts(models.TransientModel):
     file = fields.Binary('Download Report',)
 
 
-    @api.multi
     def print_report(self):
         data = self.env['account.move.line'].search([('move_id.date','>=',self.form),('move_id.date','<=',self.to),('partner_id.id','=',self.partner.id),'|',('account_id.user_type_id','=','Receivable'),('account_id.user_type_id','=','Payable')])
         entred = self.env['account.move.line'].search([('move_id.date','<',self.form),('partner_id.id','=',self.partner.id),'|',('account_id.user_type_id','=','Receivable'),('account_id.user_type_id','=','Payable')])
@@ -31,7 +30,6 @@ class XlsxReportstatementAccounts(models.TransientModel):
         data = sorted(data, key=lambda k: (k['date'], k['id']))
         self.xlsx_report(data, opening_bal)
 
-    @api.multi
     def xlsx_report(self,input_records,opening):
         with xlsxwriter.Workbook(config['data_dir']+"/statement_of_accounts.xlsx") as workbook:
             main_heading = workbook.add_format({

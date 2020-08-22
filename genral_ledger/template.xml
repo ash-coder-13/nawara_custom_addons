@@ -47,7 +47,7 @@
         <record id="genral_ledger_action" model="ir.actions.act_window">
             <field name="name">Genral Ledger</field>
             <field name="res_model">genral.ledger</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="genral_ledger_wizard"/>
             <field name="target">new</field>
@@ -80,7 +80,7 @@
         <record id="genral_ledger_action_seprate" model="ir.actions.act_window">
             <field name="name">General Ledger</field>
             <field name="res_model">genral.ledger</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="genral_ledger_wizard"/>
             <field name="target">new</field>

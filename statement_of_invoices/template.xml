@@ -43,7 +43,7 @@
         <record id="statement_of_invoices_action" model="ir.actions.act_window">
             <field name="name">Statement of Accounts (Nawara)</field>
             <field name="res_model">statement.invoices</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="statement_of_invoices_wizard"/>
             <field name="target">new</field>
@@ -53,7 +53,7 @@
         <record id="statement_of_invoices_action_menu_action" model="ir.actions.act_window">
             <field name="name">Statement of Accounts (Nawara)</field>
             <field name="res_model">statement.invoices</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="statement_of_invoices_wizard"/>
             <field name="target">new</field>

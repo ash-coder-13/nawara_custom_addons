@@ -26,7 +26,6 @@ class invoice_mass(models.TransientModel):
     template_id = fields.Many2one('mail.template', string="Usa template", default=_get_template_id, required=True,
                                   select=True)
 
-    @api.multi
     def send_button(self):
         invoice_ids = self.env.context.get('active_ids')
         invoices = self.env['account.move'].browse(invoice_ids)

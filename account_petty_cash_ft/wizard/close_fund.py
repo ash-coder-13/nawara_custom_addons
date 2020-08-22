@@ -41,7 +41,6 @@ class CloseFundWizard(models.TransientModel):
         'account.account', domain=[('type', '=', 'receivable')])
     effective_date = fields.Date(required=True)
 
-    @api.multi
     def close_fund(self):
 
         # Create the petty cash fund

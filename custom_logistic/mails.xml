@@ -585,9 +585,10 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall">1</field>
-            <field name="model" eval="'sale.order'" />
-            <field name="function" eval="'send_overdue_mail'" />
-            <field name="args" eval="()" />
+        <field name="model_id" ref="sale.model_sale_order"/>
+                                <field name="code">model.send_overdue_mail()</field>
+
+
             <field name="priority" eval="2" />
         </record>
     </data>

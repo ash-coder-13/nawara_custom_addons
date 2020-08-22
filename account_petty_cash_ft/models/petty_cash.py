@@ -113,7 +113,6 @@ class PettyCash(models.Model):
         })
         return fund
 
-    @api.multi
     def validate_and_open(self):
         self.validate_fund()
         desc = _("Petty Cash Allocation(%s)" % self.code)
@@ -125,7 +124,6 @@ class PettyCash(models.Model):
         })
         return True
 
-    @api.multi
     def get_payment_method(self):
         today=datetime.datetime.today().date()
         payment_method=False
@@ -144,7 +142,6 @@ class PettyCash(models.Model):
             payment_method=self.env.ref('account.account_payment_method_manual_out')
         return payment_method
         
-    @api.multi
     def create_pettycash_voucher(self, desc, allocation=False):
         voucher_o = self.env['account.voucher']
         
@@ -204,15 +201,12 @@ class PettyCash(models.Model):
         })
         return journal
 
-    @api.multi
     def request_reconcile(self):
         self.state = 'reconcile'
 
-    @api.multi
     def request_topup(self):
         self.state = 'topup'
 
-    @api.multi
     def reconcile_fund(self):
         moves = []
         for voucher in self.vouchers:
@@ -221,7 +215,6 @@ class PettyCash(models.Model):
         self.journal_entries = moves
         self.state = 'open'
 
-    @api.multi
     def topup_fund(self):
         moves = []
         desc = _("Petty Cash Topup(%s)" % self.code)
@@ -251,18 +244,15 @@ class PettyCash(models.Model):
         self.journal_entries = moves
         self.state = 'open'
 
-    @api.multi
     def reconcile_and_refill(self):
         self.reconcile_fund()
         self.topup_fund()
 
-    @api.multi
     def close_fund(self):
         if self.vouchers:
             self.reconcile_fund()
         self.state = 'closed'
 
-    @api.multi
     def reopen_fund(self):
         self.topup_fund()
         self.state = 'open'
@@ -277,7 +267,6 @@ class PettyCash(models.Model):
                 _("Only users in group %s may %s." % (name_desc, action_desc))
             )
 
-    @api.multi
     def change_fund_amount(self, new_amount):
 
         # Only the Finance manager should be allowed to change the

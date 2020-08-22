@@ -42,7 +42,7 @@
         <record id="container_advances_aging_wizard_action" model="ir.actions.act_window">
             <field name="name">Container Deposit Aging Report</field>
             <field name="res_model">container.aging</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="container_advances_aging_wizard"/>
             <field name="target">new</field>

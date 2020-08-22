@@ -8,7 +8,6 @@ class ResConfig(models.TransientModel):
     default_payable_account = fields.Many2one('account.account', domain=[('internal_type', '=', 'payable')],
                                               string='Default Petty Cash Payable Account')
 
-    @api.multi
     def set_payable_account(self):
         ir_values_obj = self.env['ir.values']
         if self.default_payable_account:

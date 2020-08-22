@@ -42,7 +42,6 @@ class AccountAccountTemplate(models.Model):
 class AccountChartTemplate(models.Model):
     _inherit = "account.chart.template"
     
-    @api.multi
     def generate_account(self, tax_template_ref, acc_template_ref, code_digits, company):
         account_tmpl_pool = self.env['account.account.template']
         account_pool = self.env['account.account']
@@ -57,7 +56,6 @@ class AccountChartTemplate(models.Model):
             account_obj.write({'parent_id': account_parent_id})
         return account_template_account_dict
     
-    @api.multi
     def update_generated_account(self, tax_template_ref=[], code_digits=1, company=False,importing_parent=False):
         """ This method for generating parent accounts from templates.
 

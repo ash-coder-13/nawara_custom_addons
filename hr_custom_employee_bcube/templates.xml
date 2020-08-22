@@ -1951,14 +1951,14 @@
         <record model="ir.actions.act_window" id="hr_exit_reentry_act">
             <field name="name">Exit Re-Entry</field>
             <field name="res_model">hr.exit.reentry</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="hr_ticket_act">
             <field name="name">Ticket</field>
             <field name="res_model">hr.ticket</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
@@ -1966,63 +1966,63 @@
         <record model="ir.actions.act_window" id="hr_insurance_act">
             <field name="name">Insurance</field>
             <field name="res_model">hr.insurance</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="document_com_act">
             <field name="name">Company Document</field>
             <field name="res_model">document.com</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="document_list_act">
             <field name="name">Document List</field>
             <field name="res_model">document.list</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="designation_info_act">
             <field name="name">Designation Info</field>
             <field name="res_model">designation.info</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="category_info_act">
             <field name="name">Category Info</field>
             <field name="res_model">category.info</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="department_info_act">
             <field name="name">Department Info</field>
             <field name="res_model">department.info</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="division_info_act">
             <field name="name">Division Info</field>
             <field name="res_model">division.info</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="res_sponsor_act">
             <field name="name">Sponsor</field>
             <field name="res_model">res.sponsor</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="res_company_branch_act">
             <field name="name">Branch</field>
             <field name="res_model">res.company</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="context">{'default_flip': True}</field>
             <field name="domain">[('flip','=','True')]</field>
@@ -2031,63 +2031,63 @@
         <record model="ir.actions.act_window" id="dependent_list_action">
             <field name="name">Dependent</field>
             <field name="res_model">hr.dependent</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- Employee Card -->
         <record model="ir.actions.act_window" id="card_list_action">
             <field name="name">Employee Cards</field>
             <field name="res_model">employee.card</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- Employee Amedment-->
         <record model="ir.actions.act_window" id="amedment_list_action">
             <field name="name">Employee Amedment</field>
             <field name="res_model">contract.amedment</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- Employee Iqama -->
         <record model="ir.actions.act_window" id="iqama_list_action">
             <field name="name">Employee Iqama / ID</field>
             <field name="res_model">employee.iqama</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- Employee Clearance-->
         <record model="ir.actions.act_window" id="it_department_list_action">
             <field name="name">Employee Clearance</field>
             <field name="res_model">employee.clearance</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- Employee GOSI-->
         <record model="ir.actions.act_window" id="grops_list_action">
             <field name="name">Employee GOSI</field>
             <field name="res_model">employee.grops</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- Employee Leaving-->
         <record model="ir.actions.act_window" id="leaving_list_action">
             <field name="name">Employee Leaving</field>
             <field name="res_model">eos.leaving</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
         <!-- EOS-->
         <record model="ir.actions.act_window" id="eos_list_action">
             <field name="name">EOS</field>
             <field name="res_model">employee.eos</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="users_company1">
             <field name="name">Company</field>
             <field name="res_model">res.company</field>
-            <field name="view_type">form</field>
+
             <field name="context">{'default_flip':False}</field>
             <field name="domain">[('flip','=',False)]</field>
             <field name="view_mode">tree,form</field>

@@ -34,7 +34,6 @@ class CreateFund(models.TransientModel):
                                       domain=[('internal_type', 'in', ['liquidity', 'payable'])])
     effective_date = fields.Date(required=True, default=fields.Date.today())
 
-    @api.multi
     def create_fund(self):
         if self.fund_amount <= 0.0:
             raise UserError('Fund Amount should be non-zero.')

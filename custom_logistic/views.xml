@@ -229,26 +229,26 @@
         </field>
     </record>
 
-    <record id="view_filter_export" model="ir.ui.view">
-        <field name="name">view_filter_export</field>
-        <field name="model">export.logic</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="customer" string="Customer"
-                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>
-                <field name="by_customer" domain="[('customer.id','=',customer)]"/>
-                <field name="customer_ref" string="Customer Reference"/>
-                <field name="bill_no" string="BL Number"/>
-                <field name="bayan_no" string="Bayan No"/>
-                <field name="pre_bayan" string="Pre Bayan Date"/>
-                <field name="site" string="Site"/>
-                <field name="status" string="Status"/>
-                <field name="house_bl" string="House BL"/>
-                <field name="container_num" string="Container Num"/>
-                <filter string="Group By Date" context="{'group_by':'date:day'}"/>
-            </search>
-        </field>
-    </record>
+<!--    <record id="view_filter_export" model="ir.ui.view">-->
+<!--        <field name="name">view_filter_export</field>-->
+<!--        <field name="model">export.logic</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search>-->
+<!--                <field name="customer" string="Customer"-->
+<!--                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>-->
+<!--                <field name="by_customer" domain="[('customer.id','=',customer)]"/>-->
+<!--                <field name="customer_ref" string="Customer Reference"/>-->
+<!--                <field name="bill_no" string="BL Number"/>-->
+<!--                <field name="bayan_no" string="Bayan No"/>-->
+<!--                <field name="pre_bayan" string="Pre Bayan Date"/>-->
+<!--                <field name="site" string="Site"/>-->
+<!--                <field name="status" string="Status"/>-->
+<!--                <field name="house_bl" string="House BL"/>-->
+<!--                <field name="container_num" string="Container Num"/>-->
+<!--                <filter string="Group By Date" context="{'group_by':'date:day'}"/>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="view_filter_transportation" model="ir.ui.view">
         <field name="name">view_filter_transportation</field>
@@ -449,7 +449,6 @@
     <record id="sale.action_orders" model="ir.actions.act_window">
         <field name="name">Transport Order</field>
         <field name="res_model">sale.order</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('in_terminal', '=', False)]</field>
     </record>
@@ -457,7 +456,6 @@
     <record id="sale.action_orders_terminal" model="ir.actions.act_window">
         <field name="name">Terminal Operations</field>
         <field name="res_model">sale.order</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('in_terminal', '=', True),('in_storage', '=', False)]</field>
     </record>
@@ -465,14 +463,13 @@
     <record id="sale.action_orders_storage" model="ir.actions.act_window">
         <field name="name">In Storage</field>
         <field name="res_model">sale.order</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('in_storage', '=', True)]</field>
         <!--<field name="context" eval="{'default_test_group':1}"/>-->
     </record>
 
 
-    <menuitem id="clear_import" name="Transportation" parent="sales_team.menu_base_partner" sequence="11"/>
+    <menuitem id="clear_import" name="Transportation" parent="sale.sale_menu_root" sequence="11"/>
 
     <menuitem id="sale.menu_sale_order" name="Transport Order" action="sale.action_orders" parent="clear_import"
               sequence="1"/>
@@ -483,7 +480,7 @@
     <menuitem id="sale.menu_sale_order_storage" name="In Storage" action="sale.action_orders_storage"
               parent="clear_import" sequence="3"/>
 
-    <menuitem id="menu_import" name="Custom Clearance" parent="sales_team.menu_base_partner" sequence="10"/>
+    <menuitem id="menu_import" name="Custom Clearance" parent="sale.sale_menu_root" sequence="10"/>
 
     <menuitem id="menu_import_logistic" name="Imports" parent="menu_import" action="action_import_logic" sequence=""/>
 
@@ -619,7 +616,6 @@
     <record model="ir.actions.act_window" id="purchase_broker_configuration">
         <field name="name">Broker</field>
         <field name="res_model">res.partner</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('brooker', '=',True)]</field>
         <field name="context" eval="{'default_brooker':1}"/>
@@ -628,7 +624,7 @@
     <record model="ir.actions.act_window" id="account_journal_config_act">
         <field name="name">Accounts and Journals Configuration</field>
         <field name="res_model">account_journal.configuration</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -1120,7 +1116,7 @@
         <field name="name">Change Date &amp; Status</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">change.date_status</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="context">{'default_m_name': 'import.logic'}</field>
@@ -1130,7 +1126,7 @@
         <field name="name">Change Date &amp; Status</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">change.date_status</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="context">{'default_m_name': 'export.logic'}</field>
@@ -1213,7 +1209,7 @@
     <record model="ir.actions.act_window" id="action_fleet_vehicle_accident">
         <field name="name">Accident Detail</field>
         <field name="res_model">fleet.vehicle.accident</field>
-        <field name="view_type">form</field>
+
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -1358,9 +1354,9 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall">1</field>
-            <field name="model" eval="'res.partner'"/>
-            <field name="function" eval="'send_ban_mail'"/>
-            <field name="args" eval="()"/>
+                    <field name="model_id" ref="base.model_res_partner"/>
+                                <field name="code">model.send_ban_mail()</field>
+
             <field name="priority" eval="5"/>
         </record>
     </data>

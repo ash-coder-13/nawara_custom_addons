@@ -35,7 +35,6 @@ class XlsxReportDsr(models.TransientModel):
     file = fields.Binary('Download Report',)
    
 
-    @api.multi
     def print_report(self):
 
         cust = []
@@ -55,7 +54,6 @@ class XlsxReportDsr(models.TransientModel):
         self.xlsx_report(cust)
 
 
-    @api.multi
     def xlsx_report(self,input_records):
         with xlsxwriter.Workbook(config['data_dir']+"/dsr_report.xlsx") as workbook:
             main_heading = workbook.add_format({

@@ -39,31 +39,29 @@ class Hr_Employee(models.Model):
                 if exp_date < date.today():
                     raise Warning('Port Pass Is Already Expired.')
 
-    @api.multi
     def _document_count(self):
         for each in self:
             document_ids = self.env['employee.iqama'].sudo().search([('employee', '=', each.id)])
             each.document_count = len(document_ids)
 
-    @api.multi
     def document_view(self):
-        self.ensure_one()
-        domain = [
-            ('employee', '=', self.id)]
-        return {
-            'name': _('Documents'),
-            'domain': domain,
-            'res_model': 'employee.iqama',
-            'type': 'ir.actions.act_window',
-            'view_id': False,
-            'view_mode': 'tree,form',
-            'view_type': 'form',
-            'help': _('''<p class="oe_view_nocontent_create">
-                               Click to Create for New Documents
-                            </p>'''),
-            'limit': 80,
-            'context': "{'default_employee': '%s'}" % self.id
-        }
+        for rec in self:
+            domain = [
+                ('employee', '=', rec.id)]
+            return {
+                'name': _('Documents'),
+                'domain': domain,
+                'res_model': 'employee.iqama',
+                'type': 'ir.actions.act_window',
+                'view_id': False,
+                'view_mode': 'tree,form',
+                'view_type': 'form',
+                'help': _('''<p class="oe_view_nocontent_create">
+                                   Click to Create for New Documents
+                                </p>'''),
+                'limit': 80,
+                'context': "{'default_employee': '%s'}" % rec.id
+            }
 
     document_count = fields.Integer(compute='_document_count', string='# Documents')
 
@@ -369,7 +367,6 @@ class Employee_Amedment(models.Model):
             self.r_manager = self.employee.performence_manager.id
             self.to_department = self.to_office = self.to_grade = self.to_job = self.c_location = self.mol_location = ''
 
-    @api.multi
     def validate_changes(self):
         self.employee.department_id = self.to_department.id
         self.employee.office = self.to_office.id
@@ -559,7 +556,6 @@ class EOSLeaving(models.Model):
             self.office = self.employee.office.name
             self.contact_person = self.employee.gosi_no.gosi_no
 
-    @api.multi
     def create_emp_clearence(self):
         clearence_recs = self.env['employee.clearance'].search([])
         if self.employee_clearence_ref.id == 0:
@@ -1255,15 +1251,12 @@ class HRExitReentry(models.Model):
         ('wait', 'Waiting For Payment'),
         ('done', 'Done'), ], default='new')
 
-    @api.multi
     def in_wait(self):
         self.stage = "wait"
 
-    @api.multi
     def in_done(self):
         self.stage = "done"
 
-    @api.multi
     def cancel(self):
         self.stage = "new"
 
@@ -1316,7 +1309,6 @@ class HRDep(models.Model):
 
         return new_record
 
-    @api.multi
     def write(self, vals):
         super(HRDep, self).write(vals)
         if self.dep_link:
@@ -1326,7 +1318,6 @@ class HRDep(models.Model):
 
         return True
 
-    @api.multi
     def unlink(self):
         self.dep_link.unlink()
         super(HRDep, self).unlink()

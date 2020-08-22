@@ -43,7 +43,7 @@
         <record id="parent_account_balance_wizard_action" model="ir.actions.act_window">
             <field name="name">Parent Account Wise Balance</field>
             <field name="res_model">parentaccount.balance</field>
-            <field name="view_type">form</field>
+
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="parent_account_balance_wizard"/>
             <field name="target">new</field>
