@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="pdc_maturity_checker">
+            <field name="name">PDC Maturity check</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" eval="model_cheque_category_cheques"/>
+            <field name="code" eval="self.maturity_check()"/>
+        </record>
+    </data>
+</odoo>

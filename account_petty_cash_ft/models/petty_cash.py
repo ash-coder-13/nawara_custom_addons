@@ -1,7 +1,7 @@
 import datetime
 from odoo import api, exceptions, fields, models, _
 from odoo.addons import decimal_precision as dp
-from odoo.tools import float_compare,amount_to_text_en
+from odoo.tools import float_compare
 from odoo.exceptions import ValidationError
 PETTYCASH_STATE = [
     ('draft', 'Draft'),
@@ -33,7 +33,7 @@ class PettyCash(models.Model):
     
     def set_amt_in_words(self):
         amount, currency = self.amount, self.currency_id.name
-        amount_in_words = amount_to_text_en.amount_to_text(amount, lang='en', currency=currency)
+        amount_in_words = self.currency_id.amount_to_text(amount, lang='en', currency=currency)
         if currency == 'AED':
             amount_in_words = str(amount_in_words).replace('AED', 'Dhirham')
             amount_in_words = str(amount_in_words).replace('Cents', 'fils')

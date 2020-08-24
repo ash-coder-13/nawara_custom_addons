@@ -52,12 +52,12 @@ class OpenAccountChart(models.TransientModel):
         result['context'] = str(used_context)
         return result
 
-class WizardMultiChartsAccounts(models.TransientModel):
-    _inherit = 'wizard.multi.charts.accounts'
-
-    def execute(self):
-        res = super(WizardMultiChartsAccounts, self).execute()
-        self.chart_template_id.update_generated_account({},self.code_digits,self.company_id)
-        return res
+# class WizardMultiChartsAccounts(models.TransientModel):
+#     _inherit = 'wizard.multi.charts.accounts'
+#
+#     def execute(self):
+#         res = super(WizardMultiChartsAccounts, self).execute()
+#         self.chart_template_id.update_generated_account({},self.code_digits,self.company_id)
+#         return res
     
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

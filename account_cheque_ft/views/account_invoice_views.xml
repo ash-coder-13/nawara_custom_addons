@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_invoice_supplier_form_inherit_payment" model="ir.ui.view">
+            <field name="name">view.account.invoice.supplier.form.inherit.payment</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="pdc_amount" invisible="1"/>
+                    <field name="reg_payment" invisible="1"/>
+                </field>
+<!--                                        <button name="action_invoice_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('invoice_payment_state', '!=', 'not_paid'), ('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}" string="Register Payment" groups="account.group_account_invoice"/>-->
+
+
+            </field>
+        </record>
+<!--        <record id="view_account_invoice_form_inherit_payment" model="ir.ui.view">-->
+<!--            <field name="name">view.account.invoice.form.inherit.payment</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="partner_id" position="after">-->
+<!--                    <field name="pdc_amount" invisible="1"/>-->
+<!--                    <field name="reg_payment" invisible="1"/>-->
+<!--                </field>-->
+
+<!--            </field>-->
+<!--        </record>-->
+        
+<!--        <record id="view_account_payment_invoice_form_inherit_payments" model="ir.ui.view">-->
+<!--                <field name="name">view.account.payment.invoice.form.inherit.payments</field>-->
+<!--                <field name="model">account.payment</field>-->
+<!--                <field name="inherit_id" ref="payment.view_account_payment_invoice_form_inherit_payment"/>-->
+<!--                <field name="arch" type="xml">-->
+<!--                    <xpath expr="//field[@name='payment_token_id']" position="attributes">-->
+<!--                        <attribute name="attrs">{}</attribute>-->
+<!--                        <attribute name="invisible">1</attribute>-->
+<!--                    </xpath>-->
+<!--                </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

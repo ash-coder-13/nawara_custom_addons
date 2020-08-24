@@ -1,1 +1,1 @@
-import account_report_partner_ledger
+from . import account_report_partner_ledger

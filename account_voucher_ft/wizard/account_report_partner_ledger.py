@@ -35,11 +35,11 @@ class AccountPartnerLedger(models.TransientModel):
                              'partner_id': self.partner_id.id,
                              'partner_name': self.partner_id.name,
                              })
-        return self.env['report'].get_action(self, 'account.report_partnerledger', data=data)
+        return self.env['report'].get_action(self, 'accounting_pdf_reports.report_partnerledger', data=data)
 
 
 class ReportPartnerLedger(models.AbstractModel):
-    _inherit = 'report.account.report_partnerledger'
+    _inherit = 'report.accounting_pdf_reports.report_partnerledger'
 
     @api.model
     def render_html(self, docids, data=None):

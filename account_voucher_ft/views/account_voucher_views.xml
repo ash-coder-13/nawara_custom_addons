@@ -98,75 +98,75 @@
 
     <!---->
 
-    <record id="view_voucher_search" model="ir.ui.view">
-        <field name="name">account.voucher.search</field>
-        <field name="model">account.voucher</field>
-        <field name="priority">1</field>
-        <field name="arch" type="xml">
-            <search string="Search Vouchers">
-                <field name="number" string="Voucher"/>
-                <field name="date"/>
-                <filter string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>
-                <filter string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>
-                <separator/>
-                <filter string="To Review" domain="[('state','=','posted')]" help="To Review"/>
-                <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
-                <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" /> <!-- Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! -->
-                <group expand="0" string="Group By">
-                    <filter string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
-                    <filter string="Journal" domain="[]" context="{'group_by':'journal_id'}"/>
-                    <filter string="Date" domain="[]" context="{'group_by':'date','visible':True}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<!--    <record id="view_voucher_search" model="ir.ui.view">-->
+<!--        <field name="name">account.voucher.search</field>-->
+<!--        <field name="model">account.voucher</field>-->
+<!--        <field name="priority">1</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Search Vouchers">-->
+<!--                <field name="number" string="Voucher"/>-->
+<!--                <field name="date"/>-->
+<!--                <filter string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>-->
+<!--                <filter string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>-->
+<!--                <separator/>-->
+<!--                <filter string="To Review" domain="[('state','=','posted')]" help="To Review"/>-->
+<!--                <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>-->
+<!--                <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" /> &lt;!&ndash; Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! &ndash;&gt;-->
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>-->
+<!--                    <filter string="Journal" domain="[]" context="{'group_by':'journal_id'}"/>-->
+<!--                    <filter string="Date" domain="[]" context="{'group_by':'date','visible':True}"/>-->
+<!--                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!--Search View Receipt-->
 
-    <record id="view_voucher_search_receipt" model="ir.ui.view">
-        <field name="name">account.voucher.receipt.search</field>
-        <field name="model">account.voucher</field>
-        <field name="arch" type="xml">
-            <search string="Search Vouchers">
-                <field name="number" string="Voucher"/>
-                <field name="date"/>
-                <filter string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>
-                <filter string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>
-                <field name="partner_id" string="Customer" filter_domain="[('partner_id','child_of',self)]"/>
-                <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','=','sale')]"/> <!-- Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! -->
-                <group expand="0" string="Group By">
-                    <filter string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
-                    <filter string="Journal" domain="[]" context="{'group_by':'journal_id'}"/>
-                    <filter string="Account Date" domain="[]" context="{'group_by':'account_date','visible':True}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<!--    <record id="view_voucher_search_receipt" model="ir.ui.view">-->
+<!--        <field name="name">account.voucher.receipt.search</field>-->
+<!--        <field name="model">account.voucher</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Search Vouchers">-->
+<!--                <field name="number" string="Voucher"/>-->
+<!--                <field name="date"/>-->
+<!--                <filter string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>-->
+<!--                <filter string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>-->
+<!--                <field name="partner_id" string="Customer" filter_domain="[('partner_id','child_of',self)]"/>-->
+<!--                <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','=','sale')]"/> &lt;!&ndash; Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! &ndash;&gt;-->
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>-->
+<!--                    <filter string="Journal" domain="[]" context="{'group_by':'journal_id'}"/>-->
+<!--                    <filter string="Account Date" domain="[]" context="{'group_by':'account_date','visible':True}"/>-->
+<!--                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!--Search View Payment-->
 
-    <record id="view_voucher_search_payment" model="ir.ui.view">
-        <field name="name">account.voucher.payment.search</field>
-        <field name="model">account.voucher</field>
-        <field name="arch" type="xml">
-            <search string="Search Vouchers">
-                <field name="number" string="Voucher"/>
-                <field name="date"/>
-                <filter string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>
-                <filter string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>
-                <field name="partner_id" string="Vendor" filter_domain="[('partner_id','child_of',self)]"/>
-                <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','=','purchase')]"/> <!-- Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! -->
-                <group expand="0" string="Group By">
-                    <filter string="Vendor" domain="[]" context="{'group_by':'partner_id'}"/>
-                    <filter string="Journal" domain="[]" context="{'group_by':'journal_id'}"/>
-                    <filter string="Bill Date" domain="[]" context="{'group_by':'date','visible':True}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<!--    <record id="view_voucher_search_payment" model="ir.ui.view">-->
+<!--        <field name="name">account.voucher.payment.search</field>-->
+<!--        <field name="model">account.voucher</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Search Vouchers">-->
+<!--                <field name="number" string="Voucher"/>-->
+<!--                <field name="date"/>-->
+<!--                <filter string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>-->
+<!--                <filter string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>-->
+<!--                <field name="partner_id" string="Vendor" filter_domain="[('partner_id','child_of',self)]"/>-->
+<!--                <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','=','purchase')]"/> &lt;!&ndash; Keep widget=selection on this field to pass numeric `self` value, which is not the case for regular m2o widgets! &ndash;&gt;-->
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="Vendor" domain="[]" context="{'group_by':'partner_id'}"/>-->
+<!--                    <filter string="Journal" domain="[]" context="{'group_by':'journal_id'}"/>-->
+<!--                    <filter string="Bill Date" domain="[]" context="{'group_by':'date','visible':True}"/>-->
+<!--                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!--Form View Receipt-->
 
@@ -332,8 +332,7 @@
                             string="Create Cheque" class="oe_highlight oe_right"
                             context="{'default_payment_id': active_id,
                                 'default_payee_name': partner_id,
-                                'default_issue_date': payment_date,
-                                'default_cheque_date': (mature_date!=False and mature_date) or payment_date,
+
                                 'default_amount': amount}"
                             attrs="{'invisible': ['!',
                             '&amp;',
@@ -400,7 +399,6 @@
         <field name="domain">[('voucher_type','=','sale')]</field>
         <field name="context">{'default_voucher_type': 'sale', 'voucher_type': 'sale','readonly_by_pass': ['amount']}</field>
         <field name="view_id" ref="view_voucher_tree_receipt"/>
-        <field name="search_view_id" ref="view_voucher_search_receipt"/>
         <field name="target">current</field>
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">
@@ -422,7 +420,6 @@
         <field name="domain">[('voucher_type','=','purchase')]</field>
         <field name="context">{'default_voucher_type': 'purchase', 'voucher_type': 'purchase','readonly_by_pass': ['amount']}</field>
         <field name="view_id" ref="view_voucher_tree_payment"/>
-        <field name="search_view_id" ref="view_voucher_search_payment"/>
         <field name="target">current</field>
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">

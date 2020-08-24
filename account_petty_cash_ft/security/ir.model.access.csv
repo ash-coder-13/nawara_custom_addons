@@ -2,8 +2,8 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_petty_cash_manager,pettycash.fund access,account_petty_cash_ft.model_pettycash_fund,account.group_account_manager,1,1,1,1
 access_account_petty_cash_accountant,pettycash.fund access,account_petty_cash_ft.model_pettycash_fund,account.group_account_user,1,1,0,0
 access_account_petty_cash_owner,pettycash.fund access,account_petty_cash_ft.model_pettycash_fund,,1,1,1,1
-access_account_voucher_owner,account.voucher petty cash custodian,account_voucher_ft.model_account_voucher,account.group_pettycash_custodian,1,1,1,1
-access_account_voucher_line_owner,account.voucher.line petty cash custodian,account_voucher_ft.model_account_voucher_line,account.group_pettycash_custodian,1,1,1,1
-access_account_journal_owner,account.journal petty cash custodian,account.model_account_journal,account.group_pettycash_custodian,1,0,0,0
-access_account_move_line_owner,account.move.line petty cash custodian,account.model_account_move_line,account.group_pettycash_custodian,1,0,0,0
-access_account_move_owner,account.move petty cash custodian,account.model_account_move,account.group_pettycash_custodian,1,0,0,0
+access_account_voucher_owner,account.voucher petty cash custodian,account_voucher_ft.model_account_voucher,account_petty_cash_ft.group_pettycash_custodian,1,1,1,1
+access_account_voucher_line_owner,account.voucher.line petty cash custodian,account_voucher_ft.model_account_voucher_line,account_petty_cash_ft.group_pettycash_custodian,1,1,1,1
+access_account_journal_owner,account.journal petty cash custodian,account.model_account_journal,account_petty_cash_ft.group_pettycash_custodian,1,0,0,0
+access_account_move_line_owner,account.move.line petty cash custodian,account.model_account_move_line,account_petty_cash_ft.group_pettycash_custodian,1,0,0,0
+access_account_move_owner,account.move petty cash custodian,account.model_account_move,account_petty_cash_ft.group_pettycash_custodian,1,0,0,0

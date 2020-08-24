@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <template id="report.external_layout_footer_voucher_x" name="Report Layout Footer for Voucher">
+        <template id="external_layout_footer_voucher" name="Report Layout Footer for Voucher">
             <div class="footer">
                 <div class="text-center mb32">
                     <div class="row mb32 table table-bordered"><b>
@@ -28,7 +28,7 @@
             </div>
         </template>
 
-        <template id="report.external_layout_header_voucher_x" name="Report Layout Header for Voucher" >
+        <template id="external_layout_header_voucher" name="Report Layout Header for Voucher" >
              <div class="header" style="height:200px">
             <!-- company name -->
             <div class="company_name" style="width:75%;height:auto;float:right;">
@@ -51,12 +51,12 @@
         </template>
         <template id="report.external_layout_voucher" inherit_id="report.external_layout"
                   primary="True" name="Report Layout for Voucher">
-            <t t-call="report.external_layout_header" position="replace">
-                <t t-call="report.external_layout_header_voucher_x" />
-            </t>
-            <t t-call="report.external_layout_footer" position="replace">
-                <t t-call="report.external_layout_footer_voucher_x" />
-            </t>
+<!--            <t t-call="report.external_layout_header" position="replace">-->
+<!--                <t t-call="report.external_layout_header_voucher_x" />-->
+<!--            </t>-->
+<!--            <t t-call="report.external_layout_footer" position="replace">-->
+<!--                <t t-call="report.external_layout_footer_voucher_x" />-->
+<!--            </t>-->
         </template>
 
         <template id="report_voucher_layout">

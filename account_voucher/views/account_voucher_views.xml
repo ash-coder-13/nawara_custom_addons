@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record id="view_voucher_tree" model="ir.ui.view">
+        <field name="name">account.voucher.tree</field>
+        <field name="model">account.voucher</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                <field name="date"/>
+                <field name="number"/>
+                <field name="partner_id" string="Customer"/>
+                <field name="voucher_type" invisible="context.get('visible', True)"/>
+                <field name="amount" sum="Total Amount"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+</odoo>
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <record model="ir.ui.view" id="view_voucher_line_tree">
+        <field name="name">account.voucher.line.tree</field>
+        <field name="model">account.voucher.line</field>
+        <field name="arch" type="xml">
+            <tree string="Voucher Lines" editable="bottom">
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="account_analytic_id" domain="[('company_id', '=', company_id)]"
+                       groups="analytic.group_analytic_accounting"/>
+                <field name="quantity"/>
+                <field name="price_unit"/>
+                <field name="tax_ids" widget="many2many_tags"/>
+                <field name="price_subtotal"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="account_cash_statement_graph" model="ir.ui.view">
+        <field name="name">account.voucher.graph</field>
+        <field name="model">account.voucher</field>
+        <field name="arch" type="xml">
+            <graph string="Voucher Statistics" type="bar">
+                <field name="date"/>
+                <field name="amount" operator="+"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

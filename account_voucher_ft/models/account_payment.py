@@ -4,7 +4,7 @@
 import math
 
 from odoo import models, fields, api, _
-from odoo.tools import amount_to_text_en, float_round
+from odoo.tools import  float_round
 
 
 class AccountPayment(models.Model):
@@ -12,7 +12,7 @@ class AccountPayment(models.Model):
     
     def set_amt_in_words(self):
         amount, currency = self.amount, self.currency_id.name
-        amount_in_words = amount_to_text_en.amount_to_text(amount, lang='en', currency=currency)
+        amount_in_words = self.currency_id.amount_to_text(amount, lang='en', currency=currency)
         if currency == 'AED':
             amount_in_words = str(amount_in_words).replace('AED', 'Dhirham')
             amount_in_words = str(amount_in_words).replace('Cents', 'fils')

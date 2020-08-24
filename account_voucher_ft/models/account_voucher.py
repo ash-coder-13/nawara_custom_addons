@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 from lxml import etree
-from odoo.tools import amount_to_text_en
 from odoo import fields, models, api, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
@@ -27,7 +26,7 @@ class AccountVoucher(models.Model):
 
     def set_amt_in_worlds(self):
         amount, currency = self.amount, self.currency_id.name
-        amount_in_words = amount_to_text_en.amount_to_text(amount, lang='en', currency=currency)
+        amount_in_words = self.currency_id.amount_to_text_en.amount_to_text(amount, lang='en', currency=currency)
         if currency == 'AED':
             amount_in_words = str(amount_in_words).replace('AED', 'Dirhams')
             amount_in_words = str(amount_in_words).replace('Cents', 'Fils')
@@ -108,7 +107,7 @@ class AccountVoucher(models.Model):
     @api.depends('amount')
     def set_amt_in_words(self):
         amount, currency = self.amount, self.currency_id.name
-        amount_in_words = amount_to_text_en.amount_to_text(amount, lang='en', currency=currency)
+        amount_in_words = self.currency_id.amount_to_text_en.amount_to_text(amount, lang='en', currency=currency)
         if currency == 'AED':
             amount_in_words = str(amount_in_words).replace('AED', 'Dirhams')
             amount_in_words = str(amount_in_words).replace('Cents', 'Fils')

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_partnerledger_inherit" inherit_id="account.report_partnerledger">
+    <template id="report_partnerledger_inherit" inherit_id="accounting_pdf_reports.report_partnerledger">
         <xpath expr="//div//h2" position="after">
             <div>
                 <center t-if="data['form']['partner_account_id']">

@@ -12,7 +12,7 @@
                     <separator/>
                     <group expand="0" string="Group By...">
                         <filter name="group_custodian" string="Custodian" domain="[]" context="{'group_by':'custodian'}"/>
-                        <filter name="group_amount" string="Fund Amount" domain="[]" context="{'group_by':'amount'}"/>
+<!--                        <filter name="group_amount" string="Fund Amount" domain="[]" context="{'group_by':'amount'}"/>-->
                     </group>
                 </search>
             </field>
@@ -25,7 +25,7 @@
                 <tree string="Petty Cash Funds">
                     <field name="name"/>
                     <field name="custodian"/>
-                    <field name="amount"/>
+<!--                    <field name="amount"/>-->
                     <field name="balance"/>
                     <field name="state"/>
                     <field name="company" groups="base.group_multi_company"/>
@@ -62,7 +62,7 @@
                         <group>
                             <field name="custodian"/>
                             <field name="name"/>
-	                        <field name="amount" widget="monetary"/>
+<!--	                        <field name="amount" widget="monetary"/>-->
                         </group>
                         <group>
                             <field name="effective_date"/>
@@ -90,7 +90,7 @@
                                     <field name="date"/>
                                     <field name="partner_id"/>
                                     <field name="name"/>
-                                    <field name="amount"/>
+<!--                                    <field name="amount"/>-->
                                     <field name="state"/>
                                     <button help="Print Voucher" type="object" name="print_voucher_ft"
                                     class="oe_highlight" icon="fa-print"/>
@@ -108,7 +108,7 @@
                                         <field name="date"/>
                                         <field name="partner_id"/>
                                         <field name="name"/>
-                                        <field name="amount"/>
+<!--                                        <field name="amount"/>-->
                                         <field name="state"/>
                                     </tree>
                                 </field>
@@ -124,7 +124,7 @@
                                         <field name="ref"/>
                                         <field name="partner_id"/>
                                         <field name="date"/>
-                                        <field name="amount"/>
+<!--                                        <field name="amount"/>-->
                                     </tree>
                                 </field>
                             </group>
@@ -172,11 +172,11 @@
         <menuitem id="menu_pettycash_root"
                   parent="account.menu_finance"
                   name="Petty Cash"
-                  groups="account.group_pettycash_custodian"
+                  groups="group_pettycash_custodian"
                   sequence="3" />
 
         <record id="menu_pettycash_root" model="ir.ui.menu">
-            <field name="menu_icon_class">fa fa-money</field>
+<!--            <field name="menu_icon_class">fa fa-money</field>-->
         </record>
 
         <menuitem id="menu_custodian_petty_cash_fund"

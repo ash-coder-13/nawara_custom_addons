@@ -45,13 +45,14 @@ class AccountMove(models.Model):
                     move.name =  new_name
         return self.write({'state': 'posted'})
 
+    inv_name = fields.Char('Invoice No', states=READONLY_STATES)
+    # move_id = fields.Many2one('account.move', string='Journal Entry', readonly=True, index=True, ondelete='restrict',
+    #                           copy=False, help="Link to the automatically generated Journal Items.")
+    opening_entry = fields.Boolean('Opening Entry', default=False, states=READONLY_STATES)
 
+#
+#
+# class AccountInvoice(models.Model):
+#     _inherit = 'account.move'
+#     _description = "Account Invoice"
 
-class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
-    _description = "Account Invoice"
-
-    inv_name = fields.Char('Invoice No', states=READONLY_STATES )
-    move_id = fields.Many2one('account.move', string='Journal Entry', readonly=True, index=True, ondelete='restrict',
-                              copy=False, help="Link to the automatically generated Journal Items.")
-    opening_entry = fields.Boolean('Opening Entry', default=False, states=READONLY_STATES )

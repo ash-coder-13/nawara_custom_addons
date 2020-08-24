@@ -93,7 +93,7 @@ class AccountVoucher(models.Model):
     @api.model
     def default_get(self,fields):
         res=super(AccountVoucher,self).default_get(fields)
-        if self._context.has_key('active_id') and self._context.has_key('from_petty_cash'):
+        if self._context.get('active_id') and self._context.get('from_petty_cash'):
             petty_cash_fund=self.env['pettycash.fund'].browse(self._context.get('active_id'))
             payment_method_id=petty_cash_fund.get_payment_method()
             res.update({'payment_method_id':payment_method_id.id})
