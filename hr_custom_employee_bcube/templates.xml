@@ -8,9 +8,8 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'employee.iqama'"/>
-            <field name="function" eval="'mail_reminder'"/>
-            <field name="args" eval="'()'"/>
+            <field name="model_id" ref="model_employee_iqama"/>
+            <field name="code" >model.mail_reminder()</field>
         </record>
 
         <!--        Port Pass Expiry Email Reminder-->
@@ -20,9 +19,8 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'hr.employee'"/>
-            <field name="function" eval="'port_mail_reminder'"/>
-            <field name="args" eval="'()'"/>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="code">model.port_mail_reminder()</field>
         </record>
 
         <!-- Employees -->

@@ -19,5 +19,5 @@
 #
 # /#############################################################################
 
-import inherited_model
-import import_logic
+from . import inherited_model
+from . import import_logic

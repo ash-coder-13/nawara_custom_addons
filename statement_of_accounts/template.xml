@@ -40,14 +40,14 @@
     </record>
 
 
-    <record model="ir.values" id="partner_wise_filter_id">
-        <field name="model_id" ref="" />
-        <field name="name">Print From Wizard</field>
-        <field name="key2">client_print_multi</field>
-        <field name="value" eval ="'ir.actions.act_window,'+str(ref('partner_statement_of_accounts_xlsx'))"/>
-        <field name="key">action</field>
-        <field name="model">res.partner</field>
-    </record>
+<!--    <record model="ir.values" id="partner_wise_filter_id">-->
+<!--        <field name="model_id" ref="" />-->
+<!--        <field name="name">Print From Wizard</field>-->
+<!--        <field name="key2">client_print_multi</field>-->
+<!--        <field name="value" eval ="'ir.actions.act_window,'+str(ref('partner_statement_of_accounts_xlsx'))"/>-->
+<!--        <field name="key">action</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--    </record>-->
 
 
     <record id="statement_of_accounts_action" model="ir.actions.act_window">
@@ -61,6 +61,6 @@
     
 
     <menuitem id="statement_of_accounts_action_menu_item" name="Statement of Accounts Xlsx"
-              action="statement_of_accounts_action" parent="account.account_reports_business_intelligence_menu"
+              action="statement_of_accounts_action" parent="accounting_pdf_reports.account_reports_business_intelligence_menu"
               sequence="22"/>
 </odoo>

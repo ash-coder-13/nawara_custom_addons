@@ -34,12 +34,11 @@
 		<field name="name">Statement Of Chart of A/C </field>
 		<field name="type">ir.actions.act_window</field>
 		<field name="res_model">genral.ledger</field>
-		<field name="view_type">form</field>
 		<field name="view_mode">form</field>
 		<field name="view_id" ref="form_genral_ledger_view"/>
 		<field name="target">new</field>
 	</record>
 	
-	<menuitem id="action_genral_ledger_menu" name="Statement OF Chart-Account" action="action_genral_ledger" parent="account_reports.account_reports_legal_statements_menu" />
+	<menuitem id="action_genral_ledger_menu" name="Statement OF Chart-Account" action="action_genral_ledger" parent="account.account_reports_legal_statements_menu" />
 	
 </odoo>

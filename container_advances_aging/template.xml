@@ -49,7 +49,7 @@
         </record>
 
 
-        <menuitem id="container_advances_aging_wizard_action_menu_item" name="Container Deposit Aging Report Xlsx" action="container_advances_aging_wizard_action" parent="account_reports.account_reports_legal_statements_menu" sequence="26"/>   
+        <menuitem id="container_advances_aging_wizard_action_menu_item" name="Container Deposit Aging Report Xlsx" action="container_advances_aging_wizard_action" parent="account.account_reports_legal_statements_menu" sequence="26"/>
         
     </data>
 </openerp>

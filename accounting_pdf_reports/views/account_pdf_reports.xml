@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <menuitem id="account_reports_business_intelligence_menu" name="Business Intelligence"
+                  parent="account.menu_finance_reports" sequence="5" groups="group_account_invoice"/>
 
         <menuitem id="menu_finance_legal_statement"
                   name="PDF Reports"

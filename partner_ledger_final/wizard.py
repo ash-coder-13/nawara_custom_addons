@@ -42,7 +42,6 @@ class FundRecovery(models.Model):
 		'type': 'ir.actions.act_window',
 		'name': 'Partner Ledger',
 		'res_model': 'res.partner',
-		'view_type': 'form',
 		'view_mode': 'form',
 		'target' : 'new',
 		}

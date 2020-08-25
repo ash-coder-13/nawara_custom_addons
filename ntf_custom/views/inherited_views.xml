@@ -8,9 +8,9 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'import.logic'"/>
-            <field name="function" eval="'mail_reminder'"/>
-            <field name="args" eval="'()'"/>
+            <field name="model_id" ref="custom_logistic.model_import_logic"/>
+            <field name="code">model.mail_reminder()</field>
+
         </record>
 
         <!--        Vehicle Document Expiry Email Reminder-->
@@ -20,9 +20,8 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'fleet.vehicle.log.contract'"/>
-            <field name="function" eval="'mail_reminder'"/>
-            <field name="args" eval="'()'"/>
+            <field name="model_id" ref="fleet.model_fleet_vehicle_log_contract"/>
+            <field name="code">model.mail_reminder()</field>
         </record>
 
         <!-- Account Move and Account Move Line Inherited Here -->
@@ -86,21 +85,21 @@
         </record>
 
         <!--        Search View of Industry Section-->
-        <record id="industry_section_search" model="ir.ui.view">
-            <field name="name">industry.section.search</field>
-            <field name="model">industry.section</field>
-            <field name="arch" type="xml">
-                <search string="Industry Section">
-                    <field name="name"/>
-                    <field name="code"/>
-                    <newline/>
-                    <group expand="0" string="Group By...">
-                        <filter string="Name" domain="[]" context="{'group_by':'name'}"/>
-                        <filter string="Code" domain="[]" context="{'group_by':'code'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
+<!--        <record id="industry_section_search" model="ir.ui.view">-->
+<!--            <field name="name">industry.section.search</field>-->
+<!--            <field name="model">industry.section</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Industry Section">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="code"/>-->
+<!--                    <newline/>-->
+<!--                    <group expand="0" string="Group By...">-->
+<!--                        <filter string="Name" domain="[]" context="{'group_by':'name'}"/>-->
+<!--                        <filter string="Code" domain="[]" context="{'group_by':'code'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!--        Action of Industry Section-->
         <record id="industry_section_action" model="ir.actions.act_window">
@@ -161,22 +160,22 @@
         </record>
 
         <!--        Search View of Industry Division-->
-        <record id="industry_division_search" model="ir.ui.view">
-            <field name="name">industry.division.search</field>
-            <field name="model">industry.division</field>
-            <field name="arch" type="xml">
-                <search string="Industry Division">
-                    <field name="c_code"/>
-                    <field name="name"/>
-                    <field name="code"/>
-                    <field name="section_id"/>
-                    <newline/>
-                    <group expand="0" string="Group By...">
-                        <filter string="Section" domain="[]" context="{'group_by':'section_id'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
+<!--        <record id="industry_division_search" model="ir.ui.view">-->
+<!--            <field name="name">industry.division.search</field>-->
+<!--            <field name="model">industry.division</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Industry Division">-->
+<!--                    <field name="c_code"/>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="code"/>-->
+<!--                    <field name="section_id"/>-->
+<!--                    <newline/>-->
+<!--                    <group expand="0" string="Group By...">-->
+<!--                        <filter string="Section" domain="[]" context="{'group_by':'section_id'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!--        Action of Industry Division-->
         <record id="industry_division_action" model="ir.actions.act_window">
@@ -201,19 +200,21 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//sheet/notebook/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='customer']"
+                <xpath expr="//sheet/notebook/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']"
                        position="after">
+
                     <field name="section_id" options="{'no_create_edit': True}"
-                           attrs="{'invisible': [('customer','=', False)],'required': [('customer','=', True)]}"/>
+                           attrs="{'invisible': [('customer_rank','&lt;=','0')],'required': [('customer_rank','&gt;','0')]}"/>
                     <field name="division_id" options="{'no_create_edit': True}"
-                           attrs="{'invisible': [('customer','=', False)],'required': [('customer','=', True)]}"
+                           attrs="{'invisible': [('customer_rank','&lt;=','0')],'required': [('customer_rank','&gt;','0')]}"
                            domain="[('section_id', '=', section_id)]"/>
                     <field name="class_code"
-                           attrs="{'invisible': [('customer','=', False)]}"/>
+                           attrs="{'invisible': [('customer_rank','&lt;','0')]}"/>
                 </xpath>
                 <xpath expr="//field[@name='lang']" position="before">
+                    <field name="supplier_rank" invisible="1"/>
                     <field name="profile_type"
-                           attrs="{'invisible': [('supplier','=', True)],'required': [('supplier','=', False)]}"/>
+                           attrs="{'invisible': [('supplier_rank','&lt;=','0')],'required': [('supplier_rank','&gt;','0')]}"/>
                     <field name="gtk_type"
                            attrs="{'invisible': [('profile_type','!=', 'getting_to_know')],'required': [('profile_type','=', 'getting_to_know')]}"/>
                     <field name="ref_type"
@@ -232,7 +233,7 @@
         <record id="crm_pipeline_inherited" model="ir.ui.view">
             <field name="name">crm.lead.inherited</field>
             <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="customer_type" required="1" string="Customer Status"/>
@@ -285,16 +286,16 @@
         </record>
 
         <!--        Customer Service Search View-->
-        <record id="customer_service_search" model="ir.ui.view">
-            <field name="name">customer.service.search</field>
-            <field name="model">customer.service</field>
-            <field name="arch" type="xml">
-                <search string="Customer Services">
-                    <field name="name"/>
-                    <field name="code"/>
-                </search>
-            </field>
-        </record>
+<!--        <record id="customer_service_search" model="ir.ui.view">-->
+<!--            <field name="name">customer.service.search</field>-->
+<!--            <field name="model">customer.service</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Customer Services">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="code"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!--        Customer Service Action Menu-->
         <record id="customer_service_action" model="ir.actions.act_window">

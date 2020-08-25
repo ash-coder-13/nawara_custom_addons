@@ -1,1 +1,1 @@
-import genral_ledger
+from . import genral_ledger

@@ -27,7 +27,7 @@
     'license': 'LGPL-3',
     'author': "Ashish",
     'website': "http://ntf-group.com/",
-    'depends': ['base', 'custom_logistic', 'account', 'report', 'sales_team', 'crm', 'fleet'],
+    'depends': ['base','accounting_pdf_reports', 'custom_logistic', 'account', 'crm', 'fleet','sale_crm'],
     'data': [
         'security/ir.model.access.csv',
         'wizard/sale_terminal_wiz.xml',

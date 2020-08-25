@@ -117,6 +117,7 @@ class CRMLead(models.Model):
 class FleetVehicleLogContract(models.Model):
     _inherit = 'fleet.vehicle.log.contract'
 
+
     def mail_reminder(self):
         now = datetime.now() + timedelta(days=1)
         date_now = now.date()

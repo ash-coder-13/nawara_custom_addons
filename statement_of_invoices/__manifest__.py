@@ -6,6 +6,6 @@
     'category': 'sale',
     'version': '10.0.1.17',
     'application': True,
-    'depends': ['base', 'report'],
+    'depends': ['base','accounting_pdf_reports'],
     'data': ['template.xml'],
 }

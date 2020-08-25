@@ -42,7 +42,7 @@
     <menuitem
             id="cfr_main"
             name="Customer Focused Revenue Report"
-            parent="account.account_reports_business_intelligence_menu"
+            parent="accounting_pdf_reports.account_reports_business_intelligence_menu"
             action="action_customer_focuzed_revenue_details"
             sequence="4"/>
 

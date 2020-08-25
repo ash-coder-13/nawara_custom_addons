@@ -6,6 +6,6 @@
     'category': 'sale',
     'version': '13.0.1.2',
     'application': True,
-    'depends': ['base', 'report', 'custom_logistic'],
+    'depends': ['base', 'custom_logistic'],
     'data': ['template.xml'],
 }

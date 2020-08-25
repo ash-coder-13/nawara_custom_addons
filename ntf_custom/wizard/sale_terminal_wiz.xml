@@ -45,7 +45,7 @@
         <menuitem
                 action="action_sale_terminal_excel_report"
                 id="menu_action_sale_terminal_excel_report_wizard"
-                parent="sales_team.menu_sale_report"/>
+                parent="sale.menu_sale_report"/>
 
         <!--        Import Shipment Status Excel Report File Store-->
         <record id="wizard_excel_report" model="ir.ui.view">

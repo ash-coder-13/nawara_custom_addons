@@ -65,14 +65,14 @@
             <field name="target">new</field>
         </record>
 
-        <record model="ir.values" id="date_wise_filter">
-            <field name="model_id" ref="" />
-            <field name="name">Print From Wizard</field>
-            <field name="key2">client_print_multi</field>
-            <field name="value" eval ="'ir.actions.act_window,'+str(ref('partner_ledger_action'))"/>
-            <field name="key">action</field>
-            <field name="model">res.partner</field>
-        </record>
+<!--        <record model="ir.values" id="date_wise_filter">-->
+<!--            <field name="model_id" ref="" />-->
+<!--            <field name="name">Print From Wizard</field>-->
+<!--            <field name="key2">client_print_multi</field>-->
+<!--            <field name="value" eval ="'ir.actions.act_window,'+str(ref('partner_ledger_action'))"/>-->
+<!--            <field name="key">action</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--        </record>-->
 
         <!--<menuitem id="partner_ledger_menu_item" name="Statement of account" action="partner_ledger_menu_action" parent="employee_ledger.nufund_reports_menu_item" />-->
         

@@ -55,7 +55,7 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem id="assets_bal_xlsx_action_id_cat" name="Fixed Assets Balance Report Xlsx" action="assets_bal_xlsx_action_cat" parent="account_reports.account_reports_legal_statements_menu" />
+        <menuitem id="assets_bal_xlsx_action_id_cat" name="Fixed Assets Balance Report Xlsx" action="assets_bal_xlsx_action_cat" parent="account.account_reports_legal_statements_menu" />
       
         
     </data>

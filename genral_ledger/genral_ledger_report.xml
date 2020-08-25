@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <template id="genral_ledger_report">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style type="text/css">
+                                .header,
+                                .footer {
+                                display: none;
+                                }
+                                @media (min-width: 992px)
+                                .container {
+                                width: 100%;
+                                }
+
+                                @media (min-width: 768px)
+                                .container {
+                                width: 100%;
+                                }
+                                .container {
+                                width: 100%;
+                                }
+                                body {
+                                margin: 0px !important;
+                                }
+                                body.o_in_iframe {
+                                margin-top: 0px!important;
+                                }
+                                .clearfloat {
+                                clear: both;
+                                float: none;
+                                width: 100%;
+                                height: 1px;
+                                display: block;
+                                }
+                                .report-wrapper {
+                                width: 100%;
+                                margin: 0px auto;
+                                }
+                                table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border: 2px solid #CCC;
+                                }
+                                table tr td, table tr th {
+                                text-align: center;
+                                padding: 10px 5px;
+                                border-right: 2px solid #CCC;
+                                font-size: 10px;
+                                border-bottom: 1px solid #eee;
+                                }
+                                table tr td:last-child,
+                                table tr th:last-child {
+                                border-right: none
+                                }
+                                table tr:last-child td {
+                                border-bottom: none
+                                }
+                                table tr th {
+                                text-align: center;
+                                }
+                                .report-header {
+                                width: 100%;
+                                margin: 0px 0px 10px;
+                                text-align: left;
+                                }
+                                .report-header p {
+                                width: 50%;
+                                float: left;
+                                margin: 0px 0px 20px;
+                                }
+                                .report-header p .solid {
+                                font-weight: bold;
+                                }
+                                h2 {
+                                text-align: center;
+                                font-size: 25px;
+                                text-decoration: underline;
+                                font-weight: normal;
+                                }
+                                .tile {
+                                display: inline-block;
+                                width: 100px;
+                                text-align: center;
+                                background: #a64f8e;
+                                color: #fff;
+                                padding: 2px 5px;
+                                }
+                                h1 {
+                                text-align: center;
+                                font-size: 35px;
+                                font-weight: normal;
+                                }
+                                h4 {
+                                font-weight: normal;
+                                text-align: center;
+                                }
+                                .left {
+                                width: 70%;
+                                display: inline-block;
+                                float: left;
+                                }
+                                .right {
+                                width: 30%;
+                                display: inline-block;
+                                float: left;
+                                }
+                                .box {
+                                width: 150px;
+                                border: 1px solid black;
+                                padding: 4px;
+                                margin: 4px;
+                                font-weight: bold;
+                                }
+                                .box2 {
+                                width: 100%;
+                                border: 1px solid black;
+                                padding: 4px;
+                                font-weight: bold;
+                                }
+                                .mrgin-top {
+                                margin-top: -16px !important;
+                                }
+                            </style>
+
+                            <div class="report-wrapper">
+
+                                <div class="report-header">
+
+                                    <!-- <h1>CHAMPION PAINT INDUSTRIES (PVT) LTD.</h1> -->
+
+                                    <h4>Statement of Account of All Transactions</h4>
+
+                                    <!-- <h2>
+                                        <span class="liquid" t-esc="o.name"></span> 
+                                        <span class="liquid" t-esc="o.code"></span> - 
+                                        <span class="liquid">General ledger</span>
+                                    </h2> -->
+
+                                    <div class="left">
+                                        <p>
+                                            <span class="solid">Printed on:</span>
+                                            <span t-esc="context_timestamp(datetime.datetime.now()+datetime.timedelta(hours=5)).strftime('%B %d, %Y At %H:%M %a')"></span>
+                                        </p>
+                                        <br class="clearfloat"/>
+
+                                        <t t-foreach="acc_num" t-as="num">
+                                            <p>
+                                                <span class="solid">Account Number</span>
+                                                <span class="box" t-esc="num.code"></span>
+                                            </p>
+                                            <br class="clearfloat"/>
+                                            <p>
+                                                <span class="solid">Account Title</span>
+                                            </p>
+                                            <br class="clearfloat"/>
+                                            <p class="mrgin-top box2">
+                                                <span class="liquid" t-esc="num.name"></span>
+                                            </p>
+                                        </t>
+                                    </div>
+
+                                    <div class="right">
+
+                                        <t t-foreach="users" t-as="user">
+
+                                            <p>
+                                                <span class="solid">User Id:</span>
+                                                <span class="liquid" t-esc="user.name"></span>
+                                            </p>
+                                        </t>
+                                        <br class="clearfloat"/>
+                                        <p>
+                                            <span class="solid">Start From:</span>
+                                        </p>
+                                        <br class="clearfloat"/>
+                                        <p class="mrgin-top">
+                                            <span class="mrgin-top box"
+                                                  t-esc="time.strftime('%d %b %Y',time.strptime(form,'%Y-%m-%d'))"></span>
+                                        </p>
+
+                                        <br class="clearfloat"/>
+
+                                        <p class="mrgin-top">
+                                            <span class="solid">Up To:</span>
+                                        </p>
+                                        <br class="clearfloat"/>
+                                        <p class="mrgin-top">
+                                            <span class="box"
+                                                  t-esc="time.strftime('%d %b %Y',time.strptime(to,'%Y-%m-%d'))"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="opning_balance">
+                                        <p>
+                                            <span class="solid">Opening Balance :</span>
+                                            <t t-set="opened" t-value="opening(o)"/>
+                                            <span class="liquid" t-esc="'{:0,}'.format(int(float(opened)))"></span>
+                                        </p>
+                                    </div>
+                                    <br class="clearfloat"/>
+
+                                </div>
+
+                                <table>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>JRNL</th>
+                                        <th>Party</th>
+                                        <th>Ref</th>
+                                        <th>Entry Label</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
+                                    </tr>
+
+                                    <t t-set="debits" t-value="0"/>
+                                    <t t-set="credits" t-value="0"/>
+                                    <t t-set="balance" t-value="0"/>
+
+                                    <t t-foreach="entries.sorted(key=lambda x: x.date)" t-as="data">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="time.strftime('%d/%m/%Y',time.strptime(data.date,'%Y-%m-%d'))"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data.journal_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data.partner_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data.move_id.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:0,}'.format(int(float(data.debit)))"></span>
+                                            </td>
+                                            <t t-set="debits" t-value="debits + data.debit"/>
+                                            <td>
+                                                <span t-esc="'{:0,}'.format(int(float(data.credit)))"></span>
+                                                <t t-set="credits" t-value="credits + data.credit"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="o.nature == 'debit'">
+                                                    <t t-set="opened" t-value="opened + data.debit - data.credit"/>
+                                                    <span t-esc="'{:0,}'.format(int(float(opened)))"></span>
+                                                </t>
+                                                <t t-if="o.nature == 'credit'">
+                                                    <t t-set="opened" t-value="opened - data.debit + data.credit"/>
+                                                    <span t-esc="'{:0,}'.format(int(float(opened)))"></span>
+                                                </t>
+                                                <t t-set="balance" t-value="balance + opened"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Total</th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(debits)))"></span>
+                                        </th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(credits)))"></span>
+                                        </th>
+                                        <th>
+                                            <span t-esc="'{:0,}'.format(int(float(balance)))"></span>
+                                        </th>
+                                    </tr>
+                                </table>
+
+                            </div><!--end of report wrapper-->
+
+                        </div><!--end of page -->
+
+                    </t>
+
+                </t>
+
+            </t>
+
+        </template>
+
+    </data>
+
+</odoo>

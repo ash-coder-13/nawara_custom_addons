@@ -48,7 +48,7 @@
         </record>
 
 
-        <menuitem id="dsr_action_menu_item" name="DSR Report Xlsx" action="dsr_wizard_action" parent="account_reports.account_reports_legal_statements_menu"/>   
+        <menuitem id="dsr_action_menu_item" name="DSR Report Xlsx" action="dsr_wizard_action" parent="account.account_reports_legal_statements_menu"/>
         
     </data>
 </openerp>

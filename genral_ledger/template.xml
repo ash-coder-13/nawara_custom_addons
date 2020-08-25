@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
-<openerp>
+<odoo>
     <data>
         <report
-
                 id="report_for_genral_ledger"
                 model="res.partner"
                 name="genral_ledger.genral_ledger_report"
@@ -54,14 +53,14 @@
             <field name="context">{'default_account': active_id}</field>
         </record>
 
-        <record model="ir.values" id="genral_wise_filter">
-            <field name="model_id" ref="" />
-            <field name="name">Print From Wizard</field>
-            <field name="key2">client_print_multi</field>
-            <field name="value" eval ="'ir.actions.act_window,'+str(ref('genral_ledger_action'))"/>
-            <field name="key">action</field>
-            <field name="model">account.account</field>
-        </record>
+<!--        <record model="ir.values" id="genral_wise_filter">-->
+<!--            <field name="model_id" ref="" />-->
+<!--            <field name="name">Print From Wizard</field>-->
+<!--            <field name="key2">client_print_multi</field>-->
+<!--            <field name="value" eval ="'ir.actions.act_window,'+str(ref('genral_ledger_action'))"/>-->
+<!--            <field name="key">action</field>-->
+<!--            <field name="model">account.account</field>-->
+<!--        </record>-->
 
         <record id="bank_boolean_fields" model="ir.ui.view">
             <field name="name">bank_boolean_fields</field>
@@ -87,7 +86,7 @@
         </record>
 
         <menuitem id="chile_genral_ledger" name= "Accounts General Ledger"
-                  parent="account_reports.account_reports_legal_statements_menu" action="genral_ledger_action_seprate"/>
+                  parent="account.account_reports_legal_statements_menu" action="genral_ledger_action_seprate"/>
 
     </data>
-</openerp>
+</odoo>

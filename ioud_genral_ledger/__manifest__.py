@@ -5,7 +5,7 @@
     'website': "http://www.solutionfounder.com",
     'category': 'account',
     'version': '13.0.1.0',
-    'depends': ['base', 'report', 'account'],
+    'depends': ['base', 'account'],
     'data': [
         'security/ir.model.access.csv',
         'views/module_report.xml',

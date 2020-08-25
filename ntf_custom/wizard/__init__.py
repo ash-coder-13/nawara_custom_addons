@@ -19,4 +19,4 @@
 #
 # /#############################################################################
 
-import sale_terminal_wiz
+from . import sale_terminal_wiz

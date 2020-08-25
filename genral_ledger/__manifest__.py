@@ -5,10 +5,10 @@
     'website': "http://www.solutionfounder.com",
     'category': 'account',
     'version': '13.0.1.0',
-    'depends': ['base', 'report', 'account'],
+    'depends': ['base', 'account'],
     'data': [
         'ir.model.access.csv',
         'template.xml',
-        'module_report.xml',
+        'genral_ledger_report.xml',
     ],
 }

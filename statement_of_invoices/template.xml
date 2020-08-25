@@ -59,16 +59,16 @@
             <field name="target">new</field>
         </record>
 
-        <record model="ir.values" id="date_wise_filter_invoices">
-            <field name="model_id" ref="" />
-            <field name="name">Print From Wizard</field>
-            <field name="key2">client_print_multi</field>
-            <field name="value" eval ="'ir.actions.act_window,'+str(ref('statement_of_invoices_action'))"/>
-            <field name="key">action</field>
-            <field name="model">res.partner</field>
-        </record>
+<!--        <record model="ir.values" id="date_wise_filter_invoices">-->
+<!--            <field name="model_id" ref="" />-->
+<!--            <field name="name">Print From Wizard</field>-->
+<!--            <field name="key2">client_print_multi</field>-->
+<!--            <field name="value" eval ="'ir.actions.act_window,'+str(ref('statement_of_invoices_action'))"/>-->
+<!--            <field name="key">action</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--        </record>-->
 
-        <menuitem id="statement_of_invoices_action_menu_item" name="Statement of Accounts (Nawara)" action="statement_of_invoices_action_menu_action" parent="account.account_reports_business_intelligence_menu" sequence="23"/>
+        <menuitem id="statement_of_invoices_action_menu_item" name="Statement of Accounts (Nawara)" action="statement_of_invoices_action_menu_action" parent="accounting_pdf_reports.account_reports_business_intelligence_menu" sequence="23"/>
 
       
         

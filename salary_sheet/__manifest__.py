@@ -6,6 +6,6 @@
     'category': 'sale',
     'version': '13.0.1.01',
     'application': True,
-    'depends': ['base', 'report','hr_payroll'],
+    'depends': ['base','hr_payroll'],
     'data': ['template.xml'],
 }

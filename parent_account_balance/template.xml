@@ -50,7 +50,7 @@
         </record>
 
 
-        <menuitem id="parent_account_balance_wizard_action_menu_item" name="Parent Account Wise Balance Xlsx" action="parent_account_balance_wizard_action" parent="account_reports.account_reports_legal_statements_menu" sequence="25"/>   
+        <menuitem id="parent_account_balance_wizard_action_menu_item" name="Parent Account Wise Balance Xlsx" action="parent_account_balance_wizard_action" parent="account.account_reports_legal_statements_menu" sequence="25"/>
         
     </data>
 </openerp>

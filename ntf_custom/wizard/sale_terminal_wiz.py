@@ -223,7 +223,6 @@ class SaleTerminalExcelReport(models.TransientModel):
         return {
             'name': _('Notification'),
             'context': self.env.context,
-            'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'wizard.excel.report',
             'res_id': attach_id.id,

@@ -19,7 +19,7 @@
 #
 # /#############################################################################
 
-import controllers
-import report
-import models
-import wizard
+from . import controllers
+from . import report
+from . import models
+from . import wizard
