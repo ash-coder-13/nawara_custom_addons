@@ -192,7 +192,7 @@
                         <field name="voucher_type" invisible="True"/>
                         <field name="currency_id" invisible="True"/>
                         <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
-                        <field name="partner_id" domain="[('customer','=',True)]" string="Customer"
+                        <field name="partner_id" domain="[('customer_rank','&gt;', '0')]" string="Customer"
                                context="{'search_default_customer':1, 'show_address': 1}"
                                options='{"always_reload": True}'/>
                         <field name="partner_account_id" invisible="1"/>
@@ -300,7 +300,7 @@
                 <field name="voucher_type" invisible="True"/>
                 <group>
                     <group>
-                        <field name="partner_id" domain="[('supplier','=',True)]" string="Vendor"
+                        <field name="partner_id" domain="[('supplier_rank','&gt;', '0')]" string="Vendor"
                                context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}" />
                         <field name="partner_account_id" invisible="1"/>
                         <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>

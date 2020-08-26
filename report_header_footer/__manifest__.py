@@ -8,6 +8,6 @@
     'installable': True,
     'auto_install': False,
     'application': True,
-    'depends': ['base_setup','report'],
+    'depends': ['base_setup'],
     'data': ['views/template.xml'],
 }

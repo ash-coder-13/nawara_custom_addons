@@ -86,8 +86,8 @@
                     <group>
                         <field name="site" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="port" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                        <field name="customer" domain="[('parent_id','=',False),('supplier','=',False)
-                            ,('customer','=',True)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                        <field name="customer" domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0')
+                            ,('customer_rank','&gt;','0')]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="by_customer"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="bill_bol" invisible="1"/>
@@ -102,8 +102,8 @@
                         <field name="org_date"/>
                         <field name="vessel_date" required="1"/>
                         <field name="vessel_name"/>
-                        <field name="s_supplier" domain="[('supplier','=',True),('types','=','ship_line'),
-                            ('is_driver','=',False),('customer','=', False)]"
+                        <field name="s_supplier" domain="[('supplier_rank','&gt;', '0'),('types','=','ship_line'),
+                            ('is_driver','=',False),('customer_rank','&lt;=', '0')]"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="house_bl"/>
                         <field name="bill_no"/>
@@ -191,7 +191,7 @@
                         <field name="form" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="to" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="fleet_type" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                        <field name="transporter" domain="[('supplier','=',True)]"
+                        <field name="transporter" domain="[('supplier_rank','&gt;', '0')]"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="trans_charge"/>
                         <field name="custm_charge"/>
@@ -235,7 +235,7 @@
 <!--        <field name="arch" type="xml">-->
 <!--            <search>-->
 <!--                <field name="customer" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>-->
+<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
 <!--                <field name="by_customer" domain="[('customer.id','=',customer)]"/>-->
 <!--                <field name="customer_ref" string="Customer Reference"/>-->
 <!--                <field name="bill_no" string="BL Number"/>-->
@@ -257,7 +257,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="partner_id" string="Customer"
-                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>
+                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>
                 <field name="by_customer" />
                 <field name="bill_no" string="BL Number"/>
                 <field name="container_num" string="Container Number"/>
@@ -273,7 +273,7 @@
 <!--        <field name="arch" type="xml">-->
 <!--            <search>-->
 <!--                <field name="partner_id" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>-->
+<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
 <!--                <field name="by_customer"/>-->
 <!--                <field name="bill_no" string="BL Number"/>-->
 <!--                <field name="container_num" string="Container Number"/>-->
@@ -300,7 +300,7 @@
 <!--        <field name="arch" type="xml">-->
 <!--            <search>-->
 <!--                <field name="partner_id" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>-->
+<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
 <!--                <field name="by_customer" />-->
 <!--                <field name="bill_num" string="BL Number"/>-->
 <!--                <field name="state" string="State"/>-->
@@ -348,7 +348,7 @@
 <!--        <field name="arch" type="xml">-->
 <!--            <search>-->
 <!--                <field name="customer" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>-->
+<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
 <!--                <field name="by_customer" />-->
 <!--                <field name="customer_ref" string="Customer Reference"/>-->
 <!--                <field name="site" string="Site"/>-->
@@ -682,8 +682,8 @@
                     <group>
                         <field name="site"/>
                         <field name="port" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                        <field name="customer" domain="[('parent_id','=',False),('supplier','=',False),
-                            ('customer','=',True)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                        <field name="customer" domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),
+                            ('customer_rank','&gt;', '0')]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="by_customer"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="bill_bol" invisible="1"/>
@@ -696,8 +696,8 @@
                         <field name="shipper_date"/>
                         <field name="vessel_date"/>
                         <field name="vessel_name"/>
-                        <field name="s_supplier" domain="[('supplier','=',True),('types','=','ship_line'),
-                            ('is_driver','=',False),('customer','=', False)]"
+                        <field name="s_supplier" domain="[('supplier_rank','&gt;', '0'),('types','=','ship_line'),
+                            ('is_driver','=',False),('customer_rank','&lt;=', '0')]"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="fri_id" readonly="1"/>
                         <field name="acc_link" readonly="1"/>
@@ -784,7 +784,7 @@
                         <field name="form" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="to" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="fleet_type" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                        <field name="transporter" domain="[('supplier','=',True)]"
+                        <field name="transporter" domain="[('supplier_rank','&gt;', '0')]"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="trans_charge"/>
                         <field name="custm_charge"/>
@@ -1159,7 +1159,7 @@
             <form>
                 <sheet>
                     <group colspan="4" col="4">
-                        <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True)]"
+                        <field name="driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0')]"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         <field name="accident_date"/>
                         <field name="vehicle_id" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
@@ -1185,7 +1185,7 @@
         <field name="arch" type="xml">
             <tree string="fleet.vehicle.accident">
                 <field name="vehicle_id"/>
-                <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True)]"/>
+                <field name="driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0')]"/>
                 <field name="accident_date"/>
                 <field name="location"/>
                 <field name="remarks"/>
@@ -1198,7 +1198,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="vehicle_id"/>
-                <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True)]"/>
+                <field name="driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0')]"/>
                 <field name="accident_date"/>
                 <field name="location"/>
                 <field name="remarks"/>
@@ -1288,7 +1288,7 @@
                 <group string="Accident Detail">
                     <field name="vechicle_accident_detail" context="{'default_company_id':company_id}">
                         <tree>
-                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True)]"
+                            <field name="driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0')]"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                             <field name="accident_date"/>
                             <field name="location"/>

@@ -48,7 +48,7 @@
 
 
         <menuitem id="overdue_report_action_action_menu_item" name="Overdue Report Xlsx" action="overdue_report_action"
-                  parent="account_reports.account_reports_legal_statements_menu" sequence="24"/>
+                  parent="account.account_reports_legal_statements_menu" sequence="24"/>
         
     </data>
 </openerp>

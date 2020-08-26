@@ -103,6 +103,7 @@
                     <field name="performence_manager"/>
                     <field name="is_line_man"/>
                     <field name="a_email"/>
+                      <field name="address_home_id" invisible="1"/>
                 </field>
                 <xpath expr="//field[@name='parent_id']" position="attributes">
 
@@ -137,206 +138,8 @@
 
 
                 <xpath expr="//page[2]" position="after">
-                    <!-- Personal Information -->
 
-                    <!-- 					<page string="Deployment" name="deployment">
-                                            <group name="group_top">
-
-                                                <group name="group_left">
-                                                    <field name="designation"/>
-                                                    <field name="id_prof"/>
-                                                    <field name="category"/>
-                                                    <field name="department"/>
-                                                    <field name="r_manager"/>
-                                                    <field name="division"/>
-                                                </group>
-
-                                                <group name="group_right">
-                                                    <field name="mol_location"/>
-                                                    <field name="sponsor"/>
-                                                    <field name="c_athu"/>
-                                                    <field name="fc_athu"/>
-                                                    <field name="reason"/>
-                                                </group>
-                                            </group>
-                                        </page> -->
-                    <!-- Dependent -->
-                    <!-- 					<page string="Dependent" name="employee_dependent" attrs="{'invisible': [('depend','=', False)]}">
-                                            <field name="dependent_id">
-                                                <tree>
-                                                    <field name="name"/>
-                                                    <field name="dob"/>
-                                                    <field name="pob"/>
-                                                    <field name="relation"/>
-                                                    <field name="nationality"/>
-                                                </tree>
-                                            </field>
-                                        </page>
-
-                                        <page string="Address" name="permanent_address">
-                                            <group name="group_top" string = "Present Address">
-
-                                                <group name="group_left">
-                                                    <field name="street"/>
-                                                    <field name="street2"/>
-                                                    <field name="zip_code"/>
-                                                    <field name="same_add" string="Same Permanent Address"/>
-                                                </group>
-
-                                                <group name="group_right">
-                                                    <field name="city"/>
-                                                    <field name="state_id"/>
-                                                    <field name="country_idd" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                                                    <field name="contact_no"/>
-                                                </group>
-                                            </group>
-
-
-                                            <group name="group_top" string = "Permanent Address">
-
-                                                <group name="group_left">
-                                                    <field name="p_street"/>
-                                                    <field name="p_street2"/>
-                                                    <field name="p_zip_code"/>
-                                                </group>
-
-                                                <group name="group_right">
-                                                    <field name="p_city"/>
-                                                    <field name="p_state_id"/>
-                                                    <field name="p_country_id" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                                                    <field name="p_contact_no"/>
-                                                </group>
-                                            </group>
-
-                                        </page>
-                                        <page string="Emergency Contact" name="emergency">
-                                            <field name="emergency_id">
-
-                                                <tree string='Qualifications'>
-                                                    <field name="e_name"/>
-                                                    <field name="e_relationship"/>
-                                                    <field name="e_mobile"/>
-                                                    <field name="ea_mobile"/>
-                                                    <field name="e_phone"/>
-                                                    <field name="e_mail"/>
-                                                    <field name="e_remark"/>
-                                                </tree>
-
-                                            </field>
-
-                                        </page> -->
-
-                    <!-- Education and Experience -->
-                    <!-- 					<page string="Education and Experience" name="employee_education">
-                                            <group name="qualifiction" string="Qualifications">
-                                            </group>
-                                            <field name="qualifiction_id">
-                                                <tree string='Qualifications'>
-                                                    <field name="uni_name"/>
-                                                    <field name="prg_status"/>
-                                                    <field name="comp_date"/>
-                                                    <field name="contact_name"/>
-                                                    <field name="contact_phn"/>
-                                                    <field name="contact_email"/>
-                                                </tree>
-                                            </field>
-                                            <group name="certification" string="Certification">
-                                            </group>
-                                            <field name="certification_id">
-                                                <tree string='Certification'>
-                                                    <field name="car_name"/>
-                                                    <field name="issue_org"/>
-                                                    <field name="issue_date"/>
-                                                    <field name="exp_date"/>
-                                                    <field name="regis_no"/>
-                                                    <field name="contact_name"/>
-                                                    <field name="contact_phn"/>
-                                                    <field name="contact_email"/>
-                                                </tree>
-                                            </field>
-                                        </page> -->
-
-                    <!-- Training -->
-                    <!-- 					<page string="Training" name="employee_training">
-                                            <field name="trainings_id">
-                                                <tree>
-                                                    <field name="training_sum"/>
-                                                    <field name="start_date"/>
-                                                    <field name="end_date"/>
-                                                    <field name="type_training"/>
-                                                    <field name="training_company"/>
-                                                    <field name="training_place"/>
-                                                    <field name="status"/>
-                                                </tree>
-                                            </field>
-                                        </page> -->
-                    <!-- Insurance -->
-                    <!-- 					<page string="Insurance" name="employee_insurance">
-                                            <field name="insurance_id">
-                                                <tree>
-                                                    <field name="card_code"/>
-                                                    <field name="member_name"/>
-                                                    <field name="clas_n"/>
-                                                    <field name="gender"/>
-                                                    <field name="dob"/>
-                                                    <field name="pob"/>
-                                                    <field name="relation"/>
-                                                    <field name="start_date"/>
-                                                    <field name="premium"/>
-                                                    <field name="expiry_date"/>
-                                                </tree>
-                                            </field>
-                                        </page>
-                     -->
-                    <!-- Documents -->
-                    <!-- 					<page string="Documents" name="employee_documents">
-                                            <field name="documents_id" context="{'default_e_name':name}">
-                                                <tree>
-                                                    <field name="name" />
-                                                    <field name="number"/>
-                                                    <field name="type_d"/>
-                                                    <field name="notes"/>
-                                                    <field name="place_issue"/>
-                                                    <field name="issue_date"/>
-                                                    <field name="dor"/>
-                                                    <field name="expiry_date"/>
-                                                    <field name="holder"/>
-                                                </tree>
-                                            </field>
-                                        </page>
-
-                                        <page string="References" name="references">
-                                            <group name="group_top">
-
-                                                <group name="group_left">
-                                                    <field name="r_name"/>
-                                                    <field name="rc_name"/>
-                                                    <field name="r_designation"/>
-                                                    <field name="r_mobile"/>
-
-                                                </group>
-
-                                                <group name="group_right">
-                                                    <field name="r_phone"/>
-                                                    <field name="r_mail"/>
-                                                    <field name="r_remark"/>
-                                                </group>
-                                            </group>
-                                        </page>
-                                        <page string = "Company Asset" name="asset">
-                                            <group>
-                                                <group string= "Company Asset">
-                                                    <field name="laptop_des" domain= "[('owner_user_id.name','=',name)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                                                    <field name="other_asset" widget="many2many_tags" domain= "[('owner_user_id.name','=',name)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                                                </group>
-                                                <group></group>
-                                            </group>
-                                        </page>-->
                 </xpath>
-                <!-- 				<xpath expr="//field[@name='mol_location']" position="after">
-                                    <field name="mol_no"/>
-                                </xpath>  -->
-                <!-- HR settings -->
                 <xpath expr="//field[@name='user_id']" position="after">
 
                     <field name="joining_date"/>
@@ -349,7 +152,7 @@
                     <field name="bank_code"/>
 
                 </xpath>
-                <xpath expr="//field[@name='notes']" position="before">
+                <xpath expr="//field[@name='parent_id']" position="before">
                     <field name="status_id" label="Status"/>
                 </xpath>
             </field>
@@ -1091,17 +894,17 @@
 
                 <xpath expr="//label[@for='name']" position="replace">
                 </xpath>
-                <xpath expr="//label[@for='rml_header1']" position="replace">
-                </xpath>
+<!--                <xpath expr="//label[@for='rml_header1']" position="replace">-->
+<!--                </xpath>-->
 
                 <xpath expr="//field[@name='name']" position="before">
                     <h4 attrs="{'invisible': [('flip','=', True)]}">Company</h4>
                     <h4 attrs="{'invisible': [('flip','=', False)]}">Branch</h4>
                 </xpath>
-                <xpath expr="//field[@name='rml_header1']" position="before">
-                    <h4 attrs="{'invisible': [('flip','=', True)]}">Company Tagline</h4>
-                    <h4 attrs="{'invisible': [('flip','=', False)]}">Branch Tagline</h4>
-                </xpath>
+<!--                <xpath expr="//field[@name='rml_header1']" position="before">-->
+<!--                    <h4 attrs="{'invisible': [('flip','=', True)]}">Company Tagline</h4>-->
+<!--                    <h4 attrs="{'invisible': [('flip','=', False)]}">Branch Tagline</h4>-->
+<!--                </xpath>-->
 
                 <xpath expr="//field[@name='country_id']" position="attributes">
                     <attribute name="required">True</attribute>
@@ -1509,13 +1312,13 @@
                 <xpath expr="//field[@name='model']" position="replace">
                 </xpath>
 
-                <xpath expr="//field[@name='owner_user_id']" position="attributes">
-                    <attribute name="string">Employee Name</attribute>
-                </xpath>
+<!--                <xpath expr="//field[@name='owner_user_id']" position="attributes">-->
+<!--                    <attribute name="string">Employee Name</attribute>-->
+<!--                </xpath>-->
 
-                <xpath expr="//field[@name='owner_user_id']" position="attributes">
-                    <attribute name="relation">hr.employee</attribute>
-                </xpath>
+<!--                <xpath expr="//field[@name='owner_user_id']" position="attributes">-->
+<!--                    <attribute name="relation">hr.employee</attribute>-->
+<!--                </xpath>-->
 
                 <xpath expr="//page[3]" position="after">>
                     <page string="Asset Documents" name="asset_documents">
@@ -1891,13 +1694,16 @@
         </record>
 
         <record id="hr_holidays_ext_form_view" model="ir.ui.view">
-            <field name="name">hr_holidays_ext_form_view</field>
-            <field name="model">hr.holidays</field>
-            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+            <field name="name">hr_leave_ext_form_view</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager_approve"/>
             <field name="arch" type="xml">
 
                 <xpath expr="//field[@name='employee_id']" position="after">
                     <field name="emp_id" invisible="1"/>
+                     <field name="holiday_type" invisible="1"/>
+                    <field name="request_unit_half" invisible="1"/>
+                    <field name="request_unit_hours" invisible="1"/>
 
                     <field name="replace_by"
                            attrs="{'required':[('holiday_type','=','employee')],'invisible':[('holiday_type','=','category')]}"
@@ -1914,14 +1720,14 @@
 
                 <xpath expr="//sheet/group/group/div" position="replace">
                     <br/>
-                    <field name="date_from" attrs="{'required':[('type', '=', 'remove')]}"/>
-                    <field name="date_to" attrs="{'required':[('type', '=', 'remove')]}"/>
+                    <field name="date_from" />
+                    <field name="date_to" />
                     <field name="vacation_days"/>
                 </xpath>
 
-                <field name="name" position="replace">
-                    <field name="number_of_days_temp" invisible="1"/>
-                </field>
+<!--                <field name="name" position="replace">-->
+<!--                    <field name="number_of_days_temp" invisible="1"/>-->
+<!--                </field>-->
 
             </field>
         </record>
@@ -2095,9 +1901,9 @@
             <field name="active">false</field>
         </record>
 
-        <record id="hr.menu_open_view_employee_list_my" model="ir.ui.menu">
-            <field name="sequence">-12</field>
-        </record>
+<!--        <record id="hr.menu_open_view_employee_list_my" model="ir.ui.menu">-->
+<!--            <field name="sequence">-12</field>-->
+<!--        </record>-->
 
         <record id="maintenance.menu_maintenance_title" model="ir.ui.menu">
             <field name="name">Assets</field>

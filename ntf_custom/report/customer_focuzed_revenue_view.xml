@@ -10,7 +10,7 @@
                 <group>
                     <group string="Customer &amp; Status">
                         <field name="partner_ids"
-                               domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"
+                               domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"
                                options="{'no_create_edit': True}" widget="many2many_tags" required="True"/>
                         <field name="sale_status_ids" options="{'no_create_edit': True}" widget="many2many_tags" required="True"/>
                     </group>

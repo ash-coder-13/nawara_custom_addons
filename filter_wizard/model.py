@@ -44,7 +44,6 @@ class FilterWizard(models.Model):
 		'type': 'ir.actions.act_window',
 		'name': 'Custom Search',
 		'res_model': self.m_name,
-		'view_type': 'form',
 		'view_mode': 'tree,form',
 		'domain': (['|','|','|',('tick','=',True),('bill_no','=',self.bl),('customer_ref','=',self.ref),('bayan_no','=',self.bn)]),
 		}

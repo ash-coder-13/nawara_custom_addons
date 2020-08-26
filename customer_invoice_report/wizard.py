@@ -41,6 +41,6 @@ class ResPartnerExt(models.Model):
                 'res_model': 'cust.invoice',
                 'type': 'ir.actions.act_window',
                 'view_mode': 'form',
-                'view_type': 'form',
+
                 'context': {'default_customer': self.id},
                 'target': 'new', }

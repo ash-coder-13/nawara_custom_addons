@@ -57,23 +57,23 @@
         <field name="context">{'default_m_name': 'export.logic'} </field> 
     </record>
 
-    <record model="ir.values" id="date_wise_filter1">
-        <field name="model_id" ref="" />
-        <field name="name">Print From Wizard</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval ="'ir.actions.act_window,'+str(ref('filter_wizard_action_import'))"/>
-        <field name="key">action</field>
-        <field name="model">import.logic</field>
-    </record>
+<!--    <record model="ir.values" id="date_wise_filter1">-->
+<!--        <field name="model_id" ref="" />-->
+<!--        <field name="name">Print From Wizard</field>-->
+<!--        <field name="key2">client_action_multi</field>-->
+<!--        <field name="value" eval ="'ir.actions.act_window,'+str(ref('filter_wizard_action_import'))"/>-->
+<!--        <field name="key">action</field>-->
+<!--        <field name="model">import.logic</field>-->
+<!--    </record>-->
 
-    <record model="ir.values" id="date_wise_filter2">
-        <field name="model_id" ref="" />
-        <field name="name">Print From Wizard</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval ="'ir.actions.act_window,'+str(ref('filter_wizard_action_export'))"/>
-        <field name="key">action</field>
-        <field name="model">export.logic</field>
-    </record>
+<!--    <record model="ir.values" id="date_wise_filter2">-->
+<!--        <field name="model_id" ref="" />-->
+<!--        <field name="name">Print From Wizard</field>-->
+<!--        <field name="key2">client_action_multi</field>-->
+<!--        <field name="value" eval ="'ir.actions.act_window,'+str(ref('filter_wizard_action_export'))"/>-->
+<!--        <field name="key">action</field>-->
+<!--        <field name="model">export.logic</field>-->
+<!--    </record>-->
     
 <!--     <record id="filter_wizard_action_trans" model="ir.actions.act_window">
         <field name="name">Custom Search</field>

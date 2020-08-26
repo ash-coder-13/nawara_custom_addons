@@ -48,7 +48,7 @@
                 </h1>
                 <group>
                     <group>
-                        <field name="partner_id" domain="[('supplier','=',True)]" string="Vendor"
+                        <field name="partner_id" domain="[('supplier_rank','&gt;', '0')]" string="Vendor"
                                context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}" />
                         <field name="account_id" readonly="1"/>
                         <field name="pc_voucher_type" attrs="{'invisible': [('pc_voucher_type','=','normal')]}"/>

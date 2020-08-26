@@ -6,6 +6,6 @@
     'category': 'account',
     'version': '13.0.1.0',
     'application': True,
-    'depends': ['base', 'report'],
+    'depends': ['base'],
     'data': ['template.xml'],
 }

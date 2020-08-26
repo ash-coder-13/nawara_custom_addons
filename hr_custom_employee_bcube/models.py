@@ -55,7 +55,6 @@ class Hr_Employee(models.Model):
                 'type': 'ir.actions.act_window',
                 'view_id': False,
                 'view_mode': 'tree,form',
-                'view_type': 'form',
                 'help': _('''<p class="oe_view_nocontent_create">
                                    Click to Create for New Documents
                                 </p>'''),
@@ -1267,7 +1266,7 @@ class HRExitReentry(models.Model):
 
 
 class HRHolidays(models.Model):
-    _inherit = 'hr.holidays'
+    _inherit = 'hr.leave'
 
     replace_by = fields.Many2one('hr.employee', "Replace By")
     emp_id = fields.Integer("id")

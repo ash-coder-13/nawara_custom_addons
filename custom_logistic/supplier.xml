@@ -146,7 +146,7 @@
                         <tree editable="True">
 
                             <field name="name"/>
-                            <field name="customer" domain="[('parent_id','=',False),('supplier','=',False),
+                            <field name="customer" domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),
                             ('customer_rank' ,'&gt;', 0)]" />
 
                         </tree>
@@ -320,10 +320,10 @@
                             <field name="sr_no"/>
                             <field name="smart" invisible="1"/>
                             <field name="types"/>
-                            <field name="s_supplier" domain="[('types','=','ship_line'),('supplier','=',True)]"
+                            <field name="s_supplier" domain="[('types','=','ship_line'),('supplier_rank','&gt;', '0')]"
                                    context="{'default_supplier':True,'default_customer':False,'default_types':'ship_line'}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                            <field name="customer" domain="[('parent_id','=',False),('supplier','=',False),
+                            <field name="customer" domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),
                             ('customer_rank' ,'&gt;', 0)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                             <field name="eta_date"/>
                             <field name="etd_date"/>

@@ -164,7 +164,7 @@
                         <group>
                             <field name="voucher_type" invisible="True"/>
                             <field name="currency_id" invisible="True"/>
-                            <field name="partner_id" domain="[('supplier','=',True)]" string="Vendor"
+                            <field name="partner_id" domain="[('supplier_rank','&gt;', '0')]" string="Vendor"
                                    context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}"/>
                             <field name="pay_now" required="1"/>
 <!--                            <field name="payment_journal_id"-->

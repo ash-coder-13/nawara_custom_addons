@@ -20,7 +20,7 @@
 						<group name="left">
 							<field name="ttype"/>
 							<field name="site" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-							<field name="customer" domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>
+							<field name="customer" domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>
 							<field name="b_name"  domain="[('customer.id','=',customer)]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 						</group>
 						<group name="right">

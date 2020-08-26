@@ -6,6 +6,6 @@
     'category': 'sale',
     'version': '13.0.1.0',
     'application': True,
-    'depends': ['base', 'report'],
+    'depends': ['base',],
     'data': ['ir.model.access.csv', 'template.xml','views/module_report.xml'],
 }

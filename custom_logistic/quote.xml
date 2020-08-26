@@ -51,7 +51,7 @@
 
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="options">{'no_quick_create': True, 'no_create_edit' : True}</attribute>
-                <attribute name="domain">[('customer','=',True),('parent_id','=',False)]</attribute>
+                <attribute name="domain">[('customer_rank','&gt;', '0'),('parent_id','=',False)]</attribute>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
@@ -80,7 +80,7 @@
                 'invisible': [('state', 'in', ['draft', 'sent', 'sale'])]}"/>
                 <field name="extra_driver_id" attrs="{'required': [('extra_charges', '=', True)],
                 'readonly': [('state', 'in', ['rec', 'done'])],'invisible': [('extra_charges', '=', False)]}"
-                       domain="[('customer','=',False),('supplier','=',True)]"
+                       domain="[('customer_rank','&lt;=', '0'),('supplier_rank','&gt;', '0')]"
                        options="{'no_quick_create':True, 'no_create_edit' : True}"/>
                 <field name="extra_expenses" attrs="{'required': [('extra_charges', '=', True)],
                 'readonly': [('state', 'in', ['rec', 'done'])],
@@ -131,7 +131,7 @@
 
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="attributes">
-                <attribute name="domain">[('parent_id','=',False),('supplier','=',False),('customer','=',True)]
+                <attribute name="domain">[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]
                 </attribute>
             </xpath>
 
@@ -216,8 +216,8 @@
                             <field name="trans_mode"
                                    attrs="{'required': [('state', 'not in', ['draft']),('in_terminal', '=', True)]}"/>
 
-                            <field name="suppl_name" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'invisible':
+                            <field name="suppl_name" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'invisible':
                             [('trans_mode','=','in')],'required':[('trans_mode','=','ex')],
                                        'readonly':[('state','!=','draft'),('rescheduling','!=',True)]}" options="{'no_quick_create':
                                        True, 'no_create_edit' : True}" context="{'default_supplier':True,
@@ -233,7 +233,7 @@
 
                         <group colspan="4" col="4" attrs="{'invisible':[('trans_mode','=','ex')]}">
 
-                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True),('is_reserved','=',False)]" attrs="{'readonly':[('state','!=','draft'),('rescheduling','!=',True)],'required': [('trans_mode','=','in'),('in_terminal', '=', True)]}"
+                            <field name="driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),('is_reserved','=',False)]" attrs="{'readonly':[('state','!=','draft'),('rescheduling','!=',True)],'required': [('trans_mode','=','in'),('in_terminal', '=', True)]}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
                             <field name="vehicle_id" domain="[('is_reserved','=',False),('breakdown','=',False)]"
@@ -313,12 +313,12 @@
                             <!--<field name="pullout_mode" attrs="{'required':[('pull_out','=',True)]-->
                             <!--,'readonly':[('pullout_status','in',['InProcess','Completed'])]}"/>-->
 
-                            <field name="p_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('pullout_mode','=','ex')]
+                            <field name="p_transporter_id" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'required':[('pullout_mode','=','ex')]
                             ,'invisible':[('pullout_mode','!=','ex')],'readonly':[('pullout_status','in',['InProcess','Completed'])]}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
-                            <field name="p_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                            <field name="p_driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),
                                 ('is_reserved','=',False)]" attrs="{'required':[('pullout_mode','=','in')],
                                 'invisible':[('pullout_mode','!=','in')] ,'readonly':[('pullout_status','in',
                                 ['InProcess','Completed'])]}"
@@ -387,11 +387,11 @@
                     <group colspan="4" col="4">
                         <field name="breakdown_mode" attrs="{'required':[('breakdown','=',True)]
                         ,'readonly': [('breakdown_complete', '=', True)]}"/>
-                        <field name="b_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('breakdown_mode','=','ex')]
+                        <field name="b_transporter_id" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'required':[('breakdown_mode','=','ex')]
                             ,'invisible':[('breakdown_mode','!=','ex')],'readonly': [('breakdown_complete', '=', True)]}"
                                options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                        <field name="b_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                        <field name="b_driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),
                         ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                attrs="{'required':[('breakdown_mode','=','in'),('breakdown','=',True)],'readonly': [('breakdown_complete', '=', True)],
                                'invisible':[('breakdown_mode','!=','in')]}"/>
@@ -427,12 +427,12 @@
                         <group name="left">
                             <field name="shuttling_mode" attrs="{'required':[('shuttling','=',True)],
                         'readonly':[('shuttling_status','in',['Completed','InProcess'])]}"/>
-                            <field name="s_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('shuttling_mode','=','ex')]
+                            <field name="s_transporter_id" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'required':[('shuttling_mode','=','ex')]
                             ,'invisible':[('shuttling_mode','!=','ex')],'readonly':[('shuttling_status','in',['Completed','InProcess'])],}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
-                            <field name="s_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                            <field name="s_driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),
                         ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('shuttling_mode', '=','in'),('shuttling','=',True)],'readonly':[('shuttling_status','in',['Completed','InProcess'])],
                                'invisible':[('shuttling_mode','!=','in')]}"/>
@@ -461,12 +461,12 @@
                         <group name="left">
                             <field name="emp_mode" attrs="{'required':[('emp_col','=',True)],
                         'readonly':[('emp_status','in',['Completed','InProcess'])]}"/>
-                            <field name="emp_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('emp_mode','=','ex')]
+                            <field name="emp_transporter_id" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'required':[('emp_mode','=','ex')]
                             ,'invisible':[('emp_mode','!=','ex')],'readonly':[('emp_status','in',['Completed','InProcess'])],}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
-                            <field name="emp_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                            <field name="emp_driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),
                         ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('emp_mode','=','in'),('emp_col','=',True)],
                                    'readonly':[('emp_status','in',['Completed','InProcess'])],
@@ -497,12 +497,12 @@
                         <group name="left">
                             <field name="ret_mode" attrs="{'required':[('ret_col','=',True)],
                         'readonly':[('ret_status','in',['Completed','InProcess'])]}"/>
-                            <field name="ret_transporter_id" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('ret_mode','=','ex')]
+                            <field name="ret_transporter_id" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'required':[('ret_mode','=','ex')]
                             ,'invisible':[('ret_mode','!=','ex')],'readonly':[('ret_status','in',['Completed','InProcess'])],}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
-                            <field name="ret_driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                            <field name="ret_driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),
                         ('is_reserved','=',False)]" options="{'no_quick_create': True, 'no_create_edit' : True}"
                                    attrs="{'required':[('ret_mode','=','in'),('ret_col','=',True)],
                                    'readonly':[('ret_status','in',['Completed','InProcess'])],
@@ -544,7 +544,7 @@
 
 <!--            <xpath expr="//field[@name='partner_id']" position="after">-->
 <!--                <field name="customer_id" attrs="{'invisible': [('check', '!=', True)]}"-->
-<!--                       domain="[('customer','=',True)]"/>-->
+<!--                       domain="[('customer_rank','&gt;', '0')]"/>-->
 <!--                <field name="check" invisible="1"/>-->
 <!--                <field name="import_link" readonly="1"/>-->
 <!--                <field name="export_link" readonly="1"/>-->
@@ -657,7 +657,7 @@
                     <group>
                         <group>
                             <field name="customer" attrs="{'readonly':[('state','!=','draft')]}"
-                                   domain="[('is_driver','=', False),('supplier','=', False),('customer','=', True)]"
+                                   domain="[('is_driver','=', False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                             <field name="container" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="invoice_id" readonly="1"/>
@@ -739,12 +739,12 @@
                         <group name="left">
                             <field name="pullout_mode" attrs="{'readonly':[('pullout_status','in',
                                 ['InProcess','Completed'])]}"/>
-                            <field name="transporter_id" domain="[('types','=','trnas'),('customer','=',False),
-                            ('supplier','=',True),('is_driver','=',False)]" attrs="{'required':[('pullout_mode','=','ex')]
+                            <field name="transporter_id" domain="[('types','=','trnas'),('customer_rank','&lt;=', '0'),
+                            ('supplier_rank','&gt;', '0'),('is_driver','=',False)]" attrs="{'required':[('pullout_mode','=','ex')]
                             ,'invisible':[('pullout_mode','!=','ex')],'readonly':[('pullout_status','in',['InProcess','Completed'])]}"
                                    options="{'no_quick_create': True, 'no_create_edit' : True}"/>
 
-                            <field name="driver_id" domain="[('is_driver','=', True),('supplier','=', True),
+                            <field name="driver_id" domain="[('is_driver','=', True),('supplier_rank','&gt;', '0'),
                                 ('is_reserved','=',False)]" attrs="{'required':[('pullout_mode','=','in')],
                                 'invisible':[('pullout_mode','!=','in')] ,'readonly':[('pullout_status','in',
                                 ['InProcess','Completed'])]}"

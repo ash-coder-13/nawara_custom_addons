@@ -51,7 +51,7 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem id="invoice_status_report_menu_cust" name="Invoice Status Report" parent="account_reports.account_reports_legal_statements_menu" action="invoice_status_report_action_cust" />
+        <menuitem id="invoice_status_report_menu_cust" name="Invoice Status Report" parent="account.account_reports_legal_statements_menu" action="invoice_status_report_action_cust" />
 
         <!-- <record id="invoice_status_message_action" model="ir.actions.act_window">
             <field name="name">Mail Message</field>

@@ -17,7 +17,7 @@
                 <form string="Report">
                     <group name="group_top">
                         <group name="group_left">
-                            <field name="customer" domain="[('parent_id','=',False),('supplier','=',False),('customer','=',True)]"/>
+                            <field name="customer" domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>
                             <field name="date_from"/>
                             <!-- <field name="site"/> -->
                         </group>
