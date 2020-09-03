@@ -97,6 +97,8 @@ class ExportLogic(models.Model):
                 rec.tos = self.env['sale.order'].search([('partner_id', '=', rec.customer.id),
                                                       ('sales_id', '=', rec.id),
                                                       ('bill_no', '=', rec.bill_no)]).ids
+            else:
+                rec.tos = False
 
 
     @api.depends('export_id')
@@ -272,7 +274,7 @@ class ExportLogic(models.Model):
                 context['message'] = "Do you Really Want To Create Invoice, If yes then click Create Invoice Button Again."
                 return {'name': 'Warning',
                         'type': 'ir.actions.act_window',
-                        'view_type': 'form',
+
                         'view_mode': 'form',
                         'res_model': 'sh.message.wizard',
                         'views': [(view, 'form')],
@@ -589,6 +591,11 @@ class ImportLogic(models.Model):
                     rec.delivery_date = item.delivery_date
                     rec.delivery = item.delivery
                     rec.eir_date = item.eir_date
+            else:
+                rec.delivery_date = False
+                rec.delivery = False
+                rec.eir_date = False
+
 
     customer = fields.Many2one('res.partner', string="Customer", required=True)
     by_customer = fields.Many2one('by.customer', string="By Customer")
@@ -773,6 +780,8 @@ class ImportLogic(models.Model):
                 rec.tos = self.env['sale.order'].search([('partner_id', '=', rec.customer.id),
                                                           ('sales_imp_id', '=', rec.id),
                                                           ('bill_no', '=', rec.bill_no)]).ids
+            else:
+                rec.tos = False
 
 
     def create_sale(self):
@@ -788,7 +797,7 @@ class ImportLogic(models.Model):
                         'partner_id': self.customer.id,
                         'by_customer': self.by_customer.id, 'date_order': date.today(), 'bill_type': self.bill_types,
                         'bill_no': self.bill_no, 'import_chk': True, 'suppl_name': data.transporter.id,
-                        'suppl_freight': data.trans_charge, 'form': data.form.name, 'to': data.to.name,
+                        'suppl_freight': data.trans_charge,
                         'sales_imp_id': self.id, 'our_job': '', 'sr_no': '', 'customer_ref': self.customer_ref,
                         'custom_dec': '', 'bayan_no': self.bayan_no, 'customer_site': self.site.id,
                         'final_date': self.fin_bayan_date, 'no_invoice': True, 'demurrage': self.demurrage,

@@ -488,7 +488,6 @@
     <record id="view_form_site" model="ir.ui.view">
         <field name="name">view_form_site</field>
         <field name="model">import.site</field>
-        <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Summary">
                 <sheet>
@@ -502,7 +501,7 @@
                             <field name="address"/>
                             <field name="cnt_num"/>
                         </group>
-                        /
+
                     </group>
                 </sheet>
             </form>
@@ -888,7 +887,7 @@
     <act_window id="action_export_logic"
                 name="Export"
                 res_model="export.logic"
-                view_mode="tree,form,calender,graph,pivot"/>
+                view_mode="tree,form,graph,pivot"/>
 
     <menuitem id="menu_export_logistic" name="Exports" parent="menu_import" action="action_export_logic" sequence=""/>
     <menuitem id="account_journal_config_menu" name="Accounts and Journals Configuration"

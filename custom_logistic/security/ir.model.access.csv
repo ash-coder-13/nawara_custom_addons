@@ -28,7 +28,6 @@ to_quote_FO,to.quote,model_to_quote,group_logistic_FO,1,1,1,1
 fleet_FO,fleet,model_fleet,group_logistic_FO,1,1,1,1
 account_journal_configuration_FO,account_journal.configuration,model_account_journal_configuration,group_logistic_FO,1,1,1,1
 res_partner_FO,res.partner,model_res_partner,group_logistic_FO,1,1,1,1
-
 export_logic_TO,export.logic,model_export_logic,group_logistic_TO,1,1,1,1
 import_logic_TO,import.logic,model_import_logic,group_logistic_TO,1,1,1,1
 freight_forward_TO,freight.forward,model_freight_forward,group_logistic_TO,1,1,1,1
@@ -64,8 +63,6 @@ account_journal_configuration_TO,account_journal.configuration,model_account_jou
 to_mails_TO,to.mails,model_to_mails,group_logistic_TO,1,0,1,0
 multi_mails_TO,multi.mails,model_multi_mails,group_logistic_TO,1,1,1,1
 access_re_pullout,re.pullout,model_re_pullout,group_logistic_TO,1,1,1,1
-
-
 export_logic_CCO,export.logic,model_export_logic,group_logistic_CCO,1,1,1,1
 import_logic_COO,import.logic,model_import_logic,group_logistic_CCO,1,1,1,1
 import_site_CCO,import.site,model_import_site,group_logistic_CCO,1,1,1,1
@@ -102,7 +99,6 @@ account_move_line_CCO,account.move.line,model_account_move_line,group_logistic_C
 account_journal_configuration_CCO,account_journal.configuration,model_account_journal_configuration,group_logistic_CCO,1,0,1,0
 to_mails_CCO,to.mails,model_to_mails,group_logistic_CCO,1,0,1,0
 multi_mails_CCO,multi.mails,model_multi_mails,group_logistic_CCO,1,1,1,1
-
 export_logic_PO,export.logic,model_export_logic,group_logistic_PO,1,1,1,1
 import_logic_PO,import.logic,model_import_logic,group_logistic_PO,1,1,1,1
 freight_forward_PO,freight.forward,model_freight_forward,group_logistic_PO,1,1,1,1
@@ -128,7 +124,7 @@ serv_types_PO,serv.types,model_serv_types,group_logistic_PO,1,0,0,0
 vehicle_accident_attachment_PO,vehicle.accident.attachment,model_vehicle_accident_attachment,group_logistic_PO,1,0,0,0
 to_mails_PO,to.mails,model_to_mails,group_logistic_PO,1,0,1,0
 multi_mails_PO,multi.mails,model_multi_mails,group_logistic_PO,1,1,1,1
- access_report_partner_ledger_partner_ledger_2_report,access_report_partner_ledger_partner_ledger_2_report,model_report_partner_ledger_partner_ledger_2_report,,1,0,0,0
+access_report_partner_ledger_partner_ledger_2_report,access_report_partner_ledger_partner_ledger_2_report,model_report_partner_ledger_partner_ledger_2_report,,1,0,0,0
 access_statemnent_invoices,access_statemnent_invoices,model_statemnent_invoices,,1,0,0,0
 access_re_pullout,access_re_pullout,model_re_pullout,,1,0,0,0
 access_customer_pullout,access_customer_pullout,model_customer_pullout,,1,0,0,0

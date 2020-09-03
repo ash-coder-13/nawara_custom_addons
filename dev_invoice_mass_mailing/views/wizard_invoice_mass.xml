@@ -20,7 +20,7 @@
         <record id="action_mass_mail_invoice" model="ir.actions.act_window">
 			<field name="name">Invoice Mass Mail</field>
 			<field name="res_model">mass.mail.invoice</field>
-			<field name="view_type">form</field>
+
 			<field name="view_mode">form</field>
 			<field name="view_id" ref="view_mass_mail_invoice"/>
 			<field name="target">new</field>

@@ -146,10 +146,10 @@ class AccountVoucher(models.Model):
         self.account_date = self.date
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+    def fields_view_get(self, view_id=None, toolbar=False, submenu=False):
         res = super(AccountVoucher, self). \
-            fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
-        if view_type == 'form' and not self.user_has_groups(V_GROUP):
+            fields_view_get(view_id=view_id,  toolbar=toolbar, submenu=submenu)
+        if not self.user_has_groups(V_GROUP):
             arch = res['fields']['line_ids']['views']['tree']['arch']
             arch_el = etree.fromstring(arch)
             arch_el.find('field[@name="price_unit"]').set('string', 'Amount')

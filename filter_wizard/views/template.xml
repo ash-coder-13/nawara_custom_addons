@@ -2,11 +2,11 @@
 <odoo>
 
     <data>
-        <template id="assets_backend" name="max_web_draggable_dialog assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/filter_wizard/static/src/js/javascriptfile.js"></script>
-            </xpath>
-        </template>
+<!--        <template id="assets_backend" name="max_web_draggable_dialog assets" inherit_id="web.assets_backend">-->
+<!--            <xpath expr="." position="inside">-->
+<!--                <script type="text/javascript" src="/filter_wizard/static/src/js/javascriptfile.js"></script>-->
+<!--            </xpath>-->
+<!--        </template>-->
     </data>
 
     <record id="filter_wizard_form_view" model="ir.ui.view">

@@ -567,7 +567,7 @@ class TransportInfo(models.Model):
                                  "If yes then click Button Again."
             return {'name': 'Warning',
                     'type': 'ir.actions.act_window',
-                    'view_type': 'form',
+
                     'view_mode': 'form',
                     'res_model': 'sh.message.wizard',
                     'views': [(view, 'form')],
@@ -1002,7 +1002,7 @@ class ShipmentOrder(models.Model):
             context['message'] = "Do you Really Want To Add Shipment, If yes then click button again."
             return {'name': 'Warning',
                     'type': 'ir.actions.act_window',
-                    'view_type': 'form',
+
                     'view_mode': 'form',
                     'res_model': 'sh.message.wizard',
                     'views': [(view, 'form')],

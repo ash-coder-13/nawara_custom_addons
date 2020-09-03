@@ -42,7 +42,7 @@ class CreateFund(models.TransientModel):
         return {
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
-            'view_type': 'form',
+
             'res_model': 'pettycash.fund',
             'res_id': fund.id
         }

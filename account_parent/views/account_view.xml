@@ -46,7 +46,7 @@
     <record id="open_view_account_tree" model="ir.actions.act_window">
         <field name="name">Chart of Account Heirarchy</field>
         <field name="res_model">account.account</field>
-        <field name="view_type">tree</field>
+
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_account_tree"/>
         <field name="domain">[('parent_id','=',False)]</field>
@@ -76,7 +76,7 @@
     <record id="open_view_account_noparent_tree" model="ir.actions.act_window">
         <field name="name">Chart of Account Heirarchy</field>
         <field name="res_model">account.account</field>
-        <field name="view_type">tree</field>
+
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_account_noparent_tree"/>
         <field name="context">{'show_parent_account':True}</field>

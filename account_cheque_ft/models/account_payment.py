@@ -30,12 +30,12 @@ class AccountPayment(models.Model):
     mature_date = fields.Date('Cheque Maturing Date')
     
     @api.model
-    def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
+    def fields_view_get(self, view_id=None,  toolbar=False, submenu=False):
             """
                 Add domain 'allow_check_writting = True' on journal_id field and remove 'widget = selection' on the same
                 field because the dynamic domain is not allowed on such widget
             """
-            res = super(AccountPayment, self).fields_view_get(view_id=view_id, view_type=view_type,toolbar=toolbar, submenu=submenu)
+            res = super(AccountPayment, self).fields_view_get(view_id=view_id, toolbar=toolbar, submenu=submenu)
             doc = etree.XML(res['arch'])
             if self._context.has_key('from_cheque') :
                 nodes = doc.xpath("//field[@name='payment_method_id']")

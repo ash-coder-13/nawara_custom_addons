@@ -193,7 +193,7 @@ class AccountExtend(models.Model):
                     'domain': [],
                     'res_model': 'customer.payment.bcube',
                     'type': 'ir.actions.act_window',
-                    'view_mode': 'form', 'view_type': 'form',
+                    'view_mode': 'form',
                     'context': {
                         'default_partner_id': rec.partner_id.id,
                         'default_receipts': True,
