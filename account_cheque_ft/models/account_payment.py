@@ -29,20 +29,20 @@ class AccountPayment(models.Model):
     category_cheque_pdc_id = fields.Many2one('cheque.category.cheques', 'Post Dated Cheque', readonly=True)
     mature_date = fields.Date('Cheque Maturing Date')
     
-    @api.model
-    def fields_view_get(self, view_id=None,  toolbar=False, submenu=False):
-            """
-                Add domain 'allow_check_writting = True' on journal_id field and remove 'widget = selection' on the same
-                field because the dynamic domain is not allowed on such widget
-            """
-            res = super(AccountPayment, self).fields_view_get(view_id=view_id, toolbar=toolbar, submenu=submenu)
-            doc = etree.XML(res['arch'])
-            if self._context.has_key('from_cheque') :
-                nodes = doc.xpath("//field[@name='payment_method_id']")
-                for node in nodes:
-                    node.set('domain',str([('id', 'in', self._context.get('payment_method_id'))]) )
-                res['arch'] = etree.tostring(doc)
-            return res
+    # @api.model
+    # def fields_view_get(self, view_id=None,  toolbar=False, submenu=False):
+    #         """
+    #             Add domain 'allow_check_writting = True' on journal_id field and remove 'widget = selection' on the same
+    #             field because the dynamic domain is not allowed on such widget
+    #         """
+    #         res = super(AccountPayment, self).fields_view_get(view_id=view_id, toolbar=toolbar, submenu=submenu)
+    #         doc = etree.XML(res['arch'])
+    #         if self._context.has_key('from_cheque') :
+    #             nodes = doc.xpath("//field[@name='payment_method_id']")
+    #             for node in nodes:
+    #                 node.set('domain',str([('id', 'in', self._context.get('payment_method_id'))]) )
+    #             res['arch'] = etree.tostring(doc)
+    #         return res
         
     # to subtract pdc amount
     @api.model

@@ -73,6 +73,8 @@ class IndustryDivision(models.Model):
         for file in self:
             if file.c_code:
                 file.class_code = file.c_code
+            else:
+                file.class_code = ''
 
 
 class ResPartner(models.Model):
@@ -100,6 +102,8 @@ class ResPartner(models.Model):
         for file in self:
             if file.division_id:
                 file.class_code = file.division_id.class_code
+            else:
+                file.class_code = ''
 
 
 class CRMLead(models.Model):

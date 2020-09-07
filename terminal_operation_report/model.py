@@ -21,19 +21,25 @@
 ########################################################################################
 ########################################################################################
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.exceptions import Warning
+from odoo.exceptions import UserError
+
 
 class PartnerLedgerReport(models.AbstractModel):
     _name = 'report.terminal_operation_report.partner_ledger_2_report'
 
     @api.model
+    def _get_report_values(self, docids, data=None):
+        return self.render_html(docids,data=None)
+
+    @api.model
     def render_html(self,docids, data=None):
 
-        report_obj = self.env['report']
+        report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('terminal_operation_report.partner_ledger_2_report')
         active_wizard = self.env['terminal.ledger'].search([])
 
@@ -64,6 +70,8 @@ class PartnerLedgerReport(models.AbstractModel):
             'doc_model': 'sale.order',
             'docs': records,
             'get_name': get_name,
+            'report_type':'pdf'
+
         }
 
         return report_obj.render('terminal_operation_report.partner_ledger_2_report', docargs)

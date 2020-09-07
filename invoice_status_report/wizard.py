@@ -24,6 +24,6 @@ from odoo import models, fields, api
 class GenerateSalesSummaryStatus(models.Model):
 	_name = "invoice.statusreport"
 
-	form = fields.Date(string="From",required=True)
-	to = fields.Date(string="To",required=True)
+	form = fields.Date(string="From",required=True,readonly=False)
+	to = fields.Date(string="To",required=True,readonly=False)
 	

@@ -231,6 +231,8 @@ class TransportInfo(models.Model):
                 rec.detention = rec.sales_imp_id.detention_date
             if rec.sales_id.vessel_date:
                 rec.detention = rec.sales_id.detention_date
+            else:
+                rec.detention = False
 
 
     def rescheduling_start(self):

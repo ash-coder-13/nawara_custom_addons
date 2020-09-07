@@ -22,13 +22,13 @@
 
                         <group name="group_left">
 
-                            <field name="form"/>  
+                            <field name="form" readonly="0"/>
 
                         </group>
 
                         <group name="group_right">
 
-                            <field name="to"/>
+                            <field name="to" readonly="0"/>
                         
                         </group>
 

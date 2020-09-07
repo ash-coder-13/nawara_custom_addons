@@ -145,16 +145,16 @@ class AccountVoucher(models.Model):
     def onchange_date(self):
         self.account_date = self.date
 
-    @api.model
-    def fields_view_get(self, view_id=None, toolbar=False, submenu=False):
-        res = super(AccountVoucher, self). \
-            fields_view_get(view_id=view_id,  toolbar=toolbar, submenu=submenu)
-        if not self.user_has_groups(V_GROUP):
-            arch = res['fields']['line_ids']['views']['tree']['arch']
-            arch_el = etree.fromstring(arch)
-            arch_el.find('field[@name="price_unit"]').set('string', 'Amount')
-            res['fields']['line_ids']['views']['tree']['arch'] = etree.tostring(arch_el)
-        return res
+    # @api.model
+    # def fields_view_get(self, view_id=None, toolbar=False, submenu=False):
+    #     res = super(AccountVoucher, self). \
+    #         fields_view_get(view_id=view_id,  toolbar=toolbar, submenu=submenu)
+    #     if not self.user_has_groups(V_GROUP):
+    #         arch = res['fields']['line_ids']['views']['tree']['arch']
+    #         arch_el = etree.fromstring(arch)
+    #         arch_el.find('field[@name="price_unit"]').set('string', 'Amount')
+    #         res['fields']['line_ids']['views']['tree']['arch'] = etree.tostring(arch_el)
+    #     return res
 
     @api.depends('move_id.line_ids.reconciled', 'move_id.line_ids.account_id.internal_type')
     def _check_paid(self):
