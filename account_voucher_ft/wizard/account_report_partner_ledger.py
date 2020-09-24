@@ -35,7 +35,8 @@ class AccountPartnerLedger(models.TransientModel):
                              'partner_id': self.partner_id.id,
                              'partner_name': self.partner_id.name,
                              })
-        return self.env['report'].get_action(self, 'accounting_pdf_reports.report_partnerledger', data=data)
+        return self.env.ref('accounting_pdf_reports.report_partnerledger').report_action(self, data=data)
+        # return self.env['report'].get_action(self, 'accounting_pdf_reports.report_partnerledger', data=data)
 
 
 class ReportPartnerLedger(models.AbstractModel):
@@ -109,4 +110,4 @@ class ReportPartnerLedger(models.AbstractModel):
             'lines': self._lines,
             'sum_partner': self._sum_partner,
         }
-        return self.env['report'].render('account.report_partnerledger', docargs)
+        return self.env['ir.actions.report'].render('account.report_partnerledger', docargs)

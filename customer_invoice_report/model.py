@@ -28,8 +28,9 @@ class SampleDevelopmentReport(models.AbstractModel):
 
     @api.model
     def render_html(self, docids, data=None):
-        report_obj = self.env['report']
-        report = report_obj._get_report_from_name('customer_invoice_report.module_report')
+
+        report_obj = self.env['ir.actions.report']
+        report = self.env.ref('customer_invoice_report.module_report')
         active_wizard = self.env['cust.invoice'].search([])
         emp_list = []
         for x in active_wizard:

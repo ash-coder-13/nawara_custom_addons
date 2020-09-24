@@ -88,7 +88,9 @@ class AccountVoucher(models.Model):
         return line_total
 
     def print_voucher_ft(self):
-        return self.env['report'].get_action(self, 'account_voucher_ft.report_voucher')
+        return self.env.ref('account_voucher_ft.report_voucher').report_action(self, data=None)
+
+        # return self.env['report'].get_action(self, 'account_voucher_ft.report_voucher')
 
     @api.model
     def default_get(self,fields):

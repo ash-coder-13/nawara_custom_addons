@@ -26,7 +26,7 @@ class SampleDevelopmentReport(models.AbstractModel):
 
     @api.model
     def render_html(self, docids, data=None):
-        report_obj = self.env['report']
+        report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('tax_balance.module_report')
         records = self.env['account.tax'].browse(docids)
         to_date = 1

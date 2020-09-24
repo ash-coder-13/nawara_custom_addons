@@ -8,7 +8,7 @@ class PartnerLedgerReport(models.AbstractModel):
     @api.model
     def render_html(self,docids, data=None):
 
-        report_obj = self.env['report']
+        report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('genral_ledger.genral_ledger_report')
         active_wizard = self.env['genral.ledger'].search([])
         records = self.env['account.account'].browse(docids)

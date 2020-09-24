@@ -626,7 +626,9 @@ class TransportInfo(models.Model):
             self.sale_status = 4
             if not self.way_date:
                 self.way_date = date.today()
-            return self.env['report'].get_action(self, 'airway_bill.module_report')
+            return self.env.ref('airway_bill.module_report').report_action(self, data=None)
+
+            # return self.env['report'].get_action(self, 'airway_bill.module_report')
         else:
             raise UserError(_("Please Add Container Number To Print WayBill"))
 

@@ -34,7 +34,7 @@ class SampleDevelopmentReport(models.AbstractModel):
     @api.model
     def render_html(self, docids, data=None):
 
-        report_obj = self.env['report']
+        report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('invoice_status_report.sales_summary_report')
         active_wizard = self.env['invoice.statusreport'].search([])
 

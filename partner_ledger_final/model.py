@@ -34,7 +34,7 @@ class PartnerLedgerReport(models.AbstractModel):
     @api.model
     def render_html(self, docids, data=None):
 
-        report_obj = self.env['report']
+        report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('partner_ledger_final.partner_ledger_report')
         active_wizard = self.env['partner.ledger'].search([])
         active_wizard_ids = self.env['partner.ledger'].browse(docids)
