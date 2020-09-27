@@ -981,7 +981,7 @@
     <!-- This Menu Item must have a parent and an action -->
 
     <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
-    <menuitem id="custom_config_root" name="Custom Configurations" sequence="1" parent="sales_team.menu_sale_config"/>
+    <menuitem id="custom_config_root" name="Custom Configurations" sequence="1" parent="sale.menu_sale_config"/>
 
     <menuitem id="UNIQUE_ID_categ" name="Import Export Status" parent="custom_config_root"
               action="import_export_status_act"
