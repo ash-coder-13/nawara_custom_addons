@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Import Balance , Salvage Value JV",
+    'name': "Import Balance,Salvage Value JV",
 
-    'summary': """
-        This is test module to insert invoice and manage Hr Department and Journal Entries Customization
-        Also Consist of Cron Job For Asset auto posting to call that cron make a scheculed action for method
-        _cron_create_move and object ext.depreciation.job
-         """,
 
-    'description': """
-        No description
-    """,
+    'description': """No description""",
 
     'author': "Ashish",
     'website': "http://www.solutionfounder.com",
