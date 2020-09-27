@@ -82,6 +82,8 @@ class AccountAccount(models.Model):
     child_ids = fields.One2many('account.account','parent_id', 'Child Accounts')
     parent_left = fields.Integer('Left Parent', index=1)
     parent_right = fields.Integer('Right Parent', index=1)
+    parent_path = fields.Char(index=True)
+
     
     _parent_name = "parent_id"
     _parent_store = True
