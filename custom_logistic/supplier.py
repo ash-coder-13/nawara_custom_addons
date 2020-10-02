@@ -347,7 +347,7 @@ class FreightForwarding(models.Model):
                     'price_unit': x.amount_total,
                     'account_id': x.trans_account,
                     'name': "Transportation Charges For " + str(x.name) + ' اجور نقل '.decode('utf-8'),
-                    'invoice_id': create_invoice.id,
+                    'move_id': create_invoice.id,
                     'crt_no': x.order_line.crt_no,
                     # 'invoice_line_tax_ids': [1],
                 })
@@ -357,7 +357,7 @@ class FreightForwarding(models.Model):
                         'price_unit': x.partner_id.pullout_charges,
                         'account_id': account.t_pullout_account.id,
                         'name': x.name,
-                        'invoice_id': create_invoice.id
+                        'move_id': create_invoice.id
                     })
                 if x.pull_out and x.pullout_status == 'Completed':
                     day = 0
@@ -374,7 +374,7 @@ class FreightForwarding(models.Model):
                                 'price_unit': x.partner_id.storage_charges,
                                 'account_id': account.t_storage_account.id,
                                 'name': "Storage Charges for " + str(day.days) + " Days",
-                                'invoice_id': create_invoice.id
+                                'move_id': create_invoice.id
                             })
             if self.freight and self.freight_charges > 0.0:
                 invoice_lines.create({
@@ -382,7 +382,7 @@ class FreightForwarding(models.Model):
                     'price_unit': self.freight_charges,
                     'account_id': account.storage_invoice_account.id,
                     'name': "Freight Charges",
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
 
             self.acct_link = create_invoice.id
@@ -394,7 +394,7 @@ class FreightForwarding(models.Model):
                             'price_unit': x.charge_serv,
                             'account_id': account.i_custom_invoice_account.id,
                             'name': x.type_serv.name,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                             # 'invoice_line_tax_ids': [1],
                         })
                     for x in self.implink.import_id:
@@ -404,7 +404,7 @@ class FreightForwarding(models.Model):
                             'account_id': account.i_custom_invoice_account.id,
                             'name': x.des,
                             'crt_no': x.crt_no,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                             # 'invoice_line_tax_ids': [1],
                         })
 
@@ -433,8 +433,8 @@ class FreightForwarding(models.Model):
                             'account_id': account.i_custom_invoice_account.id,
                             'name': line,
                             'service_type': get_type,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                            'move_id': create_invoice.id,
+                            # 'invoice_line_tax_ids': [1],
                         })
 
                 for x in self.implink.import_other_charges:
@@ -443,7 +443,7 @@ class FreightForwarding(models.Model):
                         'price_unit': x.charges,
                         'account_id': account.i_custom_invoice_account.id,
                         'name': x.name,
-                        'invoice_id': create_invoice.id,
+                        'move_id': create_invoice.id,
                     })
                 for x in self.implink.import_gov_charges:
                     create_invoice_lines = invoice_lines.create({
@@ -451,7 +451,7 @@ class FreightForwarding(models.Model):
                         'price_unit': x.charges,
                         'account_id': account.g_invoice_account.id,
                         'name': x.name,
-                        'invoice_id': create_invoice.id,
+                        'move_id': create_invoice.id,
                     })
                 # vendor bill
                 if self.implink.import_gov_charges:
@@ -473,7 +473,7 @@ class FreightForwarding(models.Model):
                             'price_unit': x.charges,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                         })
 
             elif self.explink and self.explink.state == 'done':
@@ -484,8 +484,8 @@ class FreightForwarding(models.Model):
                             'price_unit': x.sevr_charge,
                             'account_id': account.e_custom_invoice_account.id,
                             'name': x.sevr_type.name,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                            'move_id': create_invoice.id,
+                            # 'invoice_line_tax_ids': [1],
                         })
 
                     # / B/L Wise invoice/
@@ -513,8 +513,8 @@ class FreightForwarding(models.Model):
                             'account_id': account.e_custom_invoice_account.id,
                             'name': line,
                             'service_type': get_type,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                            'move_id': create_invoice.id,
+                            # 'invoice_line_tax_ids': [1],
                         })
 
                 for x in self.explink.export_other_charges:
@@ -523,7 +523,7 @@ class FreightForwarding(models.Model):
                         'price_unit': x.charges,
                         'account_id': account.e_custom_invoice_account.id,
                         'name': x.name,
-                        'invoice_id': create_invoice.id,
+                        'move_id': create_invoice.id,
                     })
 
                 for x in self.explink.export_gov_charges:
@@ -532,7 +532,7 @@ class FreightForwarding(models.Model):
                         'price_unit': x.charges,
                         'account_id': account.g_invoice_account.id,
                         'name': x.name,
-                        'invoice_id': create_invoice.id,
+                        'move_id': create_invoice.id,
                     })
 
                 if self.explink.export_gov_charges:
@@ -552,7 +552,7 @@ class FreightForwarding(models.Model):
                             'price_unit': x.charges,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                         })
 
             else:
@@ -623,20 +623,22 @@ class FreightTree(models.Model):
 
     @api.onchange('cont_no')
     def container_no_check_onchange(self):
-        if self.cont_no:
-            if re.match('^[A-Z]{4}[0-9]{7,}$', self.cont_no.upper()):
-                self.cont_no = self.cont_no.upper()
-            else:
-                raise ValidationError("You have Entered a Wrong Container Number or Format: %s \nFormat is AAAA0000000"
-                                      "\nFirst Four Character Must be Alphabet and Last Seven Character Must be Numeric"
-                                      % self.cont_no.upper())
+        for rec in self:
+            if rec.cont_no:
+                if re.match('^[A-Z]{4}[0-9]{7,}$', rec.cont_no.upper()):
+                    rec.cont_no = rec.cont_no.upper()
+                else:
+                    raise ValidationError("You have Entered a Wrong Container Number or Format: %s \nFormat is AAAA0000000"
+                                          "\nFirst Four Character Must be Alphabet and Last Seven Character Must be Numeric"
+                                          % rec.cont_no.upper())
 
     @api.constrains('cont_no')
     def container_no_check_constrains(self):
-        if self.cont_no:
-            if re.match('^[A-Z]{4}[0-9]{7,}$', self.cont_no.upper()):
-                return True
-            else:
-                raise ValidationError("You have Entered a Wrong Container Number or Format: %s \nFormat is AAAA0000000,"
-                                      "\nFirst Four Character Must be Alphabet and Last Seven Character Must be Numeric"
-                                      % self.cont_no.upper())
+        for rec in self:
+            if rec.cont_no:
+                if re.match('^[A-Z]{4}[0-9]{7,}$', rec.cont_no.upper()):
+                    return True
+                else:
+                    raise ValidationError("You have Entered a Wrong Container Number or Format: %s \nFormat is AAAA0000000,"
+                                          "\nFirst Four Character Must be Alphabet and Last Seven Character Must be Numeric"
+                                          % rec.cont_no.upper())

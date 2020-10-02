@@ -101,7 +101,7 @@ class AccountAssetAsset(models.Model):
     depreciation_line_ids = fields.One2many('account.asset.depreciation.line', 'asset_id', string='Depreciation Lines', readonly=True, states={'draft': [('readonly', False)], 'open': [('readonly', False)]})
     salvage_value = fields.Float(string='Salvage Value', digits=0, readonly=True, states={'draft': [('readonly', False)]},
         help="It is the amount you plan to have that you cannot depreciate.")
-    invoice_id = fields.Many2one('account.invoice', string='Invoice', states={'draft': [('readonly', False)]}, copy=False)
+    invoice_id = fields.Many2one('account.move', string='Invoice', states={'draft': [('readonly', False)]}, copy=False)
     type = fields.Selection(related="category_id.type", string='Type', required=True)
 
 

@@ -19,6 +19,7 @@
         'supplier.xml',
         'mails.xml',
         'report.xml',
+        'journal_entry_view.xml',
     ],
     'installable': True,
     'auto_install': False

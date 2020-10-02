@@ -324,8 +324,8 @@ class ExportLogic(models.Model):
                                 'price_unit': x.sevr_charge,
                                 'account_id': account.e_invoice_account.id,
                                 'name': x.sevr_type.name,
-                                'invoice_id': create_invoice.id,
-                                'invoice_line_tax_ids': [1],
+                                'move_id': create_invoice.id,
+                                # 'invoice_line_tax_ids': [1],
                             })
 
                     # / B/L Wise invoice/
@@ -373,8 +373,8 @@ class ExportLogic(models.Model):
                                 'account_id': account.e_invoice_account.id,
                                 'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
                                 'service_type': get_type,
-                                'invoice_id': create_invoice.id,
-                                'invoice_line_tax_ids': [1],
+                                'move_id': create_invoice.id,
+                                # 'invoice_line_tax_ids': [1],
                             })
 
                     for x in rec.export_other_charges:
@@ -383,7 +383,7 @@ class ExportLogic(models.Model):
                             'price_unit': x.charges,
                             'account_id': account.e_invoice_account.id,
                             'name': x.name.name,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                         })
 
                     for x in rec.export_gov_charges:
@@ -392,7 +392,7 @@ class ExportLogic(models.Model):
                             'price_unit': x.charges,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name.name,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                         })
                     rec.acc_link = create_invoice.id
 
@@ -405,7 +405,7 @@ class ExportLogic(models.Model):
                                 'account_id': account.same_custom_invoice_account.id,
                                 'name': str(x.name) + " Transportation Charges" + ' اجور نقل '.decode('utf-8'),
                                 'crt_no': x.order_line.crt_no,
-                                'invoice_id': create_invoice.id
+                                'move_id': create_invoice.id
                             })
 
                             if x.pullout_type == 'Customer':
@@ -414,7 +414,7 @@ class ExportLogic(models.Model):
                                     'price_unit': x.partner_id.pullout_charges,
                                     'account_id': account.t_pullout_account.id,
                                     'name': str(x.name) + " PullOut Charges",
-                                    'invoice_id': create_invoice.id
+                                    'move_id': create_invoice.id
                                 })
 
                             if x.pull_out and x.pullout_status == 'Completed':
@@ -431,7 +431,7 @@ class ExportLogic(models.Model):
                                             'price_unit': x.partner_id.storage_charges,
                                             'account_id': account.t_storage_account.id,
                                             'name': "Storage Charges for " + str(day.days) + " Days",
-                                            'invoice_id': create_invoice.id
+                                            'move_id': create_invoice.id
                                         })
 
                     # vendor bill creation
@@ -453,7 +453,7 @@ class ExportLogic(models.Model):
                                 'price_unit': x.charges,
                                 'account_id': account.g_invoice_account.id,
                                 'name': x.name.name,
-                                'invoice_id': create_invoice.id,
+                                'move_id': create_invoice.id,
                             })
                     email_rec = self.env['multi.mails'].search([])
                     template = self.env.ref('custom_logistic.tie_email_template')
@@ -834,8 +834,8 @@ class ImportLogic(models.Model):
                     'context': context, }
 
         account = self.env['account_journal.configuration'].search([])
-        invoice = self.env['account.move'].search([])
-        invoice_lines = self.env['account.move.line'].search([])
+        invoice = self.env['account.move']
+        invoice_lines = self.env['account.move.line']
         sale = self.env['sale.order'].search([('sales_imp_id', '=', self.id)])
         check = 0
         for x in sale:
@@ -843,7 +843,7 @@ class ImportLogic(models.Model):
                 check += 1
 
         if check == len(sale):
-            create_invoice = ''
+
             # / B/L Wise invoice/
             if not self.acc_link and not self.fri_id:
                 if self.bill_types == "B/L Number":
@@ -874,8 +874,8 @@ class ImportLogic(models.Model):
                             'price_unit': x.charge_serv,
                             'account_id': account.i_invoice_account.id,
                             'name': x.type_serv.name,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                            'move_id': create_invoice.id,
+
                         })
                     for x in self.import_id:
                         create_invoice_lines = invoice_lines.create({
@@ -884,8 +884,8 @@ class ImportLogic(models.Model):
                             'account_id': account.i_invoice_account.id,
                             'name': x.des,
                             'crt_no': x.crt_no,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                            'move_id': create_invoice.id,
+                            # 'invoice_line_tax_ids': [1],
                         })
 
                 # / Container Wise invoice/
@@ -914,8 +914,8 @@ class ImportLogic(models.Model):
                         'import_link': self.id,
                         'property_account_receivable_id': self.customer.property_account_receivable_id.id,
                     })
-
-                    self.acc_link = create_invoice.id
+                    if create_invoice:
+                        self.acc_link = create_invoice.id
                     for line in entry:
                         value = 0
                         for x in self.import_id:
@@ -934,8 +934,8 @@ class ImportLogic(models.Model):
                             'account_id': account.i_invoice_account.id,
                             'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
                             'service_type': get_type,
-                            'invoice_id': create_invoice.id,
-                            'invoice_line_tax_ids': [1],
+                            'move_id': create_invoice.id,
+                            # 'invoice_line_tax_ids': [1],
                         })
 
                 for x in self.import_other_charges:
@@ -944,7 +944,7 @@ class ImportLogic(models.Model):
                         'price_unit': x.charges,
                         'account_id': account.i_invoice_account.id,
                         'name': x.name.name,
-                        'invoice_id': create_invoice.id,
+                        'move_id': create_invoice.id,
                     })
                 for x in self.import_gov_charges:
                     create_invoice_lines = invoice_lines.create({
@@ -952,7 +952,7 @@ class ImportLogic(models.Model):
                         'price_unit': x.charges,
                         'account_id': account.g_invoice_account.id,
                         'name': x.name.name,
-                        'invoice_id': create_invoice.id,
+                        'move_id': create_invoice.id,
                     })
                 self.acc_link = create_invoice.id
 
@@ -965,7 +965,7 @@ class ImportLogic(models.Model):
                             'account_id': x.trans_account,
                             'name': str(x.name) + " Transportation Charges" + ' اجور نقل '.decode('utf-8'),
                             'crt_no': x.order_line.crt_no,
-                            'invoice_id': create_invoice.id
+                            'move_id': create_invoice.id
                         })
 
                         if x.pullout_type == 'Customer':
@@ -974,7 +974,7 @@ class ImportLogic(models.Model):
                                 'price_unit': x.partner_id.pullout_charges,
                                 'account_id': account.t_pullout_account.id,
                                 'name': str(x.name) + " PullOut Charges",
-                                'invoice_id': create_invoice.id
+                                'move_id': create_invoice.id
                             })
 
                         if x.pull_out and x.pullout_status == 'Completed':
@@ -991,7 +991,7 @@ class ImportLogic(models.Model):
                                         'price_unit': x.partner_id.storage_charges,
                                         'account_id': account.t_storage_account.id,
                                         'name': "Storage Charges for " + str(day.days) + " Days",
-                                        'invoice_id': create_invoice.id
+                                        'move_id': create_invoice.id
                                     })
                 partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
 
@@ -1015,7 +1015,7 @@ class ImportLogic(models.Model):
                             'attachment': x.attachment,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name.name,
-                            'invoice_id': create_invoice.id,
+                            'move_id': create_invoice.id,
                         })
                 email_rec = self.env['multi.mails'].search([])
                 template = self.env.ref('custom_logistic.tii_email_template')
@@ -1177,14 +1177,14 @@ class AccInvLineExt(models.Model):
     attachment = fields.Binary(string="Attachment", attachment=True)
     afterTaxAmt = fields.Float(string='Tax Amount', required=False, digits=(6, 3))
 
-    @api.onchange('price_subtotal', 'quantity', 'price_unit', 'invoice_line_tax_ids')
-    def onchange_price_subtotal(self):
-        if self.invoice_line_tax_ids:
-            amt = 0
-            for x in self.invoice_line_tax_ids:
-                tax = x.amount / 100
-                amt = amt + (tax * self.price_subtotal)
-            self.afterTaxAmt = amt
+    # @api.onchange('price_subtotal', 'quantity', 'price_unit', 'invoice_line_tax_ids')
+    # def onchange_price_subtotal(self):
+    #     if self.invoice_line_tax_ids:
+    #         amt = 0
+    #         for x in self.invoice_line_tax_ids:
+    #             tax = x.amount / 100
+    #             amt = amt + (tax * self.price_subtotal)
+    #         self.afterTaxAmt = amt
 
 
 class SaleLineExt(models.Model):

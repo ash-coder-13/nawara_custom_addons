@@ -291,7 +291,7 @@ class TransportInfo(models.Model):
                 'price_unit': self.emp_driver_expenses,
                 'account_id': account,
                 'name': "Empty Collection " + self.name,
-                'invoice_id': create_invoice.id,
+                'move_id': create_invoice.id,
                 'crt_no': self.container_num
 
             })
@@ -341,7 +341,7 @@ class TransportInfo(models.Model):
                 'price_unit': self.ret_driver_expenses,
                 'account_id': account,
                 'name': "Empty Return Collection " + self.name,
-                'invoice_id': create_invoice.id,
+                'move_id': create_invoice.id,
                 'crt_no': self.container_num
 
             })
@@ -431,7 +431,7 @@ class TransportInfo(models.Model):
                     'crt_no': x.crt_no,
                     'account_id': account,
                     'name': x.name + " Shuttling Charges",
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
             self.shuttling_status = 'InProcess'
             if self.shuttling_mode == 'in':
@@ -481,7 +481,7 @@ class TransportInfo(models.Model):
                     'price_unit': self.b_driver_expenses,
                     'account_id': account,
                     'name': 'BreakDown Driver TripMoney',
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
 
             if self.trans_mode == 'in':
@@ -655,7 +655,7 @@ class TransportInfo(models.Model):
                     'price_unit': self.extra_expenses,
                     'account_id': acc,
                     'name': self.extra_reason,
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
                 self.extra_paid = True
             else:
@@ -707,7 +707,7 @@ class TransportInfo(models.Model):
                     'crt_no': x.crt_no,
                     'account_id': acc,
                     'name': x.name,
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
         self.dispatch_date = datetime.today()
         if self.state == 'air':
@@ -750,7 +750,7 @@ class TransportInfo(models.Model):
                     'crt_no': x.crt_no,
                     'account_id': account,
                     'name': x.name,
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
             self.pullout_status = 'InProcess'
             if self.pullout_mode == 'in':
@@ -831,7 +831,7 @@ class TransportInfo(models.Model):
                         'price_unit': self.partner_id.pullout_charges,
                         'account_id': account.t_pullout_account.id,
                         'name': "PullOut Charges",
-                        'invoice_id': self.acc_link.id
+                        'move_id': self.acc_link.id
                     })
 
             if self.pull_out and self.pullout_status == 'Completed':
@@ -848,7 +848,7 @@ class TransportInfo(models.Model):
                             'price_unit': self.partner_id.storage_charges,
                             'account_id': account.t_storage_account.id,
                             'name': "Storage Charges for " + str(day.days) + " Days",
-                            'invoice_id': self.acc_link.id
+                            'move_id': self.acc_link.id
                         })
             email_rec = self.env['multi.mails'].search([])
             template = self.env.ref('custom_logistic.ti_email_template')
@@ -895,7 +895,7 @@ class TransportInfo(models.Model):
                         'price_unit': self.partner_id.pullout_charges,
                         'account_id': account.t_pullout_account.id,
                         'name': "PullOut Charges",
-                        'invoice_id': self.acc_link.id
+                        'move_id': self.acc_link.id
                     })
 
             if self.pull_out and self.pullout_status == 'Completed':
@@ -912,7 +912,7 @@ class TransportInfo(models.Model):
                             'price_unit': self.partner_id.storage_charges,
                             'account_id': account.t_storage_account.id,
                             'name': "Storage Charges for " + str(day.days) + " Days",
-                            'invoice_id': self.acc_link.id
+                            'move_id': self.acc_link.id
                         })
             email_rec = self.env['multi.mails'].search([])
             template = self.env.ref('custom_logistic.ti_email_template')
@@ -1076,7 +1076,7 @@ class ShipmentOrder(models.Model):
                     'price_unit': x.order_line.price_unit,
                     'account_id': x.trans_account,
                     'crt_no': x.order_line.crt_no,
-                    'invoice_id': records.id,
+                    'move_id': records.id,
                 })
                 if x.pullout_type == 'Customer':
                     records.invoice_line_ids.create({
@@ -1084,7 +1084,7 @@ class ShipmentOrder(models.Model):
                         'price_unit': x.partner_id.pullout_charges,
                         'account_id': account.t_pullout_account.id,
                         'name': x.name + "PullOut Charges",
-                        'invoice_id': records.id
+                        'move_id': records.id
                     })
                 if x.pull_out and x.pullout_status == 'Completed':
                     day = 0
@@ -1101,7 +1101,7 @@ class ShipmentOrder(models.Model):
                                 'price_unit': x.partner_id.storage_charges,
                                 'account_id': account.t_storage_account.id,
                                 'name': "Storage Charges for " + str(day.days) + " Days",
-                                'invoice_id': records.id
+                                'move_id': records.id
                             })
 
                 x.state = 'done'
@@ -1195,7 +1195,7 @@ class RePullout(models.Model):
                     'crt_no': x.crt_no,
                     'account_id': account,
                     'name': x.name,
-                    'invoice_id': create_invoice.id
+                    'move_id': create_invoice.id
                 })
             self.pullout_status = 'InProcess'
             if self.pullout_mode == 'in':

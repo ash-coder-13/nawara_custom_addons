@@ -43,7 +43,7 @@ class invoiceModuleCost(models.Model):
                         'price_unit': rec.amount,
                         'account_id': self.account_id.id,
                         'quantity': 1,
-                        'invoice_id': records.id
+                        'move_id': records.id
                     })
                     rec.account_invoice = records.id
                 else:
