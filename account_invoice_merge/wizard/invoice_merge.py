@@ -20,22 +20,22 @@ class InvoiceMerge(models.TransientModel):
 
     @api.model
     def _dirty_check(self):
-        if self.env.context.get('active_model', '') == 'account.invoice':
+        if self.env.context.get('active_model', '') == 'account.move':
             ids = self.env.context['active_ids']
             if len(ids) < 2:
                 raise exceptions.Warning(
                     _('Please select multiple invoices to merge in the list '
                       'view.'))
 
-            invs = self.env['account.invoice'].browse(ids)
+            invs = self.env['account.move'].browse(ids)
             for d in invs:
                 if d['state'] != 'draft':
                     raise exceptions.Warning(
                         _('At least one of the selected invoices is %s!') %
                         d['state'])
-                if d['account_id'] != invs[0]['account_id']:
-                    raise exceptions.Warning(
-                        _('Not all invoices use the same account!'))
+                # if d['account_id'] != invs[0]['account_id']:
+                #     raise exceptions.Warning(
+                #         _('Not all invoices use the same account!'))
                 if d['company_id'] != invs[0]['company_id']:
                     raise exceptions.Warning(
                         _('Not all invoices are at the same company!'))
@@ -69,7 +69,7 @@ class InvoiceMerge(models.TransientModel):
         self._dirty_check()
         return res
 
-    @api.multi
+
     def merge_invoices(self):
         """To merge similar type of account invoices.
 
@@ -81,20 +81,36 @@ class InvoiceMerge(models.TransientModel):
 mer
              @return: account invoice action
         """
-        inv_obj = self.env['account.invoice']
+        inv_obj = self.env['account.move']
         aw_obj = self.env['ir.actions.act_window']
         ids = self.env.context.get('active_ids', [])
         invoices = inv_obj.browse(ids)
         allinvoices = invoices.do_merge(keep_references=self.keep_references,
                                         date_invoice=self.date_invoice)
         xid = {
-            'out_invoice': 'action_invoice_tree1',
-            'out_refund': 'action_invoice_tree1',
-            'in_invoice': 'action_invoice_tree2',
-            'in_refund': 'action_invoice_tree2',
+            'out_invoice': 'action_move_out_invoice_type',
+            'out_refund': 'action_move_out_refund_type',
+            'in_invoice': 'action_move_in_invoice_type',
+            'in_refund': 'action_move_in_refund_type',
         }[invoices[0].type]
         action = aw_obj.for_xml_id('account', xid)
         action.update({
-            'domain': [('id', 'in', ids + allinvoices.keys())],
+            'domain': [('id', 'in', ids + list(allinvoices.keys()))],
         })
         return action
+
+
+    def action_merge_invoices(self):
+        active_ids = self.env.context.get('active_ids')
+        if not active_ids:
+            return ''
+
+        return {
+            'name': _('Merge Invoice'),
+            'res_model': 'invoice.merge',
+            'view_mode': 'form',
+            'view_id': self.env.ref('account_invoice_merge.view_invoice_merge').id,
+            'context': self.env.context,
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }

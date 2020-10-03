@@ -16,8 +16,8 @@ class TestAccountInvoiceMerge(TransactionCase):
         self.par_model = self.env['res.partner']
         self.context = self.env['res.users'].context_get()
         self.acc_model = self.env['account.account']
-        self.inv_model = self.env['account.invoice']
-        self.inv_line_model = self.env['account.invoice.line']
+        self.inv_model = self.env['account.move']
+        self.inv_line_model = self.env['account.mmove.line']
         self.wiz = self.env['invoice.merge']
 
         self.partner1 = self._create_partner()
@@ -75,7 +75,7 @@ class TestAccountInvoiceMerge(TransactionCase):
 
         wiz_id = self.wiz.with_context(
             active_ids=[self.invoice1.id, self.invoice2.id],
-            active_model='account.invoice'
+            active_model='account.move'
         ).create({})
         wiz_id.fields_view_get()
         action = wiz_id.merge_invoices()
@@ -100,7 +100,7 @@ class TestAccountInvoiceMerge(TransactionCase):
     def test_account_invoice_merge_2(self):
         wiz_id = self.wiz.with_context(
             active_ids=[self.invoice1.id, self.invoice3.id],
-            active_model='account.invoice'
+            active_model='account.move'
         ).create({})
         with self.assertRaises(Warning):
             wiz_id.fields_view_get()
