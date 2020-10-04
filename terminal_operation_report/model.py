@@ -32,12 +32,12 @@ from odoo.exceptions import UserError
 class PartnerLedgerReport(models.AbstractModel):
     _name = 'report.terminal_operation_report.partner_ledger_2_report'
 
-    @api.model
-    def _get_report_values(self, docids, data=None):
-        return self.render_html(docids,data=None)
+    # @api.model
+    # def _get_report_values(self, docids, data=None):
+    #     return self.render_html(docids,data=None)
 
     @api.model
-    def render_html(self,docids, data=None):
+    def _get_report_values(self,docids, data=None):
 
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('terminal_operation_report.partner_ledger_2_report')
@@ -74,4 +74,4 @@ class PartnerLedgerReport(models.AbstractModel):
 
         }
 
-        return report_obj.render('terminal_operation_report.partner_ledger_2_report', docargs)
+        return docargs

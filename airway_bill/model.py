@@ -26,7 +26,7 @@ class SampleDevelopmentReport(models.AbstractModel):
     _name = 'report.airway_bill.module_report'
 
     @api.model
-    def render_html(self,docids, data=None):
+    def _get_report_values(self,docids, data=None):
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('airway_bill.module_report')
         records = self.env['sale.order'].browse(docids)
@@ -43,4 +43,4 @@ class SampleDevelopmentReport(models.AbstractModel):
 
             }
 
-        return report_obj.render('airway_bill.module_report', docargs)
+        return  docargs

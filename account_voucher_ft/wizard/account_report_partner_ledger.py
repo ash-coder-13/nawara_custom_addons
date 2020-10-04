@@ -43,7 +43,7 @@ class ReportPartnerLedger(models.AbstractModel):
     _inherit = 'report.accounting_pdf_reports.report_partnerledger'
 
     @api.model
-    def render_html(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         if not data.get('form'):
             raise UserError(_("Form content is missing, this report cannot be printed."))
         data['computed'] = {}
@@ -110,4 +110,4 @@ class ReportPartnerLedger(models.AbstractModel):
             'lines': self._lines,
             'sum_partner': self._sum_partner,
         }
-        return self.env['ir.actions.report'].render('account.report_partnerledger', docargs)
+        return docargs

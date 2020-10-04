@@ -5,8 +5,8 @@
 
         <template id="module_report">
 
-            <t t-call="report.html_container">
-                <t t-call="report.external_layout">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
                     <div class="page">
 
                         <style>

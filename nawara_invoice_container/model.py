@@ -24,8 +24,18 @@ import re
 class PacificCommercialInvoice(models.AbstractModel):
     _name = 'report.nawara_invoice_container.logistic_invoice'
 
+    # @api.model
+    # def _get_report_values(self, docids, data=None):
+    #     docs = self.env['account.move'].browse(docids)
+    #     return {
+    #         'doc_ids': docs.ids,
+    #         'doc_model': 'account.move',
+    #         'data': data,
+    #         'docs': docs,
+    #     }
+
     @api.model
-    def render_html(self,docids, data=None):
+    def _get_report_values(self,docids, data=None):
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('nawara_invoice_container.logistic_invoice')
         records = self.env['account.move'].browse(docids)
@@ -65,4 +75,4 @@ class PacificCommercialInvoice(models.AbstractModel):
             'number_to_spell':number_to_spell,
             }
 
-        return report_obj.render('nawara_invoice_container.logistic_invoice', docargs)
+        return docargs

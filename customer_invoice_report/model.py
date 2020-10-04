@@ -27,7 +27,7 @@ class SampleDevelopmentReport(models.AbstractModel):
     _name = 'report.customer_invoice_report.module_report'
 
     @api.model
-    def render_html(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
 
         report_obj = self.env['ir.actions.report']
         report = self.env.ref('customer_invoice_report.module_report')
@@ -159,4 +159,4 @@ class SampleDevelopmentReport(models.AbstractModel):
             'get_partner_payment': get_partner_payment,
         }
 
-        return report_obj.render('customer_invoice_report.module_report', docargs)
+        return  docargs

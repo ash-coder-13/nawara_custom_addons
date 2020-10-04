@@ -25,7 +25,7 @@ class SampleDevelopmentReport(models.AbstractModel):
     _name = 'report.tax_balance.module_report'
 
     @api.model
-    def render_html(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('tax_balance.module_report')
         records = self.env['account.tax'].browse(docids)
@@ -56,4 +56,4 @@ class SampleDevelopmentReport(models.AbstractModel):
             'from_date':from_date,
         }
 
-        return report_obj.render('tax_balance.module_report', docargs)
+        return docargs

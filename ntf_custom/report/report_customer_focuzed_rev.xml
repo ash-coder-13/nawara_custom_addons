@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_customer_focuzed_rev">
-        <t t-call="report.external_layout">
+        <t t-call="web.external_layout">
             <div class="page" style="font-size:14px;width:100%">
                 <div class="oe_structure"/>
                 <div class="row">

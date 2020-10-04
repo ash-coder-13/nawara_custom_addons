@@ -49,7 +49,7 @@
             </div>
         </div>
         </template>
-        <template id="report.external_layout_voucher" inherit_id="report.external_layout"
+        <template id="report.external_layout_voucher" inherit_id="web.external_layout"
                   primary="True" name="Report Layout for Voucher">
 <!--            <t t-call="report.external_layout_header" position="replace">-->
 <!--                <t t-call="report.external_layout_header_voucher_x" />-->
@@ -172,7 +172,7 @@
         </template>
 
         <template id="report_receipt_document">
-            <t t-call="report.external_layout">
+            <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
                 <div class="page">
                     <div class="row row_top"><h3>RECEIPT VOUCHER</h3></div>
@@ -209,7 +209,7 @@
         </template>
 
         <template id="report_voucher">
-            <t t-call="report.html_container">
+            <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-if="o.line_ids" t-call="account_voucher_ft.report_voucher_layout" t-lang="o.partner_id.lang"/>
                     <t t-if="not o.line_ids" t-call="account_voucher_ft.report_receipt_document" t-lang="o.partner_id.lang"/>

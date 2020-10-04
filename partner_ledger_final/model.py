@@ -32,7 +32,7 @@ class PartnerLedgerReport(models.AbstractModel):
     _name = 'report.partner_ledger_final.partner_ledger_report'
 
     @api.model
-    def render_html(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
 
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('partner_ledger_final.partner_ledger_report')
@@ -107,4 +107,4 @@ class PartnerLedgerReport(models.AbstractModel):
             'get_entries': get_entries,
         }
 
-        return report_obj.render('partner_ledger_final.partner_ledger_report', docargs)
+        return  docargs
