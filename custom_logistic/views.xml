@@ -229,26 +229,26 @@
         </field>
     </record>
 
-<!--    <record id="view_filter_export" model="ir.ui.view">-->
-<!--        <field name="name">view_filter_export</field>-->
-<!--        <field name="model">export.logic</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--                <field name="customer" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
-<!--                <field name="by_customer" domain="[('customer.id','=',customer)]"/>-->
-<!--                <field name="customer_ref" string="Customer Reference"/>-->
-<!--                <field name="bill_no" string="BL Number"/>-->
-<!--                <field name="bayan_no" string="Bayan No"/>-->
-<!--                <field name="pre_bayan" string="Pre Bayan Date"/>-->
-<!--                <field name="site" string="Site"/>-->
-<!--                <field name="status" string="Status"/>-->
-<!--                <field name="house_bl" string="House BL"/>-->
-<!--                <field name="container_num" string="Container Num"/>-->
-<!--                <filter string="Group By Date" context="{'group_by':'date:day'}"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_filter_export_search" model="ir.ui.view">
+        <field name="name">view.filter.export.search</field>
+        <field name="model">export.logic</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="customer" string="Customer"
+                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>
+                <field name="by_customer" domain="[('customer.id','=',customer)]"/>
+                <field name="customer_ref" string="Customer Reference"/>
+                <field name="bill_no" string="BL Number"/>
+                <field name="bayan_no" string="Bayan No"/>
+                <field name="pre_bayan" string="Pre Bayan Date"/>
+                <field name="site" string="Site"/>
+                <field name="status" string="Status"/>
+                <field name="house_bl" string="House BL"/>
+                <field name="container_num" string="Container Num"/>
+                <filter name="date_order" string="Date" context="{'group_by':'date:day'}"/>
+            </search>
+        </field>
+    </record>
 
     <record id="view_filter_transportation" model="ir.ui.view">
         <field name="name">view_filter_transportation</field>
@@ -266,32 +266,35 @@
         </field>
     </record>
 
-<!--    <record id="view_filter_transportation_in_terminal" model="ir.ui.view">-->
-<!--        <field name="name">view_filter_transportation_in_terminal</field>-->
-<!--        <field name="model">sale.order</field>-->
-<!--        <field name="inherit_id" ref="sale.view_sales_order_filter"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--                <field name="partner_id" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
-<!--                <field name="by_customer"/>-->
-<!--                <field name="bill_no" string="BL Number"/>-->
-<!--                <field name="container_num" string="Container Number"/>-->
-<!--                <filter string="Demurrage"-->
-<!--                        domain="[('sale_status.id','!=','4'),('sale_status.id','!=','16'),('pull_out','=',False),('sales_imp_id','!=',False)]"-->
-<!--                        name="my_custom_termianl_demurrage_filter"/>-->
-<!--                <filter string="Detention"-->
-<!--                        domain="[('eir_date','=',False),('sales_imp_id','!=',False),('state','!=','done'),('sale_status.id','!=','4'),('sale_status.id','!=','16'),('pull_out','=',False)]"-->
-<!--                        name="my_custom_terminal_detention_filter"/>-->
-<!--                <filter string="Lead Days" context="{'group_by':'lead_days'}"/>-->
-<!--                <filter string="Group By Date" context="{'group_by':'date_order:day'}"/>-->
-<!--                <filter string="Arrival Date (Day)" context="{'group_by':'delivery_date:day'}"/>-->
-<!--                <filter string="Dispatch (Daily Report)" context="{'group_by':'dispatch_date:day'}"/>-->
-<!--                <filter string="PullOut (Daily Report)" context="{'group_by':'pullout_date:day'}"/>-->
-<!--                <filter string="Empty Collection (Daily Report)" context="{'group_by':'empty_collection_date:day'}"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_filter_transportation_in_terminal" model="ir.ui.view">
+        <field name="name">view_filter_transportation_in_terminal</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id" string="Customer"
+                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>
+                <field name="by_customer"/>
+                <field name="bill_no" string="BL Number"/>
+                <field name="container_num" string="Container Number"/>
+                <filter string="Demurrage"
+                        domain="[('sale_status.id','!=','4'),('sale_status.id','!=','16'),('pull_out','=',False),('sales_imp_id','!=',False)]"
+                        name="my_custom_termianl_demurrage_filter"/>
+                <filter string="Detention"
+                        domain="[('eir_date','=',False),('sales_imp_id','!=',False),('state','!=','done'),('sale_status.id','!=','4'),('sale_status.id','!=','16'),('pull_out','=',False)]"
+                        name="my_custom_terminal_detention_filter"/>
+                <group expand="0" string="Group By">
+
+                                <filter  name="lead_days" string="Lead Days" context="{'group_by':'lead_days'}"/>
+                <filter name="date_roder" string="Date" context="{'group_by':'date_order:day'}"/>
+                <filter name="arrival_Date" string="Arrival Date (Day)" context="{'group_by':'delivery_date:day'}"/>
+                <filter name="dispatch_date" string="Dispatch (Daily Report)" context="{'group_by':'dispatch_date:day'}"/>
+                <filter name="puulout" string="PullOut (Daily Report)" context="{'group_by':'pullout_date:day'}"/>
+                <filter name="empty_daily" string="Empty Collection (Daily Report)" context="{'group_by':'empty_collection_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
 
 <!--    <record id="view_filter_invoicing" model="ir.ui.view">-->
 <!--        <field name="name">view_filter_invoicing</field>-->
@@ -313,53 +316,53 @@
 <!--    </record>-->
 
 
-<!--    <record id="view_filter_FF" model="ir.ui.view">-->
-<!--        <field name="name">view_filter_FF</field>-->
-<!--        <field name="model">freight.forward</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--                <field name="customer" string="Customer"/>-->
-<!--                <field name="status"/>-->
-<!--                <field name="types"/>-->
-<!--                <field name="form"/>-->
-<!--                <field name="to"/>-->
-<!--                <filter string="Group By Date" domain="[]" context="{'group_by':'book_date:day'}"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_filter_FF" model="ir.ui.view">
+        <field name="name">view_filter_FF</field>
+        <field name="model">freight.forward</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="customer" string="Customer"/>
+                <field name="status"/>
+                <field name="types"/>
+                <field name="form"/>
+                <field name="to"/>
+                <filter name="date" string="Date" domain="[]" context="{'group_by':'book_date:day'}"/>
+            </search>
+        </field>
+    </record>
 
-<!--    <record id="view_filter_SP" model="ir.ui.view">-->
-<!--        <field name="name">view_filter_SP</field>-->
-<!--        <field name="model">shipment.order</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--                <field name="customer" string="Customer"/>-->
-<!--                <field name="vessel_number"/>-->
-<!--                <field name="bill_number"/>-->
-<!--                <field name="c_ref"/>-->
-<!--                <filter string="Group By Date" domain="[]" context="{'group_by':'book_date:day'}"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_filter_SP" model="ir.ui.view">
+        <field name="name">view_filter_SP</field>
+        <field name="model">shipment.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="customer" string="Customer"/>
+                <field name="vessel_number"/>
+                <field name="bill_number"/>
+                <field name="c_ref"/>
+                <filter name="date" string="Date" domain="[]" context="{'group_by':'book_date:day'}"/>
+            </search>
+        </field>
+    </record>
 
-<!--    <record id="view_filter_import" model="ir.ui.view">-->
-<!--        <field name="name">view_filter_import</field>-->
-<!--        <field name="model">import.logic</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search>-->
-<!--                <field name="customer" string="Customer"-->
-<!--                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>-->
-<!--                <field name="by_customer" />-->
-<!--                <field name="customer_ref" string="Customer Reference"/>-->
-<!--                <field name="site" string="Site"/>-->
-<!--                <field name="bill_no" string="BL / AWB Number"/>-->
-<!--                <field name="bayan_no" string="Bayan No"/>-->
-<!--                <field name="house_bl" string="House BL"/>-->
-<!--                <field name="container_num" string="Container Num"/>-->
-<!--                <filter string="Group By Date" domain="[]" context="{'group_by':'date:day'}"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_filter_import" model="ir.ui.view">
+        <field name="name">view_filter_import</field>
+        <field name="model">import.logic</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="customer" string="Customer"
+                       domain="[('parent_id','=',False),('supplier_rank','&lt;=', '0'),('customer_rank','&gt;', '0')]"/>
+                <field name="by_customer" />
+                <field name="customer_ref" string="Customer Reference"/>
+                <field name="site" string="Site"/>
+                <field name="bill_no" string="BL / AWB Number"/>
+                <field name="bayan_no" string="Bayan No"/>
+                <field name="house_bl" string="House BL"/>
+                <field name="container_num" string="Container Num"/>
+                <filter name="date" string="Date" domain="[]" context="{'group_by':'date:day'}"/>
+            </search>
+        </field>
+    </record>
     <record model="ir.ui.view" id="logistic_export_calendar">
         <field name="name">logistic_export_calendar</field>
         <field name="model">export.logic</field>
