@@ -315,7 +315,7 @@ class ExportLogic(models.Model):
                             'type': 'out_invoice',
                             'invoice_from': 'exp',
                             'export_link': rec.id,
-                            'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
+                            # 'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
                         })
 
                         for x in rec.export_serv:
@@ -352,7 +352,7 @@ class ExportLogic(models.Model):
                             'type': 'out_invoice',
                             'invoice_from': 'exp',
                             'export_link': rec.id,
-                            'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
+                            # 'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
                         })
 
                         for line in data:
@@ -864,7 +864,7 @@ class ImportLogic(models.Model):
                         'type': 'out_invoice',
                         'invoice_from': 'imp',
                         'import_link': self.id,
-                        'property_account_receivable_id': self.customer.property_account_receivable_id.id,
+                        # 'property_account_receivable_id': self.customer.property_account_receivable_id.id,
 
                     })
 
@@ -912,7 +912,7 @@ class ImportLogic(models.Model):
                         'type': 'out_invoice',
                         'invoice_from': 'imp',
                         'import_link': self.id,
-                        'property_account_receivable_id': self.customer.property_account_receivable_id.id,
+                        # 'property_account_receivable_id': self.customer.property_account_receivable_id.id,
                     })
                     if create_invoice:
                         self.acc_link = create_invoice.id
