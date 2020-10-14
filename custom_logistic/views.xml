@@ -531,7 +531,7 @@
         <field name="name">account_journal_configuration</field>
         <field name="model">account_journal.configuration</field>
         <field name="arch" type="xml">
-            <form string="Accounts and Journals Configuration" create="false" delete="false">
+            <form string="Accounts and Journals Configuration"  delete="false">
                 <sheet>
                     <group name="export" string="Export">
                         <group>
@@ -881,7 +881,7 @@
         <field name="model">account_journal.configuration</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Accounts and Journals Configuration" create="false" delete="false">
+            <tree string="Accounts and Journals Configuration"  delete="false">
                 <field name="name"/>
             </tree>
         </field>

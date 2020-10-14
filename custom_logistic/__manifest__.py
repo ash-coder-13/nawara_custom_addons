@@ -10,7 +10,7 @@
     'website': "",
     'category': 'Specific Industry Applications',
     'version': '13.0.1.0',
-    'depends': ['base', 'sale', 'account', 'sale_stock', 'fleet', 'stock'],
+    'depends': ['base', 'sale', 'account', 'sale_stock', 'fleet', 'stock','sh_message'],
     'data': [
         'security/security.xml',
          'security/ir.model.access.csv',

@@ -285,24 +285,40 @@ class ExportLogic(models.Model):
 
             sale = self.env['sale.order'].search([('sales_id', '=', rec.id)])
             check = 0
+
             for x in sale:
                 if x.state == 'done':
                     check += 1
 
             if check == len(sale):
                 if not rec.acc_link and not rec.fri_id:
-                    create_invoice = ''
+                    # create_invoice = ''
                     account = self.env['account_journal.configuration'].search([])
-                    invoice = self.env['account.move'].search([])
-                    invoice_lines = self.env['account.move.line'].search([])
+                    if not account:
+                        raise UserError(_('Please Account journal configuration'))
+
+                    invoice = self.env['account.move']
+                    invoice_lines = self.env['account.move.line']
                     # / B/L Wise invoice/
 
                     if rec.bill_types == "B/L Number":
-                        create_invoice = invoice.create({
+
+                        inv_lines =[]
+
+                        for x in rec.export_serv:
+                            inv_lines.append((0, 0, {
+                                'name': x.sevr_type.name,
+                                     'quantity': 1.0,
+                                      'price_unit': x.sevr_charge,
+                                     'account_id': account.e_invoice_account.id,
+                                }))
+                        print (inv_lines,'1111111')
+
+                        create_invoice = self.env['account.move'].create({
                             'journal_id': account.e_invoice_journal.id,
                             'partner_id': rec.customer.id,
                             'by_customer': rec.by_customer.id,
-                            'date_invoice': date.today(),
+                            'invoice_date': date.today(),
                             'billng_type': rec.bill_types,
                             'bill_num': rec.bill_no,
                             'our_job': rec.our_job_no,
@@ -315,18 +331,24 @@ class ExportLogic(models.Model):
                             'type': 'out_invoice',
                             'invoice_from': 'exp',
                             'export_link': rec.id,
+                            # 'invoice_line_ids': [(0, 0, {
+                            #     'quantity': 1,
+                            #     'price_unit': 1,
+                            #     'name': 'test invoice',
+                            # })],
+                             'invoice_line_ids':inv_lines,
                             # 'property_account_receivable_id': rec.customer.property_account_receivable_id.id,
                         })
+                        print (create_invoice.invoice_line_ids,'111111111')
 
-                        for x in rec.export_serv:
-                            create_invoice_lines = invoice_lines.create({
-                                'quantity': 1,
-                                'price_unit': x.sevr_charge,
-                                'account_id': account.e_invoice_account.id,
-                                'name': x.sevr_type.name,
-                                'move_id': create_invoice.id,
-                                # 'invoice_line_tax_ids': [1],
-                            })
+                            # create_invoice_lines = invoice_lines.create({
+                            #     'quantity': 1,
+                            #     'price_unit': x.sevr_charge,
+                            #     'account_id': account.e_invoice_account.id,
+                            #     'name': x.sevr_type.name,
+                            #     'move_id': create_invoice.id,
+                            #     # 'invoice_line_tax_ids': [1],
+                            # })
 
                     # / B/L Wise invoice/
                     if rec.bill_types == "Container Wise":
@@ -339,7 +361,7 @@ class ExportLogic(models.Model):
                             'journal_id': account.e_invoice_journal.id,
                             'partner_id': rec.customer.id,
                             'by_customer': rec.by_customer.id,
-                            'date_invoice': date.today(),
+                            'invoice_date': date.today(),
                             'billng_type': rec.bill_types,
                             'bill_num': rec.bill_no,
                             'our_job': rec.our_job_no,
@@ -367,34 +389,64 @@ class ExportLogic(models.Model):
                                     get_unit = y.sevr_charge_cont
                                     get_type = y.sevr_type_cont.name
 
-                            create_invoice_lines = invoice_lines.create({
-                                'quantity': value,
-                                'price_unit': get_unit,
-                                'account_id': account.e_invoice_account.id,
-                                'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
-                                'service_type': get_type,
-                                'move_id': create_invoice.id,
-                                # 'invoice_line_tax_ids': [1],
+                            create_invoice.write({
+                                'invoice_line_ids': [(0, 0, {
+                                    'quantity': value,
+                                    'price_unit': get_unit,
+                                    'account_id': account.e_invoice_account.id,
+                                    'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
+                                    'service_type': get_type,
+                                    'move_id': create_invoice.id,
+                                })]
                             })
 
+                            # create_invoice_lines = invoice_lines.create({
+                            #     'quantity': value,
+                            #     'price_unit': get_unit,
+                            #     'account_id': account.e_invoice_account.id,
+                            #     'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
+                            #     'service_type': get_type,
+                            #     'move_id': create_invoice.id,
+                            #     # 'invoice_line_tax_ids': [1],
+                            # })
+
                     for x in rec.export_other_charges:
-                        create_invoice_lines = invoice_lines.create({
-                            'quantity': 1,
-                            'price_unit': x.charges,
-                            'account_id': account.e_invoice_account.id,
-                            'name': x.name.name,
-                            'move_id': create_invoice.id,
+                        # create_invoice_lines = invoice_lines.create({
+                        #     'quantity': 1,
+                        #     'price_unit': x.charges,
+                        #     'account_id': account.e_invoice_account.id,
+                        #     'name': x.name.name,
+                        #     'move_id': create_invoice.id,
+                        # })
+                        create_invoice.write({
+                            'invoice_line_ids': [(0, 0, {
+                                'quantity': 1,
+                                'price_unit': x.charges,
+                                'account_id': account.e_invoice_account.id,
+                                'name': x.name.name,
+                                'move_id': create_invoice.id,
+                            })]
                         })
 
                     for x in rec.export_gov_charges:
-                        create_invoice_lines = invoice_lines.create({
-                            'quantity': 1,
-                            'price_unit': x.charges,
-                            'account_id': account.g_invoice_account.id,
-                            'name': x.name.name,
-                            'move_id': create_invoice.id,
+                        create_invoice.write({
+                            'invoice_line_ids': [(0, 0, {
+                                'quantity': 1,
+                                'price_unit': x.charges,
+                                'account_id': account.g_invoice_account.id,
+                                'name': x.name.name,
+                                'move_id': create_invoice.id,
+                            })]
                         })
-                    rec.acc_link = create_invoice.id
+                        # create_invoice_lines = invoice_lines.create({
+                        #     'quantity': 1,
+                        #     'price_unit': x.charges,
+                        #     'account_id': account.g_invoice_account.id,
+                        #     'name': x.name.name,
+                        #     'move_id': create_invoice.id,
+                        # })
+
+
 
                     if rec.tos:
                         for x in rec.tos:
@@ -460,8 +512,10 @@ class ExportLogic(models.Model):
                     for email in email_rec.finance:
                         rec.to_mails = email.name
                         self.env['mail.template'].browse(template.id).send_mail(rec.id)
+                    rec.acc_link = create_invoice.id
                 else:
                     raise UserError(_('Invoice Is Already Created or Maybe This Export Is Linked With Project.'))
+
             else:
                 raise UserError(_('Transportation in Process Wait until Transport order not complete'))
 
@@ -869,14 +923,23 @@ class ImportLogic(models.Model):
                     })
 
                     for x in self.import_serv:
-                        create_invoice_lines = invoice_lines.create({
-                            'quantity': 1,
-                            'price_unit': x.charge_serv,
-                            'account_id': account.i_invoice_account.id,
-                            'name': x.type_serv.name,
-                            'move_id': create_invoice.id,
-
+                        create_invoice.write({
+                            'invoice_line_ids': [(0, 0, {
+                                'quantity': 1,
+                                'price_unit': x.charge_serv,
+                                'account_id': account.i_invoice_account.id,
+                                'name': x.type_serv.name,
+                                'move_id': create_invoice.id,
+                            })]
                         })
+                        # create_invoice_lines = invoice_lines.create({
+                        #     'quantity': 1,
+                        #     'price_unit': x.charge_serv,
+                        #     'account_id': account.i_invoice_account.id,
+                        #     'name': x.type_serv.name,
+                        #     'move_id': create_invoice.id,
+                        #
+                        # })
                     for x in self.import_id:
                         create_invoice_lines = invoice_lines.create({
                             'quantity': 1,
@@ -927,16 +990,25 @@ class ImportLogic(models.Model):
                             if y.type_contt_imp == line:
                                 get_unit = y.sevr_charge_imp
                                 get_type = y.sevr_type_imp.name
-
-                        create_invoice_lines = invoice_lines.create({
-                            'quantity': value,
-                            'price_unit': get_unit,
-                            'account_id': account.i_invoice_account.id,
-                            'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
-                            'service_type': get_type,
-                            'move_id': create_invoice.id,
-                            # 'invoice_line_tax_ids': [1],
+                        create_invoice.write({
+                            'invoice_line_ids': [(0, 0, {
+                                'quantity': value,
+                                'price_unit': get_unit,
+                                'account_id': account.i_invoice_account.id,
+                                'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
+                                'service_type': get_type,
+                                'move_id': create_invoice.id,
+                            })]
                         })
+                        # create_invoice_lines = invoice_lines.create({
+                        #     'quantity': value,
+                        #     'price_unit': get_unit,
+                        #     'account_id': account.i_invoice_account.id,
+                        #     'name': 'Custom Clearance Charges  -   اجور تخليص  الجمركي',
+                        #     'service_type': get_type,
+                        #     'move_id': create_invoice.id,
+                        #     # 'invoice_line_tax_ids': [1],
+                        # })
 
                 for x in self.import_other_charges:
                     create_invoice_lines = invoice_lines.create({
