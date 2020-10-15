@@ -209,19 +209,20 @@
                            attrs="{'invisible': [('customer_rank','&lt;=','0')],'required': [('customer_rank','&gt;','0')]}"
                            domain="[('section_id', '=', section_id)]"/>
                     <field name="class_code"
-                           attrs="{'invisible': [('customer_rank','&lt;','0')]}"/>
-                </xpath>
-                <xpath expr="//field[@name='lang']" position="before">
-                    <field name="supplier_rank" invisible="1"/>
+                           attrs="{'invisible': [('customer_rank','&lt;=','0')]}"/>
+                     <field name="supplier_rank" invisible="1"/>
                     <field name="profile_type"
-                           attrs="{'invisible': [('supplier_rank','&lt;=','0')],'required': [('supplier_rank','&gt;','0')]}"/>
+                           attrs="{'required': [('supplier_rank','=',1)]}"/>
                     <field name="gtk_type"
                            attrs="{'invisible': [('profile_type','!=', 'getting_to_know')],'required': [('profile_type','=', 'getting_to_know')]}"/>
                     <field name="ref_type"
                            attrs="{'invisible': [('profile_type','!=', 'referral')],'required': [('profile_type','=', 'referral')]}"/>
                     <field name="cons_type"
                            attrs="{'invisible': [('profile_type','!=', 'consolidated_data')],'required': [('profile_type','=', 'consolidated_data')]}"/>
+
                 </xpath>
+<!--                <xpath expr="//field[@name='lang']" position="before">-->
+<!--                    </xpath>-->
                 <xpath expr="//field[@name='email']" position="after">
                     <field name="customer_service_id" widget="many2many_tags" options="{'no_create_edit': True}"/>
                 </xpath>

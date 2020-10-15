@@ -451,23 +451,25 @@ class ExportLogic(models.Model):
                     if rec.tos:
                         for x in rec.tos:
                             x.invoice_status = 'invoiced'
-                            create_invoice.invoice_line_ids.create({
+                            create_invoice.write({
+                                'invoice_line_ids': [(0, 0, {
                                 'quantity': 1,
                                 'price_unit': x.amount_total,
                                 'account_id': account.same_custom_invoice_account.id,
                                 'name': str(x.name) + " Transportation Charges" + ' اجور نقل '.decode('utf-8'),
                                 'crt_no': x.order_line.crt_no,
                                 'move_id': create_invoice.id
-                            })
+                            })]})
 
                             if x.pullout_type == 'Customer':
-                                create_invoice.invoice_line_ids.create({
+                                create_invoice.write({
+                                    'invoice_line_ids': [(0, 0, {
                                     'quantity': 1,
                                     'price_unit': x.partner_id.pullout_charges,
                                     'account_id': account.t_pullout_account.id,
                                     'name': str(x.name) + " PullOut Charges",
                                     'move_id': create_invoice.id
-                                })
+                                })]})
 
                             if x.pull_out and x.pullout_status == 'Completed':
                                 if datetime.now().date() >= (
@@ -478,13 +480,14 @@ class ExportLogic(models.Model):
                                         days=x.partner_id.free_day)).date()
 
                                     if day.days > 0:
-                                        create_invoice.invoice_line_ids.create({
+                                        create_invoice.write({
+                                            'invoice_line_ids': [(0, 0, {
                                             'quantity': day.days,
                                             'price_unit': x.partner_id.storage_charges,
                                             'account_id': account.t_storage_account.id,
                                             'name': "Storage Charges for " + str(day.days) + " Days",
                                             'move_id': create_invoice.id
-                                        })
+                                        })]})
 
                     # vendor bill creation
                     partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
@@ -500,13 +503,14 @@ class ExportLogic(models.Model):
                             # 'account_id': partner.property_account_payable_id.id
                         })
                         for x in rec.export_gov_charges:
-                            create_invoice_lines = create_invoice.invoice_line_ids.create({
+                            create_invoice_lines =   create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                                 'quantity': 1,
                                 'price_unit': x.charges,
                                 'account_id': account.g_invoice_account.id,
                                 'name': x.name.name,
                                 'move_id': create_invoice.id,
-                            })
+                            })]})
                     email_rec = self.env['multi.mails'].search([])
                     template = self.env.ref('custom_logistic.tie_email_template')
                     for email in email_rec.finance:
@@ -1031,23 +1035,25 @@ class ImportLogic(models.Model):
                 if self.tos:
                     for x in self.tos:
                         x.invoice_status = 'invoiced'
-                        create_invoice.invoice_line_ids.create({
+                        create_invoice.write({
+                            'invoice_line_ids': [(0, 0, {
                             'quantity': 1,
                             'price_unit': x.amount_total,
                             'account_id': x.trans_account,
                             'name': str(x.name) + " Transportation Charges" + ' اجور نقل '.decode('utf-8'),
                             'crt_no': x.order_line.crt_no,
                             'move_id': create_invoice.id
-                        })
+                        })]})
 
                         if x.pullout_type == 'Customer':
-                            create_invoice.invoice_line_ids.create({
+                            create_invoice.write({
+                                'invoice_line_ids': [(0, 0, {
                                 'quantity': 1,
                                 'price_unit': x.partner_id.pullout_charges,
                                 'account_id': account.t_pullout_account.id,
                                 'name': str(x.name) + " PullOut Charges",
                                 'move_id': create_invoice.id
-                            })
+                            })]})
 
                         if x.pull_out and x.pullout_status == 'Completed':
                             if datetime.now().date() >= (
@@ -1058,13 +1064,14 @@ class ImportLogic(models.Model):
                                     days=x.partner_id.free_day)).date()
 
                                 if day.days > 0:
-                                    create_invoice.invoice_line_ids.create({
+                                    create_invoice.write({
+                                        'invoice_line_ids': [(0, 0, {
                                         'quantity': day.days,
                                         'price_unit': x.partner_id.storage_charges,
                                         'account_id': account.t_storage_account.id,
                                         'name': "Storage Charges for " + str(day.days) + " Days",
                                         'move_id': create_invoice.id
-                                    })
+                                    })]})
                 partner = self.env['res.partner'].search([('name', '=', 'Government Charges Vendor')])
 
                 # vendor bill
@@ -1081,14 +1088,15 @@ class ImportLogic(models.Model):
                         # 'account_id': partner.property_account_payable_id.id
                     })
                     for x in self.import_gov_charges:
-                        create_invoice_lines = create_invoice.invoice_line_ids.create({
+                        create_invoice_lines =   create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                             'quantity': 1,
                             'price_unit': x.charges,
                             'attachment': x.attachment,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name.name,
                             'move_id': create_invoice.id,
-                        })
+                        })]})
                 email_rec = self.env['multi.mails'].search([])
                 template = self.env.ref('custom_logistic.tii_email_template')
                 for email in email_rec.finance:

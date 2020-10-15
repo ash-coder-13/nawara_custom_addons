@@ -286,7 +286,8 @@ class TransportInfo(models.Model):
                 'sale_link': self.id,
                 'invoice_from': 'trans',
             })
-            create_invoice.invoice_line_ids.create({
+            create_invoice.write({
+                'invoice_line_ids': [(0, 0, {
                 'quantity': 1,
                 'price_unit': self.emp_driver_expenses,
                 'account_id': account,
@@ -294,7 +295,7 @@ class TransportInfo(models.Model):
                 'move_id': create_invoice.id,
                 'crt_no': self.container_num
 
-            })
+            })]})
             self.emp_status = 'InProcess'
             if self.emp_mode == 'in':
                 self.emp_driver_id.is_reserved = True
@@ -336,7 +337,8 @@ class TransportInfo(models.Model):
                 'invoice_from': 'trans',
             })
 
-            create_invoice.invoice_line_ids.create({
+            create_invoice.write({
+                'invoice_line_ids': [(0, 0, {
                 'quantity': 1,
                 'price_unit': self.ret_driver_expenses,
                 'account_id': account,
@@ -344,7 +346,7 @@ class TransportInfo(models.Model):
                 'move_id': create_invoice.id,
                 'crt_no': self.container_num
 
-            })
+            })]})
             self.ret_status = 'InProcess'
             if self.ret_mode == 'in':
                 self.ret_driver_id.is_reserved = True
@@ -425,14 +427,15 @@ class TransportInfo(models.Model):
                 'invoice_from': 'trans',
             })
             for x in self.order_line:
-                create_invoice.invoice_line_ids.create({
+                create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                     'quantity': x.product_uom_qty,
                     'price_unit': self.s_driver_expenses,
                     'crt_no': x.crt_no,
                     'account_id': account,
                     'name': x.name + " Shuttling Charges",
                     'move_id': create_invoice.id
-                })
+                })]})
             self.shuttling_status = 'InProcess'
             if self.shuttling_mode == 'in':
                 self.s_driver_id.is_reserved = True
@@ -471,18 +474,19 @@ class TransportInfo(models.Model):
                     'journal_id': journal,
                     'partner_id': partner,
                     'invoice_date': date.today(),
-                    'sale_id': self.id,
+                     # 'sale_link': self.id,
                     'type': "in_invoice",
                     'sale_link': self.id,
                     'invoice_from': 'trans',
                 })
-                create_invoice_lines = create_invoice.invoice_line_ids.create({
+                create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                     'quantity': 1,
                     'price_unit': self.b_driver_expenses,
                     'account_id': account,
                     'name': 'BreakDown Driver TripMoney',
                     'move_id': create_invoice.id
-                })
+                })]})
 
             if self.trans_mode == 'in':
                 self.driver_id.is_reserved = False
@@ -650,13 +654,14 @@ class TransportInfo(models.Model):
                     'sale_link': self.id,
                     'invoice_from': 'trans',
                 })
-                create_invoice.invoice_line_ids.create({
+                create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                     'quantity': 1,
                     'price_unit': self.extra_expenses,
                     'account_id': acc,
                     'name': self.extra_reason,
                     'move_id': create_invoice.id
-                })
+                })]})
                 self.extra_paid = True
             else:
                 raise ValidationError('Extra Charges Already Paid')
@@ -701,14 +706,15 @@ class TransportInfo(models.Model):
                 'invoice_from': 'trans',
             })
             for x in self.order_line:
-                create_invoice_lines = create_invoice.invoice_line_ids.create({
+                create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                     'quantity': x.product_uom_qty,
                     'price_unit': amount,
                     'crt_no': x.crt_no,
                     'account_id': acc,
                     'name': x.name,
                     'move_id': create_invoice.id
-                })
+                })]})
         self.dispatch_date = datetime.today()
         if self.state == 'air':
             self.state = 'trip'
@@ -744,14 +750,22 @@ class TransportInfo(models.Model):
                 'invoice_from': 'trans',
             })
             for x in self.order_line:
-                create_invoice_lines = create_invoice.invoice_line_ids.create({
-                    'quantity': x.product_uom_qty,
-                    'price_unit': self.driver_expenses,
-                    'crt_no': x.crt_no,
-                    'account_id': account,
-                    'name': x.name,
-                    'move_id': create_invoice.id
-                })
+                create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
+                        'quantity': x.product_uom_qty,
+                        'price_unit': self.driver_expenses,
+                        'crt_no': x.crt_no,
+                        'account_id': account,
+                        'name': x.name,
+                        'move_id': create_invoice.id})]})
+                # create_invoice_lines = create_invoice.invoice_line_ids.create({
+                #     'quantity': x.product_uom_qty,
+                #     'price_unit': self.driver_expenses,
+                #     'crt_no': x.crt_no,
+                #     'account_id': account,
+                #     'name': x.name,
+                #     'move_id': create_invoice.id
+                # })
             self.pullout_status = 'InProcess'
             if self.pullout_mode == 'in':
                 self.p_driver_id.is_reserved = True
@@ -1189,14 +1203,15 @@ class RePullout(models.Model):
                 'invoice_from': 'trans',
             })
             for x in self.order_id.order_line:
-                _ = create_invoice.invoice_line_ids.create({
+                _ =   create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                     'quantity': x.product_uom_qty,
                     'price_unit': self.driver_expenses,
                     'crt_no': x.crt_no,
                     'account_id': account,
                     'name': x.name,
                     'move_id': create_invoice.id
-                })
+                })]})
             self.pullout_status = 'InProcess'
             if self.pullout_mode == 'in':
                 self.driver_id.is_reserved = True

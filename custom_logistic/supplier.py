@@ -468,13 +468,14 @@ class FreightForwarding(models.Model):
                         'customer_ref': self.customer_ref
                     })
                     for x in self.implink.import_gov_charges:
-                        create_invoice_lines = create_invoice.invoice_line_ids.create({
+                        create_invoice_lines =   create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                             'quantity': 1,
                             'price_unit': x.charges,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name,
                             'move_id': create_invoice.id,
-                        })
+                        })]})
 
             elif self.explink and self.explink.state == 'done':
                 if self.explink.bill_types == "B/L Number":
@@ -547,13 +548,14 @@ class FreightForwarding(models.Model):
                         'customer_ref': self.customer_ref
                     })
                     for x in self.explink.export_gov_charges:
-                        create_invoice_lines = create_invoice.invoice_line_ids.create({
+                        create_invoice_lines =   create_invoice.write({
+                    'invoice_line_ids': [(0, 0, {
                             'quantity': 1,
                             'price_unit': x.charges,
                             'account_id': account.g_invoice_account.id,
                             'name': x.name,
                             'move_id': create_invoice.id,
-                        })
+                        })]})
 
             else:
                 raise UserError(_('Custom Clearance is Under Process complete'))
