@@ -331,7 +331,7 @@ class FreightForwarding(models.Model):
 
         create_invoice = invoice.create({
             'partner_id': self.customer.id,
-            'date_invoice': self.book_date,
+            'invoice_date': self.book_date,
             'type': "out_invoice",
             'journal_id': account.p_invoice_journal.id,
             'freight_link': self.id,
@@ -459,7 +459,7 @@ class FreightForwarding(models.Model):
                     create_invoice = self.env['account.move'].create({
                         'journal_id': account.g_invoice_journal.id,
                         'partner_id': partner.id,
-                        'date_invoice': date.today(),
+                        'invoice_date': date.today(),
                         'billng_type': self.implink.bill_types,
                         'bill_num': self.implink.bill_no,
                         'type': 'in_invoice',
@@ -540,7 +540,7 @@ class FreightForwarding(models.Model):
                     create_invoice = self.env['account.move'].create({
                         'journal_id': account.g_invoice_journal.id,
                         'partner_id': partner.id,
-                        'date_invoice': date.today(),
+                        'invoice_date': date.today(),
                         'type': 'in_invoice',
                         'frieght_link': self.id,
                         'invoice_from': 'pro',

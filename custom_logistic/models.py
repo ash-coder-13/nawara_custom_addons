@@ -493,11 +493,11 @@ class ExportLogic(models.Model):
                         create_invoice = self.env['account.move'].create({
                             'journal_id': account.g_invoice_journal.id,
                             'partner_id': partner.id,
-                            'date_invoice': date.today(),
+                            'invoice_date': date.today(),
                             'type': 'in_invoice',
                             'export_link': rec.id,
                             'invoice_from': 'exp',
-                            'account_id': partner.property_account_payable_id.id
+                            # 'account_id': partner.property_account_payable_id.id
                         })
                         for x in rec.export_gov_charges:
                             create_invoice_lines = create_invoice.invoice_line_ids.create({
@@ -905,7 +905,7 @@ class ImportLogic(models.Model):
                         'journal_id': account.i_invoice_journal.id,
                         'partner_id': self.customer.id,
                         'by_customer': self.by_customer.id,
-                        'date_invoice': date.today(),
+                        'invoice_date': date.today(),
                         'billng_type': self.bill_types,
                         'bill_num': self.bill_no,
                         'our_job': self.job_no,
@@ -962,7 +962,7 @@ class ImportLogic(models.Model):
                         'journal_id': account.i_invoice_journal.id,
                         'partner_id': self.customer.id,
                         'by_customer': self.by_customer.id,
-                        'date_invoice': date.today(),
+                        'invoice_date': date.today(),
                         'billng_type': self.bill_types,
                         'bill_num': self.bill_no,
                         'our_job': self.job_no,
@@ -1072,13 +1072,13 @@ class ImportLogic(models.Model):
                     create_invoice = self.env['account.move'].create({
                         'journal_id': account.g_invoice_journal.id,
                         'partner_id': partner.id,
-                        'date_invoice': date.today(),
+                        'invoice_date': date.today(),
                         'billng_type': self.bill_types,
                         'bill_num': self.bill_no,
                         'type': 'in_invoice',
                         'import_link': self.id,
                         'invoice_from': 'imp',
-                        'account_id': partner.property_account_payable_id.id
+                        # 'account_id': partner.property_account_payable_id.id
                     })
                     for x in self.import_gov_charges:
                         create_invoice_lines = create_invoice.invoice_line_ids.create({

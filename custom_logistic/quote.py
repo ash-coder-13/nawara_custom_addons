@@ -281,7 +281,7 @@ class TransportInfo(models.Model):
             create_invoice = invoice.create({
                 'journal_id': journal,
                 'partner_id': partner,
-                'date_invoice': date.today(),
+                'invoice_date': date.today(),
                 'type': "in_invoice",
                 'sale_link': self.id,
                 'invoice_from': 'trans',
@@ -330,7 +330,7 @@ class TransportInfo(models.Model):
             create_invoice = invoice.create({
                 'journal_id': journal,
                 'partner_id': partner,
-                'date_invoice': date.today(),
+                'invoice_date': date.today(),
                 'type': "in_invoice",
                 'sale_link': self.id,
                 'invoice_from': 'trans',
@@ -419,7 +419,7 @@ class TransportInfo(models.Model):
             create_invoice = invoice.create({
                 'journal_id': journal,
                 'partner_id': partner,
-                'date_invoice': date.today(),
+                'invoice_date': date.today(),
                 'type': "in_invoice",
                 'sale_link': self.id,
                 'invoice_from': 'trans',
@@ -470,7 +470,7 @@ class TransportInfo(models.Model):
                 create_invoice = self.env['account.move'].create({
                     'journal_id': journal,
                     'partner_id': partner,
-                    'date_invoice': date.today(),
+                    'invoice_date': date.today(),
                     'sale_id': self.id,
                     'type': "in_invoice",
                     'sale_link': self.id,
@@ -644,7 +644,7 @@ class TransportInfo(models.Model):
                 create_invoice = invoice.create({
                     'journal_id': jrl,
                     'partner_id': self.extra_driver_id.id,
-                    'date_invoice': self.date_order,
+                    'invoice_date': self.date_order,
                     'customer_site': self.customer_site.id,
                     'type': "in_invoice",
                     'sale_link': self.id,
@@ -694,7 +694,7 @@ class TransportInfo(models.Model):
             create_invoice = invoice.create({
                 'journal_id': jrl,
                 'partner_id': partner_name,
-                'date_invoice': self.date_order,
+                'invoice_date': self.date_order,
                 'customer_site': self.customer_site.id,
                 'type': "in_invoice",
                 'sale_link': self.id,
@@ -737,7 +737,7 @@ class TransportInfo(models.Model):
             create_invoice = invoice.create({
                 'journal_id': journal,
                 'partner_id': partner,
-                'date_invoice': self.date_order,
+                'invoice_date': self.date_order,
                 'customer_site': self.move_from.id,
                 'type': "in_invoice",
                 'sale_link': self.id,
@@ -1058,7 +1058,7 @@ class ShipmentOrder(models.Model):
             origin = sale[0].name
             records = self.env['account.move'].create({
                 'partner_id': self.customer.id,
-                'date_invoice': date.today(),
+                'invoice_date': date.today(),
                 'type': "out_invoice",
                 'journal_id': account.p_invoice_journal.id,
                 'customer_ref': self.c_ref,
@@ -1182,7 +1182,7 @@ class RePullout(models.Model):
             create_invoice = invoice.create({
                 'journal_id': journal,
                 'partner_id': partner,
-                'date_invoice': self.order_id.date_order,
+                'invoice_date': self.order_id.date_order,
                 'customer_site': self.move_from.id,
                 'type': "in_invoice",
                 'sale_link': self.order_id.id,
