@@ -806,11 +806,11 @@ class TransportInfo(models.Model):
                 rec.lead_days = (pod - way).days
 
 
-    def action_invoice_create(self):
+    def _create_invoices(self):
         """Adding By_customer To Invoice"""
         account = self.env['account_journal.configuration'].search([])
         if self.shuttling is True and self.shuttling_status == 'Completed':
-            new_record = super(TransportInfo, self).action_invoice_create()
+            new_record = super(TransportInfo, self)._create_invoices()
             records = self.env['account.move'].search([('origin', '=', self.name)])
             if records:
                 records.by_customer = self.by_customer.id
@@ -872,7 +872,7 @@ class TransportInfo(models.Model):
             return new_record
 
         elif not self.shuttling:
-            new_record = super(TransportInfo, self).action_invoice_create()
+            new_record = super(TransportInfo, self)._create_invoices()
             records = self.env['account.move'].search([('origin', '=', self.name)])
             if records:
                 records.by_customer = self.by_customer.id
@@ -951,7 +951,7 @@ class TransportInfo(models.Model):
         """Creates invoices"""
         self.action_confirm()
         self.priority_type = False
-        self.action_invoice_create()
+        self._create_invoices()
         self.inv_chk = True
         self.state = 'done'
 
